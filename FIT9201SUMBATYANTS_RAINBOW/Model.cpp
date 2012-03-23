@@ -20,7 +20,7 @@ Model::~Model()
 
 void Model::drawPixels() const
 {
-    for(int i = 0; i < speed * speed; i++)
+    for(int i = 0; i < speed; i++)
     {
         const float nx = random();
         const float ny = random();
@@ -45,7 +45,7 @@ void Model::drawPixels() const
 
         if(0 <= px && px < width && 0 <= py && py < height)
         {
-            view->setPixel(px, py, HSVtoRGB(ny, 1.f, 1.f));
+            view->setPixel(px, py, HSVtoRGB(ny * 360, 1.f, 1.f));
         }
     }
     view->paint();
@@ -95,17 +95,23 @@ void Model::clear() const
 
 void Model::setWidth(const int _width) const
 {
-    view->setWindowWidth(_width);
+    if(_width != view->getWindowWidth())
+    {
+        view->setWindowWidth(_width);
+    }
 }
 
 void Model::setHeight(const int _height) const
 {
-    view->setWindowHeight(_height);
+    std::cout << _height << " : " << view->getWindowHeight() << std::endl;
+    if(_height != view->getWindowHeight())
+    {
+        view->setWindowHeight(_height);
+    }
 }
 
 void Model::setSpeed(const int _speed)
 {
-    std::cout << "Speed: " << _speed << std::endl;
     speed = _speed;
 }
 
@@ -113,4 +119,10 @@ float Model::random() const
 {
     const int MAX = std::numeric_limits<int>::max();
     return (rand() % MAX) / static_cast<float>(MAX - 1);
+}
+
+void Model::resize()
+{
+    view->setWidthSpin(view->getWindowWidth());
+    view->setHeightSpin(view->getWindowHeight());
 }

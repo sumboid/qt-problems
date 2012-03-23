@@ -52,3 +52,8 @@ void Controller::setSpeed(const int speed)
 {
     model->setSpeed(speed);
 }
+
+void Controller::resize()
+{
+    model->resize();
+}

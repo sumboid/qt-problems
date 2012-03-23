@@ -7,7 +7,7 @@ ViewRainbow::ViewRainbow()
     controller = new Controller(this);
     painterWidget = new PainterWidget(controller);
     mainWindow.setWindowTitle("FIT9201SUMBATYANTS_RAINBOW");
-    mainWindow.setMinimumSize(300, 300);
+    mainWindow.setMinimumSize(500, 400);
     ui.setupUi(&mainWindow);
     ui.verticalLayout_2->insertWidget(0, painterWidget, 1);
 
@@ -35,14 +35,24 @@ int ViewRainbow::getHeight()
     return painterWidget->getWidth();
 }
 
+int ViewRainbow::getWindowHeight()
+{
+    return mainWindow.height();
+}
+
+int ViewRainbow::getWindowWidth()
+{
+    return mainWindow.width();
+}
+
 void ViewRainbow::setWindowWidth(const int width)
 {
-    mainWindow.resize(mainWindow.height(), width);
+    mainWindow.resize(width, mainWindow.height());
 }
 
 void ViewRainbow::setWindowHeight(const int height)
 {
-    mainWindow.resize(height, mainWindow.width());
+    mainWindow.resize(mainWindow.width(), height);
 }
 
 void ViewRainbow::setPixel(int x, int y, unsigned int color)
@@ -58,4 +68,14 @@ void ViewRainbow::clear()
 void ViewRainbow::paint()
 {
     painterWidget->paint();
+}
+
+void ViewRainbow::setWidthSpin(const int x)
+{
+    ui.widthSpin->setValue(x);
+}
+
+void ViewRainbow::setHeightSpin(const int x)
+{
+    ui.heightSpin->setValue(x);
 }
