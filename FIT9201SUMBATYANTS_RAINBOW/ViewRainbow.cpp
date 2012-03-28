@@ -6,11 +6,11 @@ ViewRainbow::ViewRainbow()
 {
     controller = new Controller(this);
     painterWidget = new PainterWidget(controller);
-    mainWindow.setWindowTitle("FIT9201SUMBATYANTS_RAINBOW");
     mainWindow.setMinimumSize(500, 400);
     ui.setupUi(&mainWindow);
     ui.verticalLayout_2->insertWidget(0, painterWidget, 1);
 
+    connect(ui.colorSlider, SIGNAL(valueChanged(int)), controller, SLOT(setPhase(int)));
     connect(ui.clearButton, SIGNAL(clicked()), controller, SLOT(clear(void)));
     connect(ui.startButton, SIGNAL(clicked()), controller, SLOT(start(void)));
     connect(ui.stopButton, SIGNAL(clicked()), controller, SLOT(stop(void)));

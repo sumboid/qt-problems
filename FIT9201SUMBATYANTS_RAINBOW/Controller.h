@@ -20,6 +20,7 @@ public slots:
     void setHeight(const int);
     void setSpeed(const int);
     void resize();
+    void setPhase(const int);
 
 private:
     Model* model;

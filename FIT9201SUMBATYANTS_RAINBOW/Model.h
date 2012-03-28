@@ -15,9 +15,11 @@ public:
     void setHeight(const int) const;
     void clear() const;
     void resize();
+    void setPhase(const int);
 private:
     View* view;
     int speed;
+    int phase;
 
     float random() const;
     QRgb HSVtoRGB(const float&, const float&, const float&) const;

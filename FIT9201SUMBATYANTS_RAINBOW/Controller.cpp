@@ -3,7 +3,7 @@
 
 namespace
 {
-    const int MSEC_INTERVAL = 50;
+    const int MSEC_INTERVAL = 100;
 }
 
 Controller::~Controller()
@@ -56,4 +56,9 @@ void Controller::setSpeed(const int speed)
 void Controller::resize()
 {
     model->resize();
+}
+
+void Controller::setPhase(const int phase)
+{
+    model->setPhase(phase);
 }

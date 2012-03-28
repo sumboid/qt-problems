@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-Model::Model(View* _view): view(_view)
+Model::Model(View* _view): view(_view), phase(0)
 {
     srand(time(NULL));
 }
@@ -45,7 +45,7 @@ void Model::drawPixels() const
 
         if(0 <= px && px < width && 0 <= py && py < height)
         {
-            view->setPixel(px, py, HSVtoRGB(ny * 360, 1.f, 1.f));
+            view->setPixel(px, py, HSVtoRGB(ny * 360 + phase, 1.f, 1.f));
         }
     }
     view->paint();
@@ -125,4 +125,9 @@ void Model::resize()
 {
     view->setWidthSpin(view->getWindowWidth());
     view->setHeightSpin(view->getWindowHeight());
+}
+
+void Model::setPhase(const int _phase)
+{
+    phase = _phase;
 }
