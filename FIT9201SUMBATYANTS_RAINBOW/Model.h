@@ -16,6 +16,7 @@ public:
     void clear() const;
     void resize();
     void setPhase(const int);
+    void invertButton(bool);
 private:
     View* view;
     int speed;

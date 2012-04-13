@@ -24,16 +24,19 @@ void Controller::update()
 
 void Controller::start()
 {
+    model->invertButton(false);
     timer.start();
 }
 
 void Controller::stop()
 {
+    model->invertButton(true);
     timer.stop();
 }
 
 void Controller::clear()
 {
+    model->invertButton(true);
     timer.stop();
     model->clear();
 }

@@ -1,5 +1,4 @@
 #include "PainterWidget.h"
-#include <iostream>
 #include <QRgb>
 
 

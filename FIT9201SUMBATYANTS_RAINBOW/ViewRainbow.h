@@ -30,6 +30,8 @@ public:
     virtual void setPixel(int x, int y, unsigned int color);
     virtual void setWidthSpin(const int x);
     virtual void setHeightSpin(const int x);
+    virtual void invertButton(bool state);
+    virtual int getSpeed();
 
 private:
     Ui::MainWindow ui;

@@ -10,9 +10,11 @@
 
 #include <iostream>
 
-Model::Model(View* _view): view(_view), phase(0)
+Model::Model(View* _view):
+    view(_view), phase(0)
 {
     srand(time(NULL));
+    speed = view->getSpeed();
 }
 
 Model::~Model()
@@ -95,19 +97,12 @@ void Model::clear() const
 
 void Model::setWidth(const int _width) const
 {
-    if(_width != view->getWindowWidth())
-    {
-        view->setWindowWidth(_width);
-    }
+    view->setWindowWidth(_width);
 }
 
 void Model::setHeight(const int _height) const
 {
-    std::cout << _height << " : " << view->getWindowHeight() << std::endl;
-    if(_height != view->getWindowHeight())
-    {
-        view->setWindowHeight(_height);
-    }
+    view->setWindowHeight(_height);
 }
 
 void Model::setSpeed(const int _speed)
@@ -130,4 +125,9 @@ void Model::resize()
 void Model::setPhase(const int _phase)
 {
     phase = _phase;
+}
+
+void Model::invertButton(bool state)
+{
+   view->invertButton(state);
 }

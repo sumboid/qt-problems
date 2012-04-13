@@ -2,6 +2,11 @@
 #include "ViewRainbow.h"
 #include "Controller.h"
 
+namespace
+{
+    const int START_SPEED = 5000;
+}
+
 ViewRainbow::ViewRainbow()
 {
     controller = new Controller(this);
@@ -9,6 +14,8 @@ ViewRainbow::ViewRainbow()
     mainWindow.setMinimumSize(500, 400);
     ui.setupUi(&mainWindow);
     ui.verticalLayout_2->insertWidget(0, painterWidget, 1);
+    ui.stopButton->setDisabled(true);
+    ui.speedSlider->setValue(START_SPEED);
 
     connect(ui.colorSlider, SIGNAL(valueChanged(int)), controller, SLOT(setPhase(int)));
     connect(ui.clearButton, SIGNAL(clicked()), controller, SLOT(clear(void)));
@@ -23,6 +30,7 @@ ViewRainbow::ViewRainbow()
 ViewRainbow::~ViewRainbow()
 {
     delete painterWidget;
+    delete controller;
 }
 
 int ViewRainbow::getWidth()
@@ -78,4 +86,15 @@ void ViewRainbow::setWidthSpin(const int x)
 void ViewRainbow::setHeightSpin(const int x)
 {
     ui.heightSpin->setValue(x);
+}
+
+void ViewRainbow::invertButton(bool state)
+{
+    ui.startButton->setDisabled(!state);
+    ui.stopButton->setDisabled(state);
+}
+
+int ViewRainbow::getSpeed()
+{
+    return START_SPEED;
 }
