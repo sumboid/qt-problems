@@ -13,11 +13,11 @@ namespace Ui
     class MainWindow;
 }
 
-class ViewRainbow: public View, public QObject
+class ViewPuzzle: public View, public QObject
 {
 public:
-    ViewRainbow();
-    virtual ~ViewRainbow();
+    ViewPuzzle();
+    virtual ~ViewPuzzle();
 
     virtual int getWidth();
     virtual int getHeight();

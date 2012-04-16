@@ -1,10 +1,10 @@
 #include <QApplication>
 
-#include "ViewRainbow.h"
+#include "ViewPuzzle.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    ViewRainbow view;
+    ViewPuzzle view;
     return a.exec();
 }

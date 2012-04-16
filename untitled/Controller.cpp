@@ -1,6 +1,8 @@
 #include "Controller.h"
 #include "Model.h"
 
+#include <iostream>
+
 namespace
 {
     const int MSEC_INTERVAL = 100;
@@ -19,18 +21,18 @@ Controller::Controller(View* view)
 
 void Controller::update()
 {
-    model->drawPixels();
+    model->draw();
 }
 
 void Controller::start()
 {
-    model->invertButton(false);
+    //model->invertButton(false);
     timer.start();
 }
 
 void Controller::stop()
 {
-    model->invertButton(true);
+    //model->invertButton(true);
     timer.stop();
 }
 
@@ -38,30 +40,32 @@ void Controller::clear()
 {
     model->invertButton(true);
     timer.stop();
-    model->clear();
+    //model->clear();
 }
 
 void Controller::setWidth(const int width)
 {
-    model->setWidth(width);
+    //model->setWidth(width);
 }
 
 void Controller::setHeight(const int height)
 {
-    model->setHeight(height);
+    //model->setHeight(height);
 }
 
 void Controller::setSpeed(const int speed)
 {
-    model->setSpeed(speed);
+    //model->setSpeed(speed);
 }
 
 void Controller::resize()
 {
-    model->resize();
+    //model->resize();
 }
 
-void Controller::setPhase(const int phase)
+void Controller::setAngle(const int angle)
 {
-    model->setPhase(phase);
+    std::cout << angle << std::endl;
+    model->setAngle(static_cast<double>(angle) / 180 * 3.14159265);
+    model->draw();
 }

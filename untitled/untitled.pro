@@ -12,18 +12,21 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         MainWindow.cpp \
-    ViewRainbow.cpp \
     PainterWidget.cpp \
     Model.cpp \
-    Controller.cpp
+    Controller.cpp \
+    ViewPuzzle.cpp
 
 HEADERS  += MainWindow.h \
-    ViewRainbow.h \
     View.h \
     PainterWidget.h \
     Model.h \
-    Controller.h
+    Controller.h \
+    ViewPuzzle.h
 
 FORMS    += MainWindow.ui
 
 OTHER_FILES +=
+
+RESOURCES += \
+    resources.qrc

@@ -1,5 +1,5 @@
 #include <QSize>
-#include "ViewRainbow.h"
+#include "ViewPuzzle.h"
 #include "Controller.h"
 
 namespace
@@ -7,14 +7,15 @@ namespace
     const int START_SPEED = 5000;
 }
 
-ViewRainbow::ViewRainbow()
+ViewPuzzle::ViewPuzzle()
 {
     controller = new Controller(this);
     painterWidget = new PainterWidget(controller);
     mainWindow.setMinimumSize(500, 400);
     ui.setupUi(&mainWindow);
-    /*ui.verticalLayout_2->insertWidget(0, painterWidget, 1);
-    ui.stopButton->setDisabled(true);
+    ui.horizontalLayout_2->insertWidget(0, painterWidget, 1);
+    connect(ui.dial, SIGNAL(valueChanged(int)), controller, SLOT(setAngle(int)));
+    /*ui.stopButton->setDisabled(true);
     ui.speedSlider->setValue(START_SPEED);
 
     connect(ui.colorSlider, SIGNAL(valueChanged(int)), controller, SLOT(setPhase(int)));
@@ -26,75 +27,76 @@ ViewRainbow::ViewRainbow()
     connect(ui.heightSpin, SIGNAL(valueChanged(int)), controller, SLOT(setHeight(int)));
 */
     mainWindow.show();
+    controller->update();
 }
-ViewRainbow::~ViewRainbow()
+ViewPuzzle::~ViewPuzzle()
 {
     delete painterWidget;
     delete controller;
 }
 
-int ViewRainbow::getWidth()
+int ViewPuzzle::getWidth()
 {
     return painterWidget->getHeight();
 }
 
-int ViewRainbow::getHeight()
+int ViewPuzzle::getHeight()
 {
     return painterWidget->getWidth();
 }
 
-int ViewRainbow::getWindowHeight()
+int ViewPuzzle::getWindowHeight()
 {
     return mainWindow.height();
 }
 
-int ViewRainbow::getWindowWidth()
+int ViewPuzzle::getWindowWidth()
 {
     return mainWindow.width();
 }
 
-void ViewRainbow::setWindowWidth(const int width)
+void ViewPuzzle::setWindowWidth(const int width)
 {
     mainWindow.resize(width, mainWindow.height());
 }
 
-void ViewRainbow::setWindowHeight(const int height)
+void ViewPuzzle::setWindowHeight(const int height)
 {
     mainWindow.resize(mainWindow.width(), height);
 }
 
-void ViewRainbow::setPixel(int x, int y, unsigned int color)
+void ViewPuzzle::setPixel(int x, int y, unsigned int color)
 {
     painterWidget->setPixel(x, y, color);
 }
 
-void ViewRainbow::clear()
+void ViewPuzzle::clear()
 {
     painterWidget->clear();
 }
 
-void ViewRainbow::paint()
+void ViewPuzzle::paint()
 {
     painterWidget->paint();
 }
 
-void ViewRainbow::setWidthSpin(const int x)
+void ViewPuzzle::setWidthSpin(const int x)
 {
   //  ui.widthSpin->setValue(x);
 }
 
-void ViewRainbow::setHeightSpin(const int x)
+void ViewPuzzle::setHeightSpin(const int x)
 {
   //  ui.heightSpin->setValue(x);
 }
 
-void ViewRainbow::invertButton(bool state)
+void ViewPuzzle::invertButton(bool state)
 {
   //  ui.startButton->setDisabled(!state);
   //  ui.stopButton->setDisabled(state);
 }
 
-int ViewRainbow::getSpeed()
+int ViewPuzzle::getSpeed()
 {
     return START_SPEED;
 }
