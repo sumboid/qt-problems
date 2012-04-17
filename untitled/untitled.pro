@@ -15,14 +15,16 @@ SOURCES += main.cpp\
     PainterWidget.cpp \
     Model.cpp \
     Controller.cpp \
-    ViewPuzzle.cpp
+    ViewPuzzle.cpp \
+    Triangle.cpp
 
 HEADERS  += MainWindow.h \
     View.h \
     PainterWidget.h \
     Model.h \
     Controller.h \
-    ViewPuzzle.h
+    ViewPuzzle.h \
+    Triangle.h
 
 FORMS    += MainWindow.ui
 
