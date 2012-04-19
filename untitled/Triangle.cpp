@@ -6,7 +6,7 @@ Triangle::Triangle(View* _view, const QImage& _image):
 {
     for(int i = 0; i < 3; ++i)
     {
-        imageCoordinates.x[i] = Point(0, 0);
+        imagePoints[i] = Point(0, 0);
     }
 }
 
@@ -14,8 +14,8 @@ void Triangle::setImageCoordinates(const Point* coordinates)
 {
     for(int i = 0; i < 3; ++i)
     {
-        imageCoordinates.x[i].first = coordinates[i].first;
-        imageCoordinates.x[i].second = coordinates[i].second;
+        imagePoints[i].first = coordinates[i].first;
+        imagePoints[i].second = coordinates[i].second;
     }
 }
 
@@ -24,7 +24,7 @@ void Triangle::setScale(const double& _scale)
     scale = _scale;
 }
 
-std::vector<Point> Triangle::drawLine(const Point _x, const Point _y)
+std::vector<Point> Triangle::getLine(const Point _x, const Point _y)
 {
     Point x = _x;
     Point y = _y;
@@ -70,6 +70,45 @@ void Triangle::draw(const Point x, const double angle)
      */
 
     Point a, b, c = x;
+
+    //Vodka Absolut
+    a.first = scale * (imagePoints[1].first - imagePoints[0].first) + c.first;
+    a.second = scale * (imagePoints[1].second - imagePoints[0].second) + c.second;
+
+    b.first = scale * (imagePoints[2].first - imagePoints[0].first) + c.first;
+    b.second = scale * (imagePoints[2].second - imagePoints[0].second) + c.second;
+
+
+    //TODO: rotate
+
+    vector ca = getLine(c, a);
+    vector cb = getLine(c, b);
+    vector ab = getLine(a, b);
+
+    //bE3HOLNM
+
+    if (a.second > b.second)
+    {
+        if (b.second >= c.second)
+        {
+            c.second;
+        }
+        else
+        {
+            b.second;
+        }
+    }
+    else
+    {
+        if (a.second >= c.second)
+        {
+            c.second;
+        }
+        else
+        {
+            a.second;
+        }
+    }
 
     return;
 }

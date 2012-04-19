@@ -6,8 +6,8 @@
 #include <QImage>
 
 #include "View.h"
+#include "Point.h"
 
-typedef std::pair<int, int> Point;
 
 class Triangle
 {
