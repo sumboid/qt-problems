@@ -55,6 +55,10 @@ std::vector<Point> Triangle::getLine(const Point _x, const Point _y)
     return line;
 }
 
+unsigned int Triangle::getColor(const Point& x)
+{
+
+}
 
 void Triangle::draw(const Point x, const double angle)
 {

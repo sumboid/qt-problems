@@ -7,6 +7,7 @@
 
 #include "View.h"
 #include "Point.h"
+#include "Filter.h"
 
 
 class Triangle
@@ -18,12 +19,13 @@ public:
     void setScale(const double&);
     void draw(const Point x, const double angle);
 private:
-    a.first = scale * (imagePoints[1].first - imagePoints[0].first) + c.first;
-    a.second = scale * (imagePoints[1].second - imagePoints[0].second) + c.second;
-    std::vector<Point> getLine(const Point x, const Point y);
+    std::vector<Point> getLine(const Point& x, const Point& y) const;
+    unsigned int getColor(const Point& x) const;
 
     Point imagePoints[3]; /* [c], [a], [b] */
     double scale;
+    Filter filter;
+
 
     View* view;
     const QImage& image;
