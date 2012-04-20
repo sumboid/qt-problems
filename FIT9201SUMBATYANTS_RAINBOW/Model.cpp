@@ -112,8 +112,7 @@ void Model::setSpeed(const int _speed)
 
 float Model::random() const
 {
-    const int MAX = std::numeric_limits<int>::max();
-    return (rand() % MAX) / static_cast<float>(MAX - 1);
+    return (rand() % RAND_MAX) / static_cast<float>(RAND_MAX - 1);
 }
 
 void Model::resize()
