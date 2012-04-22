@@ -71,12 +71,13 @@ void Triangle::draw(const Point x, const double angle)
      *   |   \
      *  [c]--[b]
      *
+     *  [[c, 0], [a, 1], [b, 2]]
      */
 
-    Point a, b, c = x;
+    Points a, b, c = 0;
 
     //Vodka Absolut
-    a.first = scale * (imagePoints[1].first - imagePoints[0].first) + c.first;
+    a.first = scale * (imagePoints[1].first - imagePoints[0].first) + points[0].first;
     a.second = scale * (imagePoints[1].second - imagePoints[0].second) + c.second;
 
     b.first = scale * (imagePoints[2].first - imagePoints[0].first) + c.first;
@@ -85,33 +86,137 @@ void Triangle::draw(const Point x, const double angle)
 
     //TODO: rotate
 
-    vector ca = getLine(c, a);
-    vector cb = getLine(c, b);
-    vector ab = getLine(a, b);
+    //Setting points for getColor()
+    points[0].first = c.first;
+    points[0].second = c.second;
+    points[1].first = a.first;
+    points[1].second = a.second;
+    points[2].first = b.first;
+    points[2].second = b.second;
 
-    //bE3HOLNM
+    //Search point with min(y)
+    //Point startPoint;
+    vector left, right, bottom; //left, right and bottom lines
 
-    if (a.second > b.second)
+    if (a.second >= b.second)
     {
         if (b.second >= c.second)
         {
-            c.second;
+
+            if(a.first > b.first)
+            {
+                /*  a.y >= b.y
+                 *  [b]----[a]
+                 *   \     /
+                 *    \   /
+                 *     \ /
+                 *     [c]
+                 */
+
+                left = getLine(c, b);
+                right = getLine(c, a);
+                bottom = getLine(b, a);
+            }
+            else
+            {
+                /*  a.y >= b.y
+                 *  [a]----[b]
+                 *   \     /
+                 *    \   /
+                 *     \ /
+                 *     [c]
+                 */
+                left = getLine(c, a);
+                right = getLine(c, b);
+                bottom = getLine(a, b);
+            }
         }
         else
         {
-            b.second;
+            //startPoint.first = b.first;
+            //startPoint.second = b.second;
+
+            if(a.first > c.first)
+            {
+                /*
+                 *  a.y >= c.y
+                 *  [c]----[a]
+                 *   \     /
+                 *    \   /
+                 *     \ /
+                 *     [b]
+                 */
+                left = getLine(b, c);
+                right = getLine(b, a);
+                bottom = getLine(c, a);
+            }
+            else
+            {
+                /*  a.y >= c.y
+                 *  [a]----[c]
+                 *   \     /
+                 *    \   /
+                 *     \ /
+                 *     [b]
+                 */
+                left = getLine(b, a);
+                right = getLine(b, c);
+                bottom = getLine(a, c);
+            }
         }
     }
     else
     {
         if (a.second >= c.second)
         {
-            c.second;
+            //startPoint.first = c.first;
+            //startPoint.second = c.second;
+
+            if(a.first > b.first)
+            {
+                left = getLine(c, b);
+                right = getLine(c, a);
+                bottom = getLine(b, a);
+            }
+            else
+            {
+                left = getLine(c, a);
+                right = getLine(c, b);
+                bottom = getLine(a, b);
+            }
         }
         else
         {
-            a.second;
+            //startPoint.first = a.first;
+            //startPoint.second = a.second;
+
+            if(b.first > c.first)
+            {
+                left = getLine(a, c);
+                right = getLine(a, b);
+                bottom = getLine(c, b);
+            }
+            else
+            {
+                left = getLine(a, b);
+                right = getLine(a, c);
+                bottom = getLine(b, c);
+            }
         }
+    }
+
+    //Prepare to start draw
+    size_t leftSize = left.size();
+    size_t rightSize = right.size();
+    size_t bottomSize = bottom.size();
+
+    int lineNumber = left[0].second;
+
+    int l = 0, r = 0, b = 0;
+
+    for(l = 0; l < leftSize; ++l)
+    {
+        
     }
 
     return;
