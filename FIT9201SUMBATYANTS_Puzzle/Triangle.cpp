@@ -216,7 +216,70 @@ void Triangle::draw(const Point x, const double angle)
 
     for(l = 0; l < leftSize; ++l)
     {
-        
+        //Search last left pixel on lineNumber
+        if(l + 1 != leftSize && left[l + 1].second == lineNumber)
+        {
+            view->setPixel(left[l].first, left[l].second, 0x0);
+            continue;
+        }
+
+        view->setPixel(left[l].first, left[l].second, 0x0);
+
+        if(r != rigthSize)
+        {
+            for(int i = left[l].second + 1; i < right[r].second; ++i)
+            {
+                view->setPixel(lineNumber, i, getColor(lineNumber, i));
+            }
+
+            while(right[r].second < lineNumber + 1)
+            {
+                view->setPixel(right[r].first, right[r].second, 0x0);
+                ++r;
+            }
+        }
+        else
+        {
+            for(int i = left[l].second + 1; i < bottom[b].second; ++i)
+            {
+                view->setPixel(lineNumber, i, getColor(lineNumber, i));
+            }
+
+            while(bottom[b].second < lineNumber + 1)
+            {
+                view->setPixel(bottom[b].first, bottom[b].second, 0x0);
+                ++b;
+            }
+        }
+
+        ++lineNumber;
+    }
+
+    if(b == 0)
+    {
+        for(;b < bottomSize; ++b)
+        {
+            if(b + 1 != bottomSize && bottom[b + 1].second == lineNumber)
+            {
+                view->setPixel(bottom[b].first, bottom[b].second, 0x0);
+                continue;
+            }
+
+            view->setPixel(bottom[b].first, bottom[b].second, 0x0);
+
+            for(int i = bottom[b].second + 1; i < right[r].second; ++i)
+            {
+                view->setPixel(lineNumber, i, getColor(lineNumber, i));
+            }
+
+            while(right[r].second < lineNumber + 1)
+            {
+                view->setPixel(right[r].first, right[r].second, 0x0);
+                ++r;
+            }
+
+            ++lineNumber;
+        }
     }
 
     return;
