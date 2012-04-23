@@ -57,10 +57,10 @@ std::vector<Point> Triangle::getLine(const Point _x, const Point _y)
 
 unsigned int Triangle::getColor(const Point& x)
 {
-
+    
 }
 
-void Triangle::draw(const Point x, const double angle)
+void Triangle::draw(const Point x, const double _angle)
 {
     /* Hurdcoar
      *
@@ -86,7 +86,7 @@ void Triangle::draw(const Point x, const double angle)
 
     //TODO: rotate
 
-    //Setting points for getColor()
+    //Setting points and angle for getColor()
     points[0].first = c.first;
     points[0].second = c.second;
     points[1].first = a.first;
@@ -94,8 +94,9 @@ void Triangle::draw(const Point x, const double angle)
     points[2].first = b.first;
     points[2].second = b.second;
 
+    angle = _angle;
+
     //Search point with min(y)
-    //Point startPoint;
     vector left, right, bottom; //left, right and bottom lines
 
     if (a.second >= b.second)
@@ -133,9 +134,6 @@ void Triangle::draw(const Point x, const double angle)
         }
         else
         {
-            //startPoint.first = b.first;
-            //startPoint.second = b.second;
-
             if(a.first > c.first)
             {
                 /*
@@ -158,6 +156,8 @@ void Triangle::draw(const Point x, const double angle)
                  *    \   /
                  *     \ /
                  *     [b]
+                 *
+                 *  etc
                  */
                 left = getLine(b, a);
                 right = getLine(b, c);
@@ -169,9 +169,6 @@ void Triangle::draw(const Point x, const double angle)
     {
         if (a.second >= c.second)
         {
-            //startPoint.first = c.first;
-            //startPoint.second = c.second;
-
             if(a.first > b.first)
             {
                 left = getLine(c, b);
@@ -187,9 +184,6 @@ void Triangle::draw(const Point x, const double angle)
         }
         else
         {
-            //startPoint.first = a.first;
-            //startPoint.second = a.second;
-
             if(b.first > c.first)
             {
                 left = getLine(a, c);
