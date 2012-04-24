@@ -75,7 +75,21 @@ unsigned int Triangle::getColor(const Point& d)
     double _sin = ::sqrt(1 - _cos * _cos);
     double u = cd * _cos / cb;
     double v = cd * _sin / ca;
-    
+
+    int x, y;
+    //Nearest
+    if(imagePoints[0].second > imagePoints[1].second)
+    {
+        x = static_cast<int>(imagePoints[0].first - LENGTH(imagePoints[0], imagePoints[2]) * u + 0.5);
+        y = static_cast<int>(imagePoints[0].second - LENGTH(imagePoints[0], imagePoints[1]) * v + 0.5);
+    }
+    else
+    {
+        x = static_cast<int>(imagePoints[0].first + LENGTH(imagePoints[0], imagePoints[2]) * u + 0.5);
+        y = static_cast<int>(imagePoints[0].second + LENGTH(imagePoints[0], imagePoints[1]) * v + 0.5);
+    }
+
+    return image.pixel(x, y);
 }
 
 void Triangle::draw(const Point x, const double _angle)

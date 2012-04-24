@@ -24,7 +24,6 @@ private:
 
     Point imagePoints[3]; /* [c], [a], [b] */
     Point points[3]; /* [c], [a], [b] */
-    double scale;
     Filter filter;
 
 
