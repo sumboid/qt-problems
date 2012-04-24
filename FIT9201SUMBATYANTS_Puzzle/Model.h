@@ -1,6 +1,7 @@
 #pragma once
 #include <QRgb>
 #include "View.h"
+#include "Triangle.h"
 
 class Model
 {
@@ -13,6 +14,11 @@ public:
     void setAngle(const double);
     void invertButton(bool);
 private:
+    void setTrianglesPoints(Triangle& triangle, const int number);
+
+
     View* view;
+    QImage image;
+    vector<Triangle> triangles;
     double angle;
 };

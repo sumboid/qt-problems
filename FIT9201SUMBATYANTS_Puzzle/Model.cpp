@@ -6,8 +6,13 @@
 
 #include <iostream>
 
-Model::Model(View* _view): view(_view), angle(0)
+Model::Model(View* _view): 
+view(_view), angle(0), image(QPixmap(":/puzzle.png").toImage())
 {
+    for(int i = 0; i < 32; i++)
+    {
+        triangles[i] = Triangle(view, image);
+    }
 }
 
 Model::~Model()
@@ -15,23 +20,21 @@ Model::~Model()
 
 void Model::draw() const
 {
-    QPixmap image(":/puzzle.png");
-    QImage img = image.toImage();
-    int width = view->getWidth();
-    int height = view->getHeight();
+    Triangle t(view, image);
+    setTrianglePoints(t, 0);
+    t.setScale(1);
+    t.draw(Point(view.getWidth()/2, view.getHeight()/2), 0);
+}
 
-    view->clear();
-    for(int i = 0; i < img.width(); i++)
-        for(int k = 0; k < img.height(); k++)
-        {
-            int x = static_cast<int>(cos(angle) * static_cast<double>(i) - sin(angle) * static_cast<double>(k));
-            int y = static_cast<int>(sin(angle) * static_cast<double>(i) + cos(angle) * static_cast<double>(k));
-            x += width / 2 - cos(angle) * img.width() / 2 + sin(angle) * img.height() / 2;
-            y += height / 2 - sin(angle) * img.height() / 2 - cos(angle) * img.width() / 2;
-            view->setPixel(x, y, img.pixel(i, k));
-        }
-
-    view->paint();
+void Model::setTrianglePoints(Trinagle& triangle, const int number)
+{
+    Point a, b, c;
+    a.first = 0;
+    a.second = 0;
+    c.first = 0;
+    c.second = image.height() - 1;
+    b.first = image.width() - 1;
+    b.second = image.height() - 1;
 }
 
 void Model::setAngle(const double _angle)
