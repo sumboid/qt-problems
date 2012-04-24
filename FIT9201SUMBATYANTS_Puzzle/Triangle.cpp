@@ -55,8 +55,26 @@ std::vector<Point> Triangle::getLine(const Point _x, const Point _y)
     return line;
 }
 
-unsigned int Triangle::getColor(const Point& x)
+#define LENGTH(x, y) (::sqrt((x.first - y.first) * (x.first - y.first) + \
+                             (x.second - y.second) * (x.second - y.second)))
+
+unsigned int Triangle::getColor(const Point& d)
 {
+//    double cb = ::sqrt((c.first - b.first) * (c.first - b.first) +
+//                       (c.second - b.second) * (c.second - b.second));
+//    double ca = ::sqrt((c.first - a.first) * (c.first - a.first) +
+//                       (c.second - a.second) * (c.second - a.second));
+//    double cx = ::sqrt((c.first - x.first) * (c.first - x.first) +
+//                       (c.second - x.second) * (c.second - x.second));
+    double cb = LENGTH(points[0], points[2]);
+    double ca = LENGTH(points[0], points[1]);
+    double cd = LENGTH(points[0], d);
+    double _cos = ((points[2].first - points[0].first) * (d.first - points[0].first) +
+                   (points[2].second - points[0].second) * (d.second - points[0].second)) /
+                   (cd * cb);
+    double _sin = ::sqrt(1 - _cos * _cos);
+    double u = cd * _cos / cb;
+    double v = cd * _sin / ca;
     
 }
 
