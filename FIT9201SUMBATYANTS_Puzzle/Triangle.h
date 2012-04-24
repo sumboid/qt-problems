@@ -13,11 +13,11 @@
 class Triangle
 {
 public:
-    Triangle(View *, const QImage&);
+    Triangle(View *, const QImage *);
 
     void setImageCoordinates(const Point*);
     void setScale(const double&);
-    void draw(const Point x, const double angle);
+    void draw(const Point& x, const double angle);
 private:
     std::vector<Point> getLine(const Point& x, const Point& y) const;
     unsigned int getColor(const Point& x) const;
@@ -29,7 +29,7 @@ private:
 
 
     View* view;
-    const QImage& image;
+    const QImage* image;
 };
 
 #endif // TRIANGLE_H

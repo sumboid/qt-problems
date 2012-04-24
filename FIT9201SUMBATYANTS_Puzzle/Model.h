@@ -1,5 +1,6 @@
 #pragma once
 #include <QRgb>
+#include <vector>
 #include "View.h"
 #include "Triangle.h"
 
@@ -10,15 +11,15 @@ public:
     ~Model();
 
     void setSpeed(const int speed);
-    void draw() const;
+    void draw();
     void setAngle(const double);
     void invertButton(bool);
 private:
-    void setTrianglesPoints(Triangle& triangle, const int number);
+    void setTrianglePoints(Triangle& triangle, const int number);
 
 
     View* view;
     QImage image;
-    vector<Triangle> triangles;
+    std::vector<Triangle> triangles;
     double angle;
 };
