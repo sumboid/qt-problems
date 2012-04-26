@@ -1,6 +1,7 @@
 #include "PainterWidget.h"
 #include <QRgb>
 
+#include <iostream>
 
 PainterWidget::PainterWidget(Controller* _controller):
     controller(_controller)

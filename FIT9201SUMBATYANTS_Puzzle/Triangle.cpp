@@ -2,8 +2,10 @@
 #include <vector>
 #include "Triangle.h"
 
+#include <iostream>
+
 Triangle::Triangle(View* _view, const QImage* _image):
-    scale(0), view(_view), image(_image)
+    scale(2), view(_view), image(_image)
 {
     for(int i = 0; i < 3; ++i)
     {
@@ -27,6 +29,8 @@ void Triangle::setScale(const double& _scale)
 
 std::vector<Point> Triangle::getLine(const Point& _x, const Point& _y) const
 {
+    //std::cout << "From: " << "( " << _x.first << ", " << _x.second << ") " <<
+    //             "To: " << "( " << _y.first << ", " << _y.second << ")" << std::endl;
     Point x = _x;
     Point y = _y;
     std::vector<Point> line;
@@ -36,9 +40,10 @@ std::vector<Point> Triangle::getLine(const Point& _x, const Point& _y) const
     const int signY = x.second < y.second ? 1 : -1;
 
     int error = deltaX - deltaY;
-    line.push_back(Point(y.first, y.second));
+    //std::cout << "(" << y.first << " ," <<  y.second << ")" << std::endl;
     while(x.first != y.first || x.second != y.second)
     {
+        //std::cout << "(" << x.first << " ," <<  x.second << ")" << std::endl;
         line.push_back(Point(x.first, x.second));
         const int error2 = error * 2;
         if(error2 > -deltaY)
@@ -53,6 +58,7 @@ std::vector<Point> Triangle::getLine(const Point& _x, const Point& _y) const
         }
     }
 
+    line.push_back(Point(y.first, y.second));
     return line;
 }
 
@@ -76,6 +82,8 @@ unsigned int Triangle::getColor(const Point& d) const
     double _sin = ::sqrt(1 - _cos * _cos);
     double u = cd * _cos / cb;
     double v = cd * _sin / ca;
+
+    std::cout << "( " << u << ", " << v << ")" << std::endl; 
 
     int x, y;
     //Nearest
@@ -110,7 +118,7 @@ void Triangle::draw(const Point& x, const double _angle)
     Point a, b, c = Point(x.first, x.second);
 
     //Vodka Absolut
-    a.first = scale * (imagePoints[1].first - imagePoints[0].first) + points[0].first;
+    a.first = scale * (imagePoints[1].first - imagePoints[0].first) + c.first;
     a.second = scale * (imagePoints[1].second - imagePoints[0].second) + c.second;
 
     b.first = scale * (imagePoints[2].first - imagePoints[0].first) + c.first;
@@ -235,15 +243,25 @@ void Triangle::draw(const Point& x, const double _angle)
     size_t rightSize = right.size();
     size_t bottomSize = bottom.size();
 
-    int lineNumber = left[0].second;
+    int lineNumber = left[0].second - 1;
 
     size_t l = 0, r = 0, t = 0; //XXX: top
 
+    //std::cout <<
+    //    "a: " << a.first << ", " << a.second << std::endl <<
+    //    "b: " << b.first << ", " << b.second << std::endl <<
+    //    "c: " << c.first << ", " << c.second << std::endl;
+
     for(l = 0; l < leftSize; ++l)
     {
+        ++lineNumber;
+
+        //std::cout << "lineNumber = " << lineNumber << std::endl;
+        //sleep(1);
         //Search last left pixel on lineNumber
-        if(l + 1 != leftSize && left[l + 1].second == lineNumber)
+        if(left[l + 1].second == lineNumber)
         {
+            //std::cout << "Search left pixel" << std::endl;
             view->setPixel(left[l].first, left[l].second, 0x0);
             continue;
         }
@@ -252,19 +270,24 @@ void Triangle::draw(const Point& x, const double _angle)
 
         if(r != rightSize)
         {
-            for(int i = left[l].second + 1; i < right[r].second; ++i)
+            for(int i = left[l].first + 1; i < right[r].first; ++i)
             {
-                view->setPixel(lineNumber, i, getColor(Point(lineNumber, i)));
+                //std::cout << "Draw line" << std::endl;
+                //sleep(1);
+                view->setPixel(i, lineNumber, getColor(Point(lineNumber, i)));
             }
 
             while(right[r].second < lineNumber + 1)
             {
+                //std::cout << "Draw right line" << std::endl;
+                //sleep(1);
                 view->setPixel(right[r].first, right[r].second, 0x0);
                 ++r;
             }
         }
         else
         {
+            //sleep(1);
             for(int i = left[l].second + 1; i < bottom[t].second; ++i)
             {
                 view->setPixel(lineNumber, i, getColor(Point(lineNumber, i)));
@@ -277,9 +300,9 @@ void Triangle::draw(const Point& x, const double _angle)
             }
         }
 
-        ++lineNumber;
     }
 
+    //sleep(10);
     if(t == 0)
     {
         for(;t < bottomSize; ++t)
@@ -290,15 +313,19 @@ void Triangle::draw(const Point& x, const double _angle)
                 continue;
             }
 
+
             view->setPixel(bottom[t].first, bottom[t].second, 0x0);
 
-            for(int i = bottom[t].second + 1; i < right[r].second; ++i)
+            for(int i = bottom[t].first + 1; i < right[r].first; ++i)
             {
-                view->setPixel(lineNumber, i, getColor(Point(lineNumber, i)));
+                //sleep(1);
+                view->setPixel(i, lineNumber, getColor(Point(lineNumber, i)));
             }
 
             while(right[r].second < lineNumber + 1)
             {
+            
+                //sleep(1);
                 view->setPixel(right[r].first, right[r].second, 0x0);
                 ++r;
             }

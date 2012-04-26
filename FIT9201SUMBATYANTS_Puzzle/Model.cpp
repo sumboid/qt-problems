@@ -35,6 +35,9 @@ void Model::setTrianglePoints(Triangle& triangle, const int number)
     c.second = image.height() - 1;
     b.first = image.width() - 1;
     b.second = image.height() - 1;
+
+    Point points[3] = {c, a, b};
+    triangle.setImageCoordinates(points);
 }
 
 void Model::setAngle(const double _angle)

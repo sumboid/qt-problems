@@ -2,6 +2,7 @@
 #include "ViewPuzzle.h"
 #include "Controller.h"
 
+#include <iostream>
 namespace
 {
     const int START_SPEED = 5000;
