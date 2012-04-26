@@ -1,3 +1,5 @@
+/* GPL2.txt */
+
 #include <cmath>
 #include <vector>
 #include "Triangle.h"
@@ -29,7 +31,7 @@ void Triangle::setScale(const double& _scale)
 
 std::vector<Point> Triangle::getLine(const Point& _x, const Point& _y) const
 {
-    //std::cout << "From: " << "( " << _x.first << ", " << _x.second << ") " <<
+    ////std::cout << "From: " << "( " << _x.first << ", " << _x.second << ") " <<
     //             "To: " << "( " << _y.first << ", " << _y.second << ")" << std::endl;
     Point x = _x;
     Point y = _y;
@@ -40,10 +42,10 @@ std::vector<Point> Triangle::getLine(const Point& _x, const Point& _y) const
     const int signY = x.second < y.second ? 1 : -1;
 
     int error = deltaX - deltaY;
-    //std::cout << "(" << y.first << " ," <<  y.second << ")" << std::endl;
+    ////std::cout << "(" << y.first << " ," <<  y.second << ")" << std::endl;
     while(x.first != y.first || x.second != y.second)
     {
-        //std::cout << "(" << x.first << " ," <<  x.second << ")" << std::endl;
+        ////std::cout << "(" << x.first << " ," <<  x.second << ")" << std::endl;
         line.push_back(Point(x.first, x.second));
         const int error2 = error * 2;
         if(error2 > -deltaY)
@@ -83,7 +85,10 @@ unsigned int Triangle::getColor(const Point& d) const
     double u = cd * _cos / cb;
     double v = cd * _sin / ca;
 
-    std::cout << "( " << u << ", " << v << ")" << std::endl; 
+    std::cout << "(" << u << ", " << v << "): \
+              cd = " << cd << " cos = " << _cos << " sin = " << _sin << " scal = " <<
+              (points[2].first - points[0].first) * (d.first - points[0].first) +
+              (points[2].second - points[0].second) * (d.second - points[0].second) << std::endl; 
 
     int x, y;
     //Nearest
@@ -247,7 +252,7 @@ void Triangle::draw(const Point& x, const double _angle)
 
     size_t l = 0, r = 0, t = 0; //XXX: top
 
-    //std::cout <<
+    ////std::cout <<
     //    "a: " << a.first << ", " << a.second << std::endl <<
     //    "b: " << b.first << ", " << b.second << std::endl <<
     //    "c: " << c.first << ", " << c.second << std::endl;
@@ -256,12 +261,12 @@ void Triangle::draw(const Point& x, const double _angle)
     {
         ++lineNumber;
 
-        //std::cout << "lineNumber = " << lineNumber << std::endl;
+        ////std::cout << "lineNumber = " << lineNumber << std::endl;
         //sleep(1);
         //Search last left pixel on lineNumber
         if(left[l + 1].second == lineNumber)
         {
-            //std::cout << "Search left pixel" << std::endl;
+            ////std::cout << "Search left pixel" << std::endl;
             view->setPixel(left[l].first, left[l].second, 0x0);
             continue;
         }
@@ -272,14 +277,14 @@ void Triangle::draw(const Point& x, const double _angle)
         {
             for(int i = left[l].first + 1; i < right[r].first; ++i)
             {
-                //std::cout << "Draw line" << std::endl;
+                ////std::cout << "Draw line" << std::endl;
                 //sleep(1);
                 view->setPixel(i, lineNumber, getColor(Point(lineNumber, i)));
             }
 
             while(right[r].second < lineNumber + 1)
             {
-                //std::cout << "Draw right line" << std::endl;
+                ////std::cout << "Draw right line" << std::endl;
                 //sleep(1);
                 view->setPixel(right[r].first, right[r].second, 0x0);
                 ++r;

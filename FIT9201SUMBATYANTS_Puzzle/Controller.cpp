@@ -65,7 +65,6 @@ void Controller::resize()
 
 void Controller::setAngle(const int angle)
 {
-    std::cout << angle << std::endl;
     model->setAngle(static_cast<double>(angle) / 180 * 3.14159265);
     model->draw();
 }
