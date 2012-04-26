@@ -4,3 +4,4 @@
 moc_*
 ui_*
 Makefile
+qrc_resources.cpp 

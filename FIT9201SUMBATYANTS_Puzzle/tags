@@ -1,0 +1,286 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BILINEAR	Filter.h	/^enum Filter { NEAREST, BILINEAR }; \/\/Not bad to realize factory$/;"	e	enum:Filter
+Controller	Controller.cpp	/^Controller::Controller(View* view)$/;"	f	class:Controller	signature:(View* view)
+Controller	Controller.h	/^    Controller(View* view);$/;"	p	class:Controller	access:public	signature:(View* view)
+Controller	Controller.h	/^class Controller : public QObject$/;"	c	inherits:QObject
+Controller::Controller	Controller.cpp	/^Controller::Controller(View* view)$/;"	f	class:Controller	signature:(View* view)
+Controller::Controller	Controller.h	/^    Controller(View* view);$/;"	p	class:Controller	access:public	signature:(View* view)
+Controller::clear	Controller.cpp	/^void Controller::clear()$/;"	f	class:Controller	signature:()
+Controller::clear	Controller.h	/^    void clear();$/;"	p	class:Controller	access:public	signature:()
+Controller::model	Controller.h	/^    Model* model;$/;"	m	class:Controller	access:private
+Controller::resize	Controller.cpp	/^void Controller::resize()$/;"	f	class:Controller	signature:()
+Controller::resize	Controller.h	/^    void resize();$/;"	p	class:Controller	access:public	signature:()
+Controller::setAngle	Controller.cpp	/^void Controller::setAngle(const int angle)$/;"	f	class:Controller	signature:(const int angle)
+Controller::setAngle	Controller.h	/^    void setAngle(const int);$/;"	p	class:Controller	access:public	signature:(const int)
+Controller::setHeight	Controller.cpp	/^void Controller::setHeight(const int height)$/;"	f	class:Controller	signature:(const int height)
+Controller::setHeight	Controller.h	/^    void setHeight(const int);$/;"	p	class:Controller	access:public	signature:(const int)
+Controller::setSpeed	Controller.cpp	/^void Controller::setSpeed(const int speed)$/;"	f	class:Controller	signature:(const int speed)
+Controller::setSpeed	Controller.h	/^    void setSpeed(const int);$/;"	p	class:Controller	access:public	signature:(const int)
+Controller::setWidth	Controller.cpp	/^void Controller::setWidth(const int width)$/;"	f	class:Controller	signature:(const int width)
+Controller::setWidth	Controller.h	/^    void setWidth(const int);$/;"	p	class:Controller	access:public	signature:(const int)
+Controller::start	Controller.cpp	/^void Controller::start()$/;"	f	class:Controller	signature:()
+Controller::start	Controller.h	/^    void start();$/;"	p	class:Controller	access:public	signature:()
+Controller::stop	Controller.cpp	/^void Controller::stop()$/;"	f	class:Controller	signature:()
+Controller::stop	Controller.h	/^    void stop();$/;"	p	class:Controller	access:public	signature:()
+Controller::timer	Controller.h	/^    QTimer timer;$/;"	m	class:Controller	access:private
+Controller::update	Controller.cpp	/^void Controller::update()$/;"	f	class:Controller	signature:()
+Controller::update	Controller.h	/^    void update();$/;"	p	class:Controller	access:public	signature:()
+Controller::~Controller	Controller.cpp	/^Controller::~Controller()$/;"	f	class:Controller	signature:()
+Controller::~Controller	Controller.h	/^    ~Controller();$/;"	p	class:Controller	access:public	signature:()
+Filter	Filter.h	/^enum Filter { NEAREST, BILINEAR }; \/\/Not bad to realize factory$/;"	g
+LENGTH	Triangle.cpp	58;"	d	file:
+MAINWINDOW_H	MainWindow.h	2;"	d
+MSEC_INTERVAL	Controller.cpp	/^    const int MSEC_INTERVAL = 100;$/;"	m	namespace:__anon1	file:
+MainWindow	MainWindow.cpp	/^MainWindow::MainWindow(QWidget *parent) :$/;"	f	class:MainWindow	signature:(QWidget *parent)
+MainWindow	MainWindow.h	/^    explicit MainWindow(QWidget *parent = 0);$/;"	p	class:MainWindow	access:public	signature:(QWidget *parent = 0)
+MainWindow	MainWindow.h	/^class MainWindow : public QMainWindow$/;"	c	inherits:QMainWindow
+MainWindow::MainWindow	MainWindow.cpp	/^MainWindow::MainWindow(QWidget *parent) :$/;"	f	class:MainWindow	signature:(QWidget *parent)
+MainWindow::MainWindow	MainWindow.h	/^    explicit MainWindow(QWidget *parent = 0);$/;"	p	class:MainWindow	access:public	signature:(QWidget *parent = 0)
+MainWindow::ui	MainWindow.h	/^    Ui::MainWindow *ui;$/;"	m	class:MainWindow	access:private
+MainWindow::~MainWindow	MainWindow.cpp	/^MainWindow::~MainWindow()$/;"	f	class:MainWindow	signature:()
+MainWindow::~MainWindow	MainWindow.h	/^    ~MainWindow();$/;"	p	class:MainWindow	access:public	signature:()
+Model	Model.cpp	/^Model::Model(View* _view): $/;"	f	class:Model	signature:(View* _view)
+Model	Model.h	/^    Model(View* view);$/;"	p	class:Model	access:public	signature:(View* view)
+Model	Model.h	/^class Model$/;"	c
+Model::Model	Model.cpp	/^Model::Model(View* _view): $/;"	f	class:Model	signature:(View* _view)
+Model::Model	Model.h	/^    Model(View* view);$/;"	p	class:Model	access:public	signature:(View* view)
+Model::angle	Model.h	/^    double angle;$/;"	m	class:Model	access:private
+Model::draw	Model.cpp	/^void Model::draw() const$/;"	f	class:Model	signature:() const
+Model::draw	Model.h	/^    void draw() const;$/;"	p	class:Model	access:public	signature:() const
+Model::image	Model.h	/^    QImage image;$/;"	m	class:Model	access:private
+Model::invertButton	Model.cpp	/^void Model::invertButton(bool state)$/;"	f	class:Model	signature:(bool state)
+Model::invertButton	Model.h	/^    void invertButton(bool);$/;"	p	class:Model	access:public	signature:(bool)
+Model::setAngle	Model.cpp	/^void Model::setAngle(const double _angle)$/;"	f	class:Model	signature:(const double _angle)
+Model::setAngle	Model.h	/^    void setAngle(const double);$/;"	p	class:Model	access:public	signature:(const double)
+Model::setSpeed	Model.h	/^    void setSpeed(const int speed);$/;"	p	class:Model	access:public	signature:(const int speed)
+Model::triangles	Model.h	/^    vector<Triangle> triangles;$/;"	m	class:Model	access:private
+Model::view	Model.h	/^    View* view;$/;"	m	class:Model	access:private
+Model::~Model	Model.cpp	/^Model::~Model()$/;"	f	class:Model	signature:()
+Model::~Model	Model.h	/^    ~Model();$/;"	p	class:Model	access:public	signature:()
+NEAREST	Filter.h	/^enum Filter { NEAREST, BILINEAR }; \/\/Not bad to realize factory$/;"	e	enum:Filter
+PainterWidget	PainterWidget.cpp	/^PainterWidget::PainterWidget(Controller* _controller):$/;"	f	class:PainterWidget	signature:(Controller* _controller)
+PainterWidget	PainterWidget.h	/^    PainterWidget(Controller* controller);$/;"	p	class:PainterWidget	access:public	signature:(Controller* controller)
+PainterWidget	PainterWidget.h	/^class PainterWidget : public QWidget$/;"	c	inherits:QWidget
+PainterWidget::PainterWidget	PainterWidget.cpp	/^PainterWidget::PainterWidget(Controller* _controller):$/;"	f	class:PainterWidget	signature:(Controller* _controller)
+PainterWidget::PainterWidget	PainterWidget.h	/^    PainterWidget(Controller* controller);$/;"	p	class:PainterWidget	access:public	signature:(Controller* controller)
+PainterWidget::clear	PainterWidget.cpp	/^void PainterWidget::clear()$/;"	f	class:PainterWidget	signature:()
+PainterWidget::clear	PainterWidget.h	/^    void clear();$/;"	p	class:PainterWidget	access:public	signature:()
+PainterWidget::controller	PainterWidget.h	/^    Controller* controller;$/;"	m	class:PainterWidget	access:private
+PainterWidget::getHeight	PainterWidget.cpp	/^int PainterWidget::getHeight()$/;"	f	class:PainterWidget	signature:()
+PainterWidget::getHeight	PainterWidget.h	/^    int getHeight();$/;"	p	class:PainterWidget	access:public	signature:()
+PainterWidget::getWidth	PainterWidget.cpp	/^int PainterWidget::getWidth()$/;"	f	class:PainterWidget	signature:()
+PainterWidget::getWidth	PainterWidget.h	/^    int getWidth();$/;"	p	class:PainterWidget	access:public	signature:()
+PainterWidget::image	PainterWidget.h	/^    QImage image;$/;"	m	class:PainterWidget	access:private
+PainterWidget::paint	PainterWidget.cpp	/^void PainterWidget::paint()$/;"	f	class:PainterWidget	signature:()
+PainterWidget::paint	PainterWidget.h	/^    void paint();$/;"	p	class:PainterWidget	access:public	signature:()
+PainterWidget::paintEvent	PainterWidget.cpp	/^void PainterWidget::paintEvent(QPaintEvent*)$/;"	f	class:PainterWidget	signature:(QPaintEvent*)
+PainterWidget::paintEvent	PainterWidget.h	/^    virtual void paintEvent(QPaintEvent*);$/;"	p	class:PainterWidget	access:protected	signature:(QPaintEvent*)
+PainterWidget::resizeEvent	PainterWidget.cpp	/^void PainterWidget::resizeEvent(QResizeEvent*)$/;"	f	class:PainterWidget	signature:(QResizeEvent*)
+PainterWidget::resizeEvent	PainterWidget.h	/^    virtual void resizeEvent(QResizeEvent*);$/;"	p	class:PainterWidget	access:protected	signature:(QResizeEvent*)
+PainterWidget::setPixel	PainterWidget.cpp	/^void PainterWidget::setPixel(int x, int y, QRgb color)$/;"	f	class:PainterWidget	signature:(int x, int y, QRgb color)
+PainterWidget::setPixel	PainterWidget.h	/^    void setPixel(int x, int y, unsigned int color);$/;"	p	class:PainterWidget	access:public	signature:(int x, int y, unsigned int color)
+PainterWidget::~PainterWidget	PainterWidget.cpp	/^PainterWidget::~PainterWidget()$/;"	f	class:PainterWidget	signature:()
+PainterWidget::~PainterWidget	PainterWidget.h	/^    ~PainterWidget();$/;"	p	class:PainterWidget	access:public	signature:()
+Point	Point.h	/^typedef std::pair<int, int> Point;$/;"	t
+START_SPEED	ViewPuzzle.cpp	/^    const int START_SPEED = 5000;$/;"	m	namespace:__anon2	file:
+TRIANGLE_H	Triangle.h	2;"	d
+Triangle	Triangle.cpp	/^Triangle::Triangle(View* _view, const QImage& _image):$/;"	f	class:Triangle	signature:(View* _view, const QImage& _image)
+Triangle	Triangle.h	/^    Triangle(View *, const QImage&);$/;"	p	class:Triangle	access:public	signature:(View *, const QImage&)
+Triangle	Triangle.h	/^class Triangle$/;"	c
+Triangle::Triangle	Triangle.cpp	/^Triangle::Triangle(View* _view, const QImage& _image):$/;"	f	class:Triangle	signature:(View* _view, const QImage& _image)
+Triangle::Triangle	Triangle.h	/^    Triangle(View *, const QImage&);$/;"	p	class:Triangle	access:public	signature:(View *, const QImage&)
+Triangle::draw	Triangle.cpp	/^void Triangle::draw(const Point x, const double _angle)$/;"	f	class:Triangle	signature:(const Point x, const double _angle)
+Triangle::draw	Triangle.h	/^    void draw(const Point x, const double angle);$/;"	p	class:Triangle	access:public	signature:(const Point x, const double angle)
+Triangle::filter	Triangle.h	/^    Filter filter;$/;"	m	class:Triangle	access:private
+Triangle::getColor	Triangle.cpp	/^unsigned int Triangle::getColor(const Point& d)$/;"	f	class:Triangle	signature:(const Point& d)
+Triangle::getColor	Triangle.h	/^    unsigned int getColor(const Point& x) const;$/;"	p	class:Triangle	access:private	signature:(const Point& x) const
+Triangle::getLine	Triangle.cpp	/^std::vector<Point> Triangle::getLine(const Point _x, const Point _y)$/;"	f	class:Triangle	signature:(const Point _x, const Point _y)
+Triangle::getLine	Triangle.h	/^    std::vector<Point> getLine(const Point& x, const Point& y) const;$/;"	p	class:Triangle	access:private	signature:(const Point& x, const Point& y) const
+Triangle::image	Triangle.h	/^    const QImage& image;$/;"	m	class:Triangle	access:private
+Triangle::imagePoints	Triangle.h	/^    Point imagePoints[3]; \/* [c], [a], [b] *\/$/;"	m	class:Triangle	access:private
+Triangle::points	Triangle.h	/^    Point points[3]; \/* [c], [a], [b] *\/$/;"	m	class:Triangle	access:private
+Triangle::setImageCoordinates	Triangle.cpp	/^void Triangle::setImageCoordinates(const Point* coordinates)$/;"	f	class:Triangle	signature:(const Point* coordinates)
+Triangle::setImageCoordinates	Triangle.h	/^    void setImageCoordinates(const Point*);$/;"	p	class:Triangle	access:public	signature:(const Point*)
+Triangle::setScale	Triangle.cpp	/^void Triangle::setScale(const double& _scale)$/;"	f	class:Triangle	signature:(const double& _scale)
+Triangle::setScale	Triangle.h	/^    void setScale(const double&);$/;"	p	class:Triangle	access:public	signature:(const double&)
+Triangle::view	Triangle.h	/^    View* view;$/;"	m	class:Triangle	access:private
+Ui	MainWindow.h	/^namespace Ui {$/;"	n
+Ui	ViewPuzzle.h	/^namespace Ui$/;"	n
+VIEW_H	View.h	2;"	d
+View	View.h	/^class View$/;"	c
+View::clear	View.h	/^    virtual void clear() = 0;$/;"	p	class:View	access:public	signature:()
+View::getHeight	View.h	/^    virtual int getHeight() = 0;$/;"	p	class:View	access:public	signature:()
+View::getSpeed	View.h	/^    virtual int getSpeed() = 0;$/;"	p	class:View	access:public	signature:()
+View::getWidth	View.h	/^    virtual int getWidth() = 0;$/;"	p	class:View	access:public	signature:()
+View::getWindowHeight	View.h	/^    virtual int getWindowHeight() = 0;$/;"	p	class:View	access:public	signature:()
+View::getWindowWidth	View.h	/^    virtual int getWindowWidth() = 0;$/;"	p	class:View	access:public	signature:()
+View::invertButton	View.h	/^    virtual void invertButton(bool state) = 0;$/;"	p	class:View	access:public	signature:(bool state)
+View::paint	View.h	/^    virtual void paint() = 0;$/;"	p	class:View	access:public	signature:()
+View::setHeightSpin	View.h	/^    virtual void setHeightSpin(const int x) = 0;$/;"	p	class:View	access:public	signature:(const int x)
+View::setPixel	View.h	/^    virtual void setPixel(int x, int y, unsigned int color) = 0;$/;"	p	class:View	access:public	signature:(int x, int y, unsigned int color)
+View::setWidthSpin	View.h	/^    virtual void setWidthSpin(const int x) = 0;$/;"	p	class:View	access:public	signature:(const int x)
+View::setWindowHeight	View.h	/^    virtual void setWindowHeight(const int height) = 0;$/;"	p	class:View	access:public	signature:(const int height)
+View::setWindowWidth	View.h	/^    virtual void setWindowWidth(const int width) = 0;$/;"	p	class:View	access:public	signature:(const int width)
+View::~View	View.h	/^    virtual ~View() {}$/;"	f	class:View	access:public	signature:()
+ViewPuzzle	ViewPuzzle.cpp	/^ViewPuzzle::ViewPuzzle()$/;"	f	class:ViewPuzzle	signature:()
+ViewPuzzle	ViewPuzzle.h	/^    ViewPuzzle();$/;"	p	class:ViewPuzzle	access:public	signature:()
+ViewPuzzle	ViewPuzzle.h	/^class ViewPuzzle: public View, public QObject$/;"	c	inherits:View,QObject
+ViewPuzzle::ViewPuzzle	ViewPuzzle.cpp	/^ViewPuzzle::ViewPuzzle()$/;"	f	class:ViewPuzzle	signature:()
+ViewPuzzle::ViewPuzzle	ViewPuzzle.h	/^    ViewPuzzle();$/;"	p	class:ViewPuzzle	access:public	signature:()
+ViewPuzzle::clear	ViewPuzzle.cpp	/^void ViewPuzzle::clear()$/;"	f	class:ViewPuzzle	signature:()
+ViewPuzzle::clear	ViewPuzzle.h	/^    virtual void clear();$/;"	p	class:ViewPuzzle	access:public	signature:()
+ViewPuzzle::controller	ViewPuzzle.h	/^    Controller* controller;$/;"	m	class:ViewPuzzle	access:private
+ViewPuzzle::getHeight	ViewPuzzle.cpp	/^int ViewPuzzle::getHeight()$/;"	f	class:ViewPuzzle	signature:()
+ViewPuzzle::getHeight	ViewPuzzle.h	/^    virtual int getHeight();$/;"	p	class:ViewPuzzle	access:public	signature:()
+ViewPuzzle::getSpeed	ViewPuzzle.cpp	/^int ViewPuzzle::getSpeed()$/;"	f	class:ViewPuzzle	signature:()
+ViewPuzzle::getSpeed	ViewPuzzle.h	/^    virtual int getSpeed();$/;"	p	class:ViewPuzzle	access:public	signature:()
+ViewPuzzle::getWidth	ViewPuzzle.cpp	/^int ViewPuzzle::getWidth()$/;"	f	class:ViewPuzzle	signature:()
+ViewPuzzle::getWidth	ViewPuzzle.h	/^    virtual int getWidth();$/;"	p	class:ViewPuzzle	access:public	signature:()
+ViewPuzzle::getWindowHeight	ViewPuzzle.cpp	/^int ViewPuzzle::getWindowHeight()$/;"	f	class:ViewPuzzle	signature:()
+ViewPuzzle::getWindowHeight	ViewPuzzle.h	/^    virtual int getWindowHeight();$/;"	p	class:ViewPuzzle	access:public	signature:()
+ViewPuzzle::getWindowWidth	ViewPuzzle.cpp	/^int ViewPuzzle::getWindowWidth()$/;"	f	class:ViewPuzzle	signature:()
+ViewPuzzle::getWindowWidth	ViewPuzzle.h	/^    virtual int getWindowWidth();$/;"	p	class:ViewPuzzle	access:public	signature:()
+ViewPuzzle::invertButton	ViewPuzzle.cpp	/^void ViewPuzzle::invertButton(bool state)$/;"	f	class:ViewPuzzle	signature:(bool state)
+ViewPuzzle::invertButton	ViewPuzzle.h	/^    virtual void invertButton(bool state);$/;"	p	class:ViewPuzzle	access:public	signature:(bool state)
+ViewPuzzle::mainWindow	ViewPuzzle.h	/^    QMainWindow mainWindow;$/;"	m	class:ViewPuzzle	access:private
+ViewPuzzle::paint	ViewPuzzle.cpp	/^void ViewPuzzle::paint()$/;"	f	class:ViewPuzzle	signature:()
+ViewPuzzle::paint	ViewPuzzle.h	/^    virtual void paint();$/;"	p	class:ViewPuzzle	access:public	signature:()
+ViewPuzzle::painterWidget	ViewPuzzle.h	/^    PainterWidget* painterWidget;$/;"	m	class:ViewPuzzle	access:private
+ViewPuzzle::setHeightSpin	ViewPuzzle.cpp	/^void ViewPuzzle::setHeightSpin(const int x)$/;"	f	class:ViewPuzzle	signature:(const int x)
+ViewPuzzle::setHeightSpin	ViewPuzzle.h	/^    virtual void setHeightSpin(const int x);$/;"	p	class:ViewPuzzle	access:public	signature:(const int x)
+ViewPuzzle::setPixel	ViewPuzzle.cpp	/^void ViewPuzzle::setPixel(int x, int y, unsigned int color)$/;"	f	class:ViewPuzzle	signature:(int x, int y, unsigned int color)
+ViewPuzzle::setPixel	ViewPuzzle.h	/^    virtual void setPixel(int x, int y, unsigned int color);$/;"	p	class:ViewPuzzle	access:public	signature:(int x, int y, unsigned int color)
+ViewPuzzle::setWidthSpin	ViewPuzzle.cpp	/^void ViewPuzzle::setWidthSpin(const int x)$/;"	f	class:ViewPuzzle	signature:(const int x)
+ViewPuzzle::setWidthSpin	ViewPuzzle.h	/^    virtual void setWidthSpin(const int x);$/;"	p	class:ViewPuzzle	access:public	signature:(const int x)
+ViewPuzzle::setWindowHeight	ViewPuzzle.cpp	/^void ViewPuzzle::setWindowHeight(const int height)$/;"	f	class:ViewPuzzle	signature:(const int height)
+ViewPuzzle::setWindowHeight	ViewPuzzle.h	/^    virtual void setWindowHeight(const int height);$/;"	p	class:ViewPuzzle	access:public	signature:(const int height)
+ViewPuzzle::setWindowWidth	ViewPuzzle.cpp	/^void ViewPuzzle::setWindowWidth(const int width)$/;"	f	class:ViewPuzzle	signature:(const int width)
+ViewPuzzle::setWindowWidth	ViewPuzzle.h	/^    virtual void setWindowWidth(const int width);$/;"	p	class:ViewPuzzle	access:public	signature:(const int width)
+ViewPuzzle::ui	ViewPuzzle.h	/^    Ui::MainWindow ui;$/;"	m	class:ViewPuzzle	access:private
+ViewPuzzle::~ViewPuzzle	ViewPuzzle.cpp	/^ViewPuzzle::~ViewPuzzle()$/;"	f	class:ViewPuzzle	signature:()
+ViewPuzzle::~ViewPuzzle	ViewPuzzle.h	/^    virtual ~ViewPuzzle();$/;"	p	class:ViewPuzzle	access:public	signature:()
+__anon1::MSEC_INTERVAL	Controller.cpp	/^    const int MSEC_INTERVAL = 100;$/;"	m	namespace:__anon1	file:
+__anon2::START_SPEED	ViewPuzzle.cpp	/^    const int START_SPEED = 5000;$/;"	m	namespace:__anon2	file:
+angle	Model.h	/^    double angle;$/;"	m	class:Model	access:private
+clear	Controller.cpp	/^void Controller::clear()$/;"	f	class:Controller	signature:()
+clear	Controller.h	/^    void clear();$/;"	p	class:Controller	access:public	signature:()
+clear	PainterWidget.cpp	/^void PainterWidget::clear()$/;"	f	class:PainterWidget	signature:()
+clear	PainterWidget.h	/^    void clear();$/;"	p	class:PainterWidget	access:public	signature:()
+clear	View.h	/^    virtual void clear() = 0;$/;"	p	class:View	access:public	signature:()
+clear	ViewPuzzle.cpp	/^void ViewPuzzle::clear()$/;"	f	class:ViewPuzzle	signature:()
+clear	ViewPuzzle.h	/^    virtual void clear();$/;"	p	class:ViewPuzzle	access:public	signature:()
+controller	PainterWidget.h	/^    Controller* controller;$/;"	m	class:PainterWidget	access:private
+controller	ViewPuzzle.h	/^    Controller* controller;$/;"	m	class:ViewPuzzle	access:private
+draw	Model.cpp	/^void Model::draw() const$/;"	f	class:Model	signature:() const
+draw	Model.h	/^    void draw() const;$/;"	p	class:Model	access:public	signature:() const
+draw	Triangle.cpp	/^void Triangle::draw(const Point x, const double _angle)$/;"	f	class:Triangle	signature:(const Point x, const double _angle)
+draw	Triangle.h	/^    void draw(const Point x, const double angle);$/;"	p	class:Triangle	access:public	signature:(const Point x, const double angle)
+filter	Triangle.h	/^    Filter filter;$/;"	m	class:Triangle	access:private
+getColor	Triangle.cpp	/^unsigned int Triangle::getColor(const Point& d)$/;"	f	class:Triangle	signature:(const Point& d)
+getColor	Triangle.h	/^    unsigned int getColor(const Point& x) const;$/;"	p	class:Triangle	access:private	signature:(const Point& x) const
+getHeight	PainterWidget.cpp	/^int PainterWidget::getHeight()$/;"	f	class:PainterWidget	signature:()
+getHeight	PainterWidget.h	/^    int getHeight();$/;"	p	class:PainterWidget	access:public	signature:()
+getHeight	View.h	/^    virtual int getHeight() = 0;$/;"	p	class:View	access:public	signature:()
+getHeight	ViewPuzzle.cpp	/^int ViewPuzzle::getHeight()$/;"	f	class:ViewPuzzle	signature:()
+getHeight	ViewPuzzle.h	/^    virtual int getHeight();$/;"	p	class:ViewPuzzle	access:public	signature:()
+getLine	Triangle.cpp	/^std::vector<Point> Triangle::getLine(const Point _x, const Point _y)$/;"	f	class:Triangle	signature:(const Point _x, const Point _y)
+getLine	Triangle.h	/^    std::vector<Point> getLine(const Point& x, const Point& y) const;$/;"	p	class:Triangle	access:private	signature:(const Point& x, const Point& y) const
+getSpeed	View.h	/^    virtual int getSpeed() = 0;$/;"	p	class:View	access:public	signature:()
+getSpeed	ViewPuzzle.cpp	/^int ViewPuzzle::getSpeed()$/;"	f	class:ViewPuzzle	signature:()
+getSpeed	ViewPuzzle.h	/^    virtual int getSpeed();$/;"	p	class:ViewPuzzle	access:public	signature:()
+getWidth	PainterWidget.cpp	/^int PainterWidget::getWidth()$/;"	f	class:PainterWidget	signature:()
+getWidth	PainterWidget.h	/^    int getWidth();$/;"	p	class:PainterWidget	access:public	signature:()
+getWidth	View.h	/^    virtual int getWidth() = 0;$/;"	p	class:View	access:public	signature:()
+getWidth	ViewPuzzle.cpp	/^int ViewPuzzle::getWidth()$/;"	f	class:ViewPuzzle	signature:()
+getWidth	ViewPuzzle.h	/^    virtual int getWidth();$/;"	p	class:ViewPuzzle	access:public	signature:()
+getWindowHeight	View.h	/^    virtual int getWindowHeight() = 0;$/;"	p	class:View	access:public	signature:()
+getWindowHeight	ViewPuzzle.cpp	/^int ViewPuzzle::getWindowHeight()$/;"	f	class:ViewPuzzle	signature:()
+getWindowHeight	ViewPuzzle.h	/^    virtual int getWindowHeight();$/;"	p	class:ViewPuzzle	access:public	signature:()
+getWindowWidth	View.h	/^    virtual int getWindowWidth() = 0;$/;"	p	class:View	access:public	signature:()
+getWindowWidth	ViewPuzzle.cpp	/^int ViewPuzzle::getWindowWidth()$/;"	f	class:ViewPuzzle	signature:()
+getWindowWidth	ViewPuzzle.h	/^    virtual int getWindowWidth();$/;"	p	class:ViewPuzzle	access:public	signature:()
+image	Model.h	/^    QImage image;$/;"	m	class:Model	access:private
+image	PainterWidget.h	/^    QImage image;$/;"	m	class:PainterWidget	access:private
+image	Triangle.h	/^    const QImage& image;$/;"	m	class:Triangle	access:private
+imagePoints	Triangle.h	/^    Point imagePoints[3]; \/* [c], [a], [b] *\/$/;"	m	class:Triangle	access:private
+invertButton	Model.cpp	/^void Model::invertButton(bool state)$/;"	f	class:Model	signature:(bool state)
+invertButton	Model.h	/^    void invertButton(bool);$/;"	p	class:Model	access:public	signature:(bool)
+invertButton	View.h	/^    virtual void invertButton(bool state) = 0;$/;"	p	class:View	access:public	signature:(bool state)
+invertButton	ViewPuzzle.cpp	/^void ViewPuzzle::invertButton(bool state)$/;"	f	class:ViewPuzzle	signature:(bool state)
+invertButton	ViewPuzzle.h	/^    virtual void invertButton(bool state);$/;"	p	class:ViewPuzzle	access:public	signature:(bool state)
+main	main.cpp	/^int main(int argc, char *argv[])$/;"	f	signature:(int argc, char *argv[])
+mainWindow	ViewPuzzle.h	/^    QMainWindow mainWindow;$/;"	m	class:ViewPuzzle	access:private
+model	Controller.h	/^    Model* model;$/;"	m	class:Controller	access:private
+paint	PainterWidget.cpp	/^void PainterWidget::paint()$/;"	f	class:PainterWidget	signature:()
+paint	PainterWidget.h	/^    void paint();$/;"	p	class:PainterWidget	access:public	signature:()
+paint	View.h	/^    virtual void paint() = 0;$/;"	p	class:View	access:public	signature:()
+paint	ViewPuzzle.cpp	/^void ViewPuzzle::paint()$/;"	f	class:ViewPuzzle	signature:()
+paint	ViewPuzzle.h	/^    virtual void paint();$/;"	p	class:ViewPuzzle	access:public	signature:()
+paintEvent	PainterWidget.cpp	/^void PainterWidget::paintEvent(QPaintEvent*)$/;"	f	class:PainterWidget	signature:(QPaintEvent*)
+paintEvent	PainterWidget.h	/^    virtual void paintEvent(QPaintEvent*);$/;"	p	class:PainterWidget	access:protected	signature:(QPaintEvent*)
+painterWidget	ViewPuzzle.h	/^    PainterWidget* painterWidget;$/;"	m	class:ViewPuzzle	access:private
+points	Triangle.h	/^    Point points[3]; \/* [c], [a], [b] *\/$/;"	m	class:Triangle	access:private
+resize	Controller.cpp	/^void Controller::resize()$/;"	f	class:Controller	signature:()
+resize	Controller.h	/^    void resize();$/;"	p	class:Controller	access:public	signature:()
+resizeEvent	PainterWidget.cpp	/^void PainterWidget::resizeEvent(QResizeEvent*)$/;"	f	class:PainterWidget	signature:(QResizeEvent*)
+resizeEvent	PainterWidget.h	/^    virtual void resizeEvent(QResizeEvent*);$/;"	p	class:PainterWidget	access:protected	signature:(QResizeEvent*)
+setAngle	Controller.cpp	/^void Controller::setAngle(const int angle)$/;"	f	class:Controller	signature:(const int angle)
+setAngle	Controller.h	/^    void setAngle(const int);$/;"	p	class:Controller	access:public	signature:(const int)
+setAngle	Model.cpp	/^void Model::setAngle(const double _angle)$/;"	f	class:Model	signature:(const double _angle)
+setAngle	Model.h	/^    void setAngle(const double);$/;"	p	class:Model	access:public	signature:(const double)
+setHeight	Controller.cpp	/^void Controller::setHeight(const int height)$/;"	f	class:Controller	signature:(const int height)
+setHeight	Controller.h	/^    void setHeight(const int);$/;"	p	class:Controller	access:public	signature:(const int)
+setHeightSpin	View.h	/^    virtual void setHeightSpin(const int x) = 0;$/;"	p	class:View	access:public	signature:(const int x)
+setHeightSpin	ViewPuzzle.cpp	/^void ViewPuzzle::setHeightSpin(const int x)$/;"	f	class:ViewPuzzle	signature:(const int x)
+setHeightSpin	ViewPuzzle.h	/^    virtual void setHeightSpin(const int x);$/;"	p	class:ViewPuzzle	access:public	signature:(const int x)
+setImageCoordinates	Triangle.cpp	/^void Triangle::setImageCoordinates(const Point* coordinates)$/;"	f	class:Triangle	signature:(const Point* coordinates)
+setImageCoordinates	Triangle.h	/^    void setImageCoordinates(const Point*);$/;"	p	class:Triangle	access:public	signature:(const Point*)
+setPixel	PainterWidget.cpp	/^void PainterWidget::setPixel(int x, int y, QRgb color)$/;"	f	class:PainterWidget	signature:(int x, int y, QRgb color)
+setPixel	PainterWidget.h	/^    void setPixel(int x, int y, unsigned int color);$/;"	p	class:PainterWidget	access:public	signature:(int x, int y, unsigned int color)
+setPixel	View.h	/^    virtual void setPixel(int x, int y, unsigned int color) = 0;$/;"	p	class:View	access:public	signature:(int x, int y, unsigned int color)
+setPixel	ViewPuzzle.cpp	/^void ViewPuzzle::setPixel(int x, int y, unsigned int color)$/;"	f	class:ViewPuzzle	signature:(int x, int y, unsigned int color)
+setPixel	ViewPuzzle.h	/^    virtual void setPixel(int x, int y, unsigned int color);$/;"	p	class:ViewPuzzle	access:public	signature:(int x, int y, unsigned int color)
+setScale	Triangle.cpp	/^void Triangle::setScale(const double& _scale)$/;"	f	class:Triangle	signature:(const double& _scale)
+setScale	Triangle.h	/^    void setScale(const double&);$/;"	p	class:Triangle	access:public	signature:(const double&)
+setSpeed	Controller.cpp	/^void Controller::setSpeed(const int speed)$/;"	f	class:Controller	signature:(const int speed)
+setSpeed	Controller.h	/^    void setSpeed(const int);$/;"	p	class:Controller	access:public	signature:(const int)
+setSpeed	Model.h	/^    void setSpeed(const int speed);$/;"	p	class:Model	access:public	signature:(const int speed)
+setWidth	Controller.cpp	/^void Controller::setWidth(const int width)$/;"	f	class:Controller	signature:(const int width)
+setWidth	Controller.h	/^    void setWidth(const int);$/;"	p	class:Controller	access:public	signature:(const int)
+setWidthSpin	View.h	/^    virtual void setWidthSpin(const int x) = 0;$/;"	p	class:View	access:public	signature:(const int x)
+setWidthSpin	ViewPuzzle.cpp	/^void ViewPuzzle::setWidthSpin(const int x)$/;"	f	class:ViewPuzzle	signature:(const int x)
+setWidthSpin	ViewPuzzle.h	/^    virtual void setWidthSpin(const int x);$/;"	p	class:ViewPuzzle	access:public	signature:(const int x)
+setWindowHeight	View.h	/^    virtual void setWindowHeight(const int height) = 0;$/;"	p	class:View	access:public	signature:(const int height)
+setWindowHeight	ViewPuzzle.cpp	/^void ViewPuzzle::setWindowHeight(const int height)$/;"	f	class:ViewPuzzle	signature:(const int height)
+setWindowHeight	ViewPuzzle.h	/^    virtual void setWindowHeight(const int height);$/;"	p	class:ViewPuzzle	access:public	signature:(const int height)
+setWindowWidth	View.h	/^    virtual void setWindowWidth(const int width) = 0;$/;"	p	class:View	access:public	signature:(const int width)
+setWindowWidth	ViewPuzzle.cpp	/^void ViewPuzzle::setWindowWidth(const int width)$/;"	f	class:ViewPuzzle	signature:(const int width)
+setWindowWidth	ViewPuzzle.h	/^    virtual void setWindowWidth(const int width);$/;"	p	class:ViewPuzzle	access:public	signature:(const int width)
+start	Controller.cpp	/^void Controller::start()$/;"	f	class:Controller	signature:()
+start	Controller.h	/^    void start();$/;"	p	class:Controller	access:public	signature:()
+stop	Controller.cpp	/^void Controller::stop()$/;"	f	class:Controller	signature:()
+stop	Controller.h	/^    void stop();$/;"	p	class:Controller	access:public	signature:()
+timer	Controller.h	/^    QTimer timer;$/;"	m	class:Controller	access:private
+triangles	Model.h	/^    vector<Triangle> triangles;$/;"	m	class:Model	access:private
+ui	MainWindow.h	/^    Ui::MainWindow *ui;$/;"	m	class:MainWindow	access:private
+ui	ViewPuzzle.h	/^    Ui::MainWindow ui;$/;"	m	class:ViewPuzzle	access:private
+update	Controller.cpp	/^void Controller::update()$/;"	f	class:Controller	signature:()
+update	Controller.h	/^    void update();$/;"	p	class:Controller	access:public	signature:()
+view	Model.h	/^    View* view;$/;"	m	class:Model	access:private
+view	Triangle.h	/^    View* view;$/;"	m	class:Triangle	access:private
+~Controller	Controller.cpp	/^Controller::~Controller()$/;"	f	class:Controller	signature:()
+~Controller	Controller.h	/^    ~Controller();$/;"	p	class:Controller	access:public	signature:()
+~MainWindow	MainWindow.cpp	/^MainWindow::~MainWindow()$/;"	f	class:MainWindow	signature:()
+~MainWindow	MainWindow.h	/^    ~MainWindow();$/;"	p	class:MainWindow	access:public	signature:()
+~Model	Model.cpp	/^Model::~Model()$/;"	f	class:Model	signature:()
+~Model	Model.h	/^    ~Model();$/;"	p	class:Model	access:public	signature:()
+~PainterWidget	PainterWidget.cpp	/^PainterWidget::~PainterWidget()$/;"	f	class:PainterWidget	signature:()
+~PainterWidget	PainterWidget.h	/^    ~PainterWidget();$/;"	p	class:PainterWidget	access:public	signature:()
+~View	View.h	/^    virtual ~View() {}$/;"	f	class:View	access:public	signature:()
+~ViewPuzzle	ViewPuzzle.cpp	/^ViewPuzzle::~ViewPuzzle()$/;"	f	class:ViewPuzzle	signature:()
+~ViewPuzzle	ViewPuzzle.h	/^    virtual ~ViewPuzzle();$/;"	p	class:ViewPuzzle	access:public	signature:()
