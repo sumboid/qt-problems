@@ -31,8 +31,6 @@ void Triangle::setScale(const double& _scale)
 
 std::vector<Point> Triangle::getLine(const Point& _x, const Point& _y) const
 {
-    ////std::cout << "From: " << "( " << _x.first << ", " << _x.second << ") " <<
-    //             "To: " << "( " << _y.first << ", " << _y.second << ")" << std::endl;
     Point x = _x;
     Point y = _y;
     std::vector<Point> line;
@@ -42,10 +40,8 @@ std::vector<Point> Triangle::getLine(const Point& _x, const Point& _y) const
     const int signY = x.second < y.second ? 1 : -1;
 
     int error = deltaX - deltaY;
-    ////std::cout << "(" << y.first << " ," <<  y.second << ")" << std::endl;
     while(x.first != y.first || x.second != y.second)
     {
-        ////std::cout << "(" << x.first << " ," <<  x.second << ")" << std::endl;
         line.push_back(Point(x.first, x.second));
         const int error2 = error * 2;
         if(error2 > -deltaY)
@@ -69,15 +65,15 @@ std::vector<Point> Triangle::getLine(const Point& _x, const Point& _y) const
 
 unsigned int Triangle::getColor(const Point& d) const
 {
-//    double cb = ::sqrt((c.first - b.first) * (c.first - b.first) +
-//                       (c.second - b.second) * (c.second - b.second));
-//    double ca = ::sqrt((c.first - a.first) * (c.first - a.first) +
-//                       (c.second - a.second) * (c.second - a.second));
-//    double cx = ::sqrt((c.first - x.first) * (c.first - x.first) +
-//                       (c.second - x.second) * (c.second - x.second));
+    double cd = LENGTH(points[0], d);
+
+    if (cd == 0)
+    {
+        return image->pixel(imagePoints[0].first, imagePoints[0].second);
+    }
+
     double cb = LENGTH(points[0], points[2]);
     double ca = LENGTH(points[0], points[1]);
-    double cd = LENGTH(points[0], d);
     double _cos = ((points[2].first - points[0].first) * (d.first - points[0].first) +
                    (points[2].second - points[0].second) * (d.second - points[0].second)) /
                    (cd * cb);
@@ -85,26 +81,37 @@ unsigned int Triangle::getColor(const Point& d) const
     double u = cd * _cos / cb;
     double v = cd * _sin / ca;
 
-    std::cout << "(" << u << ", " << v << "): \
-              cd = " << cd << " cos = " << _cos << " sin = " << _sin << " scal = " <<
-              (points[2].first - points[0].first) * (d.first - points[0].first) +
-              (points[2].second - points[0].second) * (d.second - points[0].second) << std::endl; 
+    std::cout << //"(" << u << ", " << v << "): 
+                 " cos = " << _cos << " sin = " << _sin << " d.first = " << d.first << " c.first = " << points[0].first << std::endl;
+                    //" scal = " <<
+//              abs(points[2].first - points[0].first) * abs(d.first - points[0].first) +
+//              abs(points[2].second - points[0].second) * abs(d.second - points[0].second) << std::endl; 
 
     int x, y;
     //Nearest
-    if(imagePoints[0].second > imagePoints[1].second)
+    if(imagePoints[0].first > imagePoints[2].first)
     {
         x = static_cast<int>(imagePoints[0].first - LENGTH(imagePoints[0], imagePoints[2]) * u + 0.5);
-        y = static_cast<int>(imagePoints[0].second - LENGTH(imagePoints[0], imagePoints[1]) * v + 0.5);
     }
     else
     {
         x = static_cast<int>(imagePoints[0].first + LENGTH(imagePoints[0], imagePoints[2]) * u + 0.5);
+    }
+
+    if(imagePoints[0].second > imagePoints[1].second)
+    {
+        y = static_cast<int>(imagePoints[0].second - LENGTH(imagePoints[0], imagePoints[1]) * v + 0.5);
+    }
+    else
+    {
         y = static_cast<int>(imagePoints[0].second + LENGTH(imagePoints[0], imagePoints[1]) * v + 0.5);
     }
 
     return image->pixel(x, y);
 }
+
+// МУДАК. СЛУШАЙ СЮДА, Y ВНИЗ РАСТЕТ, БЛЯДЬ. НЕ ЗАБУДЬ, СУКА! СПОКОЙНОЙ НОЧИ. ЧТОБЫ ПОФИКСИЛ.
+
 
 void Triangle::draw(const Point& x, const double _angle)
 {
@@ -122,12 +129,13 @@ void Triangle::draw(const Point& x, const double _angle)
 
     Point a, b, c = Point(x.first, x.second);
 
+    sleep(5);
     //Vodka Absolut
     a.first = scale * (imagePoints[1].first - imagePoints[0].first) + c.first;
-    a.second = scale * (imagePoints[1].second - imagePoints[0].second) + c.second;
+    a.second = c.second - scale * (imagePoints[0].second - imagePoints[1].second);
 
     b.first = scale * (imagePoints[2].first - imagePoints[0].first) + c.first;
-    b.second = scale * (imagePoints[2].second - imagePoints[0].second) + c.second;
+    b.second = c.second - scale * (imagePoints[0].second - imagePoints[2].second);
 
 
     //TODO: rotate
@@ -140,7 +148,7 @@ void Triangle::draw(const Point& x, const double _angle)
     points[2].first = b.first;
     points[2].second = b.second;
 
-    //Search point with min(y)
+    //Search point with max(y)
     std::vector<Point> left, right, bottom; //left, right and bottom lines
 
     if (a.second >= b.second)
