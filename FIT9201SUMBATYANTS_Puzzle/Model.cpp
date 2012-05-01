@@ -22,8 +22,15 @@ void Model::draw()
 {
     Triangle t(view, &image);
     setTrianglePoints(t, 0);
-    t.setScale(1);
+    t.setScale(getScale());
     t.draw(Point(view->getWidth()/2, view->getHeight()/2), 0);
+}
+
+double Model::getScale() const
+{
+    double widthScale = view->getWidth() * 16. / 81 / image.width();
+    double heightScale = view->getHeight() * 16. / 81 / image.height();
+    return widthScale > heightScale ? heightScale : widthScale;
 }
 
 void Model::setTrianglePoints(Triangle& triangle, const int number)

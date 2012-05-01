@@ -7,7 +7,7 @@
 #include <iostream>
 
 Triangle::Triangle(View* _view, const QImage* _image):
-    scale(2), view(_view), image(_image)
+    scale(1), view(_view), image(_image)
 {
     for(int i = 0; i < 3; ++i)
     {
@@ -81,6 +81,7 @@ unsigned int Triangle::getColor(const Point& d) const
     double u = cd * _cos / cb;
     double v = cd * _sin / ca;
 
+    if(d.first < points[0].first)
     std::cout << //"(" << u << ", " << v << "): 
                  " cos = " << _cos << " sin = " << _sin << " d.first = " << d.first << " c.first = " << points[0].first << std::endl;
                     //" scal = " <<
@@ -110,9 +111,6 @@ unsigned int Triangle::getColor(const Point& d) const
     return image->pixel(x, y);
 }
 
-// МУДАК. СЛУШАЙ СЮДА, Y ВНИЗ РАСТЕТ, БЛЯДЬ. НЕ ЗАБУДЬ, СУКА! СПОКОЙНОЙ НОЧИ. ЧТОБЫ ПОФИКСИЛ.
-
-
 void Triangle::draw(const Point& x, const double _angle)
 {
     /* Hurdcoar
@@ -129,7 +127,6 @@ void Triangle::draw(const Point& x, const double _angle)
 
     Point a, b, c = Point(x.first, x.second);
 
-    sleep(5);
     //Vodka Absolut
     a.first = scale * (imagePoints[1].first - imagePoints[0].first) + c.first;
     a.second = c.second - scale * (imagePoints[0].second - imagePoints[1].second);
@@ -260,21 +257,13 @@ void Triangle::draw(const Point& x, const double _angle)
 
     size_t l = 0, r = 0, t = 0; //XXX: top
 
-    ////std::cout <<
-    //    "a: " << a.first << ", " << a.second << std::endl <<
-    //    "b: " << b.first << ", " << b.second << std::endl <<
-    //    "c: " << c.first << ", " << c.second << std::endl;
-
     for(l = 0; l < leftSize; ++l)
     {
         ++lineNumber;
 
-        ////std::cout << "lineNumber = " << lineNumber << std::endl;
-        //sleep(1);
         //Search last left pixel on lineNumber
         if(left[l + 1].second == lineNumber)
         {
-            ////std::cout << "Search left pixel" << std::endl;
             view->setPixel(left[l].first, left[l].second, 0x0);
             continue;
         }
@@ -285,28 +274,23 @@ void Triangle::draw(const Point& x, const double _angle)
         {
             for(int i = left[l].first + 1; i < right[r].first; ++i)
             {
-                ////std::cout << "Draw line" << std::endl;
-                //sleep(1);
-                view->setPixel(i, lineNumber, getColor(Point(lineNumber, i)));
+                view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
             }
 
-            while(right[r].second < lineNumber + 1)
+            while(right[r].second < lineNumber + 1 && r < rightSize)
             {
-                ////std::cout << "Draw right line" << std::endl;
-                //sleep(1);
                 view->setPixel(right[r].first, right[r].second, 0x0);
                 ++r;
             }
         }
         else
         {
-            //sleep(1);
             for(int i = left[l].second + 1; i < bottom[t].second; ++i)
             {
-                view->setPixel(lineNumber, i, getColor(Point(lineNumber, i)));
+                view->setPixel(lineNumber, i, getColor(Point(i, lineNumber)));
             }
 
-            while(bottom[t].second < lineNumber + 1)
+            while(bottom[t].second < lineNumber + 1 && t < bottomSize)
             {
                 view->setPixel(bottom[t].first, bottom[t].second, 0x0);
                 ++t;
@@ -314,8 +298,6 @@ void Triangle::draw(const Point& x, const double _angle)
         }
 
     }
-
-    //sleep(10);
     if(t == 0)
     {
         for(;t < bottomSize; ++t)
@@ -329,16 +311,13 @@ void Triangle::draw(const Point& x, const double _angle)
 
             view->setPixel(bottom[t].first, bottom[t].second, 0x0);
 
-            for(int i = bottom[t].first + 1; i < right[r].first; ++i)
+            for(int i = bottom[t].first + 1; i < right[r].first && r < rightSize; ++i)
             {
-                //sleep(1);
-                view->setPixel(i, lineNumber, getColor(Point(lineNumber, i)));
+                view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
             }
 
-            while(right[r].second < lineNumber + 1)
+            while(right[r].second < lineNumber + 1 && r < rightSize)
             {
-            
-                //sleep(1);
                 view->setPixel(right[r].first, right[r].second, 0x0);
                 ++r;
             }

@@ -13,7 +13,8 @@ PainterWidget::~PainterWidget()
 
 void PainterWidget::setPixel(int x, int y, QRgb color)
 {
-    image.setPixel(x, y, color);
+    if(image.width() > x && image.height() > y)
+        image.setPixel(x, y, color);
 }
 
 void PainterWidget::clear()

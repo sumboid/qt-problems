@@ -16,7 +16,7 @@ public:
     void invertButton(bool);
 private:
     void setTrianglePoints(Triangle& triangle, const int number);
-
+    double getScale() const;
 
     View* view;
     QImage image;
