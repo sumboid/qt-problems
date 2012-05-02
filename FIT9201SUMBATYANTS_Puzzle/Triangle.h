@@ -19,7 +19,7 @@ public:
     void setScale(const double&);
     void draw(const Point& x, const double angle);
 private:
-    std::vector<Point> getLine(const Point& x, const Point& y) const;
+    Point getLine(const Point& x, const Point& y) const;
     unsigned int getColor(const Point& x) const;
 
     Point imagePoints[3]; /* [c], [a], [b] */

@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <vector>
+#include <algorithm>
 #include "Triangle.h"
 
 #include <iostream>
@@ -29,11 +30,10 @@ void Triangle::setScale(const double& _scale)
     scale = _scale;
 }
 
-std::vector<Point> Triangle::getLine(const Point& _x, const Point& _y) const
+Point Triangle::getLine(const Point& _x, const Point& _y) const
 {
     Point x = _x;
     Point y = _y;
-    std::vector<Point> line;
     const int deltaX = abs(x.first - y.first);
     const int deltaY = abs(y.second - x.second);
     const int signX = x.first < y.first ? 1 : -1;
@@ -42,7 +42,6 @@ std::vector<Point> Triangle::getLine(const Point& _x, const Point& _y) const
     int error = deltaX - deltaY;
     while(x.first != y.first || x.second != y.second)
     {
-        line.push_back(Point(x.first, x.second));
         const int error2 = error * 2;
         if(error2 > -deltaY)
         {
@@ -54,10 +53,10 @@ std::vector<Point> Triangle::getLine(const Point& _x, const Point& _y) const
             error += deltaX;
             x.second += signY;
         }
+        return Point(x.first, x.second);
     }
 
-    line.push_back(Point(y.first, y.second));
-    return line;
+    return Point(y.first, y.second);
 }
 
 #define LENGTH(x, y) (::sqrt((x.first - y.first) * (x.first - y.first) + \
@@ -112,10 +111,15 @@ unsigned int Triangle::getColor(const Point& d) const
     return image->pixel(x, y);
 }
 
+// Comparator
+bool ycomp(const Point& x, const Point& y)
+{
+    return x.first > y.first;
+}
+
 void Triangle::draw(const Point& x, const double _angle)
 {
-    /* Hurdcoar
-     *
+    /*
      *  [a]
      *   |\
      *   | \
@@ -128,13 +132,14 @@ void Triangle::draw(const Point& x, const double _angle)
 
     Point a, b, c = Point(x.first, x.second);
 
-    //Vodka Absolut
+    //Scale
     a.first = scale * (imagePoints[1].first - imagePoints[0].first) + c.first;
     a.second = c.second - scale * (imagePoints[0].second - imagePoints[1].second);
 
     b.first = scale * (imagePoints[2].first - imagePoints[0].first) + c.first;
     b.second = c.second - scale * (imagePoints[0].second - imagePoints[2].second);
 
+    //Rotate
     double _cos = ::cos(_angle);
     double _sin = ::sin(_angle);
 
@@ -147,7 +152,6 @@ void Triangle::draw(const Point& x, const double _angle)
         static_cast<int>(static_cast<double>(b.first - c.first) * _sin + 0.5);
     b.first = c.first +
         static_cast<int>(static_cast<double>(b.first - c.first) * _cos + 0.5);
-    //TODO: rotate
 
     //Setting points for getColor()
     points[0].first = c.first;
@@ -158,119 +162,65 @@ void Triangle::draw(const Point& x, const double _angle)
     points[2].second = b.second;
 
     //Search point with max(y)
-    std::vector<Point> left, right, bottom; //left, right and bottom lines
+    enum Position {TOP = 0, MIDDLE = 1, BOTTOM = 2};
 
-    if (a.second >= b.second)
+    Point sortPoints[3] = {c, a, b};
+    std::sort(sortPoints, sortPoints + 3, ycomp);
+    Position left, right;
+
+    if(sortPoints[MIDDLE].first > sortPoints[BOTTOM].first)
     {
-        if (b.second >= c.second)
-        {
-            std::cout << "C - top" << std::endl;
-
-            if(a.first > b.first)
-            {
-                /*  a.y >= b.y
-                 *  [b]----[a]
-                 *   \     /
-                 *    \   /
-                 *     \ /
-                 *     [c]
-                 */
-
-                left = getLine(c, b);
-                right = getLine(c, a);
-                bottom = getLine(a, b);
-            }
-            else
-            {
-                /*  a.y >= b.y
-                 *  [a]----[b]
-                 *   \     /
-                 *    \   /
-                 *     \ /
-                 *     [c]
-                 */
-                left = getLine(c, a);
-                right = getLine(c, b);
-                bottom = getLine(a, b);
-            }
-        }
-        else
-        {
-            std::cout << "B - top" << std::endl;
-            if(a.first > c.first)
-            {
-                /*
-                 *  a.y >= c.y
-                 *  [c]----[a]
-                 *   \     /
-                 *    \   /
-                 *     \ /
-                 *     [b]
-                 */
-                left = getLine(b, c);
-                right = getLine(b, a);
-                bottom = getLine(a, c);
-            }
-            else
-            {
-                /*  a.y >= c.y
-                 *  [a]----[c]
-                 *   \     /
-                 *    \   /
-                 *     \ /
-                 *     [b]
-                 *
-                 *  etc
-                 */
-                left = getLine(b, a);
-                right = getLine(b, c);
-                bottom = getLine(a, c);
-            }
-        }
+        left = BOTTOM;
+        right = MIDDLE;
     }
     else
     {
-        if (a.second >= c.second)
-        {
-            std::cout << "C - top" << std::endl;
-            if(a.first > b.first)
-            {
-                left = getLine(c, b);
-                right = getLine(c, a);
-                bottom = getLine(a, b);
-            }
-            else
-            {
-                left = getLine(c, a);
-                right = getLine(c, b);
-                bottom = getLine(a, b);
-            }
-        }
-        else
-        {
-            std::cout << "A - top" << std::endl;
-            if(b.first > c.first)
-            {
-                left = getLine(a, c);
-                right = getLine(a, b);
-                bottom = getLine(b, c);
-            }
-            else
-            {
-                left = getLine(a, b);
-                right = getLine(a, c);
-                bottom = getLine(b, c);
-            }
-        }
+        left = MIDDLE;
+        right = BOTTOM;
     }
 
-    //Prepare to start draw
-    size_t leftSize = left.size();
-    size_t rightSize = right.size();
-    size_t bottomSize = bottom.size();
+    int lineNumber = sortPoints[TOP].second;
 
-    int lineNumber = left[0].second - 1;
+    Point leftBorder = sortPoints[TOP], rightBorder = sortPoints[TOP];
+    Point bottomBorder;
 
+    if(sortPoints[left].second < sortPoints[right].second)
+    {
+        bottomBorder = sortPoints[left];
+    }
+    else
+    {
+        bottomBorder = sortPoints[right];
+    }
+
+    while(sortPoints[left] != leftBorder)
+    {
+        //view->setPixel(leftBorder.first, leftBorder.second, 0xff0000);
+        for(int i = leftBorder.first + 1; i < rightBorder.first - 1; i++)
+        {
+            view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
+        }
+        while(rightBorder.second == lineNumber)
+        {
+            view->setPixel(rightBorder.first, lineNumber, 0x00ff00);
+            if(rightBorder == sortPoints[right])
+            {
+                break;
+            }
+            rightBorder = getLine(rightBorder, sortPoints[right]);
+        }
+        while(leftBorder.second == lineNumber)
+        {
+            view->setPixel(leftBorder.first, lineNumber, 0xff0000);
+            if(leftBorder == sortPoints[left])
+            {
+                break;
+            }
+            leftBorder = getLine(leftBorder, sortPoints[left]);
+        }
+        lineNumber++;
+    }
+/*
     size_t l = 0, r = 0, t = 0; //XXX: top
 
     for(l = 0; l < leftSize; ++l)
@@ -290,20 +240,18 @@ void Triangle::draw(const Point& x, const double _angle)
         {
             for(int i = left[l].first + 1; i < right[r].first; ++i)
             {
-                std::cout << "PEKA" << std::endl;
                 view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
             }
 
             while(right[r].second < lineNumber + 1 && r < rightSize)
             {
-                std::cout << "YOBA" << std::endl;
                 view->setPixel(right[r].first, right[r].second, 0x00ff00);
                 ++r;
             }
-            if(r == rightSize)
-            {
-                ++t;
-            }
+            //if(r == rightSize)
+            //{
+            //    ++t;
+            //}
         }
         else
         {
@@ -320,8 +268,9 @@ void Triangle::draw(const Point& x, const double _angle)
         }
 
     }
-    if(t == 0)
+    if(t == 1)
     {
+        std::cout << "YOBA1" << std::endl;
         for(;t < bottomSize; ++t)
         {
             if(t + 1 != bottomSize && bottom[t + 1].second == lineNumber)
@@ -330,19 +279,17 @@ void Triangle::draw(const Point& x, const double _angle)
                 continue;
             }
 
-
             view->setPixel(bottom[t].first, bottom[t].second, 0x0000ff);
 
-            //XXX: bugbugbugbugbugbugbugbugb
+            std::cout << bottom[t].first + 1 << " " << right[r].first << std::endl;
             for(int i = bottom[t].first + 1; i < right[r].first && r < rightSize; ++i)
             {
-                std::cout << "PEKA" << std::endl;
+                std::cout << "YOBA" << std::endl;
                 view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
             }
 
             while(right[r].second < lineNumber + 1 && r < rightSize)
             {
-                std::cout << "YOBA" << std::endl;
                 view->setPixel(right[r].first, right[r].second, 0x00ff00);
                 ++r;
             }
@@ -350,6 +297,6 @@ void Triangle::draw(const Point& x, const double _angle)
             ++lineNumber;
         }
     }
-
+*/
     return;
 }
