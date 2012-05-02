@@ -23,7 +23,9 @@ void Model::draw()
     Triangle t(view, &image);
     setTrianglePoints(t, 0);
     t.setScale(getScale());
-    t.draw(Point(view->getWidth()/2, view->getHeight()/2), 0);
+    view->clear();
+    t.draw(Point(view->getWidth()/2, view->getHeight()/2), angle);
+    view->paint();
 }
 
 double Model::getScale() const
