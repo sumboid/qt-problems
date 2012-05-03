@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include "Triangle.h"
+#include "Line.h"
 
 #include <iostream>
 
@@ -30,41 +31,12 @@ void Triangle::setScale(const double& _scale)
     scale = _scale;
 }
 
-Point Triangle::getLine(const Point& _x, const Point& _y) const
-{
-    Point x = _x;
-    Point y = _y;
-    const int deltaX = abs(x.first - y.first);
-    const int deltaY = abs(y.second - x.second);
-    const int signX = x.first < y.first ? 1 : -1;
-    const int signY = x.second < y.second ? 1 : -1;
-
-    int error = deltaX - deltaY;
-    while(x.first != y.first || x.second != y.second)
-    {
-        const int error2 = error * 2;
-        if(error2 > -deltaY)
-        {
-            error -= deltaY;
-            x.first += signX;
-        }
-        if(error2 < deltaX)
-        {
-            error += deltaX;
-            x.second += signY;
-        }
-        return Point(x.first, x.second);
-    }
-
-    return Point(y.first, y.second);
-}
-
 #define LENGTH(x, y) (::sqrt((x.first - y.first) * (x.first - y.first) + \
                              (x.second - y.second) * (x.second - y.second)))
 
 unsigned int Triangle::getColor(const Point& d) const
 {
-    return 0x0;
+    //return 0x0;
     double cd = LENGTH(points[0], d);
 
     if (cd == 0)
@@ -114,8 +86,11 @@ unsigned int Triangle::getColor(const Point& d) const
 // Comparator
 bool ycomp(const Point& x, const Point& y)
 {
-    return x.first > y.first;
+    return x.second < y.second;
 }
+
+#define EQUAL(x, y) (x.first == y.first && x.second == y.second)
+#define PRINT(a, x) (std::cout << a << " = (" << x.first << ", " << x.second << ")" << std::endl)
 
 void Triangle::draw(const Point& x, const double _angle)
 {
@@ -182,121 +157,58 @@ void Triangle::draw(const Point& x, const double _angle)
     int lineNumber = sortPoints[TOP].second;
 
     Point leftBorder = sortPoints[TOP], rightBorder = sortPoints[TOP];
-    Point bottomBorder;
+    Point bottomBorder = sortPoints[MIDDLE];
 
-    if(sortPoints[left].second < sortPoints[right].second)
-    {
-        bottomBorder = sortPoints[left];
-    }
-    else
-    {
-        bottomBorder = sortPoints[right];
-    }
+    Line leftLine(sortPoints[TOP], sortPoints[left]);
+    Line rightLine(sortPoints[TOP], sortPoints[right]);
+    Line bottomLine(sortPoints[MIDDLE], sortPoints[BOTTOM]);
 
-    while(sortPoints[left] != leftBorder)
+    PRINT("top", sortPoints[TOP]);
+    PRINT("middle", sortPoints[MIDDLE]);
+    PRINT("bottom", sortPoints[BOTTOM]);
+    PRINT("left", sortPoints[left]);
+    PRINT("right", sortPoints[right]);
+
+    std::cout << "-----------" << std::endl;
+
+    while(!EQUAL(sortPoints[BOTTOM], leftBorder))
     {
         //view->setPixel(leftBorder.first, leftBorder.second, 0xff0000);
-        for(int i = leftBorder.first + 1; i < rightBorder.first - 1; i++)
+        for(int i = leftBorder.first + 1; i < rightBorder.first; i++)
         {
             view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
         }
+
         while(rightBorder.second == lineNumber)
         {
-            view->setPixel(rightBorder.first, lineNumber, 0x00ff00);
-            if(rightBorder == sortPoints[right])
+            view->setPixel(rightBorder.first, rightBorder.second, 0x00ff00);
+            if(EQUAL(rightBorder, sortPoints[MIDDLE]))
+            {
+                rightBorder = bottomBorder;
+                rightLine = bottomLine;
+            }
+            if(EQUAL(rightBorder, sortPoints[BOTTOM]))
             {
                 break;
             }
-            rightBorder = getLine(rightBorder, sortPoints[right]);
+            PRINT("point",rightBorder);
+            PRINT("bottom",sortPoints[BOTTOM]);
+            rightBorder = rightLine.next();
         }
         while(leftBorder.second == lineNumber)
         {
-            view->setPixel(leftBorder.first, lineNumber, 0xff0000);
-            if(leftBorder == sortPoints[left])
+            view->setPixel(leftBorder.first, leftBorder.second, 0xff0000);
+            if(EQUAL(leftBorder, sortPoints[BOTTOM]))
             {
                 break;
             }
-            leftBorder = getLine(leftBorder, sortPoints[left]);
+            if(EQUAL(leftBorder, sortPoints[MIDDLE]))
+            {
+                leftBorder = bottomBorder;
+                leftLine = bottomLine;
+            }
+            leftBorder = leftLine.next();
         }
         lineNumber++;
     }
-/*
-    size_t l = 0, r = 0, t = 0; //XXX: top
-
-    for(l = 0; l < leftSize; ++l)
-    {
-        ++lineNumber;
-
-        //Search last left pixel on lineNumber
-        if(left[l + 1].second == lineNumber)
-        {
-            view->setPixel(left[l].first, left[l].second, 0xff0000);
-            continue;
-        }
-
-        view->setPixel(left[l].first, left[l].second, 0xff0000);
-
-        if(r != rightSize)
-        {
-            for(int i = left[l].first + 1; i < right[r].first; ++i)
-            {
-                view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
-            }
-
-            while(right[r].second < lineNumber + 1 && r < rightSize)
-            {
-                view->setPixel(right[r].first, right[r].second, 0x00ff00);
-                ++r;
-            }
-            //if(r == rightSize)
-            //{
-            //    ++t;
-            //}
-        }
-        else
-        {
-            for(int i = left[l].first + 1; i < bottom[t].first; ++i)
-            {
-                view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
-            }
-
-            while(bottom[t].second < lineNumber + 1 && t < bottomSize)
-            {
-                view->setPixel(bottom[t].first, bottom[t].second, 0x0000ff);
-                ++t;
-            }
-        }
-
-    }
-    if(t == 1)
-    {
-        std::cout << "YOBA1" << std::endl;
-        for(;t < bottomSize; ++t)
-        {
-            if(t + 1 != bottomSize && bottom[t + 1].second == lineNumber)
-            {
-                view->setPixel(bottom[t].first, bottom[t].second, 0x0000ff);
-                continue;
-            }
-
-            view->setPixel(bottom[t].first, bottom[t].second, 0x0000ff);
-
-            std::cout << bottom[t].first + 1 << " " << right[r].first << std::endl;
-            for(int i = bottom[t].first + 1; i < right[r].first && r < rightSize; ++i)
-            {
-                std::cout << "YOBA" << std::endl;
-                view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
-            }
-
-            while(right[r].second < lineNumber + 1 && r < rightSize)
-            {
-                view->setPixel(right[r].first, right[r].second, 0x00ff00);
-                ++r;
-            }
-
-            ++lineNumber;
-        }
-    }
-*/
-    return;
 }

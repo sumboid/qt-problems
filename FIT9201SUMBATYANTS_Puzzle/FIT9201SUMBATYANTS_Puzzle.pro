@@ -10,7 +10,8 @@ SOURCES += main.cpp\
            Model.cpp \
            Controller.cpp \
            ViewPuzzle.cpp \
-           Triangle.cpp
+           Triangle.cpp \
+           Line.cpp
 
 HEADERS  += MainWindow.h \
             View.h \
@@ -20,7 +21,8 @@ HEADERS  += MainWindow.h \
             ViewPuzzle.h \
             Triangle.h \
             Point.h \
-            Filter.h
+            Filter.h \
+            Line.h
 
 FORMS    += MainWindow.ui
 
