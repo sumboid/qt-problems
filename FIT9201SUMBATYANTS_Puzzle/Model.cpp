@@ -38,12 +38,28 @@ double Model::getScale() const
 void Model::setTrianglePoints(Triangle& triangle, const int number)
 {
     Point a, b, c;
-    a.first = 0;
-    a.second = 0;
-    c.first = 0;
-    c.second = image.height() - 1;
-    b.first = image.width() - 1;
-    b.second = image.height() - 1;
+    int line = number / 8;
+    int position = number - line * 8;
+    bool odd = (position % 2 == 1);
+
+    if(!odd)
+    {
+        a.first = position * ((image.width() - 1) / 4);
+        a.second = line * ((image.height() - 1) / 4);
+        b.first = (position + 1) * ((image.width() - 1) / 4);
+        b.second = (line + 1) * ((image.height() - 1) / 4);
+        c.first = a.first;
+        c.second = b.second; 
+    }
+    else
+    {
+        a.first = (position + 1) * ((image.width() - 1) / 4);
+        a.second = (line + 1) * ((image.height() - 1) / 4);
+        b.first = position * ((image.width() - 1) / 4);
+        b.second = line * ((image.width() - 1) / 4);
+        c.first = b.first;
+        c.second = a.second;
+    }
 
     Point points[3] = {c, a, b};
     triangle.setImageCoordinates(points);

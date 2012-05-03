@@ -163,13 +163,13 @@ void Triangle::draw(const Point& x, const double _angle)
     Line rightLine(sortPoints[TOP], sortPoints[right]);
     Line bottomLine(sortPoints[MIDDLE], sortPoints[BOTTOM]);
 
-    PRINT("top", sortPoints[TOP]);
-    PRINT("middle", sortPoints[MIDDLE]);
-    PRINT("bottom", sortPoints[BOTTOM]);
-    PRINT("left", sortPoints[left]);
-    PRINT("right", sortPoints[right]);
+    //PRINT("top", sortPoints[TOP]);
+    //PRINT("middle", sortPoints[MIDDLE]);
+    //PRINT("bottom", sortPoints[BOTTOM]);
+    //PRINT("left", sortPoints[left]);
+    //PRINT("right", sortPoints[right]);
 
-    std::cout << "-----------" << std::endl;
+    //std::cout << "-----------" << std::endl;
 
     while(!EQUAL(sortPoints[BOTTOM], leftBorder))
     {
@@ -191,8 +191,8 @@ void Triangle::draw(const Point& x, const double _angle)
             {
                 break;
             }
-            PRINT("point",rightBorder);
-            PRINT("bottom",sortPoints[BOTTOM]);
+      //      PRINT("point",rightBorder);
+      //      PRINT("bottom",sortPoints[BOTTOM]);
             rightBorder = rightLine.next();
         }
         while(leftBorder.second == lineNumber)
