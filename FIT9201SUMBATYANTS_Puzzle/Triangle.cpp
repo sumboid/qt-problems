@@ -115,10 +115,11 @@ unsigned int Triangle::getColor(const Point& d) const
 
     if(blend)
     {
-        float alpha = ((rgb >> 24) & 0xFF) / (float) 0x100;
+        float alpha = ((rgb >> 24) & 0xFF) / (float) 0xff;
         rgb = MIX(rgb, 0xffffff, alpha);
     }
-     //rgb |= 0xff000000;
+
+    rgb |= 0xff000000;
 
     return rgb;
 }

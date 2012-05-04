@@ -46,23 +46,24 @@ double Model::getScale() const
     return widthScale > heightScale ? heightScale : widthScale;
 }
 
+#define max(x, y) (x > y ? x : y)
+
 void Model::setTrianglePoints(Triangle& triangle, const int number)
 {
     Point a, b, c;
-    int line = number / 8;
-    int position = number - line * 8;
-    bool even = ((position + 1) % 2 == 0);
+    int line = number >> 3;
+    int position = number % 8;
+    bool even = position & 1;
 
-    a.first = (position / 2) * ((image.width()) / 4);
-    a.second = line * ((image.height()) / 4);
-    b.first = ((position / 2) + 1)  * ((image.width()) / 4);
-    b.second = (line + 1) * ((image.height()) / 4);
-    if(a.first != 0) a.first--;
-    if(a.second != 0) a.second--;
-    if(b.first != 0) b.first--;
-    if(b.second != 0) b.second--;
+    int qw = image.width() / 4;
+    int qh = image.height() / 4;
+    a.first = max(0, position / 2 * qw - 1);
+    a.second = max(0, line * qh - 1);
+    b.first = a.first + qw;
+    b.second = a.second + qh;
     c.first = even ? b.first : a.first;
-    c.second = even ? a.second : b.second; 
+    c.second = even ? a.second : b.second;
+
 
     Point pointsOdd[3] = {c, a, b};
     Point pointsEven[3] = {c, b, a};
