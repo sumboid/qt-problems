@@ -73,7 +73,7 @@ void Model::setTrianglePoints(Triangle& triangle, const int number)
 
 Point Model::getTrianglePosition(Triangle& triangle, const int number)
 {
-    int line = number / 8;
+    /*int line = number / 8;
     int position = number - line * 8 + 1;
     bool even = (position % 2 == 0);
 
@@ -86,6 +86,13 @@ Point Model::getTrianglePosition(Triangle& triangle, const int number)
 
     x.first = view->getWidth() / 2 + (float)(position / 2 - 2) * (image.width() * getScale() / 4.);
     x.second = view->getHeight() / 2 + (float)(line - 2) * (image.height() * getScale() / 4.);
+    return x;*/
+    Point x;
+    int position = number & 7;
+    int line = number / 8 + (position & 1 ^ 1);
+    position += position & 1;
+    x.first = view->getWidth() / 2 + (position - 4) * image.width() * getScale() / 8;
+    x.second = view->getHeight() / 2 + (line - 2) * image.height() * getScale() / 4;
     return x;
 }
 

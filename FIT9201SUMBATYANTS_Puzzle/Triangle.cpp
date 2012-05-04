@@ -1,5 +1,3 @@
-/* GPL2.txt */
-
 #include <cmath>
 #include <vector>
 #include <algorithm>
@@ -43,7 +41,6 @@ void Triangle::setScale(const double& _scale)
 
 unsigned int Triangle::getColor(const Point& d) const
 {
-    //return 0x0;
     double cd = LENGTH(points[0], d);
 
     if (cd < 0.1)
@@ -52,15 +49,8 @@ unsigned int Triangle::getColor(const Point& d) const
     }
 
     double cb = LENGTH(points[0], points[2]);
-    if (cb < 0.1)
-    {
-        return image->pixel(imagePoints[0].first, imagePoints[0].second);
-    }
     double ca = LENGTH(points[0], points[1]);
-    if (ca < 1)
-    {
-        return image->pixel(imagePoints[0].first, imagePoints[0].second);
-    }
+
     double _cos = ((points[2].first - points[0].first) * (d.first - points[0].first) +
                    (points[2].second - points[0].second) * (d.second - points[0].second)) /
                    (cd * cb);
@@ -98,7 +88,7 @@ unsigned int Triangle::getColor(const Point& d) const
 
     if(static_cast<int>(x+0.5) >= image->width() || static_cast<int>(y+0.5) >= image->height()) return 0x0;
 
-    unsigned int rgb;
+    unsigned int rgb = 0;
 
     if(filter == NEAREST)
     {
@@ -106,11 +96,23 @@ unsigned int Triangle::getColor(const Point& d) const
     }
     else if(filter == BILINEAR)
     {
-        float dx = x - static_cast<int>(x);
-        float dy = y - static_cast<int>(y);
-        rgb = MIX(MIX(image->pixel(x, y), image->pixel(x + 0.5, y), 1 - dx),
-                  MIX(image->pixel(x, y + 0.5), image->pixel(x + 0.5, y + 0.5),1 - dx),
-                  1 - dy);
+        int ix = (int) x;
+        int iy = (int) y;
+        double dx = x - ix;
+        double dy = y - iy;
+
+        double d[] = { (1 - dy) * (1 - dx), dy * (1 - dx), dy * dx, (1 - dy) * dx };
+        int p[] = { image->pixel(ix, iy), image->pixel(ix, iy + 1), image->pixel(ix + 1, iy + 1), image->pixel(ix + 1, iy) };
+
+        double rgba[] = {0, 0, 0, 0};
+        for (int j = 0; j < 4; j++) 
+        {
+            rgba[0] += qRed(p[j]) * d[j];
+            rgba[1] += qGreen(p[j]) * d[j];
+            rgba[2] += qBlue(p[j]) * d[j];
+        }
+        rgba[3] = qAlpha(p[0]);
+        rgb = qRgba(rgba[0], rgba[1], rgba[2], rgba[3]);
     }
 
     if(blend)
@@ -151,10 +153,8 @@ void Triangle::draw(const Point& x, const double _angle)
     //Scale
     a.first = scale * (imagePoints[1].first - imagePoints[0].first) + c.first + 0.5;
     a.second = c.second - scale * (imagePoints[0].second - imagePoints[1].second) + 0.5;
-    //if(a.second > c.second) a.second++; else a.second--;
     b.first = scale * (imagePoints[2].first - imagePoints[0].first) + c.first + 0.5;
     b.second = c.second - scale * (imagePoints[0].second - imagePoints[2].second) + 0.5;
-    //if(b.first > c.first) b.first++; else b.first--;
 
     //Rotate
     double _cos = ::cos(_angle);
@@ -204,17 +204,9 @@ void Triangle::draw(const Point& x, const double _angle)
     Line rightLine(sortPoints[TOP], sortPoints[right]);
     Line bottomLine(sortPoints[MIDDLE], sortPoints[BOTTOM]);
 
-    //PRINT("top", sortPoints[TOP]);
-    //PRINT("middle", sortPoints[MIDDLE]);
-    //PRINT("bottom", sortPoints[BOTTOM]);
-    //PRINT("left", sortPoints[left]);
-    //PRINT("right", sortPoints[right]);
-
-    //std::cout << "-----------" << std::endl;
 
     while(!EQUAL(sortPoints[BOTTOM], leftBorder))
     {
-        //view->setPixel(leftBorder.first, leftBorder.second, 0xff0000);
         for(int i = leftBorder.first + 1; i < rightBorder.first; i++)
         {
             view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
@@ -232,8 +224,6 @@ void Triangle::draw(const Point& x, const double _angle)
             {
                 break;
             }
-      //      PRINT("point",rightBorder);
-      //      PRINT("bottom",sortPoints[BOTTOM]);
             rightBorder = rightLine.next();
         }
         while(leftBorder.second == lineNumber)
