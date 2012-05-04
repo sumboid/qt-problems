@@ -15,18 +15,15 @@ ViewPuzzle::ViewPuzzle()
     mainWindow.setMinimumSize(500, 400);
     ui.setupUi(&mainWindow);
     ui.horizontalLayout_2->insertWidget(0, painterWidget, 1);
-    connect(ui.dial, SIGNAL(valueChanged(int)), controller, SLOT(setAngle(int)));
-    /*ui.stopButton->setDisabled(true);
-    ui.speedSlider->setValue(START_SPEED);
+    ui.stopButton->setDisabled(true);
 
-    connect(ui.colorSlider, SIGNAL(valueChanged(int)), controller, SLOT(setPhase(int)));
-    connect(ui.clearButton, SIGNAL(clicked()), controller, SLOT(clear(void)));
+    connect(ui.blendCheckBox, SIGNAL(stateChanged(int)), controller, SLOT(setBlend(int)));
+    connect(ui.filterCheckBox, SIGNAL(stateChanged(int)), controller, SLOT(setFilter(int)));
+    connect(ui.dial, SIGNAL(valueChanged(int)), controller, SLOT(setStep(int)));
+    connect(ui.initButton, SIGNAL(clicked()), controller, SLOT(init(void)));
     connect(ui.startButton, SIGNAL(clicked()), controller, SLOT(start(void)));
     connect(ui.stopButton, SIGNAL(clicked()), controller, SLOT(stop(void)));
-    connect(ui.speedSlider, SIGNAL(valueChanged(int)), controller, SLOT(setSpeed(int)));
-    connect(ui.widthSpin, SIGNAL(valueChanged(int)), controller, SLOT(setWidth(int)));
-    connect(ui.heightSpin, SIGNAL(valueChanged(int)), controller, SLOT(setHeight(int)));
-*/
+
     mainWindow.show();
     controller->update();
 }

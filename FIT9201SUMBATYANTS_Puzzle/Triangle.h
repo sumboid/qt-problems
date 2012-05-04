@@ -18,14 +18,16 @@ public:
     void setImageCoordinates(const Point*);
     void setScale(const double&);
     void draw(const Point& x, const double angle);
+    void setFilter(const Filter& filter);
+    void setBlend(const bool);
 private:
-    Point getLine(const Point& x, const Point& y) const;
     unsigned int getColor(const Point& x) const;
 
     Point imagePoints[3]; /* [c], [a], [b] */
     Point points[3]; /* [c], [a], [b] */
     double scale;
     Filter filter;
+    bool blend;
 
 
     View* view;

@@ -15,12 +15,10 @@ public slots:
     void update();
     void start();
     void stop();
-    void clear();
-    void setWidth(const int);
-    void setHeight(const int);
-    void setSpeed(const int);
-    void resize();
-    void setAngle(const int);
+    void setBlend(const int);
+    void setFilter(const int);
+    void init();
+    void setStep(const int);
 
 private:
     Model* model;

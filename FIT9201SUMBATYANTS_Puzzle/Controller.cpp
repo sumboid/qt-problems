@@ -26,45 +26,37 @@ void Controller::update()
 
 void Controller::start()
 {
-    //model->invertButton(false);
+    model->invertButton(false);
     timer.start();
 }
 
 void Controller::stop()
 {
-    //model->invertButton(true);
+    model->invertButton(true);
     timer.stop();
 }
 
-void Controller::clear()
+void Controller::init()
 {
     model->invertButton(true);
     timer.stop();
-    //model->clear();
+    model->init();
 }
 
-void Controller::setWidth(const int width)
+void Controller::setBlend(const int blend)
 {
-    //model->setWidth(width);
+    model->setBlend(blend);
+    update();
 }
 
-void Controller::setHeight(const int height)
+void Controller::setFilter(const int filter)
 {
-    //model->setHeight(height);
+    model->setFilter(filter);
+    update();
 }
 
-void Controller::setSpeed(const int speed)
+void Controller::setStep(const int step)
 {
-    //model->setSpeed(speed);
-}
-
-void Controller::resize()
-{
-    //model->resize();
-}
-
-void Controller::setAngle(const int angle)
-{
-    model->setAngle(static_cast<double>(angle) / 180 * 3.14159265);
+    model->setAngle(static_cast<double>(step) / 180 * 3.14159265);
     model->draw();
 }
