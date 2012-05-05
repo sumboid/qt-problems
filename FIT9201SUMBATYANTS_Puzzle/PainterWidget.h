@@ -15,6 +15,7 @@ public:
     void clear();
     int getWidth();
     int getHeight();
+    unsigned int getColor(int x, int y);
 protected:
     virtual void paintEvent(QPaintEvent*);
     virtual void resizeEvent(QResizeEvent*);

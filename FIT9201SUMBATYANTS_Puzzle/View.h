@@ -15,10 +15,8 @@ public:
     virtual void paint() = 0;
     virtual void clear() = 0;
     virtual void setPixel(int x, int y, unsigned int color) = 0;
-    virtual void setWidthSpin(const int x) = 0;
-    virtual void setHeightSpin(const int x) = 0;
     virtual void invertButton(bool state) = 0;
-    virtual int getSpeed() = 0;
+    virtual unsigned int getColor(int x, int y) = 0;
 };
 
 #endif // VIEW_H

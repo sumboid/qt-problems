@@ -51,3 +51,8 @@ int PainterWidget::getHeight()
 {
     return size().width();
 }
+
+unsigned int PainterWidget::getColor(int x, int y)
+{
+    return image.pixel(x, y);
+}

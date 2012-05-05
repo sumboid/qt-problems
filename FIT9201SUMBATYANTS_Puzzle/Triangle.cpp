@@ -8,7 +8,7 @@
 #include <iostream>
 
 Triangle::Triangle(View* _view, const QImage* _image):
-    scale(1), view(_view), image(_image), blend(false), filter(NEAREST)
+scale(1), view(_view), image(_image), blend(false), filter(NEAREST)
 {
     for(int i = 0; i < 3; ++i)
     {
@@ -98,27 +98,34 @@ unsigned int Triangle::getColor(const Point& d) const
     {
         int ix = (int) x;
         int iy = (int) y;
-        double dx = x - ix;
-        double dy = y - iy;
-
-        double d[] = { (1 - dy) * (1 - dx), dy * (1 - dx), dy * dx, (1 - dy) * dx };
-        int p[] = { image->pixel(ix, iy), image->pixel(ix, iy + 1), image->pixel(ix + 1, iy + 1), image->pixel(ix + 1, iy) };
-
-        double rgba[] = {0, 0, 0, 0};
-        for (int j = 0; j < 4; j++) 
+        if(ix == image->width() - 1 || iy == image->height() - 1)
         {
-            rgba[0] += qRed(p[j]) * d[j];
-            rgba[1] += qGreen(p[j]) * d[j];
-            rgba[2] += qBlue(p[j]) * d[j];
+            rgb = image->pixel(x + 0.5, y + 0.5);
         }
-        rgba[3] = qAlpha(p[0]);
-        rgb = qRgba(rgba[0], rgba[1], rgba[2], rgba[3]);
+        else
+        {
+            double dx = x - ix;
+            double dy = y - iy;
+
+            double d[] = { (1 - dy) * (1 - dx), dy * (1 - dx), dy * dx, (1 - dy) * dx };
+            int p[] = { image->pixel(ix, iy), image->pixel(ix, iy + 1), image->pixel(ix + 1, iy + 1), image->pixel(ix + 1, iy) };
+
+            double rgba[] = {0, 0, 0, 0};
+            for (int j = 0; j < 4; j++) 
+            {
+                rgba[0] += qRed(p[j]) * d[j];
+                rgba[1] += qGreen(p[j]) * d[j];
+                rgba[2] += qBlue(p[j]) * d[j];
+            }
+            rgba[3] = qAlpha(p[0]);
+            rgb = qRgba(rgba[0], rgba[1], rgba[2], rgba[3]);
+        }
     }
 
     if(blend)
     {
-        float alpha = ((rgb >> 24) & 0xFF) / (float) 0xff;
-        rgb = MIX(rgb, 0xffffff, alpha);
+        float alpha = ((rgb >> 24) & 0xff) / (float) 0x100;
+        rgb = MIX(rgb, view->getColor(d.first, d.second), alpha);
     }
 
     rgb |= 0xff000000;
@@ -133,7 +140,6 @@ bool ycomp(const Point& x, const Point& y)
 }
 
 #define EQUAL(x, y) (x.first == y.first && x.second == y.second)
-#define PRINT(a, x) (std::cout << a << " = (" << x.first << ", " << x.second << ")" << std::endl)
 
 void Triangle::draw(const Point& x, const double _angle)
 {

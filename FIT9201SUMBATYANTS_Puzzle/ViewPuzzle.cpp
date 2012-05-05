@@ -78,23 +78,13 @@ void ViewPuzzle::paint()
     painterWidget->paint();
 }
 
-void ViewPuzzle::setWidthSpin(const int x)
-{
-  //  ui.widthSpin->setValue(x);
-}
-
-void ViewPuzzle::setHeightSpin(const int x)
-{
-  //  ui.heightSpin->setValue(x);
-}
-
 void ViewPuzzle::invertButton(bool state)
 {
-  //  ui.startButton->setDisabled(!state);
-  //  ui.stopButton->setDisabled(state);
+    ui.startButton->setDisabled(!state);
+    ui.stopButton->setDisabled(state);
 }
 
-int ViewPuzzle::getSpeed()
+unsigned int ViewPuzzle::getColor(int x, int y)
 {
-    return START_SPEED;
+    return painterWidget->getColor(x, y);
 }

@@ -28,10 +28,8 @@ public:
     virtual void paint();
     virtual void clear();
     virtual void setPixel(int x, int y, unsigned int color);
-    virtual void setWidthSpin(const int x);
-    virtual void setHeightSpin(const int x);
     virtual void invertButton(bool state);
-    virtual int getSpeed();
+    virtual unsigned int getColor(int x, int y);
 
 private:
     Ui::MainWindow ui;
