@@ -85,8 +85,8 @@ Point Model::getTrianglePosition(Triangle& triangle, const int number)
 
     int qw = image.width() / 4;
     int qh = image.height() / 4;
-    a.first = max(0, view->getWidth() / 2 + (position / 2 * qw - 1 - 2*qw) * getHScale() + 0.5);
-    a.second = max(0, view->getHeight() / 2 + (line * qh - 1 - 2*qh) * getVScale() + 0.5);
+    a.first = view->getWidth() / 2 + (position / 2 * qw - 2 * qw) * getHScale() + 0.5;
+    a.second = view->getHeight() / 2 + (line * qh - 2 * qh) * getVScale() + 0.5;
     b.first = a.first + qw * getHScale() + 0.5;
     b.second = a.second + qh * getVScale() + 0.5;
     c.first = even ? b.first : a.first;
@@ -107,7 +107,7 @@ void Model::init()
 void Model::setFilter(const int _filter)
 {
     Filter filter = (_filter != 0 ? BILINEAR : NEAREST);
-    for(int i = 0; i < 32; i++)
+    for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
     {
         triangles[i]->setFilter(filter);
     }
@@ -115,7 +115,7 @@ void Model::setFilter(const int _filter)
 
 void Model::setBlend(const int blend)
 {
-    for(int i = 0; i < 32; i++)
+    for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
     {
         triangles[i]->setBlend(blend != 0);
     }

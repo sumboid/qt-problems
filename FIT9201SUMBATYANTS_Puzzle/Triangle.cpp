@@ -44,10 +44,10 @@ unsigned int Triangle::getColor(const Point& d) const
 {
     double cd = LENGTH(points[0], d);
 
-    if (cd < 0.1)
-    {
-        return image->pixel(imagePoints[0].first, imagePoints[0].second);
-    }
+    //if (cd < 0.1)
+    //{
+    //    return image->pixel(imagePoints[0].first, imagePoints[0].second);
+    //}
 
     double cb = LENGTH(points[0], points[2]);
     double ca = LENGTH(points[0], points[1]);
@@ -56,7 +56,7 @@ unsigned int Triangle::getColor(const Point& d) const
                    (points[2].second - points[0].second) * (d.second - points[0].second)) /
                    (cd * cb);
     double _sin;
-    if(static_cast<int>(_cos) == 1) 
+    if(static_cast<int>(_cos) == 1)
     {
         _sin = 0;
     }
@@ -125,7 +125,7 @@ unsigned int Triangle::getColor(const Point& d) const
 
     if(blend)
     {
-        float alpha = ((rgb >> 24) & 0xff) / (float) 0x100;
+        float alpha = ((rgb >> 24) & 0xff) / (float) 0xff;
         rgb = MIX(rgb, view->getColor(d.first, d.second), alpha);
     }
 
@@ -214,9 +214,19 @@ void Triangle::draw(const Point& x, const double _angle)
 
     while(!EQUAL(sortPoints[BOTTOM], leftBorder))
     {
-        for(int i = leftBorder.first + 1; i < rightBorder.first; i++)
+        if(leftBorder.first + 1 < rightBorder.first)
         {
-            view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
+            for(int i = leftBorder.first + 1; i < rightBorder.first; i++)
+            {
+                view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
+            }
+        }
+        else
+        {
+            for(int i = rightBorder.first + 1; i < leftBorder.first; i++)
+            {
+                view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
+            }
         }
 
         while(rightBorder.second == lineNumber)

@@ -19,9 +19,11 @@ public slots:
     void setFilter(const int);
     void init();
     void setStep(const int);
+    void nextStep();
 
 private:
     Model* model;
     QTimer timer;
+    int step;
 
 };

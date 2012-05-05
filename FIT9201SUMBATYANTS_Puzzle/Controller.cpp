@@ -5,17 +5,17 @@
 
 namespace
 {
-    const int MSEC_INTERVAL = 100;
+    const int MSEC_INTERVAL = 30;
 }
 
 Controller::~Controller()
 {
     delete model;
 }
-Controller::Controller(View* view)
+Controller::Controller(View* view): step(0)
 {
     model = new Model(view);
-    connect(&timer, SIGNAL(timeout()), this, SLOT(update()));
+    connect(&timer, SIGNAL(timeout()), this, SLOT(nextStep()));
     timer.setInterval(MSEC_INTERVAL);
 }
 
@@ -59,4 +59,10 @@ void Controller::setStep(const int step)
 {
     model->setAngle(static_cast<double>(step) / 180 * 3.14159265);
     model->draw();
+}
+
+void Controller::nextStep()
+{
+    step == 360 ? step = 1 : step++;
+    setStep(step);
 }
