@@ -73,20 +73,6 @@ void Model::setTrianglePoints(Triangle& triangle, const int number)
 
 Point Model::getTrianglePosition(Triangle& triangle, const int number)
 {
-    /*int line = number / 8;
-    int position = number - line * 8 + 1;
-    bool even = (position % 2 == 0);
-
-    if (!even)
-    {
-        position--;
-        line++;
-    }
-    Point x;
-
-    x.first = view->getWidth() / 2 + (float)(position / 2 - 2) * (image.width() * getScale() / 4.);
-    x.second = view->getHeight() / 2 + (float)(line - 2) * (image.height() * getScale() / 4.);
-    return x;*/
     Point x;
     int position = number & 7;
     int line = number / 8 + (position & 1 ^ 1);
@@ -107,7 +93,7 @@ void Model::init()
 
 void Model::setFilter(const int _filter)
 {
-    Filter filter = (_filter == 0 ? BILINEAR : NEAREST);
+    Filter filter = (_filter != 0 ? BILINEAR : NEAREST);
     for(int i = 0; i < 32; i++)
     {
         triangles[i]->setFilter(filter);
