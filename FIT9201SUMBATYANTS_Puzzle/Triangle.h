@@ -16,7 +16,7 @@ public:
     Triangle(View *, const QImage *);
 
     void setImageCoordinates(const Point*);
-    void setScale(const double&);
+    void setScale(const double&, const double&);
     void draw(const Point& x, const double angle);
     void setFilter(const Filter& filter);
     void setBlend(const bool);
@@ -25,7 +25,8 @@ private:
 
     Point imagePoints[3]; /* [c], [a], [b] */
     Point points[3]; /* [c], [a], [b] */
-    double scale;
+    double vScale;
+    double hScale;
     Filter filter;
     bool blend;
 

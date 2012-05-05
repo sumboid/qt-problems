@@ -19,7 +19,8 @@ public:
     void init();
 private:
     void setTrianglePoints(Triangle& triangle, const int number);
-    double getScale() const;
+    double getVScale() const;
+    double getHScale() const;
     Point getTrianglePosition(Triangle&, const int);
 
     View* view;

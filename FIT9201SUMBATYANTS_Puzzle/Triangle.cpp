@@ -8,7 +8,7 @@
 #include <iostream>
 
 Triangle::Triangle(View* _view, const QImage* _image):
-scale(1), view(_view), image(_image), blend(false), filter(NEAREST)
+vScale(1), hScale(1), view(_view), image(_image), blend(false), filter(NEAREST)
 {
     for(int i = 0; i < 3; ++i)
     {
@@ -25,9 +25,10 @@ void Triangle::setImageCoordinates(const Point* coordinates)
     }
 }
 
-void Triangle::setScale(const double& _scale)
+void Triangle::setScale(const double& _vscale, const double& _hscale)
 {
-    scale = _scale;
+    vScale = _vscale;
+    hScale = _hscale;
 }
 
 #define LENGTH(x, y) (::sqrt((x.first - y.first) * (x.first - y.first) + \
@@ -157,10 +158,10 @@ void Triangle::draw(const Point& x, const double _angle)
     Point a, b, c = Point(x.first, x.second);
 
     //Scale
-    a.first = scale * (imagePoints[1].first - imagePoints[0].first) + c.first + 0.5;
-    a.second = c.second - scale * (imagePoints[0].second - imagePoints[1].second) + 0.5;
-    b.first = scale * (imagePoints[2].first - imagePoints[0].first) + c.first + 0.5;
-    b.second = c.second - scale * (imagePoints[0].second - imagePoints[2].second) + 0.5;
+    a.first = hScale * (imagePoints[1].first - imagePoints[0].first) + c.first + 0.5;
+    a.second = c.second - vScale * (imagePoints[0].second - imagePoints[1].second) + 0.5;
+    b.first = hScale * (imagePoints[2].first - imagePoints[0].first) + c.first + 0.5;
+    b.second = c.second - vScale * (imagePoints[0].second - imagePoints[2].second) + 0.5;
 
     //Rotate
     double _cos = ::cos(_angle);

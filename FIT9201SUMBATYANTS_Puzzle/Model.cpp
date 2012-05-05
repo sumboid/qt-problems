@@ -6,10 +6,15 @@
 
 #include <iostream>
 
-Model::Model(View* _view): 
-view(_view), angle(0), image(QPixmap(":/puzzle.png").toImage())
+namespace
 {
-    for(int i = 0; i < 32; i++)
+    const int NUMBER_OF_TRIANGLES = 32;
+}
+
+Model::Model(View* _view):
+view(_view), angle(0), image(QImage(":/puzzle.png"))
+{
+    for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
     {
         triangles.push_back(new Triangle(view, &image));
     }
@@ -17,7 +22,7 @@ view(_view), angle(0), image(QPixmap(":/puzzle.png").toImage())
 
 Model::~Model()
 {
-    for(int i = 0; i < 32; i++)
+    for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
     {
         delete triangles[i];
     }
@@ -26,24 +31,26 @@ Model::~Model()
 
 void Model::draw()
 {
-    for(int i = 0; i < 32; i++)
+    for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
     {
         setTrianglePoints(*triangles[i], i);
-        triangles[i]->setScale(getScale());
+        triangles[i]->setScale(getVScale(), getHScale());
     }
     view->clear();
-    for(int i = 0; i < 32; i++)
+    for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
     {
         triangles[i]->draw(getTrianglePosition(*triangles[i], i), angle);
     }
     view->paint();
 }
 
-double Model::getScale() const
+double Model::getHScale() const
 {
-    double widthScale = view->getWidth() * 16. / 24 / image.width();
-    double heightScale = view->getHeight() * 16. / 24 / image.height();
-    return widthScale > heightScale ? heightScale : widthScale;
+    return view->getWidth() * 16. / 81 / image.width();
+}
+double Model::getVScale() const
+{
+    return view->getHeight() * 16. / 81 / image.height();
 }
 
 #define max(x, y) (x > y ? x : y)
@@ -64,22 +71,28 @@ void Model::setTrianglePoints(Triangle& triangle, const int number)
     c.first = even ? b.first : a.first;
     c.second = even ? a.second : b.second;
 
-
     Point pointsOdd[3] = {c, a, b};
     Point pointsEven[3] = {c, b, a};
     triangle.setImageCoordinates(even ? pointsEven : pointsOdd);
 }
-#define PRINT(a, x) (std::cout << a << " = (" << x.first << ", " << x.second << ")" << std::endl)
 
 Point Model::getTrianglePosition(Triangle& triangle, const int number)
 {
-    Point x;
-    int position = number & 7;
-    int line = number / 8 + (position & 1 ^ 1);
-    position += position & 1;
-    x.first = view->getWidth() / 2 + (position - 4) * image.width() * getScale() / 8;
-    x.second = view->getHeight() / 2 + (line - 2) * image.height() * getScale() / 4;
-    return x;
+    Point a, b, c;
+    int line = number >> 3;
+    int position = number % 8;
+    bool even = position & 1;
+
+    int qw = image.width() / 4;
+    int qh = image.height() / 4;
+    a.first = max(0, view->getWidth() / 2 + (position / 2 * qw - 1 - 2*qw) * getHScale() + 0.5);
+    a.second = max(0, view->getHeight() / 2 + (line * qh - 1 - 2*qh) * getVScale() + 0.5);
+    b.first = a.first + qw * getHScale() + 0.5;
+    b.second = a.second + qh * getVScale() + 0.5;
+    c.first = even ? b.first : a.first;
+    c.second = even ? a.second : b.second;
+
+    return c;
 }
 
 void Model::setAngle(const double _angle)
