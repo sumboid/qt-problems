@@ -8,7 +8,8 @@
 #include <iostream>
 
 Triangle::Triangle(View* _view, const QImage* _image):
-vScale(1), hScale(1), view(_view), image(_image), blend(false), filter(NEAREST)
+vScale(1), hScale(1), view(_view), image(_image), blend(false), filter(NEAREST),
+allPixels(0), opacityPixels(0)
 {
     for(int i = 0; i < 3; ++i)
     {
@@ -40,15 +41,10 @@ void Triangle::setScale(const double& _vscale, const double& _hscale)
                              qBlue(x) * a + qBlue(y) * (1 - a),\
                              qAlpha(x) * a + qAlpha(y) * (1 - a)))
 
-unsigned int Triangle::getColor(const Point& d) const
+unsigned int Triangle::getColor(const Point& d)
 {
+    allPixels++;
     double cd = LENGTH(points[0], d);
-
-    //if (cd < 0.1)
-    //{
-    //    return image->pixel(imagePoints[0].first, imagePoints[0].second);
-    //}
-
     double cb = LENGTH(points[0], points[2]);
     double ca = LENGTH(points[0], points[1]);
 
@@ -87,7 +83,7 @@ unsigned int Triangle::getColor(const Point& d) const
         y = (imagePoints[0].second + LENGTH(imagePoints[0], imagePoints[1]) * v);
     }
 
-    if(static_cast<int>(x+0.5) >= image->width() || static_cast<int>(y+0.5) >= image->height()) return 0x0;
+    if(static_cast<int>(x + 0.5) >= image->width() || static_cast<int>(y + 0.5) >= image->height()) return 0x0;
 
     unsigned int rgb = 0;
 
@@ -97,39 +93,45 @@ unsigned int Triangle::getColor(const Point& d) const
     }
     else if(filter == BILINEAR)
     {
-        int ix = (int) x;
-        int iy = (int) y;
-        if(ix == image->width() - 1 || iy == image->height() - 1)
+        int ix = (int) x + 0.5;
+        if (ix > image->width() - 2)
         {
-            rgb = image->pixel(x + 0.5, y + 0.5);
+            ix = image->width() - 2;
         }
-        else
+        int iy = (int) y + 0.5;
+        if (iy > image->height() - 2)
         {
-            double dx = x - ix;
-            double dy = y - iy;
-
-            double d[] = { (1 - dy) * (1 - dx), dy * (1 - dx), dy * dx, (1 - dy) * dx };
-            int p[] = { image->pixel(ix, iy), image->pixel(ix, iy + 1), image->pixel(ix + 1, iy + 1), image->pixel(ix + 1, iy) };
-
-            double rgba[] = {0, 0, 0, 0};
-            for (int j = 0; j < 4; j++) 
-            {
-                rgba[0] += qRed(p[j]) * d[j];
-                rgba[1] += qGreen(p[j]) * d[j];
-                rgba[2] += qBlue(p[j]) * d[j];
-            }
-            rgba[3] = qAlpha(p[0]);
-            rgb = qRgba(rgba[0], rgba[1], rgba[2], rgba[3]);
+            iy = image->height() - 2;
         }
+        double dx = x - ix;
+        double dy = y - iy;
+
+        double d[] = { (1 - dy) * (1 - dx), dy * (1 - dx), dy * dx, (1 - dy) * dx };
+        int p[] = { image->pixel(ix, iy), image->pixel(ix, iy + 1), image->pixel(ix + 1, iy + 1), image->pixel(ix + 1, iy) };
+
+        double rgba[] = {0, 0, 0, 0};
+        for (int j = 0; j < 4; j++) 
+        {
+            rgba[0] += qRed(p[j]) * d[j];
+            rgba[1] += qGreen(p[j]) * d[j];
+            rgba[2] += qBlue(p[j]) * d[j];
+        }
+        rgba[3] = qAlpha(p[0]);
+        rgb = qRgba(rgba[0], rgba[1], rgba[2], rgba[3]);
     }
 
     if(blend)
     {
-        float alpha = ((rgb >> 24) & 0xff) / (float) 0xff;
-        rgb = MIX(rgb, view->getColor(d.first, d.second), alpha);
+        int alpha = (rgb >> 24) & 0xff; 
+        if(alpha != 0xff)
+        {
+            rgb = MIX(rgb, view->getColor(d.first, d.second), alpha / (float)0xff);
+        }
+        else
+        {
+            opacityPixels++;
+        }
     }
-
-    rgb |= 0xff000000;
 
     return rgb;
 }

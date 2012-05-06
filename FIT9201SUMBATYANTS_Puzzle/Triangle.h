@@ -21,7 +21,7 @@ public:
     void setFilter(const Filter& filter);
     void setBlend(const bool);
 private:
-    unsigned int getColor(const Point& x) const;
+    unsigned int getColor(const Point& x);
 
     Point imagePoints[3]; /* [c], [a], [b] */
     Point points[3]; /* [c], [a], [b] */
@@ -29,6 +29,8 @@ private:
     double hScale;
     Filter filter;
     bool blend;
+    int allPixels;
+    int opacityPixels;
 
 
     View* view;
