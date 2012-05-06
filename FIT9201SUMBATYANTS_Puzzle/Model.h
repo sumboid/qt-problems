@@ -1,9 +1,12 @@
 #pragma once
 #include <QRgb>
 #include <vector>
+#include <utility>
 #include "View.h"
 #include "Triangle.h"
 #include "Filter.h"
+
+const int NUMBER_OF_TRIANGLES = 32;
 
 class Model
 {
@@ -12,7 +15,7 @@ public:
     ~Model();
 
     void draw();
-    void setAngle(const double);
+    void setStep(const int);
     void invertButton(bool);
     void setFilter(const int);
     void setBlend(const int);
@@ -21,11 +24,14 @@ private:
     void setTrianglePoints(Triangle& triangle, const int number);
     double getVScale() const;
     double getHScale() const;
-    Point getTrianglePosition(Triangle&, const int);
+    Point getTrianglePosition(const int);
+    double getTriangleAngle(const int);
 
     View* view;
     QImage image;
 
-    std::vector<Triangle*> triangles;
-    double angle;
+    Triangle* triangles[NUMBER_OF_TRIANGLES];
+    double angles[NUMBER_OF_TRIANGLES];
+    std::pair<double, double> lastPoints[NUMBER_OF_TRIANGLES];
+    int step;
 };

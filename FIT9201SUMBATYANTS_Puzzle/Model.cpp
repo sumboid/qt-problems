@@ -1,22 +1,20 @@
 #include <QPixmap>
 #include <QResource>
-#include <math.h>
-#include <stdlib.h>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
 #include "Model.h"
 
 #include <iostream>
 
-namespace
-{
-    const int NUMBER_OF_TRIANGLES = 32;
-}
-
 Model::Model(View* _view):
-view(_view), angle(0), image(QImage(":/puzzle.png"))
+view(_view), step(0), image(QImage(":/puzzle.png"))
 {
+    init();
+    srand(time(0));
     for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
     {
-        triangles.push_back(new Triangle(view, &image));
+        triangles[i] = new Triangle(view, &image);
     }
 }
 
@@ -39,7 +37,7 @@ void Model::draw()
     view->clear();
     for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
     {
-        triangles[i]->draw(getTrianglePosition(*triangles[i], i), angle);
+        triangles[i]->draw(getTrianglePosition(i), getTriangleAngle(i));
     }
     view->paint();
 }
@@ -76,32 +74,60 @@ void Model::setTrianglePoints(Triangle& triangle, const int number)
     triangle.setImageCoordinates(even ? pointsEven : pointsOdd);
 }
 
-Point Model::getTrianglePosition(Triangle& triangle, const int number)
+Point Model::getTrianglePosition(const int number)
 {
     Point a, b, c;
     int line = number >> 3;
     int position = number % 8;
     bool even = position & 1;
+    double hscale = getHScale();
+    double vscale = getVScale();
 
     int qw = image.width() / 4;
     int qh = image.height() / 4;
-    a.first = view->getWidth() / 2 + (position / 2 * qw - 2 * qw) * getHScale() + 0.5;
-    a.second = view->getHeight() / 2 + (line * qh - 2 * qh) * getVScale() + 0.5;
-    b.first = a.first + qw * getHScale() + 0.5;
-    b.second = a.second + qh * getVScale() + 0.5;
+    a.first = view->getWidth() / 2 + (position / 2 * qw - 2 * qw) * hscale + 0.5;
+    a.second = view->getHeight() / 2 + (line * qh - 2 * qh) * vscale + 0.5;
+    b.first = a.first + qw * hscale + 0.5;
+    b.second = a.second + qh * vscale + 0.5;
     c.first = even ? b.first : a.first;
     c.second = even ? a.second : b.second;
 
+    double hstep = lastPoints[number].first / 180.;
+    double vstep = lastPoints[number].second / 180.;
+    int hshift = (step > 180 ? hstep * (360 - step) : hstep * step) + 5*sin(step / 180 * 3.1415);
+    int vshift = (step > 180 ? vstep * (360 - step) : vstep * step) + 5*sin(step / 180 * 3.1415);
+
+    if (hscale <= 1.)
+        hshift *= hscale;
+    if (vscale <= 1.)
+        vshift *= vscale;
+
+    c.first += hshift;
+    c.second += vshift;
     return c;
 }
 
-void Model::setAngle(const double _angle)
+double Model::getTriangleAngle(const int number)
 {
-    angle = _angle;
+    double part = angles[number] / 180;
+    return part * (step > 180 ? 360 - step : step);
 }
+
+void Model::setStep(const int _step)
+{
+    view->setDial(_step);
+    step = _step;
+}
+
 
 void Model::init()
 {
+    for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
+    {
+        angles[i] = (double)(rand() % 180) / 180 * 3.1415;
+        lastPoints[i].first = (rand() % 360 - 180);
+        lastPoints[i].second = (rand() % 360 - 180);
+    }
 }
 
 void Model::setFilter(const int _filter)

@@ -5,7 +5,7 @@
 
 namespace
 {
-    const int MSEC_INTERVAL = 30;
+    const int MSEC_INTERVAL = 10;
 }
 
 Controller::~Controller()
@@ -41,6 +41,9 @@ void Controller::init()
     model->invertButton(true);
     timer.stop();
     model->init();
+    step = 0;
+    setStep(0);
+    update();
 }
 
 void Controller::setBlend(const int blend)
@@ -55,9 +58,10 @@ void Controller::setFilter(const int filter)
     update();
 }
 
-void Controller::setStep(const int step)
+void Controller::setStep(const int _step)
 {
-    model->setAngle(static_cast<double>(step) / 180 * 3.14159265);
+    step = _step;
+    model->setStep(_step);
     model->draw();
 }
 

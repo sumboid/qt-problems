@@ -43,26 +43,6 @@ int ViewPuzzle::getHeight()
     return painterWidget->getWidth();
 }
 
-int ViewPuzzle::getWindowHeight()
-{
-    return mainWindow.height();
-}
-
-int ViewPuzzle::getWindowWidth()
-{
-    return mainWindow.width();
-}
-
-void ViewPuzzle::setWindowWidth(const int width)
-{
-    mainWindow.resize(width, mainWindow.height());
-}
-
-void ViewPuzzle::setWindowHeight(const int height)
-{
-    mainWindow.resize(mainWindow.width(), height);
-}
-
 void ViewPuzzle::setPixel(int x, int y, unsigned int color)
 {
     painterWidget->setPixel(x, y, color);
@@ -87,4 +67,9 @@ void ViewPuzzle::invertButton(bool state)
 unsigned int ViewPuzzle::getColor(int x, int y)
 {
     return painterWidget->getColor(x, y);
+}
+
+void ViewPuzzle::setDial(const int step)
+{
+    ui.dial->setValue(step);
 }
