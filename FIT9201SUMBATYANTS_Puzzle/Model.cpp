@@ -94,8 +94,8 @@ Point Model::getTrianglePosition(const int number)
 
     double hstep = lastPoints[number].first / 180.;
     double vstep = lastPoints[number].second / 180.;
-    int hshift = (step > 180 ? hstep * (360 - step) : hstep * step) + 5*sin(step / 180 * 3.1415);
-    int vshift = (step > 180 ? vstep * (360 - step) : vstep * step) + 5*sin(step / 180 * 3.1415);
+    int hshift = (step > 180 ? hstep * (360 - step) : hstep * step);
+    int vshift = (step > 180 ? vstep * (360 - step) : vstep * step) + 50 * sin(step / 180. * 3.1415);
 
     if (hscale <= 1.)
         hshift *= hscale;
