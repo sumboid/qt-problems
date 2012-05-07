@@ -14,6 +14,7 @@ public:
     virtual void invertButton(bool state) = 0;
     virtual unsigned int getColor(int x, int y) = 0;
     virtual void setDial(const int) = 0;
+    virtual void setBar(const char*) = 0;
 };
 
 #endif // VIEW_H

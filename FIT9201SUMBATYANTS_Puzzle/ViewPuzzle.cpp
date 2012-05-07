@@ -72,5 +72,9 @@ unsigned int ViewPuzzle::getColor(int x, int y)
 void ViewPuzzle::setDial(const int step)
 {
     ui.dial->setValue(step);
-    ui.dial->setWrapping(true);
+}
+
+void ViewPuzzle::setBar(const char* message)
+{
+    ui.statusBar->showMessage(message);
 }

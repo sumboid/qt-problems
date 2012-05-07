@@ -21,6 +21,7 @@ public slots:
     void setStep(const int);
     void nextStep();
     void resize();
+    void getInfo(const int, const int);
 
 private:
     Model* model;

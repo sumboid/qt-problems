@@ -2,6 +2,7 @@
 #include <QWidget>
 #include <QPainter>
 #include <QImage>
+#include <QMouseEvent>
 #include "Controller.h"
 
 class PainterWidget : public QWidget
@@ -19,6 +20,7 @@ public:
 protected:
     virtual void paintEvent(QPaintEvent*);
     virtual void resizeEvent(QResizeEvent*);
+    virtual void mouseMoveEvent(QMouseEvent*);
 private:
     Controller* controller;
     QImage image;

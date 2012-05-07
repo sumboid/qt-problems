@@ -64,10 +64,10 @@ void Model::setTrianglePoints(Triangle& triangle, const int number)
     int position = number % 8;
     bool even = position & 1;
 
-    int qw = (double)image.width() / 4;
-    int qh = (double)image.height() / 4;
-    a.first = max(0, position / 2 * qw - 1);
-    a.second = max(0, line * qh - 1);
+    double qw = image.width() / 4.;
+    double qh = image.height() / 4.;
+    a.first = (float)max(0, position / 2 * qw) + 0.5;
+    a.second = (float)max(0, line * qh) + 0.5;
     b.first = a.first + qw;
     b.second = a.second + qh;
     c.first = even ? b.first : a.first;
@@ -151,4 +151,17 @@ void Model::setBlend(const int blend)
 void Model::invertButton(bool state)
 {
     view->invertButton(state);
+}
+
+void Model::getInfo(const int x, const int y)
+{
+    for(int i = NUMBER_OF_TRIANGLES - 1; i >= 0; --i)
+    {
+        if(triangles[i]->checkPoint(Point(x, y)))
+        {
+            view->setBar(triangles[i]->getInfo());
+            return;
+        }
+    }
+    view->setBar("");
 }

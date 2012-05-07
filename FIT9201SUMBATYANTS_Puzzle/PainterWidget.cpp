@@ -5,7 +5,10 @@
 
 PainterWidget::PainterWidget(Controller* _controller):
     controller(_controller)
-{}
+{
+    setMouseTracking(true);
+}
+
 
 PainterWidget::~PainterWidget()
 {
@@ -35,7 +38,11 @@ void PainterWidget::resizeEvent(QResizeEvent*)
     clear();
     controller->resize();
     controller->update();
-    //update();
+}
+
+void PainterWidget::mouseMoveEvent(QMouseEvent *event)
+{
+    controller->getInfo(event->x(), event->y());
 }
 
 void PainterWidget::paint()

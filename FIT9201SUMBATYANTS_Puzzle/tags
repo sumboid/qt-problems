@@ -15,29 +15,34 @@ COPY_DIR	Makefile	/^COPY_DIR      = $(COPY) -r$/;"	m
 COPY_FILE	Makefile	/^COPY_FILE     = $(COPY)$/;"	m
 CXX	Makefile	/^CXX           = g++$/;"	m
 CXXFLAGS	Makefile	/^CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT $(DEFINES)$/;"	m
-Controller	Controller.cpp	/^Controller::Controller(View* view)$/;"	f	class:Controller	signature:(View* view)
+Controller	Controller.cpp	/^Controller::Controller(View* view): step(0)$/;"	f	class:Controller	signature:(View* view)
 Controller	Controller.h	/^    Controller(View* view);$/;"	p	class:Controller	access:public	signature:(View* view)
 Controller	Controller.h	/^class Controller : public QObject$/;"	c	inherits:QObject
-Controller::Controller	Controller.cpp	/^Controller::Controller(View* view)$/;"	f	class:Controller	signature:(View* view)
+Controller::Controller	Controller.cpp	/^Controller::Controller(View* view): step(0)$/;"	f	class:Controller	signature:(View* view)
 Controller::Controller	Controller.h	/^    Controller(View* view);$/;"	p	class:Controller	access:public	signature:(View* view)
 Controller::getStaticMetaObject	moc_Controller.cpp	/^const QMetaObject &Controller::getStaticMetaObject() { return staticMetaObject; }$/;"	f	class:Controller	signature:()
 Controller::init	Controller.cpp	/^void Controller::init()$/;"	f	class:Controller	signature:()
 Controller::init	Controller.h	/^    void init();$/;"	p	class:Controller	access:public	signature:()
 Controller::metaObject	moc_Controller.cpp	/^const QMetaObject *Controller::metaObject() const$/;"	f	class:Controller	signature:() const
 Controller::model	Controller.h	/^    Model* model;$/;"	m	class:Controller	access:private
+Controller::nextStep	Controller.cpp	/^void Controller::nextStep()$/;"	f	class:Controller	signature:()
+Controller::nextStep	Controller.h	/^    void nextStep();$/;"	p	class:Controller	access:public	signature:()
 Controller::qt_metacall	moc_Controller.cpp	/^int Controller::qt_metacall(QMetaObject::Call _c, int _id, void **_a)$/;"	f	class:Controller	signature:(QMetaObject::Call _c, int _id, void **_a)
 Controller::qt_metacast	moc_Controller.cpp	/^void *Controller::qt_metacast(const char *_clname)$/;"	f	class:Controller	signature:(const char *_clname)
 Controller::qt_static_metacall	moc_Controller.cpp	/^void Controller::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)$/;"	f	class:Controller	signature:(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+Controller::resize	Controller.cpp	/^void Controller::resize()$/;"	f	class:Controller	signature:()
+Controller::resize	Controller.h	/^    void resize();$/;"	p	class:Controller	access:public	signature:()
 Controller::setBlend	Controller.cpp	/^void Controller::setBlend(const int blend)$/;"	f	class:Controller	signature:(const int blend)
 Controller::setBlend	Controller.h	/^    void setBlend(const int);$/;"	p	class:Controller	access:public	signature:(const int)
 Controller::setFilter	Controller.cpp	/^void Controller::setFilter(const int filter)$/;"	f	class:Controller	signature:(const int filter)
 Controller::setFilter	Controller.h	/^    void setFilter(const int);$/;"	p	class:Controller	access:public	signature:(const int)
-Controller::setStep	Controller.cpp	/^void Controller::setStep(const int step)$/;"	f	class:Controller	signature:(const int step)
+Controller::setStep	Controller.cpp	/^void Controller::setStep(const int _step)$/;"	f	class:Controller	signature:(const int _step)
 Controller::setStep	Controller.h	/^    void setStep(const int);$/;"	p	class:Controller	access:public	signature:(const int)
 Controller::start	Controller.cpp	/^void Controller::start()$/;"	f	class:Controller	signature:()
 Controller::start	Controller.h	/^    void start();$/;"	p	class:Controller	access:public	signature:()
 Controller::staticMetaObject	moc_Controller.cpp	/^const QMetaObject Controller::staticMetaObject = {$/;"	m	class:Controller	file:
 Controller::staticMetaObjectExtraData	moc_Controller.cpp	/^const QMetaObjectExtraData Controller::staticMetaObjectExtraData = {$/;"	m	class:Controller	file:
+Controller::step	Controller.h	/^    int step;$/;"	m	class:Controller	access:private
 Controller::stop	Controller.cpp	/^void Controller::stop()$/;"	f	class:Controller	signature:()
 Controller::stop	Controller.h	/^    void stop();$/;"	p	class:Controller	access:public	signature:()
 Controller::timer	Controller.h	/^    QTimer timer;$/;"	m	class:Controller	access:private
@@ -50,27 +55,38 @@ DEL_DIR	Makefile	/^DEL_DIR       = rmdir$/;"	m
 DEL_FILE	Makefile	/^DEL_FILE      = rm -f$/;"	m
 DESTDIR	Makefile	/^DESTDIR       = $/;"	m
 DIST	Makefile	/^DIST          = \/usr\/share\/qt4\/mkspecs\/common\/unix.conf \\$/;"	m
-EQUAL	Triangle.cpp	142;"	d	file:
+EQUAL	Triangle.cpp	22;"	d	file:
 Filter	Filter.h	/^enum Filter { NEAREST, BILINEAR }; \/\/Not bad to realize factory$/;"	g
 INCPATH	Makefile	/^INCPATH       = -I\/usr\/share\/qt4\/mkspecs\/linux-g++ -I. -I\/usr\/include\/qt4\/QtCore -I\/usr\/include\/qt4\/QtGui -I\/usr\/include\/qt4 -I. -I.$/;"	m
 INSTALL_DIR	Makefile	/^INSTALL_DIR   = $(COPY_DIR)$/;"	m
 INSTALL_FILE	Makefile	/^INSTALL_FILE  = install -m 644 -p$/;"	m
 INSTALL_PROGRAM	Makefile	/^INSTALL_PROGRAM = install -m 755 -p$/;"	m
-Image	Image.h	/^    Image (const char* name);$/;"	p	class:Image	access:public	signature:(const char* name)
-Image	Image.h	/^class Image $/;"	c
-Image::Image	Image.h	/^    Image (const char* name);$/;"	p	class:Image	access:public	signature:(const char* name)
-Image::blend	Image.h	/^    bool blend;$/;"	m	class:Image	access:private
-Image::blendImage	Image.h	/^    QImage blendImage;$/;"	m	class:Image	access:private
+Image	Image.cpp	/^Image::Image(const char* image): original(QImage(image)), filter(NEAREST)$/;"	f	class:Image	signature:(const char* image)
+Image	Image.h	/^    Image (const char* image);$/;"	p	class:Image	access:public	signature:(const char* image)
+Image	Image.h	/^class Image {$/;"	c
+Image::Image	Image.cpp	/^Image::Image(const char* image): original(QImage(image)), filter(NEAREST)$/;"	f	class:Image	signature:(const char* image)
+Image::Image	Image.h	/^    Image (const char* image);$/;"	p	class:Image	access:public	signature:(const char* image)
+Image::bilinear	Image.h	/^    QImage bilinear;$/;"	m	class:Image	access:private
 Image::filter	Image.h	/^    Filter filter;$/;"	m	class:Image	access:private
-Image::getColor	Image.h	/^    unsigned int getColor(const Point& point) const;$/;"	p	class:Image	access:public	signature:(const Point& point) const
-Image::getHeight	Image.h	/^    int getHeight() const;$/;"	p	class:Image	access:public	signature:() const
-Image::getWidth	Image.h	/^    int getWidth() const;$/;"	p	class:Image	access:public	signature:() const
-Image::image	Image.h	/^    QImage image;$/;"	m	class:Image	access:private
-Image::makeBlendImage	Image.h	/^    void makeBlendImage();$/;"	p	class:Image	access:private	signature:()
-Image::setBlend	Image.h	/^    void setBlend(const bool blend);$/;"	p	class:Image	access:public	signature:(const bool blend)
-Image::setFiltration	Image.h	/^    void setFiltration(const Filter& filter);$/;"	p	class:Image	access:public	signature:(const Filter& filter)
+Image::height	Image.cpp	/^unsigned int Image::height() const$/;"	f	class:Image	signature:() const
+Image::height	Image.h	/^    unsigned int height() const;$/;"	p	class:Image	access:public	signature:() const
+Image::nearest	Image.h	/^    QImage nearest;$/;"	m	class:Image	access:private
+Image::original	Image.h	/^    QImage original;$/;"	m	class:Image	access:private
+Image::pixel	Image.cpp	/^unsigned int Image::pixel(const int x, const int y) const$/;"	f	class:Image	signature:(const int x, const int y) const
+Image::pixel	Image.h	/^    unsigned int pixel(const int x, const int y) const;$/;"	p	class:Image	access:public	signature:(const int x, const int y) const
+Image::rheight	Image.cpp	/^unsigned int Image::rheight() const$/;"	f	class:Image	signature:() const
+Image::rheight	Image.h	/^    unsigned int rheight() const;$/;"	p	class:Image	access:public	signature:() const
+Image::rwidth	Image.cpp	/^unsigned int Image::rwidth() const$/;"	f	class:Image	signature:() const
+Image::rwidth	Image.h	/^    unsigned int rwidth() const;$/;"	p	class:Image	access:public	signature:() const
+Image::setFilter	Image.cpp	/^void Image::setFilter(const Filter& _filter)$/;"	f	class:Image	signature:(const Filter& _filter)
+Image::setFilter	Image.h	/^    void setFilter(const Filter& filter);$/;"	p	class:Image	access:public	signature:(const Filter& filter)
+Image::setScale	Image.cpp	/^void Image::setScale(const double hscale, const double vscale)$/;"	f	class:Image	signature:(const double hscale, const double vscale)
+Image::setScale	Image.h	/^    void setScale(const double hscale, const double vscale);$/;"	p	class:Image	access:public	signature:(const double hscale, const double vscale)
+Image::width	Image.cpp	/^unsigned int Image::width() const$/;"	f	class:Image	signature:() const
+Image::width	Image.h	/^    unsigned int width() const;$/;"	p	class:Image	access:public	signature:() const
+Image::~Image	Image.cpp	/^Image::~Image() {};$/;"	f	class:Image	signature:()
 Image::~Image	Image.h	/^    ~Image ();$/;"	p	class:Image	access:public	signature:()
-LENGTH	Triangle.cpp	33;"	d	file:
+LENGTH	Triangle.cpp	77;"	d	file:
 LFLAGS	Makefile	/^LFLAGS        = -Wl,-O1$/;"	m
 LIBS	Makefile	/^LIBS          = $(SUBLIBS)  -L\/usr\/lib64\/qt4 -lQtGui -L\/usr\/lib64 -L\/usr\/lib64\/qt4 -L\/usr\/X11R6\/lib -lQtCore -lgthread-2.0 -lrt -lglib-2.0 -lpthread $/;"	m
 LINK	Makefile	/^LINK          = g++$/;"	m
@@ -93,10 +109,10 @@ Line::signY	Line.h	/^    int signX, signY;$/;"	m	class:Line	access:private
 Line::x	Line.h	/^    Point x, y;$/;"	m	class:Line	access:private
 Line::y	Line.h	/^    Point x, y;$/;"	m	class:Line	access:private
 MAINWINDOW_H	MainWindow.h	2;"	d
-MIX	Triangle.cpp	37;"	d	file:
+MIX	Triangle.cpp	81;"	d	file:
 MKDIR	Makefile	/^MKDIR         = mkdir -p$/;"	m
 MOVE	Makefile	/^MOVE          = mv -f$/;"	m
-MSEC_INTERVAL	Controller.cpp	/^    const int MSEC_INTERVAL = 100;$/;"	m	namespace:__anon1	file:
+MSEC_INTERVAL	Controller.cpp	/^    const int MSEC_INTERVAL = 10;$/;"	m	namespace:__anon1	file:
 MainWindow	MainWindow.cpp	/^MainWindow::MainWindow(QWidget *parent) :$/;"	f	class:MainWindow	signature:(QWidget *parent)
 MainWindow	MainWindow.h	/^    explicit MainWindow(QWidget *parent = 0);$/;"	p	class:MainWindow	access:public	signature:(QWidget *parent = 0)
 MainWindow	MainWindow.h	/^class MainWindow : public QMainWindow$/;"	c	inherits:QMainWindow
@@ -113,40 +129,48 @@ MainWindow::staticMetaObjectExtraData	moc_MainWindow.cpp	/^const QMetaObjectExtr
 MainWindow::ui	MainWindow.h	/^    Ui::MainWindow *ui;$/;"	m	class:MainWindow	access:private
 MainWindow::~MainWindow	MainWindow.cpp	/^MainWindow::~MainWindow()$/;"	f	class:MainWindow	signature:()
 MainWindow::~MainWindow	MainWindow.h	/^    ~MainWindow();$/;"	p	class:MainWindow	access:public	signature:()
-Model	Model.cpp	/^Model::Model(View* _view): $/;"	f	class:Model	signature:(View* _view)
+Model	Model.cpp	/^Model::Model(View* _view):$/;"	f	class:Model	signature:(View* _view)
 Model	Model.h	/^    Model(View* view);$/;"	p	class:Model	access:public	signature:(View* view)
 Model	Model.h	/^class Model$/;"	c
-Model::Model	Model.cpp	/^Model::Model(View* _view): $/;"	f	class:Model	signature:(View* _view)
+Model::Model	Model.cpp	/^Model::Model(View* _view):$/;"	f	class:Model	signature:(View* _view)
 Model::Model	Model.h	/^    Model(View* view);$/;"	p	class:Model	access:public	signature:(View* view)
-Model::angle	Model.h	/^    double angle;$/;"	m	class:Model	access:private
+Model::angles	Model.h	/^    double angles[NUMBER_OF_TRIANGLES];$/;"	m	class:Model	access:private
 Model::draw	Model.cpp	/^void Model::draw()$/;"	f	class:Model	signature:()
 Model::draw	Model.h	/^    void draw();$/;"	p	class:Model	access:public	signature:()
-Model::getScale	Model.cpp	/^double Model::getScale() const$/;"	f	class:Model	signature:() const
-Model::getScale	Model.h	/^    double getScale() const;$/;"	p	class:Model	access:private	signature:() const
-Model::getTrianglePosition	Model.cpp	/^Point Model::getTrianglePosition(Triangle& triangle, const int number)$/;"	f	class:Model	signature:(Triangle& triangle, const int number)
-Model::getTrianglePosition	Model.h	/^    Point getTrianglePosition(Triangle&, const int);$/;"	p	class:Model	access:private	signature:(Triangle&, const int)
-Model::image	Model.h	/^    QImage image;$/;"	m	class:Model	access:private
+Model::getHScale	Model.cpp	/^double Model::getHScale() const$/;"	f	class:Model	signature:() const
+Model::getHScale	Model.h	/^    double getHScale() const;$/;"	p	class:Model	access:private	signature:() const
+Model::getInfo	Model.h	/^    void getInfo(const int x, const int y);$/;"	p	class:Model	access:public	signature:(const int x, const int y)
+Model::getTriangleAngle	Model.cpp	/^double Model::getTriangleAngle(const int number)$/;"	f	class:Model	signature:(const int number)
+Model::getTriangleAngle	Model.h	/^    double getTriangleAngle(const int);$/;"	p	class:Model	access:private	signature:(const int)
+Model::getTrianglePosition	Model.cpp	/^Point Model::getTrianglePosition(const int number)$/;"	f	class:Model	signature:(const int number)
+Model::getTrianglePosition	Model.h	/^    Point getTrianglePosition(const int);$/;"	p	class:Model	access:private	signature:(const int)
+Model::getVScale	Model.cpp	/^double Model::getVScale() const$/;"	f	class:Model	signature:() const
+Model::getVScale	Model.h	/^    double getVScale() const;$/;"	p	class:Model	access:private	signature:() const
+Model::image	Model.h	/^    Image image;$/;"	m	class:Model	access:private
 Model::init	Model.cpp	/^void Model::init()$/;"	f	class:Model	signature:()
 Model::init	Model.h	/^    void init();$/;"	p	class:Model	access:public	signature:()
 Model::invertButton	Model.cpp	/^void Model::invertButton(bool state)$/;"	f	class:Model	signature:(bool state)
 Model::invertButton	Model.h	/^    void invertButton(bool);$/;"	p	class:Model	access:public	signature:(bool)
-Model::setAngle	Model.cpp	/^void Model::setAngle(const double _angle)$/;"	f	class:Model	signature:(const double _angle)
-Model::setAngle	Model.h	/^    void setAngle(const double);$/;"	p	class:Model	access:public	signature:(const double)
+Model::lastPoints	Model.h	/^    std::pair<double, double> lastPoints[NUMBER_OF_TRIANGLES];$/;"	m	class:Model	access:private
+Model::resize	Model.cpp	/^void Model::resize()$/;"	f	class:Model	signature:()
+Model::resize	Model.h	/^    void resize();$/;"	p	class:Model	access:public	signature:()
 Model::setBlend	Model.cpp	/^void Model::setBlend(const int blend)$/;"	f	class:Model	signature:(const int blend)
 Model::setBlend	Model.h	/^    void setBlend(const int);$/;"	p	class:Model	access:public	signature:(const int)
 Model::setFilter	Model.cpp	/^void Model::setFilter(const int _filter)$/;"	f	class:Model	signature:(const int _filter)
 Model::setFilter	Model.h	/^    void setFilter(const int);$/;"	p	class:Model	access:public	signature:(const int)
+Model::setStep	Model.cpp	/^void Model::setStep(const int _step)$/;"	f	class:Model	signature:(const int _step)
+Model::setStep	Model.h	/^    void setStep(const int);$/;"	p	class:Model	access:public	signature:(const int)
 Model::setTrianglePoints	Model.cpp	/^void Model::setTrianglePoints(Triangle& triangle, const int number)$/;"	f	class:Model	signature:(Triangle& triangle, const int number)
 Model::setTrianglePoints	Model.h	/^    void setTrianglePoints(Triangle& triangle, const int number);$/;"	p	class:Model	access:private	signature:(Triangle& triangle, const int number)
-Model::triangles	Model.h	/^    std::vector<Triangle*> triangles;$/;"	m	class:Model	access:private
+Model::step	Model.h	/^    int step;$/;"	m	class:Model	access:private
+Model::triangles	Model.h	/^    Triangle* triangles[NUMBER_OF_TRIANGLES];$/;"	m	class:Model	access:private
 Model::view	Model.h	/^    View* view;$/;"	m	class:Model	access:private
 Model::~Model	Model.cpp	/^Model::~Model()$/;"	f	class:Model	signature:()
 Model::~Model	Model.h	/^    ~Model();$/;"	p	class:Model	access:public	signature:()
 NEAREST	Filter.h	/^enum Filter { NEAREST, BILINEAR }; \/\/Not bad to realize factory$/;"	e	enum:Filter
+NUMBER_OF_TRIANGLES	Model.h	/^const int NUMBER_OF_TRIANGLES = 32;$/;"	v
 OBJECTS	Makefile	/^OBJECTS       = main.o \\$/;"	m
 OBJECTS_DIR	Makefile	/^OBJECTS_DIR   = .\/$/;"	m
-PRINT	Model.cpp	72;"	d	file:
-PRINT	Triangle.cpp	143;"	d	file:
 PainterWidget	PainterWidget.cpp	/^PainterWidget::PainterWidget(Controller* _controller):$/;"	f	class:PainterWidget	signature:(Controller* _controller)
 PainterWidget	PainterWidget.h	/^    PainterWidget(Controller* controller);$/;"	p	class:PainterWidget	access:public	signature:(Controller* controller)
 PainterWidget	PainterWidget.h	/^class PainterWidget : public QWidget$/;"	c	inherits:QWidget
@@ -155,6 +179,8 @@ PainterWidget::PainterWidget	PainterWidget.h	/^    PainterWidget(Controller* con
 PainterWidget::clear	PainterWidget.cpp	/^void PainterWidget::clear()$/;"	f	class:PainterWidget	signature:()
 PainterWidget::clear	PainterWidget.h	/^    void clear();$/;"	p	class:PainterWidget	access:public	signature:()
 PainterWidget::controller	PainterWidget.h	/^    Controller* controller;$/;"	m	class:PainterWidget	access:private
+PainterWidget::getColor	PainterWidget.cpp	/^unsigned int PainterWidget::getColor(int x, int y)$/;"	f	class:PainterWidget	signature:(int x, int y)
+PainterWidget::getColor	PainterWidget.h	/^    unsigned int getColor(int x, int y);$/;"	p	class:PainterWidget	access:public	signature:(int x, int y)
 PainterWidget::getHeight	PainterWidget.cpp	/^int PainterWidget::getHeight()$/;"	f	class:PainterWidget	signature:()
 PainterWidget::getHeight	PainterWidget.h	/^    int getHeight();$/;"	p	class:PainterWidget	access:public	signature:()
 PainterWidget::getStaticMetaObject	moc_PainterWidget.cpp	/^const QMetaObject &PainterWidget::getStaticMetaObject() { return staticMetaObject; }$/;"	f	class:PainterWidget	signature:()
@@ -189,29 +215,32 @@ SYMLINK	Makefile	/^SYMLINK       = ln -f -s$/;"	m
 TAR	Makefile	/^TAR           = tar -cf$/;"	m
 TARGET	Makefile	/^TARGET        = FIT9201SUMBATYANTS_Puzzle$/;"	m
 TRIANGLE_H	Triangle.h	2;"	d
-Triangle	Triangle.cpp	/^Triangle::Triangle(View* _view, const QImage* _image):$/;"	f	class:Triangle	signature:(View* _view, const QImage* _image)
-Triangle	Triangle.h	/^    Triangle(View *, const QImage *);$/;"	p	class:Triangle	access:public	signature:(View *, const QImage *)
+Triangle	Triangle.cpp	/^Triangle::Triangle(View* _view, const Image* _image):$/;"	f	class:Triangle	signature:(View* _view, const Image* _image)
+Triangle	Triangle.h	/^    Triangle(View *, const Image *);$/;"	p	class:Triangle	access:public	signature:(View *, const Image *)
 Triangle	Triangle.h	/^class Triangle$/;"	c
-Triangle::Triangle	Triangle.cpp	/^Triangle::Triangle(View* _view, const QImage* _image):$/;"	f	class:Triangle	signature:(View* _view, const QImage* _image)
-Triangle::Triangle	Triangle.h	/^    Triangle(View *, const QImage *);$/;"	p	class:Triangle	access:public	signature:(View *, const QImage *)
+Triangle::Triangle	Triangle.cpp	/^Triangle::Triangle(View* _view, const Image* _image):$/;"	f	class:Triangle	signature:(View* _view, const Image* _image)
+Triangle::Triangle	Triangle.h	/^    Triangle(View *, const Image *);$/;"	p	class:Triangle	access:public	signature:(View *, const Image *)
+Triangle::allPixels	Triangle.h	/^    int allPixels;$/;"	m	class:Triangle	access:private
 Triangle::blend	Triangle.h	/^    bool blend;$/;"	m	class:Triangle	access:private
+Triangle::borderPixels	Triangle.h	/^    int borderPixels;$/;"	m	class:Triangle	access:private
+Triangle::checkPoint	Triangle.cpp	/^bool Triangle::checkPoint(const Point& point) const$/;"	f	class:Triangle	signature:(const Point& point) const
+Triangle::checkPoint	Triangle.h	/^    bool checkPoint(const Point& point) const;$/;"	p	class:Triangle	access:public	signature:(const Point& point) const
 Triangle::draw	Triangle.cpp	/^void Triangle::draw(const Point& x, const double _angle)$/;"	f	class:Triangle	signature:(const Point& x, const double _angle)
 Triangle::draw	Triangle.h	/^    void draw(const Point& x, const double angle);$/;"	p	class:Triangle	access:public	signature:(const Point& x, const double angle)
-Triangle::filter	Triangle.h	/^    Filter filter;$/;"	m	class:Triangle	access:private
-Triangle::getColor	Triangle.cpp	/^unsigned int Triangle::getColor(const Point& d) const$/;"	f	class:Triangle	signature:(const Point& d) const
-Triangle::getColor	Triangle.h	/^    unsigned int getColor(const Point& x) const;$/;"	p	class:Triangle	access:private	signature:(const Point& x) const
-Triangle::image	Triangle.h	/^    const QImage* image;$/;"	m	class:Triangle	access:private
+Triangle::getColor	Triangle.cpp	/^unsigned int Triangle::getColor(const Point& d)$/;"	f	class:Triangle	signature:(const Point& d)
+Triangle::getColor	Triangle.h	/^    unsigned int getColor(const Point& x);$/;"	p	class:Triangle	access:private	signature:(const Point& x)
+Triangle::getInfo	Triangle.cpp	/^const char* Triangle::getInfo() const$/;"	f	class:Triangle	signature:() const
+Triangle::getInfo	Triangle.h	/^    const char* getInfo() const;$/;"	p	class:Triangle	access:public	signature:() const
+Triangle::image	Triangle.h	/^    const Image* image;$/;"	m	class:Triangle	access:private
 Triangle::imagePoints	Triangle.h	/^    Point imagePoints[3]; \/* [c], [a], [b] *\/$/;"	m	class:Triangle	access:private
 Triangle::points	Triangle.h	/^    Point points[3]; \/* [c], [a], [b] *\/$/;"	m	class:Triangle	access:private
-Triangle::scale	Triangle.h	/^    double scale;$/;"	m	class:Triangle	access:private
 Triangle::setBlend	Triangle.cpp	/^void Triangle::setBlend(const bool _blend)$/;"	f	class:Triangle	signature:(const bool _blend)
 Triangle::setBlend	Triangle.h	/^    void setBlend(const bool);$/;"	p	class:Triangle	access:public	signature:(const bool)
-Triangle::setFilter	Triangle.cpp	/^void Triangle::setFilter(const Filter& _filter)$/;"	f	class:Triangle	signature:(const Filter& _filter)
-Triangle::setFilter	Triangle.h	/^    void setFilter(const Filter& filter);$/;"	p	class:Triangle	access:public	signature:(const Filter& filter)
 Triangle::setImageCoordinates	Triangle.cpp	/^void Triangle::setImageCoordinates(const Point* coordinates)$/;"	f	class:Triangle	signature:(const Point* coordinates)
 Triangle::setImageCoordinates	Triangle.h	/^    void setImageCoordinates(const Point*);$/;"	p	class:Triangle	access:public	signature:(const Point*)
-Triangle::setScale	Triangle.cpp	/^void Triangle::setScale(const double& _scale)$/;"	f	class:Triangle	signature:(const double& _scale)
-Triangle::setScale	Triangle.h	/^    void setScale(const double&);$/;"	p	class:Triangle	access:public	signature:(const double&)
+Triangle::setPoints	Triangle.cpp	/^void Triangle::setPoints(const Point& x, const double _angle)$/;"	f	class:Triangle	signature:(const Point& x, const double _angle)
+Triangle::setPoints	Triangle.h	/^    void setPoints(const Point& x, const double _angle);$/;"	p	class:Triangle	access:private	signature:(const Point& x, const double _angle)
+Triangle::transparentPixels	Triangle.h	/^    int transparentPixels;$/;"	m	class:Triangle	access:private
 Triangle::view	Triangle.h	/^    View* view;$/;"	m	class:Triangle	access:private
 UI_MAINWINDOW_H	ui_MainWindow.h	11;"	d
 Ui	MainWindow.h	/^namespace Ui {$/;"	n
@@ -240,18 +269,13 @@ Ui_MainWindow::verticalSpacer	ui_MainWindow.h	/^    QSpacerItem *verticalSpacer;
 VIEW_H	View.h	2;"	d
 View	View.h	/^class View$/;"	c
 View::clear	View.h	/^    virtual void clear() = 0;$/;"	p	class:View	access:public	signature:()
+View::getColor	View.h	/^    virtual unsigned int getColor(int x, int y) = 0;$/;"	p	class:View	access:public	signature:(int x, int y)
 View::getHeight	View.h	/^    virtual int getHeight() = 0;$/;"	p	class:View	access:public	signature:()
-View::getSpeed	View.h	/^    virtual int getSpeed() = 0;$/;"	p	class:View	access:public	signature:()
 View::getWidth	View.h	/^    virtual int getWidth() = 0;$/;"	p	class:View	access:public	signature:()
-View::getWindowHeight	View.h	/^    virtual int getWindowHeight() = 0;$/;"	p	class:View	access:public	signature:()
-View::getWindowWidth	View.h	/^    virtual int getWindowWidth() = 0;$/;"	p	class:View	access:public	signature:()
 View::invertButton	View.h	/^    virtual void invertButton(bool state) = 0;$/;"	p	class:View	access:public	signature:(bool state)
 View::paint	View.h	/^    virtual void paint() = 0;$/;"	p	class:View	access:public	signature:()
-View::setHeightSpin	View.h	/^    virtual void setHeightSpin(const int x) = 0;$/;"	p	class:View	access:public	signature:(const int x)
+View::setDial	View.h	/^    virtual void setDial(const int) = 0;$/;"	p	class:View	access:public	signature:(const int)
 View::setPixel	View.h	/^    virtual void setPixel(int x, int y, unsigned int color) = 0;$/;"	p	class:View	access:public	signature:(int x, int y, unsigned int color)
-View::setWidthSpin	View.h	/^    virtual void setWidthSpin(const int x) = 0;$/;"	p	class:View	access:public	signature:(const int x)
-View::setWindowHeight	View.h	/^    virtual void setWindowHeight(const int height) = 0;$/;"	p	class:View	access:public	signature:(const int height)
-View::setWindowWidth	View.h	/^    virtual void setWindowWidth(const int width) = 0;$/;"	p	class:View	access:public	signature:(const int width)
 View::~View	View.h	/^    virtual ~View() {}$/;"	f	class:View	access:public	signature:()
 ViewPuzzle	ViewPuzzle.cpp	/^ViewPuzzle::ViewPuzzle()$/;"	f	class:ViewPuzzle	signature:()
 ViewPuzzle	ViewPuzzle.h	/^    ViewPuzzle();$/;"	p	class:ViewPuzzle	access:public	signature:()
@@ -261,42 +285,35 @@ ViewPuzzle::ViewPuzzle	ViewPuzzle.h	/^    ViewPuzzle();$/;"	p	class:ViewPuzzle	a
 ViewPuzzle::clear	ViewPuzzle.cpp	/^void ViewPuzzle::clear()$/;"	f	class:ViewPuzzle	signature:()
 ViewPuzzle::clear	ViewPuzzle.h	/^    virtual void clear();$/;"	p	class:ViewPuzzle	access:public	signature:()
 ViewPuzzle::controller	ViewPuzzle.h	/^    Controller* controller;$/;"	m	class:ViewPuzzle	access:private
+ViewPuzzle::getColor	ViewPuzzle.cpp	/^unsigned int ViewPuzzle::getColor(int x, int y)$/;"	f	class:ViewPuzzle	signature:(int x, int y)
+ViewPuzzle::getColor	ViewPuzzle.h	/^    virtual unsigned int getColor(int x, int y);$/;"	p	class:ViewPuzzle	access:public	signature:(int x, int y)
 ViewPuzzle::getHeight	ViewPuzzle.cpp	/^int ViewPuzzle::getHeight()$/;"	f	class:ViewPuzzle	signature:()
 ViewPuzzle::getHeight	ViewPuzzle.h	/^    virtual int getHeight();$/;"	p	class:ViewPuzzle	access:public	signature:()
-ViewPuzzle::getSpeed	ViewPuzzle.cpp	/^int ViewPuzzle::getSpeed()$/;"	f	class:ViewPuzzle	signature:()
-ViewPuzzle::getSpeed	ViewPuzzle.h	/^    virtual int getSpeed();$/;"	p	class:ViewPuzzle	access:public	signature:()
 ViewPuzzle::getWidth	ViewPuzzle.cpp	/^int ViewPuzzle::getWidth()$/;"	f	class:ViewPuzzle	signature:()
 ViewPuzzle::getWidth	ViewPuzzle.h	/^    virtual int getWidth();$/;"	p	class:ViewPuzzle	access:public	signature:()
-ViewPuzzle::getWindowHeight	ViewPuzzle.cpp	/^int ViewPuzzle::getWindowHeight()$/;"	f	class:ViewPuzzle	signature:()
-ViewPuzzle::getWindowHeight	ViewPuzzle.h	/^    virtual int getWindowHeight();$/;"	p	class:ViewPuzzle	access:public	signature:()
-ViewPuzzle::getWindowWidth	ViewPuzzle.cpp	/^int ViewPuzzle::getWindowWidth()$/;"	f	class:ViewPuzzle	signature:()
-ViewPuzzle::getWindowWidth	ViewPuzzle.h	/^    virtual int getWindowWidth();$/;"	p	class:ViewPuzzle	access:public	signature:()
 ViewPuzzle::invertButton	ViewPuzzle.cpp	/^void ViewPuzzle::invertButton(bool state)$/;"	f	class:ViewPuzzle	signature:(bool state)
 ViewPuzzle::invertButton	ViewPuzzle.h	/^    virtual void invertButton(bool state);$/;"	p	class:ViewPuzzle	access:public	signature:(bool state)
 ViewPuzzle::mainWindow	ViewPuzzle.h	/^    QMainWindow mainWindow;$/;"	m	class:ViewPuzzle	access:private
 ViewPuzzle::paint	ViewPuzzle.cpp	/^void ViewPuzzle::paint()$/;"	f	class:ViewPuzzle	signature:()
 ViewPuzzle::paint	ViewPuzzle.h	/^    virtual void paint();$/;"	p	class:ViewPuzzle	access:public	signature:()
 ViewPuzzle::painterWidget	ViewPuzzle.h	/^    PainterWidget* painterWidget;$/;"	m	class:ViewPuzzle	access:private
-ViewPuzzle::setHeightSpin	ViewPuzzle.cpp	/^void ViewPuzzle::setHeightSpin(const int x)$/;"	f	class:ViewPuzzle	signature:(const int x)
-ViewPuzzle::setHeightSpin	ViewPuzzle.h	/^    virtual void setHeightSpin(const int x);$/;"	p	class:ViewPuzzle	access:public	signature:(const int x)
+ViewPuzzle::setDial	ViewPuzzle.cpp	/^void ViewPuzzle::setDial(const int step)$/;"	f	class:ViewPuzzle	signature:(const int step)
+ViewPuzzle::setDial	ViewPuzzle.h	/^    virtual void setDial(const int);$/;"	p	class:ViewPuzzle	access:public	signature:(const int)
 ViewPuzzle::setPixel	ViewPuzzle.cpp	/^void ViewPuzzle::setPixel(int x, int y, unsigned int color)$/;"	f	class:ViewPuzzle	signature:(int x, int y, unsigned int color)
 ViewPuzzle::setPixel	ViewPuzzle.h	/^    virtual void setPixel(int x, int y, unsigned int color);$/;"	p	class:ViewPuzzle	access:public	signature:(int x, int y, unsigned int color)
-ViewPuzzle::setWidthSpin	ViewPuzzle.cpp	/^void ViewPuzzle::setWidthSpin(const int x)$/;"	f	class:ViewPuzzle	signature:(const int x)
-ViewPuzzle::setWidthSpin	ViewPuzzle.h	/^    virtual void setWidthSpin(const int x);$/;"	p	class:ViewPuzzle	access:public	signature:(const int x)
-ViewPuzzle::setWindowHeight	ViewPuzzle.cpp	/^void ViewPuzzle::setWindowHeight(const int height)$/;"	f	class:ViewPuzzle	signature:(const int height)
-ViewPuzzle::setWindowHeight	ViewPuzzle.h	/^    virtual void setWindowHeight(const int height);$/;"	p	class:ViewPuzzle	access:public	signature:(const int height)
-ViewPuzzle::setWindowWidth	ViewPuzzle.cpp	/^void ViewPuzzle::setWindowWidth(const int width)$/;"	f	class:ViewPuzzle	signature:(const int width)
-ViewPuzzle::setWindowWidth	ViewPuzzle.h	/^    virtual void setWindowWidth(const int width);$/;"	p	class:ViewPuzzle	access:public	signature:(const int width)
 ViewPuzzle::ui	ViewPuzzle.h	/^    Ui::MainWindow ui;$/;"	m	class:ViewPuzzle	access:private
 ViewPuzzle::~ViewPuzzle	ViewPuzzle.cpp	/^ViewPuzzle::~ViewPuzzle()$/;"	f	class:ViewPuzzle	signature:()
 ViewPuzzle::~ViewPuzzle	ViewPuzzle.h	/^    virtual ~ViewPuzzle();$/;"	p	class:ViewPuzzle	access:public	signature:()
-__anon1::MSEC_INTERVAL	Controller.cpp	/^    const int MSEC_INTERVAL = 100;$/;"	m	namespace:__anon1	file:
+__anon1::MSEC_INTERVAL	Controller.cpp	/^    const int MSEC_INTERVAL = 10;$/;"	m	namespace:__anon1	file:
 __anon2::START_SPEED	ViewPuzzle.cpp	/^    const int START_SPEED = 5000;$/;"	m	namespace:__anon2	file:
-angle	Model.h	/^    double angle;$/;"	m	class:Model	access:private
-blend	Image.h	/^    bool blend;$/;"	m	class:Image	access:private
+allPixels	Triangle.h	/^    int allPixels;$/;"	m	class:Triangle	access:private
+angles	Model.h	/^    double angles[NUMBER_OF_TRIANGLES];$/;"	m	class:Model	access:private
+bilinear	Image.h	/^    QImage bilinear;$/;"	m	class:Image	access:private
 blend	Triangle.h	/^    bool blend;$/;"	m	class:Triangle	access:private
 blendCheckBox	ui_MainWindow.h	/^    QCheckBox *blendCheckBox;$/;"	m	class:Ui_MainWindow	access:public
-blendImage	Image.h	/^    QImage blendImage;$/;"	m	class:Image	access:private
+borderPixels	Triangle.h	/^    int borderPixels;$/;"	m	class:Triangle	access:private
+checkPoint	Triangle.cpp	/^bool Triangle::checkPoint(const Point& point) const$/;"	f	class:Triangle	signature:(const Point& point) const
+checkPoint	Triangle.h	/^    bool checkPoint(const Point& point) const;$/;"	p	class:Triangle	access:public	signature:(const Point& point) const
 clear	PainterWidget.cpp	/^void PainterWidget::clear()$/;"	f	class:PainterWidget	signature:()
 clear	PainterWidget.h	/^    void clear();$/;"	p	class:PainterWidget	access:public	signature:()
 clear	View.h	/^    virtual void clear() = 0;$/;"	p	class:View	access:public	signature:()
@@ -315,45 +332,45 @@ draw	Triangle.cpp	/^void Triangle::draw(const Point& x, const double _angle)$/;"
 draw	Triangle.h	/^    void draw(const Point& x, const double angle);$/;"	p	class:Triangle	access:public	signature:(const Point& x, const double angle)
 error	Line.h	/^    int error;$/;"	m	class:Line	access:private
 filter	Image.h	/^    Filter filter;$/;"	m	class:Image	access:private
-filter	Triangle.h	/^    Filter filter;$/;"	m	class:Triangle	access:private
 filterCheckBox	ui_MainWindow.h	/^    QCheckBox *filterCheckBox;$/;"	m	class:Ui_MainWindow	access:public
-getColor	Image.h	/^    unsigned int getColor(const Point& point) const;$/;"	p	class:Image	access:public	signature:(const Point& point) const
-getColor	Triangle.cpp	/^unsigned int Triangle::getColor(const Point& d) const$/;"	f	class:Triangle	signature:(const Point& d) const
-getColor	Triangle.h	/^    unsigned int getColor(const Point& x) const;$/;"	p	class:Triangle	access:private	signature:(const Point& x) const
-getHeight	Image.h	/^    int getHeight() const;$/;"	p	class:Image	access:public	signature:() const
+getColor	PainterWidget.cpp	/^unsigned int PainterWidget::getColor(int x, int y)$/;"	f	class:PainterWidget	signature:(int x, int y)
+getColor	PainterWidget.h	/^    unsigned int getColor(int x, int y);$/;"	p	class:PainterWidget	access:public	signature:(int x, int y)
+getColor	Triangle.cpp	/^unsigned int Triangle::getColor(const Point& d)$/;"	f	class:Triangle	signature:(const Point& d)
+getColor	Triangle.h	/^    unsigned int getColor(const Point& x);$/;"	p	class:Triangle	access:private	signature:(const Point& x)
+getColor	View.h	/^    virtual unsigned int getColor(int x, int y) = 0;$/;"	p	class:View	access:public	signature:(int x, int y)
+getColor	ViewPuzzle.cpp	/^unsigned int ViewPuzzle::getColor(int x, int y)$/;"	f	class:ViewPuzzle	signature:(int x, int y)
+getColor	ViewPuzzle.h	/^    virtual unsigned int getColor(int x, int y);$/;"	p	class:ViewPuzzle	access:public	signature:(int x, int y)
+getHScale	Model.cpp	/^double Model::getHScale() const$/;"	f	class:Model	signature:() const
+getHScale	Model.h	/^    double getHScale() const;$/;"	p	class:Model	access:private	signature:() const
 getHeight	PainterWidget.cpp	/^int PainterWidget::getHeight()$/;"	f	class:PainterWidget	signature:()
 getHeight	PainterWidget.h	/^    int getHeight();$/;"	p	class:PainterWidget	access:public	signature:()
 getHeight	View.h	/^    virtual int getHeight() = 0;$/;"	p	class:View	access:public	signature:()
 getHeight	ViewPuzzle.cpp	/^int ViewPuzzle::getHeight()$/;"	f	class:ViewPuzzle	signature:()
 getHeight	ViewPuzzle.h	/^    virtual int getHeight();$/;"	p	class:ViewPuzzle	access:public	signature:()
-getScale	Model.cpp	/^double Model::getScale() const$/;"	f	class:Model	signature:() const
-getScale	Model.h	/^    double getScale() const;$/;"	p	class:Model	access:private	signature:() const
-getSpeed	View.h	/^    virtual int getSpeed() = 0;$/;"	p	class:View	access:public	signature:()
-getSpeed	ViewPuzzle.cpp	/^int ViewPuzzle::getSpeed()$/;"	f	class:ViewPuzzle	signature:()
-getSpeed	ViewPuzzle.h	/^    virtual int getSpeed();$/;"	p	class:ViewPuzzle	access:public	signature:()
+getInfo	Model.h	/^    void getInfo(const int x, const int y);$/;"	p	class:Model	access:public	signature:(const int x, const int y)
+getInfo	Triangle.cpp	/^const char* Triangle::getInfo() const$/;"	f	class:Triangle	signature:() const
+getInfo	Triangle.h	/^    const char* getInfo() const;$/;"	p	class:Triangle	access:public	signature:() const
 getStaticMetaObject	moc_Controller.cpp	/^const QMetaObject &Controller::getStaticMetaObject() { return staticMetaObject; }$/;"	f	class:Controller	signature:()
 getStaticMetaObject	moc_MainWindow.cpp	/^const QMetaObject &MainWindow::getStaticMetaObject() { return staticMetaObject; }$/;"	f	class:MainWindow	signature:()
 getStaticMetaObject	moc_PainterWidget.cpp	/^const QMetaObject &PainterWidget::getStaticMetaObject() { return staticMetaObject; }$/;"	f	class:PainterWidget	signature:()
-getTrianglePosition	Model.cpp	/^Point Model::getTrianglePosition(Triangle& triangle, const int number)$/;"	f	class:Model	signature:(Triangle& triangle, const int number)
-getTrianglePosition	Model.h	/^    Point getTrianglePosition(Triangle&, const int);$/;"	p	class:Model	access:private	signature:(Triangle&, const int)
-getWidth	Image.h	/^    int getWidth() const;$/;"	p	class:Image	access:public	signature:() const
+getTriangleAngle	Model.cpp	/^double Model::getTriangleAngle(const int number)$/;"	f	class:Model	signature:(const int number)
+getTriangleAngle	Model.h	/^    double getTriangleAngle(const int);$/;"	p	class:Model	access:private	signature:(const int)
+getTrianglePosition	Model.cpp	/^Point Model::getTrianglePosition(const int number)$/;"	f	class:Model	signature:(const int number)
+getTrianglePosition	Model.h	/^    Point getTrianglePosition(const int);$/;"	p	class:Model	access:private	signature:(const int)
+getVScale	Model.cpp	/^double Model::getVScale() const$/;"	f	class:Model	signature:() const
+getVScale	Model.h	/^    double getVScale() const;$/;"	p	class:Model	access:private	signature:() const
 getWidth	PainterWidget.cpp	/^int PainterWidget::getWidth()$/;"	f	class:PainterWidget	signature:()
 getWidth	PainterWidget.h	/^    int getWidth();$/;"	p	class:PainterWidget	access:public	signature:()
 getWidth	View.h	/^    virtual int getWidth() = 0;$/;"	p	class:View	access:public	signature:()
 getWidth	ViewPuzzle.cpp	/^int ViewPuzzle::getWidth()$/;"	f	class:ViewPuzzle	signature:()
 getWidth	ViewPuzzle.h	/^    virtual int getWidth();$/;"	p	class:ViewPuzzle	access:public	signature:()
-getWindowHeight	View.h	/^    virtual int getWindowHeight() = 0;$/;"	p	class:View	access:public	signature:()
-getWindowHeight	ViewPuzzle.cpp	/^int ViewPuzzle::getWindowHeight()$/;"	f	class:ViewPuzzle	signature:()
-getWindowHeight	ViewPuzzle.h	/^    virtual int getWindowHeight();$/;"	p	class:ViewPuzzle	access:public	signature:()
-getWindowWidth	View.h	/^    virtual int getWindowWidth() = 0;$/;"	p	class:View	access:public	signature:()
-getWindowWidth	ViewPuzzle.cpp	/^int ViewPuzzle::getWindowWidth()$/;"	f	class:ViewPuzzle	signature:()
-getWindowWidth	ViewPuzzle.h	/^    virtual int getWindowWidth();$/;"	p	class:ViewPuzzle	access:public	signature:()
+height	Image.cpp	/^unsigned int Image::height() const$/;"	f	class:Image	signature:() const
+height	Image.h	/^    unsigned int height() const;$/;"	p	class:Image	access:public	signature:() const
 horizontalLayout_2	ui_MainWindow.h	/^    QHBoxLayout *horizontalLayout_2;$/;"	m	class:Ui_MainWindow	access:public
 horizontalLayout_3	ui_MainWindow.h	/^    QHBoxLayout *horizontalLayout_3;$/;"	m	class:Ui_MainWindow	access:public
-image	Image.h	/^    QImage image;$/;"	m	class:Image	access:private
-image	Model.h	/^    QImage image;$/;"	m	class:Model	access:private
+image	Model.h	/^    Image image;$/;"	m	class:Model	access:private
 image	PainterWidget.h	/^    QImage image;$/;"	m	class:PainterWidget	access:private
-image	Triangle.h	/^    const QImage* image;$/;"	m	class:Triangle	access:private
+image	Triangle.h	/^    const Image* image;$/;"	m	class:Triangle	access:private
 imagePoints	Triangle.h	/^    Point imagePoints[3]; \/* [c], [a], [b] *\/$/;"	m	class:Triangle	access:private
 init	Controller.cpp	/^void Controller::init()$/;"	f	class:Controller	signature:()
 init	Controller.h	/^    void init();$/;"	p	class:Controller	access:public	signature:()
@@ -365,19 +382,23 @@ invertButton	Model.h	/^    void invertButton(bool);$/;"	p	class:Model	access:pub
 invertButton	View.h	/^    virtual void invertButton(bool state) = 0;$/;"	p	class:View	access:public	signature:(bool state)
 invertButton	ViewPuzzle.cpp	/^void ViewPuzzle::invertButton(bool state)$/;"	f	class:ViewPuzzle	signature:(bool state)
 invertButton	ViewPuzzle.h	/^    virtual void invertButton(bool state);$/;"	p	class:ViewPuzzle	access:public	signature:(bool state)
+lastPoints	Model.h	/^    std::pair<double, double> lastPoints[NUMBER_OF_TRIANGLES];$/;"	m	class:Model	access:private
 main	main.cpp	/^int main(int argc, char *argv[])$/;"	f	signature:(int argc, char *argv[])
 mainWidget	ui_MainWindow.h	/^    QWidget *mainWidget;$/;"	m	class:Ui_MainWindow	access:public
 mainWindow	ViewPuzzle.h	/^    QMainWindow mainWindow;$/;"	m	class:ViewPuzzle	access:private
-makeBlendImage	Image.h	/^    void makeBlendImage();$/;"	p	class:Image	access:private	signature:()
-max	Model.cpp	49;"	d	file:
+max	Model.cpp	58;"	d	file:
 maxLabel	ui_MainWindow.h	/^    QLabel *maxLabel;$/;"	m	class:Ui_MainWindow	access:public
 metaObject	moc_Controller.cpp	/^const QMetaObject *Controller::metaObject() const$/;"	f	class:Controller	signature:() const
 metaObject	moc_MainWindow.cpp	/^const QMetaObject *MainWindow::metaObject() const$/;"	f	class:MainWindow	signature:() const
 metaObject	moc_PainterWidget.cpp	/^const QMetaObject *PainterWidget::metaObject() const$/;"	f	class:PainterWidget	signature:() const
 minLabel	ui_MainWindow.h	/^    QLabel *minLabel;$/;"	m	class:Ui_MainWindow	access:public
 model	Controller.h	/^    Model* model;$/;"	m	class:Controller	access:private
+nearest	Image.h	/^    QImage nearest;$/;"	m	class:Image	access:private
 next	Line.cpp	/^Point Line::next()$/;"	f	class:Line	signature:()
 next	Line.h	/^    Point next();$/;"	p	class:Line	access:public	signature:()
+nextStep	Controller.cpp	/^void Controller::nextStep()$/;"	f	class:Controller	signature:()
+nextStep	Controller.h	/^    void nextStep();$/;"	p	class:Controller	access:public	signature:()
+original	Image.h	/^    QImage original;$/;"	m	class:Image	access:private
 paint	PainterWidget.cpp	/^void PainterWidget::paint()$/;"	f	class:PainterWidget	signature:()
 paint	PainterWidget.h	/^    void paint();$/;"	p	class:PainterWidget	access:public	signature:()
 paint	View.h	/^    virtual void paint() = 0;$/;"	p	class:View	access:public	signature:()
@@ -386,6 +407,8 @@ paint	ViewPuzzle.h	/^    virtual void paint();$/;"	p	class:ViewPuzzle	access:pub
 paintEvent	PainterWidget.cpp	/^void PainterWidget::paintEvent(QPaintEvent*)$/;"	f	class:PainterWidget	signature:(QPaintEvent*)
 paintEvent	PainterWidget.h	/^    virtual void paintEvent(QPaintEvent*);$/;"	p	class:PainterWidget	access:protected	signature:(QPaintEvent*)
 painterWidget	ViewPuzzle.h	/^    PainterWidget* painterWidget;$/;"	m	class:ViewPuzzle	access:private
+pixel	Image.cpp	/^unsigned int Image::pixel(const int x, const int y) const$/;"	f	class:Image	signature:(const int x, const int y) const
+pixel	Image.h	/^    unsigned int pixel(const int x, const int y) const;$/;"	p	class:Image	access:public	signature:(const int x, const int y) const
 points	Triangle.h	/^    Point points[3]; \/* [c], [a], [b] *\/$/;"	m	class:Triangle	access:private
 qCleanupResources_resources	qrc_resources.cpp	/^int QT_MANGLE_NAMESPACE(qCleanupResources_resources)()$/;"	f	signature:()
 qInitResources_resources	qrc_resources.cpp	/^int QT_MANGLE_NAMESPACE(qInitResources_resources)()$/;"	f	signature:()
@@ -409,29 +432,32 @@ qt_resource_struct	qrc_resources.cpp	/^static const unsigned char qt_resource_st
 qt_static_metacall	moc_Controller.cpp	/^void Controller::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)$/;"	f	class:Controller	signature:(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 qt_static_metacall	moc_MainWindow.cpp	/^void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)$/;"	f	class:MainWindow	signature:(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 qt_static_metacall	moc_PainterWidget.cpp	/^void PainterWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)$/;"	f	class:PainterWidget	signature:(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+resize	Controller.cpp	/^void Controller::resize()$/;"	f	class:Controller	signature:()
+resize	Controller.h	/^    void resize();$/;"	p	class:Controller	access:public	signature:()
+resize	Model.cpp	/^void Model::resize()$/;"	f	class:Model	signature:()
+resize	Model.h	/^    void resize();$/;"	p	class:Model	access:public	signature:()
 resizeEvent	PainterWidget.cpp	/^void PainterWidget::resizeEvent(QResizeEvent*)$/;"	f	class:PainterWidget	signature:(QResizeEvent*)
 resizeEvent	PainterWidget.h	/^    virtual void resizeEvent(QResizeEvent*);$/;"	p	class:PainterWidget	access:protected	signature:(QResizeEvent*)
 retranslateUi	ui_MainWindow.h	/^    void retranslateUi(QMainWindow *MainWindow)$/;"	f	class:Ui_MainWindow	access:public	signature:(QMainWindow *MainWindow)
-scale	Triangle.h	/^    double scale;$/;"	m	class:Triangle	access:private
-setAngle	Model.cpp	/^void Model::setAngle(const double _angle)$/;"	f	class:Model	signature:(const double _angle)
-setAngle	Model.h	/^    void setAngle(const double);$/;"	p	class:Model	access:public	signature:(const double)
+rheight	Image.cpp	/^unsigned int Image::rheight() const$/;"	f	class:Image	signature:() const
+rheight	Image.h	/^    unsigned int rheight() const;$/;"	p	class:Image	access:public	signature:() const
+rwidth	Image.cpp	/^unsigned int Image::rwidth() const$/;"	f	class:Image	signature:() const
+rwidth	Image.h	/^    unsigned int rwidth() const;$/;"	p	class:Image	access:public	signature:() const
 setBlend	Controller.cpp	/^void Controller::setBlend(const int blend)$/;"	f	class:Controller	signature:(const int blend)
 setBlend	Controller.h	/^    void setBlend(const int);$/;"	p	class:Controller	access:public	signature:(const int)
-setBlend	Image.h	/^    void setBlend(const bool blend);$/;"	p	class:Image	access:public	signature:(const bool blend)
 setBlend	Model.cpp	/^void Model::setBlend(const int blend)$/;"	f	class:Model	signature:(const int blend)
 setBlend	Model.h	/^    void setBlend(const int);$/;"	p	class:Model	access:public	signature:(const int)
 setBlend	Triangle.cpp	/^void Triangle::setBlend(const bool _blend)$/;"	f	class:Triangle	signature:(const bool _blend)
 setBlend	Triangle.h	/^    void setBlend(const bool);$/;"	p	class:Triangle	access:public	signature:(const bool)
+setDial	View.h	/^    virtual void setDial(const int) = 0;$/;"	p	class:View	access:public	signature:(const int)
+setDial	ViewPuzzle.cpp	/^void ViewPuzzle::setDial(const int step)$/;"	f	class:ViewPuzzle	signature:(const int step)
+setDial	ViewPuzzle.h	/^    virtual void setDial(const int);$/;"	p	class:ViewPuzzle	access:public	signature:(const int)
 setFilter	Controller.cpp	/^void Controller::setFilter(const int filter)$/;"	f	class:Controller	signature:(const int filter)
 setFilter	Controller.h	/^    void setFilter(const int);$/;"	p	class:Controller	access:public	signature:(const int)
+setFilter	Image.cpp	/^void Image::setFilter(const Filter& _filter)$/;"	f	class:Image	signature:(const Filter& _filter)
+setFilter	Image.h	/^    void setFilter(const Filter& filter);$/;"	p	class:Image	access:public	signature:(const Filter& filter)
 setFilter	Model.cpp	/^void Model::setFilter(const int _filter)$/;"	f	class:Model	signature:(const int _filter)
 setFilter	Model.h	/^    void setFilter(const int);$/;"	p	class:Model	access:public	signature:(const int)
-setFilter	Triangle.cpp	/^void Triangle::setFilter(const Filter& _filter)$/;"	f	class:Triangle	signature:(const Filter& _filter)
-setFilter	Triangle.h	/^    void setFilter(const Filter& filter);$/;"	p	class:Triangle	access:public	signature:(const Filter& filter)
-setFiltration	Image.h	/^    void setFiltration(const Filter& filter);$/;"	p	class:Image	access:public	signature:(const Filter& filter)
-setHeightSpin	View.h	/^    virtual void setHeightSpin(const int x) = 0;$/;"	p	class:View	access:public	signature:(const int x)
-setHeightSpin	ViewPuzzle.cpp	/^void ViewPuzzle::setHeightSpin(const int x)$/;"	f	class:ViewPuzzle	signature:(const int x)
-setHeightSpin	ViewPuzzle.h	/^    virtual void setHeightSpin(const int x);$/;"	p	class:ViewPuzzle	access:public	signature:(const int x)
 setImageCoordinates	Triangle.cpp	/^void Triangle::setImageCoordinates(const Point* coordinates)$/;"	f	class:Triangle	signature:(const Point* coordinates)
 setImageCoordinates	Triangle.h	/^    void setImageCoordinates(const Point*);$/;"	p	class:Triangle	access:public	signature:(const Point*)
 setPixel	PainterWidget.cpp	/^void PainterWidget::setPixel(int x, int y, QRgb color)$/;"	f	class:PainterWidget	signature:(int x, int y, QRgb color)
@@ -439,21 +465,16 @@ setPixel	PainterWidget.h	/^    void setPixel(int x, int y, unsigned int color);$
 setPixel	View.h	/^    virtual void setPixel(int x, int y, unsigned int color) = 0;$/;"	p	class:View	access:public	signature:(int x, int y, unsigned int color)
 setPixel	ViewPuzzle.cpp	/^void ViewPuzzle::setPixel(int x, int y, unsigned int color)$/;"	f	class:ViewPuzzle	signature:(int x, int y, unsigned int color)
 setPixel	ViewPuzzle.h	/^    virtual void setPixel(int x, int y, unsigned int color);$/;"	p	class:ViewPuzzle	access:public	signature:(int x, int y, unsigned int color)
-setScale	Triangle.cpp	/^void Triangle::setScale(const double& _scale)$/;"	f	class:Triangle	signature:(const double& _scale)
-setScale	Triangle.h	/^    void setScale(const double&);$/;"	p	class:Triangle	access:public	signature:(const double&)
-setStep	Controller.cpp	/^void Controller::setStep(const int step)$/;"	f	class:Controller	signature:(const int step)
+setPoints	Triangle.cpp	/^void Triangle::setPoints(const Point& x, const double _angle)$/;"	f	class:Triangle	signature:(const Point& x, const double _angle)
+setPoints	Triangle.h	/^    void setPoints(const Point& x, const double _angle);$/;"	p	class:Triangle	access:private	signature:(const Point& x, const double _angle)
+setScale	Image.cpp	/^void Image::setScale(const double hscale, const double vscale)$/;"	f	class:Image	signature:(const double hscale, const double vscale)
+setScale	Image.h	/^    void setScale(const double hscale, const double vscale);$/;"	p	class:Image	access:public	signature:(const double hscale, const double vscale)
+setStep	Controller.cpp	/^void Controller::setStep(const int _step)$/;"	f	class:Controller	signature:(const int _step)
 setStep	Controller.h	/^    void setStep(const int);$/;"	p	class:Controller	access:public	signature:(const int)
+setStep	Model.cpp	/^void Model::setStep(const int _step)$/;"	f	class:Model	signature:(const int _step)
+setStep	Model.h	/^    void setStep(const int);$/;"	p	class:Model	access:public	signature:(const int)
 setTrianglePoints	Model.cpp	/^void Model::setTrianglePoints(Triangle& triangle, const int number)$/;"	f	class:Model	signature:(Triangle& triangle, const int number)
 setTrianglePoints	Model.h	/^    void setTrianglePoints(Triangle& triangle, const int number);$/;"	p	class:Model	access:private	signature:(Triangle& triangle, const int number)
-setWidthSpin	View.h	/^    virtual void setWidthSpin(const int x) = 0;$/;"	p	class:View	access:public	signature:(const int x)
-setWidthSpin	ViewPuzzle.cpp	/^void ViewPuzzle::setWidthSpin(const int x)$/;"	f	class:ViewPuzzle	signature:(const int x)
-setWidthSpin	ViewPuzzle.h	/^    virtual void setWidthSpin(const int x);$/;"	p	class:ViewPuzzle	access:public	signature:(const int x)
-setWindowHeight	View.h	/^    virtual void setWindowHeight(const int height) = 0;$/;"	p	class:View	access:public	signature:(const int height)
-setWindowHeight	ViewPuzzle.cpp	/^void ViewPuzzle::setWindowHeight(const int height)$/;"	f	class:ViewPuzzle	signature:(const int height)
-setWindowHeight	ViewPuzzle.h	/^    virtual void setWindowHeight(const int height);$/;"	p	class:ViewPuzzle	access:public	signature:(const int height)
-setWindowWidth	View.h	/^    virtual void setWindowWidth(const int width) = 0;$/;"	p	class:View	access:public	signature:(const int width)
-setWindowWidth	ViewPuzzle.cpp	/^void ViewPuzzle::setWindowWidth(const int width)$/;"	f	class:ViewPuzzle	signature:(const int width)
-setWindowWidth	ViewPuzzle.h	/^    virtual void setWindowWidth(const int width);$/;"	p	class:ViewPuzzle	access:public	signature:(const int width)
 setupUi	ui_MainWindow.h	/^    void setupUi(QMainWindow *MainWindow)$/;"	f	class:Ui_MainWindow	access:public	signature:(QMainWindow *MainWindow)
 signX	Line.h	/^    int signX, signY;$/;"	m	class:Line	access:private
 signY	Line.h	/^    int signX, signY;$/;"	m	class:Line	access:private
@@ -467,11 +488,14 @@ staticMetaObjectExtraData	moc_Controller.cpp	/^const QMetaObjectExtraData Contro
 staticMetaObjectExtraData	moc_MainWindow.cpp	/^const QMetaObjectExtraData MainWindow::staticMetaObjectExtraData = {$/;"	m	class:MainWindow	file:
 staticMetaObjectExtraData	moc_PainterWidget.cpp	/^const QMetaObjectExtraData PainterWidget::staticMetaObjectExtraData = {$/;"	m	class:PainterWidget	file:
 statusBar	ui_MainWindow.h	/^    QStatusBar *statusBar;$/;"	m	class:Ui_MainWindow	access:public
+step	Controller.h	/^    int step;$/;"	m	class:Controller	access:private
+step	Model.h	/^    int step;$/;"	m	class:Model	access:private
 stop	Controller.cpp	/^void Controller::stop()$/;"	f	class:Controller	signature:()
 stop	Controller.h	/^    void stop();$/;"	p	class:Controller	access:public	signature:()
 stopButton	ui_MainWindow.h	/^    QPushButton *stopButton;$/;"	m	class:Ui_MainWindow	access:public
 timer	Controller.h	/^    QTimer timer;$/;"	m	class:Controller	access:private
-triangles	Model.h	/^    std::vector<Triangle*> triangles;$/;"	m	class:Model	access:private
+transparentPixels	Triangle.h	/^    int transparentPixels;$/;"	m	class:Triangle	access:private
+triangles	Model.h	/^    Triangle* triangles[NUMBER_OF_TRIANGLES];$/;"	m	class:Model	access:private
 ui	MainWindow.h	/^    Ui::MainWindow *ui;$/;"	m	class:MainWindow	access:private
 ui	ViewPuzzle.h	/^    Ui::MainWindow ui;$/;"	m	class:ViewPuzzle	access:private
 update	Controller.cpp	/^void Controller::update()$/;"	f	class:Controller	signature:()
@@ -480,11 +504,15 @@ verticalLayout_2	ui_MainWindow.h	/^    QVBoxLayout *verticalLayout_2;$/;"	m	clas
 verticalSpacer	ui_MainWindow.h	/^    QSpacerItem *verticalSpacer;$/;"	m	class:Ui_MainWindow	access:public
 view	Model.h	/^    View* view;$/;"	m	class:Model	access:private
 view	Triangle.h	/^    View* view;$/;"	m	class:Triangle	access:private
+width	Image.cpp	/^unsigned int Image::width() const$/;"	f	class:Image	signature:() const
+width	Image.h	/^    unsigned int width() const;$/;"	p	class:Image	access:public	signature:() const
 x	Line.h	/^    Point x, y;$/;"	m	class:Line	access:private
+xcomp	Triangle.cpp	/^bool xcomp(const Point& x, const Point& y)$/;"	f	signature:(const Point& x, const Point& y)
 y	Line.h	/^    Point x, y;$/;"	m	class:Line	access:private
 ycomp	Triangle.cpp	/^bool ycomp(const Point& x, const Point& y)$/;"	f	signature:(const Point& x, const Point& y)
 ~Controller	Controller.cpp	/^Controller::~Controller()$/;"	f	class:Controller	signature:()
 ~Controller	Controller.h	/^    ~Controller();$/;"	p	class:Controller	access:public	signature:()
+~Image	Image.cpp	/^Image::~Image() {};$/;"	f	class:Image	signature:()
 ~Image	Image.h	/^    ~Image ();$/;"	p	class:Image	access:public	signature:()
 ~MainWindow	MainWindow.cpp	/^MainWindow::~MainWindow()$/;"	f	class:MainWindow	signature:()
 ~MainWindow	MainWindow.h	/^    ~MainWindow();$/;"	p	class:MainWindow	access:public	signature:()
