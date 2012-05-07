@@ -48,11 +48,11 @@ void Model::resize()
 
 double Model::getHScale() const
 {
-    return view->getWidth() * 16. / 81 / image.rwidth();
+    return (double)view->getWidth() / image.rwidth() * sqrt(16. / 81);
 }
 double Model::getVScale() const
 {
-    return view->getHeight() * 16. / 81 / image.rheight();
+    return (double)view->getHeight() / image.rheight() * sqrt(16. / 81);
 }
 
 #define max(x, y) (x > y ? x : y)
