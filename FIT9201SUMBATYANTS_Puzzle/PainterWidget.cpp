@@ -33,6 +33,7 @@ void PainterWidget::resizeEvent(QResizeEvent*)
 {
     image = QImage(this->size(), QImage::Format_RGB888);
     clear();
+    controller->resize();
     controller->update();
     //update();
 }

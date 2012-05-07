@@ -7,8 +7,8 @@
 
 #include <iostream>
 
-Triangle::Triangle(View* _view, const QImage* _image):
-vScale(1), hScale(1), view(_view), image(_image), blend(false), filter(NEAREST),
+Triangle::Triangle(View* _view, const Image* _image):
+view(_view), image(_image), blend(false),
 allPixels(0), opacityPixels(0)
 {
     for(int i = 0; i < 3; ++i)
@@ -24,12 +24,6 @@ void Triangle::setImageCoordinates(const Point* coordinates)
         imagePoints[i].first = coordinates[i].first;
         imagePoints[i].second = coordinates[i].second;
     }
-}
-
-void Triangle::setScale(const double& _vscale, const double& _hscale)
-{
-    vScale = _vscale;
-    hScale = _hscale;
 }
 
 #define LENGTH(x, y) (::sqrt((x.first - y.first) * (x.first - y.first) + \
@@ -60,65 +54,30 @@ unsigned int Triangle::getColor(const Point& d)
     {
         _sin = ::sqrt(1 - _cos * _cos);
     }
-    double u = cd * _cos / cb;
-    double v = cd * _sin / ca;
-
-    float x, y;
+    int x = cd * _cos + 0.5;
+    int y = cd * _sin + 0.5;
 
     if(imagePoints[0].first > imagePoints[2].first)
     {
-        x = (imagePoints[0].first - LENGTH(imagePoints[0], imagePoints[2]) * u);
+        x = imagePoints[0].first - x;
     }
     else
     {
-        x = (imagePoints[0].first + LENGTH(imagePoints[0], imagePoints[2]) * u);
+        x = imagePoints[0].first + x;
     }
 
     if(imagePoints[0].second > imagePoints[1].second)
     {
-        y = (imagePoints[0].second - LENGTH(imagePoints[0], imagePoints[1]) * v);
+        y = imagePoints[0].second - y;
     }
     else
     {
-        y = (imagePoints[0].second + LENGTH(imagePoints[0], imagePoints[1]) * v);
+        y = imagePoints[0].second + y;
     }
 
-    if(static_cast<int>(x + 0.5) >= image->width() || static_cast<int>(y + 0.5) >= image->height()) return 0x0;
+    if(x >= image->width() || y >= image->height()) return 0x0;
 
-    unsigned int rgb = 0;
-
-    if(filter == NEAREST)
-    {
-        rgb = image->pixel(x + 0.5, y + 0.5);
-    }
-    else if(filter == BILINEAR)
-    {
-        int ix = (int) x + 0.5;
-        if (ix > image->width() - 2)
-        {
-            ix = image->width() - 2;
-        }
-        int iy = (int) y + 0.5;
-        if (iy > image->height() - 2)
-        {
-            iy = image->height() - 2;
-        }
-        double dx = x - ix;
-        double dy = y - iy;
-
-        double d[] = { (1 - dy) * (1 - dx), dy * (1 - dx), dy * dx, (1 - dy) * dx };
-        int p[] = { image->pixel(ix, iy), image->pixel(ix, iy + 1), image->pixel(ix + 1, iy + 1), image->pixel(ix + 1, iy) };
-
-        double rgba[] = {0, 0, 0, 0};
-        for (int j = 0; j < 4; j++) 
-        {
-            rgba[0] += qRed(p[j]) * d[j];
-            rgba[1] += qGreen(p[j]) * d[j];
-            rgba[2] += qBlue(p[j]) * d[j];
-        }
-        rgba[3] = qAlpha(p[0]);
-        rgb = qRgba(rgba[0], rgba[1], rgba[2], rgba[3]);
-    }
+    unsigned int rgb = image->pixel(x, y);
 
     if(blend)
     {
@@ -160,10 +119,10 @@ void Triangle::draw(const Point& x, const double _angle)
     Point a, b, c = Point(x.first, x.second);
 
     //Scale
-    a.first = hScale * (imagePoints[1].first - imagePoints[0].first) + c.first + 0.5;
-    a.second = c.second - vScale * (imagePoints[0].second - imagePoints[1].second) + 0.5;
-    b.first = hScale * (imagePoints[2].first - imagePoints[0].first) + c.first + 0.5;
-    b.second = c.second - vScale * (imagePoints[0].second - imagePoints[2].second) + 0.5;
+    a.first = (imagePoints[1].first - imagePoints[0].first) + c.first;
+    a.second = c.second - (imagePoints[0].second - imagePoints[1].second);
+    b.first = (imagePoints[2].first - imagePoints[0].first) + c.first;
+    b.second = c.second - (imagePoints[0].second - imagePoints[2].second);
 
     //Rotate
     double _cos = ::cos(_angle);
@@ -266,9 +225,4 @@ void Triangle::draw(const Point& x, const double _angle)
 void Triangle::setBlend(const bool _blend)
 {
     blend = _blend;
-}
-
-void Triangle::setFilter(const Filter& _filter)
-{
-    filter = _filter;
 }

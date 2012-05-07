@@ -8,7 +8,7 @@
 #include <iostream>
 
 Model::Model(View* _view):
-view(_view), step(0), image(QImage(":/puzzle.png"))
+view(_view), step(0), image(Image(":/puzzle.png"))
 {
     init();
     srand(time(0));
@@ -29,12 +29,11 @@ Model::~Model()
 
 void Model::draw()
 {
+    view->clear();
     for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
     {
         setTrianglePoints(*triangles[i], i);
-        triangles[i]->setScale(getVScale(), getHScale());
     }
-    view->clear();
     for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
     {
         triangles[i]->draw(getTrianglePosition(i), getTriangleAngle(i));
@@ -42,13 +41,18 @@ void Model::draw()
     view->paint();
 }
 
+void Model::resize()
+{
+    image.setScale(getHScale(), getVScale());
+}
+
 double Model::getHScale() const
 {
-    return view->getWidth() * 16. / 81 / image.width();
+    return view->getWidth() * 16. / 81 / image.rwidth();
 }
 double Model::getVScale() const
 {
-    return view->getHeight() * 16. / 81 / image.height();
+    return view->getHeight() * 16. / 81 / image.rheight();
 }
 
 #define max(x, y) (x > y ? x : y)
@@ -60,8 +64,8 @@ void Model::setTrianglePoints(Triangle& triangle, const int number)
     int position = number % 8;
     bool even = position & 1;
 
-    int qw = image.width() / 4;
-    int qh = image.height() / 4;
+    int qw = (double)image.width() / 4;
+    int qh = (double)image.height() / 4;
     a.first = max(0, position / 2 * qw - 1);
     a.second = max(0, line * qh - 1);
     b.first = a.first + qw;
@@ -85,10 +89,10 @@ Point Model::getTrianglePosition(const int number)
 
     int qw = image.width() / 4;
     int qh = image.height() / 4;
-    a.first = view->getWidth() / 2 + (position / 2 * qw - 2 * qw) * hscale + 0.5;
-    a.second = view->getHeight() / 2 + (line * qh - 2 * qh) * vscale + 0.5;
-    b.first = a.first + qw * hscale + 0.5;
-    b.second = a.second + qh * vscale + 0.5;
+    a.first = view->getWidth() / 2 + (position / 2 * qw - 2 * qw) + 0.5;
+    a.second = view->getHeight() / 2 + (line * qh - 2 * qh) + 0.5;
+    b.first = a.first + qw + 0.5;
+    b.second = a.second + qh + 0.5;
     c.first = even ? b.first : a.first;
     c.second = even ? a.second : b.second;
 
@@ -133,10 +137,7 @@ void Model::init()
 void Model::setFilter(const int _filter)
 {
     Filter filter = (_filter != 0 ? BILINEAR : NEAREST);
-    for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
-    {
-        triangles[i]->setFilter(filter);
-    }
+    image.setFilter(filter);
 }
 
 void Model::setBlend(const int blend)

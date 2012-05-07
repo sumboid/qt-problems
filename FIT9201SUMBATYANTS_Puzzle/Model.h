@@ -1,7 +1,6 @@
 #pragma once
-#include <QRgb>
-#include <vector>
 #include <utility>
+#include "Image.h"
 #include "View.h"
 #include "Triangle.h"
 #include "Filter.h"
@@ -20,6 +19,7 @@ public:
     void setFilter(const int);
     void setBlend(const int);
     void init();
+    void resize();
 private:
     void setTrianglePoints(Triangle& triangle, const int number);
     double getVScale() const;
@@ -28,7 +28,7 @@ private:
     double getTriangleAngle(const int);
 
     View* view;
-    QImage image;
+    Image image;
 
     Triangle* triangles[NUMBER_OF_TRIANGLES];
     double angles[NUMBER_OF_TRIANGLES];

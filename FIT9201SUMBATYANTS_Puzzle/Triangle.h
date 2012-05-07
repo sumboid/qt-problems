@@ -3,38 +3,32 @@
 
 #include <utility>
 #include <vector>
-#include <QImage>
 
+
+#include "Image.h"
 #include "View.h"
 #include "Point.h"
-#include "Filter.h"
-
 
 class Triangle
 {
 public:
-    Triangle(View *, const QImage *);
+    Triangle(View *, const Image *);
 
     void setImageCoordinates(const Point*);
-    void setScale(const double&, const double&);
     void draw(const Point& x, const double angle);
-    void setFilter(const Filter& filter);
     void setBlend(const bool);
 private:
     unsigned int getColor(const Point& x);
 
     Point imagePoints[3]; /* [c], [a], [b] */
     Point points[3]; /* [c], [a], [b] */
-    double vScale;
-    double hScale;
-    Filter filter;
     bool blend;
     int allPixels;
     int opacityPixels;
 
 
     View* view;
-    const QImage* image;
+    const Image* image;
 };
 
 #endif // TRIANGLE_H
