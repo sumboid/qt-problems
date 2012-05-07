@@ -128,7 +128,7 @@ void Model::init()
 {
     for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
     {
-        angles[i] = (double)(rand() % 180) / 180 * 3.1415;
+        angles[i] = (double)(rand() % 360) / 180 * 3.1415;
         lastPoints[i].first = (rand() % 360 - 180);
         lastPoints[i].second = (rand() % 360 - 180);
     }
