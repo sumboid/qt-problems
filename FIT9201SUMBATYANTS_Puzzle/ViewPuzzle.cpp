@@ -45,7 +45,8 @@ int ViewPuzzle::getHeight()
 
 void ViewPuzzle::setPixel(int x, int y, unsigned int color)
 {
-    painterWidget->setPixel(x, y, color);
+    if(x >= 0 && y >=0 && x < getWidth() && y < getHeight())
+        painterWidget->setPixel(x, y, color);
 }
 
 void ViewPuzzle::clear()
