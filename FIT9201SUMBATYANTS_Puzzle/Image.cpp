@@ -33,8 +33,8 @@ void Image::setScale(const double hscale, const double vscale)
     {
         for(int y = 0; y < bilinear.height(); ++y)
         {
-            double rx = (double)x / bilinear.width() * original.width();
-            double ry = (double)y / bilinear.height() * original.height();
+            double rx = (double)x / (bilinear.width() - 1) * (original.width() - 1);
+            double ry = (double)y / (bilinear.height() - 1) * (original.height() - 1);
             int ix = rx;
             int iy = ry;
             if (ix > original.width() - 2)
@@ -61,8 +61,9 @@ void Image::setScale(const double hscale, const double vscale)
                 rgba[0] += qRed(p[j]) * d[j];
                 rgba[1] += qGreen(p[j]) * d[j];
                 rgba[2] += qBlue(p[j]) * d[j];
+                rgba[3] += qAlpha(p[j]) * d[j];
             }
-            rgba[3] = qAlpha(p[0]);
+            //rgba[3] = qAlpha(p[0]);
             unsigned int color = qRgba(rgba[0], rgba[1], rgba[2], rgba[3]);
 
             bilinear.setPixel(x, y, color);
