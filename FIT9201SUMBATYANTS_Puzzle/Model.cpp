@@ -96,18 +96,15 @@ Point Model::getTrianglePosition(const int number)
     c.first = even ? b.first : a.first;
     c.second = even ? a.second : b.second;
 
-    double hstep = lastPoints[number].first / 180.;
-    double vstep = lastPoints[number].second / 180.;
-    int hshift = (step > 180 ? hstep * (360 - step) : hstep * step);
-    int vshift = (step > 180 ? vstep * (360 - step) : vstep * step) + 50 * sin(step / 180. * 3.1415);
+    int stepHScale = ((view->getWidth() - image.width()) >> 3) % 180;
+    int stepVScale = ((view->getHeight() - image.height()) >> 3) % 180;
+    double hstep = lastPoints[number].first / 180;
+    double vstep = lastPoints[number].second / 180;
+    double hshift = (step > 180 ? hstep * (360 - step) : hstep * step);
+    double vshift = (step > 180 ? vstep * (360 - step) : vstep * step) + sin(step / 180. * 3.1415);
 
-    if (hscale <= 1.)
-        hshift *= hscale;
-    if (vscale <= 1.)
-        vshift *= vscale;
-
-    c.first += hshift;
-    c.second += vshift;
+    c.first += hshift * stepHScale;
+    c.second += vshift * stepVScale;
     return c;
 }
 
@@ -123,14 +120,16 @@ void Model::setStep(const int _step)
     step = _step;
 }
 
+#define RANDOM (((rand() % RAND_MAX) / static_cast<double>(RAND_MAX - 1)) * 2 - 1) //[-1 .. 1]
 
 void Model::init()
 {
     for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
     {
-        angles[i] = (double)(rand() % 360) / 180 * 3.1415;
-        lastPoints[i].first = (rand() % 100 - 50);
-        lastPoints[i].second = (rand() % 100 - 50);
+        angles[i] = (double)(rand() % 720 - 360) / 180 * 3.1415;
+        lastPoints[i].first = RANDOM;
+        lastPoints[i].second = RANDOM;
+        std::cout << lastPoints[i].first << " " <<lastPoints[i].second << std::endl;
     }
 }
 

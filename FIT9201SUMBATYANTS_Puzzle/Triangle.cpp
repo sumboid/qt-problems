@@ -238,9 +238,6 @@ void Triangle::draw(const Point& x, const double _angle)
 
         while(rightBorder.second == lineNumber)
         {
-            view->setPixel(rightBorder.first, rightBorder.second, 0x0);
-            allPixels++;
-            borderPixels++;
             if(EQUAL(rightBorder, sortPoints[MIDDLE]))
             {
                 rightBorder = bottomBorder;
@@ -254,9 +251,6 @@ void Triangle::draw(const Point& x, const double _angle)
         }
         while(leftBorder.second == lineNumber)
         {
-            view->setPixel(leftBorder.first, leftBorder.second, 0x0);
-            allPixels++;
-            borderPixels++;
             if(EQUAL(leftBorder, sortPoints[BOTTOM]))
             {
                 break;
@@ -270,6 +264,41 @@ void Triangle::draw(const Point& x, const double _angle)
         }
         lineNumber++;
     }
+
+    leftBorder = sortPoints[TOP];
+    rightBorder = sortPoints[TOP];
+    bottomBorder = sortPoints[MIDDLE];
+
+    leftLine = Line(sortPoints[TOP], sortPoints[left]);
+    rightLine = Line(sortPoints[TOP], sortPoints[right]);
+    bottomLine = Line(sortPoints[MIDDLE], sortPoints[BOTTOM]);
+
+    while(leftBorder != sortPoints[left])
+    {
+        view->setPixel(leftBorder.first, leftBorder.second, 0x0);
+        leftBorder = leftLine.next();
+        allPixels++;
+        borderPixels++;
+    }
+    while(rightBorder != sortPoints[right])
+    {
+        view->setPixel(rightBorder.first, rightBorder.second, 0x0);
+        rightBorder = rightLine.next();
+        allPixels++;
+        borderPixels++;
+    }
+    while(bottomBorder != sortPoints[BOTTOM])
+    {
+        view->setPixel(bottomBorder.first, bottomBorder.second, 0x0);
+        bottomBorder = bottomLine.next();
+        allPixels++;
+        borderPixels++;
+    }
+
+    allPixels++;
+    borderPixels++;
+    view->setPixel(sortPoints[BOTTOM].first, sortPoints[BOTTOM].second, 0x0);
+
 }
 
 void Triangle::setBlend(const bool _blend)
