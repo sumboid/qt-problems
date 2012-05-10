@@ -20,6 +20,7 @@ public slots:
     void init();
     void setStep(const int);
     void nextStep();
+    void getInfo(const int, const int);
 
 private:
     Model* model;

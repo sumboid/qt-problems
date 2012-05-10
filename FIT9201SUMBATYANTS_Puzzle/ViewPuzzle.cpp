@@ -45,7 +45,8 @@ int ViewPuzzle::getHeight()
 
 void ViewPuzzle::setPixel(int x, int y, unsigned int color)
 {
-    painterWidget->setPixel(x, y, color);
+    if(x >= 0 && y >=0 && x < getWidth() && y < getHeight())
+        painterWidget->setPixel(x, y, color);
 }
 
 void ViewPuzzle::clear()
@@ -72,5 +73,9 @@ unsigned int ViewPuzzle::getColor(int x, int y)
 void ViewPuzzle::setDial(const int step)
 {
     ui.dial->setValue(step);
-    ui.dial->setWrapping(true);
+}
+
+void ViewPuzzle::setBar(const char* message)
+{
+    ui.statusBar->showMessage(message);
 }

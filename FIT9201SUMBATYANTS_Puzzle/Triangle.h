@@ -20,6 +20,8 @@ public:
     void draw(const Point& x, const double angle);
     void setFilter(const Filter& filter);
     void setBlend(const bool);
+    bool checkPoint(const Point& point) const;
+    const char* getInfo() const;
 private:
     unsigned int getColor(const Point& x);
 
@@ -30,7 +32,8 @@ private:
     Filter filter;
     bool blend;
     int allPixels;
-    int opacityPixels;
+    int transparentPixels;
+    int borderPixels;
 
 
     View* view;

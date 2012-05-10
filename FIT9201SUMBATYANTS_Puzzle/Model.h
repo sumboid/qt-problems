@@ -20,6 +20,7 @@ public:
     void setFilter(const int);
     void setBlend(const int);
     void init();
+    void getInfo(const int x, const int y);
 private:
     void setTrianglePoints(Triangle& triangle, const int number);
     double getVScale() const;

@@ -44,11 +44,11 @@ void Model::draw()
 
 double Model::getHScale() const
 {
-    return view->getWidth() * 16. / 81 / image.width();
+    return (double)view->getWidth() / image.width() * sqrt(16. / 81);
 }
 double Model::getVScale() const
 {
-    return view->getHeight() * 16. / 81 / image.height();
+    return (double)view->getHeight() / image.height() * sqrt(16. / 81);
 }
 
 #define max(x, y) (x > y ? x : y)
@@ -150,4 +150,17 @@ void Model::setBlend(const int blend)
 void Model::invertButton(bool state)
 {
     view->invertButton(state);
+}
+
+void Model::getInfo(const int x, const int y)
+{
+    for(int i = NUMBER_OF_TRIANGLES - 1; i >= 0; --i)
+    {
+        if(triangles[i]->checkPoint(Point(x, y)))
+        {
+            view->setBar(triangles[i]->getInfo());
+            return;
+        }
+    }
+    view->setBar("");
 }

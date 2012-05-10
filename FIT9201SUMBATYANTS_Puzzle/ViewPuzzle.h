@@ -27,6 +27,7 @@ public:
     virtual void invertButton(bool state);
     virtual unsigned int getColor(int x, int y);
     virtual void setDial(const int);
+    virtual void setBar(const char*);
 
 private:
     Ui::MainWindow ui;

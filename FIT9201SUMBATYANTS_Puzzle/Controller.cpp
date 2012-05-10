@@ -70,3 +70,8 @@ void Controller::nextStep()
     step == 360 ? step = 1 : step++;
     setStep(step);
 }
+
+void Controller::getInfo(const int x, const int y)
+{
+    model->getInfo(x, y);
+}

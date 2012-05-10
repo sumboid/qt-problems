@@ -1,5 +1,6 @@
 #include <cmath>
 #include <vector>
+#include <sstream>
 #include <algorithm>
 #include "Triangle.h"
 #include "Line.h"
@@ -7,14 +8,60 @@
 
 #include <iostream>
 
+// Comparator
+bool ycomp(const Point& x, const Point& y)
+{
+    return x.second < y.second;
+}
+bool xcomp(const Point& x, const Point& y)
+{
+    return x.first < y.first;
+}
+
+#define EQUAL(x, y) (x.first == y.first && x.second == y.second)
+
 Triangle::Triangle(View* _view, const QImage* _image):
 vScale(1), hScale(1), view(_view), image(_image), blend(false), filter(NEAREST),
-allPixels(0), opacityPixels(0)
+allPixels(0), transparentPixels(0), borderPixels(0)
 {
     for(int i = 0; i < 3; ++i)
     {
         imagePoints[i] = Point(0, 0);
     }
+}
+
+bool Triangle::checkPoint(const Point& point) const
+{
+    if(EQUAL(points[0], point) ||
+       EQUAL(points[1], point) ||
+       EQUAL(points[2], point))
+    {
+        return true;
+    }
+
+    Point cpoint[4] = { points[0], points[1], points[2], point };
+    std::sort(cpoint, cpoint + 4, xcomp);
+    if(EQUAL(cpoint[0], point) || EQUAL(cpoint[3], point))
+    {
+        return false;
+    }
+    std::sort(cpoint, cpoint + 4, ycomp);
+    if(EQUAL(cpoint[0], point) || EQUAL(cpoint[3], point))
+    {
+        return false;
+    }
+
+    return true;
+}
+
+const char* Triangle::getInfo() const
+{
+    std::stringstream info;
+    info << "Border: " << borderPixels <<
+            ", All: " << allPixels <<
+            ", Opacity: " << allPixels - transparentPixels;
+
+    return info.str().c_str();
 }
 
 void Triangle::setImageCoordinates(const Point* coordinates)
@@ -83,7 +130,7 @@ unsigned int Triangle::getColor(const Point& d)
         y = (imagePoints[0].second + LENGTH(imagePoints[0], imagePoints[1]) * v);
     }
 
-    if(static_cast<int>(x + 0.5) >= image->width() || static_cast<int>(y + 0.5) >= image->height()) return 0x0;
+    if(static_cast<int>(x + 0.5) >= image->width() || static_cast<int>(y + 0.5) >= image->height()) return 0x0; //Check bugs
 
     unsigned int rgb = 0;
 
@@ -115,8 +162,8 @@ unsigned int Triangle::getColor(const Point& d)
             rgba[0] += qRed(p[j]) * d[j];
             rgba[1] += qGreen(p[j]) * d[j];
             rgba[2] += qBlue(p[j]) * d[j];
+            rgba[3] += qAlpha(p[j]) * d[j];
         }
-        rgba[3] = qAlpha(p[0]);
         rgb = qRgba(rgba[0], rgba[1], rgba[2], rgba[3]);
     }
 
@@ -126,23 +173,12 @@ unsigned int Triangle::getColor(const Point& d)
         if(alpha != 0xff)
         {
             rgb = MIX(rgb, view->getColor(d.first, d.second), alpha / (float)0xff);
-        }
-        else
-        {
-            opacityPixels++;
+            transparentPixels++;
         }
     }
 
     return rgb;
 }
-
-// Comparator
-bool ycomp(const Point& x, const Point& y)
-{
-    return x.second < y.second;
-}
-
-#define EQUAL(x, y) (x.first == y.first && x.second == y.second)
 
 void Triangle::draw(const Point& x, const double _angle)
 {
@@ -156,6 +192,10 @@ void Triangle::draw(const Point& x, const double _angle)
      *
      *  [[c, 0], [a, 1], [b, 2]]
      */
+
+    allPixels = 0;
+    transparentPixels = 0;
+    borderPixels = 0;
 
     Point a, b, c = Point(x.first, x.second);
 
@@ -220,6 +260,7 @@ void Triangle::draw(const Point& x, const double _angle)
         {
             for(int i = leftBorder.first + 1; i < rightBorder.first; i++)
             {
+                allPixels++;
                 view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
             }
         }
@@ -227,13 +268,13 @@ void Triangle::draw(const Point& x, const double _angle)
         {
             for(int i = rightBorder.first + 1; i < leftBorder.first; i++)
             {
+                allPixels++;
                 view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
             }
         }
 
         while(rightBorder.second == lineNumber)
         {
-            view->setPixel(rightBorder.first, rightBorder.second, 0x0);
             if(EQUAL(rightBorder, sortPoints[MIDDLE]))
             {
                 rightBorder = bottomBorder;
@@ -247,7 +288,6 @@ void Triangle::draw(const Point& x, const double _angle)
         }
         while(leftBorder.second == lineNumber)
         {
-            view->setPixel(leftBorder.first, leftBorder.second, 0x0);
             if(EQUAL(leftBorder, sortPoints[BOTTOM]))
             {
                 break;
@@ -261,6 +301,40 @@ void Triangle::draw(const Point& x, const double _angle)
         }
         lineNumber++;
     }
+
+    leftBorder = sortPoints[TOP];
+    rightBorder = sortPoints[TOP];
+    bottomBorder = sortPoints[MIDDLE];
+
+    leftLine = Line(sortPoints[TOP], sortPoints[left]);
+    rightLine = Line(sortPoints[TOP], sortPoints[right]);
+    bottomLine = Line(sortPoints[MIDDLE], sortPoints[BOTTOM]);
+
+    while(leftBorder != sortPoints[left])
+    {
+        view->setPixel(leftBorder.first, leftBorder.second, 0x0);
+        leftBorder = leftLine.next();
+        allPixels++;
+        borderPixels++;
+    }
+    while(rightBorder != sortPoints[right])
+    {
+        view->setPixel(rightBorder.first, rightBorder.second, 0x0);
+        rightBorder = rightLine.next();
+        allPixels++;
+        borderPixels++;
+    }
+    while(bottomBorder != sortPoints[BOTTOM])
+    {
+        view->setPixel(bottomBorder.first, bottomBorder.second, 0x0);
+        bottomBorder = bottomLine.next();
+        allPixels++;
+        borderPixels++;
+    }
+
+    allPixels++;
+    borderPixels++;
+    view->setPixel(sortPoints[BOTTOM].first, sortPoints[BOTTOM].second, 0x0);
 }
 
 void Triangle::setBlend(const bool _blend)
