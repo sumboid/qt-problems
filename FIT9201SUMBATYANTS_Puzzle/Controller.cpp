@@ -24,6 +24,11 @@ void Controller::update()
     model->draw();
 }
 
+void Controller::resize()
+{
+    model->resize();
+}
+
 void Controller::start()
 {
     model->invertButton(false);

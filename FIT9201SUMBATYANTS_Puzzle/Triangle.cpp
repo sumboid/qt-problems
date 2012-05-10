@@ -1,10 +1,14 @@
+#include "Triangle.h"
 #include <cmath>
 #include <vector>
+<<<<<<< HEAD
+=======
+#include <string>
+>>>>>>> a52fd6e219c8092d337afa900415a0220fe913b9
 #include <sstream>
 #include <algorithm>
-#include "Triangle.h"
-#include "Line.h"
 #include <QRgb>
+#include "Line.h"
 
 #include <iostream>
 
@@ -20,8 +24,13 @@ bool xcomp(const Point& x, const Point& y)
 
 #define EQUAL(x, y) (x.first == y.first && x.second == y.second)
 
+<<<<<<< HEAD
 Triangle::Triangle(View* _view, const QImage* _image):
 vScale(1), hScale(1), view(_view), image(_image), blend(false), filter(NEAREST),
+=======
+Triangle::Triangle(View* _view, const Image* _image):
+view(_view), image(_image), blend(false),
+>>>>>>> a52fd6e219c8092d337afa900415a0220fe913b9
 allPixels(0), transparentPixels(0), borderPixels(0)
 {
     for(int i = 0; i < 3; ++i)
@@ -73,12 +82,6 @@ void Triangle::setImageCoordinates(const Point* coordinates)
     }
 }
 
-void Triangle::setScale(const double& _vscale, const double& _hscale)
-{
-    vScale = _vscale;
-    hScale = _hscale;
-}
-
 #define LENGTH(x, y) (::sqrt((x.first - y.first) * (x.first - y.first) + \
                              (x.second - y.second) * (x.second - y.second)))
 
@@ -90,7 +93,6 @@ void Triangle::setScale(const double& _vscale, const double& _hscale)
 
 unsigned int Triangle::getColor(const Point& d)
 {
-    allPixels++;
     double cd = LENGTH(points[0], d);
     double cb = LENGTH(points[0], points[2]);
     double ca = LENGTH(points[0], points[1]);
@@ -107,26 +109,25 @@ unsigned int Triangle::getColor(const Point& d)
     {
         _sin = ::sqrt(1 - _cos * _cos);
     }
-    double u = cd * _cos / cb;
-    double v = cd * _sin / ca;
-
-    float x, y;
+    int x = cd * _cos + 0.5;
+    int y = cd * _sin + 0.5;
 
     if(imagePoints[0].first > imagePoints[2].first)
     {
-        x = (imagePoints[0].first - LENGTH(imagePoints[0], imagePoints[2]) * u);
+        x = imagePoints[0].first - x;
     }
     else
     {
-        x = (imagePoints[0].first + LENGTH(imagePoints[0], imagePoints[2]) * u);
+        x = imagePoints[0].first + x;
     }
 
     if(imagePoints[0].second > imagePoints[1].second)
     {
-        y = (imagePoints[0].second - LENGTH(imagePoints[0], imagePoints[1]) * v);
+        y = imagePoints[0].second - y;
     }
     else
     {
+<<<<<<< HEAD
         y = (imagePoints[0].second + LENGTH(imagePoints[0], imagePoints[1]) * v);
     }
 
@@ -137,25 +138,14 @@ unsigned int Triangle::getColor(const Point& d)
     if(filter == NEAREST)
     {
         rgb = image->pixel(x + 0.5, y + 0.5);
+=======
+        y = imagePoints[0].second + y;
+>>>>>>> a52fd6e219c8092d337afa900415a0220fe913b9
     }
-    else if(filter == BILINEAR)
-    {
-        int ix = (int) x + 0.5;
-        if (ix > image->width() - 2)
-        {
-            ix = image->width() - 2;
-        }
-        int iy = (int) y + 0.5;
-        if (iy > image->height() - 2)
-        {
-            iy = image->height() - 2;
-        }
-        double dx = x - ix;
-        double dy = y - iy;
 
-        double d[] = { (1 - dy) * (1 - dx), dy * (1 - dx), dy * dx, (1 - dy) * dx };
-        int p[] = { image->pixel(ix, iy), image->pixel(ix, iy + 1), image->pixel(ix + 1, iy + 1), image->pixel(ix + 1, iy) };
+    if(x >= image->width() || y >= image->height()) return 0x0;
 
+<<<<<<< HEAD
         double rgba[] = {0, 0, 0, 0};
         for (int j = 0; j < 4; j++) 
         {
@@ -166,6 +156,9 @@ unsigned int Triangle::getColor(const Point& d)
         }
         rgb = qRgba(rgba[0], rgba[1], rgba[2], rgba[3]);
     }
+=======
+    unsigned int rgb = image->pixel(x, y);
+>>>>>>> a52fd6e219c8092d337afa900415a0220fe913b9
 
     if(blend)
     {
@@ -180,7 +173,13 @@ unsigned int Triangle::getColor(const Point& d)
     return rgb;
 }
 
+<<<<<<< HEAD
 void Triangle::draw(const Point& x, const double _angle)
+=======
+
+
+void Triangle::setPoints(const Point& x, const double _angle)
+>>>>>>> a52fd6e219c8092d337afa900415a0220fe913b9
 {
     /*
      *  [a]
@@ -200,10 +199,10 @@ void Triangle::draw(const Point& x, const double _angle)
     Point a, b, c = Point(x.first, x.second);
 
     //Scale
-    a.first = hScale * (imagePoints[1].first - imagePoints[0].first) + c.first + 0.5;
-    a.second = c.second - vScale * (imagePoints[0].second - imagePoints[1].second) + 0.5;
-    b.first = hScale * (imagePoints[2].first - imagePoints[0].first) + c.first + 0.5;
-    b.second = c.second - vScale * (imagePoints[0].second - imagePoints[2].second) + 0.5;
+    a.first = (imagePoints[1].first - imagePoints[0].first) + c.first;
+    a.second = c.second - (imagePoints[0].second - imagePoints[1].second);
+    b.first = (imagePoints[2].first - imagePoints[0].first) + c.first;
+    b.second = c.second - (imagePoints[0].second - imagePoints[2].second);
 
     //Rotate
     double _cos = ::cos(_angle);
@@ -225,11 +224,18 @@ void Triangle::draw(const Point& x, const double _angle)
     points[1].second = a.second;
     points[2].first = b.first;
     points[2].second = b.second;
+}
 
+void Triangle::draw(const Point& x, const double _angle)
+{
+    allPixels = 0;
+    transparentPixels = 0;
+    borderPixels = 0;
+    setPoints(x, _angle);
     //Search point with max(y)
     enum Position {TOP = 0, MIDDLE = 1, BOTTOM = 2};
 
-    Point sortPoints[3] = {c, a, b};
+    Point sortPoints[3] = {points[0], points[1], points[2]};
     std::sort(sortPoints, sortPoints + 3, ycomp);
     Position left, right;
 
@@ -253,7 +259,6 @@ void Triangle::draw(const Point& x, const double _angle)
     Line rightLine(sortPoints[TOP], sortPoints[right]);
     Line bottomLine(sortPoints[MIDDLE], sortPoints[BOTTOM]);
 
-
     while(!EQUAL(sortPoints[BOTTOM], leftBorder))
     {
         if(leftBorder.first + 1 < rightBorder.first)
@@ -262,6 +267,7 @@ void Triangle::draw(const Point& x, const double _angle)
             {
                 allPixels++;
                 view->setPixel(i, lineNumber, getColor(Point(i, lineNumber)));
+                allPixels++;
             }
         }
         else
@@ -275,6 +281,12 @@ void Triangle::draw(const Point& x, const double _angle)
 
         while(rightBorder.second == lineNumber)
         {
+<<<<<<< HEAD
+=======
+            view->setPixel(rightBorder.first, rightBorder.second, 0x0);
+            allPixels++;
+            borderPixels++;
+>>>>>>> a52fd6e219c8092d337afa900415a0220fe913b9
             if(EQUAL(rightBorder, sortPoints[MIDDLE]))
             {
                 rightBorder = bottomBorder;
@@ -288,6 +300,12 @@ void Triangle::draw(const Point& x, const double _angle)
         }
         while(leftBorder.second == lineNumber)
         {
+<<<<<<< HEAD
+=======
+            view->setPixel(leftBorder.first, leftBorder.second, 0x0);
+            allPixels++;
+            borderPixels++;
+>>>>>>> a52fd6e219c8092d337afa900415a0220fe913b9
             if(EQUAL(leftBorder, sortPoints[BOTTOM]))
             {
                 break;
@@ -340,9 +358,4 @@ void Triangle::draw(const Point& x, const double _angle)
 void Triangle::setBlend(const bool _blend)
 {
     blend = _blend;
-}
-
-void Triangle::setFilter(const Filter& _filter)
-{
-    filter = _filter;
 }

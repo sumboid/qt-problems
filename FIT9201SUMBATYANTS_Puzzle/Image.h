@@ -7,10 +7,14 @@ public:
     ~Image ();
     void setScale(const double hscale, const double vscale);
     void setFilter(const Filter& filter);
-    void getPixel(const double u, const double v, const Point& c, const Point& a, const Point& b);
+    unsigned int pixel(const int x, const int y) const;
+    unsigned int width() const;
+    unsigned int height() const;
+    unsigned int rwidth() const;
+    unsigned int rheight() const;
 private:
     QImage original;
-    Qimage bilinear;
+    QImage bilinear;
     QImage nearest;
 
     Filter filter;
