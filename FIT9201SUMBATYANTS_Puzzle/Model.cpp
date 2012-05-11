@@ -129,7 +129,6 @@ void Model::init()
         angles[i] = (double)(rand() % 720 - 360) / 180 * 3.1415;
         lastPoints[i].first = RANDOM;
         lastPoints[i].second = RANDOM;
-        std::cout << lastPoints[i].first << " " <<lastPoints[i].second << std::endl;
     }
 }
 
