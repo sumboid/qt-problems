@@ -26,29 +26,26 @@ allPixels(0), transparentPixels(0), borderPixels(0)
         imagePoints[i] = Point(0, 0);
     }
 }
+#define VECT(x, y) (Point(y.first - x.first, y.second - x.second))
+#define MUL(x, y) (x.first*y.second - x.second*y.first)
+#define SGN(x) (x >= 0 ? 1 : -1)
 
 bool Triangle::checkPoint(const Point& point) const
 {
-    if(EQUAL(points[0], point) ||
-       EQUAL(points[1], point) ||
-       EQUAL(points[2], point))
-    {
-        return true;
-    }
+    Point ca = VECT(points[0], points[1]);
+    Point cd = VECT(points[0], point);
+    Point ab = VECT(points[1], points[2]);
+    Point ad = VECT(points[1], point);
+    Point bc = VECT(points[2], points[0]);
+    Point bd = VECT(points[2], point);
 
-    Point cpoint[4] = { points[0], points[1], points[2], point };
-    std::sort(cpoint, cpoint + 4, xcomp);
-    if(EQUAL(cpoint[0], point) || EQUAL(cpoint[3], point))
-    {
-        return false;
-    }
-    std::sort(cpoint, cpoint + 4, ycomp);
-    if(EQUAL(cpoint[0], point) || EQUAL(cpoint[3], point))
-    {
-        return false;
-    }
+    int mul1 = MUL(ca, cd);
+    int mul2 = MUL(ab, ad);
+    int mul3 = MUL(bc, bd);
 
-    return true;
+    return ((SGN(mul1) == SGN(mul2)) &&
+            (SGN(mul2) == SGN(mul3)) &&
+            (SGN(mul3) == SGN(mul1)));
 }
 
 const char* Triangle::getInfo() const
