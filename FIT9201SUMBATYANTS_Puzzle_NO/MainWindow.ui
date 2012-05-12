@@ -99,6 +99,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="resizeCheckBox">
+         <property name="text">
+          <string>Resize</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>

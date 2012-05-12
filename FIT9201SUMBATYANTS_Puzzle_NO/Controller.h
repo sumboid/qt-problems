@@ -1,6 +1,7 @@
 #pragma once
 #include <QObject>
 #include <QTimer>
+#include <QTime>
 #include "Model.h"
 #include "View.h"
 
@@ -15,16 +16,18 @@ public slots:
     void update();
     void start();
     void stop();
-    void setBlend(const int);
-    void setFilter(const int);
+    void setBlend(int);
+    void setFilter(int);
     void init();
-    void setStep(const int);
+    void setStep(int);
     void nextStep();
-    void getInfo(const int, const int);
+    void getInfo(int, int);
+    void resize(int);
 
 private:
     Model* model;
     QTimer timer;
     int step;
+    QTime lastTime;
 
 };

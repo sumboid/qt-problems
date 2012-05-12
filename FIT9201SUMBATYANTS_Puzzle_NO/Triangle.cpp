@@ -1,14 +1,11 @@
 #include <cmath>
-#include <vector>
 #include <sstream>
 #include <algorithm>
 #include "Triangle.h"
 #include "Line.h"
 #include <QRgb>
 
-#include <iostream>
-
-// Comparator
+// Comparators
 bool ycomp(const Point& x, const Point& y)
 {
     return x.second < y.second;
@@ -21,7 +18,7 @@ bool xcomp(const Point& x, const Point& y)
 #define EQUAL(x, y) (x.first == y.first && x.second == y.second)
 
 Triangle::Triangle(View* _view, const QImage* _image):
-vScale(1), hScale(1), view(_view), image(_image), blend(false), filter(NEAREST),
+vScale(1), hScale(1), filter(NEAREST), view(_view), image(_image), blend(false),
 allPixels(0), transparentPixels(0), borderPixels(0)
 {
     for(int i = 0; i < 3; ++i)
@@ -131,7 +128,7 @@ unsigned int Triangle::getColor(const Point& d)
     }
 
     if(static_cast<int>(x + 0.5) >= image->width() || static_cast<int>(y + 0.5) >= image->height()) return 0x0; //Check bugs
-
+    if(x < 0 || y < 0) return 0x0; 
     unsigned int rgb = 0;
 
     if(filter == NEAREST)
@@ -200,9 +197,9 @@ void Triangle::draw(const Point& x, const double _angle)
     Point a, b, c = Point(x.first, x.second);
 
     //Scale
-    a.first = hScale * (imagePoints[1].first - imagePoints[0].first) + c.first + 0.5;
+    a.first = hScale * (imagePoints[1].first - imagePoints[0].first) + (double)c.first + 0.5;
     a.second = c.second - vScale * (imagePoints[0].second - imagePoints[1].second) + 0.5;
-    b.first = hScale * (imagePoints[2].first - imagePoints[0].first) + c.first + 0.5;
+    b.first = hScale * (imagePoints[2].first - imagePoints[0].first) + (double)c.first + 0.5;
     b.second = c.second - vScale * (imagePoints[0].second - imagePoints[2].second) + 0.5;
 
     //Rotate
@@ -210,14 +207,14 @@ void Triangle::draw(const Point& x, const double _angle)
     double _sin = ::sin(_angle);
 
     a.first = c.first -
-        static_cast<int>(static_cast<double>(c.second - a.second) * _sin) + 0.5;
+        static_cast<int>(static_cast<double>(c.second - a.second) * _sin);
     a.second = c.second -
-        static_cast<int>(static_cast<double>(c.second - a.second) * _cos) + 0.5;
+        static_cast<int>(static_cast<double>(c.second - a.second) * _cos);
 
     b.second = c.second -
-        static_cast<int>(static_cast<double>(b.first - c.first) * _sin) + 0.5;
+        static_cast<int>(static_cast<double>(b.first - c.first) * _sin);
     b.first = c.first +
-        static_cast<int>(static_cast<double>(b.first - c.first) * _cos) + 0.5;
+        static_cast<int>(static_cast<double>(b.first - c.first) * _cos);
     //Setting points for getColor()
     points[0].first = c.first;
     points[0].second = c.second;

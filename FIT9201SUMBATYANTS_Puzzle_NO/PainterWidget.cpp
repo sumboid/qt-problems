@@ -1,8 +1,6 @@
 #include "PainterWidget.h"
 #include <QRgb>
 
-#include <iostream>
-
 PainterWidget::PainterWidget(Controller* _controller):
     controller(_controller)
 {
@@ -61,5 +59,8 @@ int PainterWidget::getHeight()
 
 unsigned int PainterWidget::getColor(int x, int y)
 {
-    return image.pixel(x, y);
+    if(image.width() > x && image.height() > y && x >= 0 && y >= 0)
+        return image.pixel(x, y);
+    else
+        return 0x0;
 }

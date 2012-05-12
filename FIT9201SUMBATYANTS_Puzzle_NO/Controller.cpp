@@ -1,6 +1,5 @@
 #include "Controller.h"
 #include "Model.h"
-
 #include <iostream>
 
 namespace
@@ -28,6 +27,7 @@ void Controller::start()
 {
     model->invertButton(false);
     timer.start();
+    lastTime.start();
 }
 
 void Controller::stop()
@@ -46,19 +46,19 @@ void Controller::init()
     update();
 }
 
-void Controller::setBlend(const int blend)
+void Controller::setBlend(int blend)
 {
     model->setBlend(blend);
     update();
 }
 
-void Controller::setFilter(const int filter)
+void Controller::setFilter(int filter)
 {
     model->setFilter(filter);
     update();
 }
 
-void Controller::setStep(const int _step)
+void Controller::setStep(int _step)
 {
     step = _step;
     model->setStep(_step);
@@ -67,11 +67,21 @@ void Controller::setStep(const int _step)
 
 void Controller::nextStep()
 {
-    step == 360 ? step = 1 : step++;
+    int delta = lastTime.elapsed();
+    int steps = delta / MSEC_INTERVAL;
+    step = (step + steps) % 360;
+    //step == 360 ? step = 1 : step++;
+    lastTime.restart();
     setStep(step);
 }
 
-void Controller::getInfo(const int x, const int y)
+void Controller::getInfo(int x, int y)
 {
     model->getInfo(x, y);
+}
+
+void Controller::resize(int flag)
+{
+    model->resize(flag);
+    model->draw();
 }

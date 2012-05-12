@@ -5,7 +5,6 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-           MainWindow.cpp \
            PainterWidget.cpp \
            Model.cpp \
            Controller.cpp \
@@ -13,8 +12,7 @@ SOURCES += main.cpp\
            Triangle.cpp \
            Line.cpp
 
-HEADERS  += MainWindow.h \
-            View.h \
+HEADERS  += View.h \
             PainterWidget.h \
             Model.h \
             Controller.h \

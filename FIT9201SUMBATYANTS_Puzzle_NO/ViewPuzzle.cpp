@@ -19,6 +19,7 @@ ViewPuzzle::ViewPuzzle()
 
     connect(ui.blendCheckBox, SIGNAL(stateChanged(int)), controller, SLOT(setBlend(int)));
     connect(ui.filterCheckBox, SIGNAL(stateChanged(int)), controller, SLOT(setFilter(int)));
+    connect(ui.resizeCheckBox, SIGNAL(stateChanged(int)), controller, SLOT(resize(int)));
     connect(ui.dial, SIGNAL(valueChanged(int)), controller, SLOT(setStep(int)));
     connect(ui.initButton, SIGNAL(clicked()), controller, SLOT(init(void)));
     connect(ui.startButton, SIGNAL(clicked()), controller, SLOT(start(void)));

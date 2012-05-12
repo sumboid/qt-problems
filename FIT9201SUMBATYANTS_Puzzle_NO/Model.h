@@ -21,6 +21,7 @@ public:
     void setBlend(const int);
     void init();
     void getInfo(const int x, const int y);
+    void resize(int);
 private:
     void setTrianglePoints(Triangle& triangle, const int number);
     double getVScale() const;
@@ -35,4 +36,6 @@ private:
     double angles[NUMBER_OF_TRIANGLES];
     std::pair<double, double> lastPoints[NUMBER_OF_TRIANGLES];
     int step;
+    int interval;
+    bool resized;
 };

@@ -1,14 +1,12 @@
-#include <QPixmap>
 #include <QResource>
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
 #include "Model.h"
 
-#include <iostream>
 
 Model::Model(View* _view):
-view(_view), step(0), image(QImage(":/puzzle.png"))
+view(_view), image(QImage(":/puzzle.png")), step(0), resized(false)
 {
     init();
     srand(time(0));
@@ -44,11 +42,30 @@ void Model::draw()
 
 double Model::getHScale() const
 {
-    return (double)view->getWidth() / image.width() * sqrt(16. / 81);
+    if(resized)
+    {
+        return (double)view->getWidth() / image.width() * sqrt(16. / 81);
+    }
+    else
+    {
+        return 1;
+    }
 }
 double Model::getVScale() const
 {
-    return (double)view->getHeight() / image.height() * sqrt(16. / 81);
+    if(resized)
+    {
+        return (double)view->getHeight() / image.height() * sqrt(16. / 81);
+    }
+    else
+    {
+        return 1;
+    }
+}
+
+void Model::resize(int flag)
+{
+    resized = (flag != 0);
 }
 
 #define max(x, y) (x > y ? x : y)
@@ -83,18 +100,18 @@ Point Model::getTrianglePosition(const int number)
     double hscale = getHScale();
     double vscale = getVScale();
 
-    int qw = (image.width() * hscale) / 4;
-    int qh = (image.height() * vscale) / 4;
-    a.first = view->getWidth() / 2 + (position / 2 * qw - 2 * qw);
+    int qw = (image.width() * hscale) / 4. + 0.5;
+    int qh = (image.height() * vscale) / 4. + 0.5;
+    a.first = view->getWidth() / 2 + (position / 2 * qw - 2 * qw) + 0.5;
     a.second = view->getHeight() / 2 + (line * qh - 2 * qh) + 0.5;
-    b.first = a.first + qw;
+    b.first = a.first + qw + 0.5;
     b.second = a.second + qh + 0.5;
     c.first = even ? b.first : a.first;
     c.second = even ? a.second : b.second;
 
 
-    int stepHScale = ((view->getWidth() - image.width()) >> 3) % 180;
-    int stepVScale = ((view->getHeight() - image.height()) >> 3) % 180;
+    int stepHScale = ((view->getWidth() - image.width()) >> 4) % 180;
+    int stepVScale = ((view->getHeight() - image.height()) >> 4) % 180;
     double hstep = lastPoints[number].first / 180;
     double vstep = lastPoints[number].second / 180;
     double hshift = (step > 180 ? hstep * (360 - step) : hstep * step);
