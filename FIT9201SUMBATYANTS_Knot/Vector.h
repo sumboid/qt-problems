@@ -3,15 +3,21 @@
 struct Vector2D
 {
     int x[2];
+    double z;
 };
 
-class Vector {
+class Vector
+{
 public:
     Vector(const Vector& vector);
+    Vector();
     Vector (const double x0,
             const double x1,
             const double x2,
             const double x3);
+    Vector (const double x0,
+            const double x1,
+            const double x2);
     double magnitude();
     void normalize();
     void multiply(const double&);
@@ -21,6 +27,7 @@ public:
     Vector2D project(const double&) const;
     void translate(const Vector&);
     void rotate(const double*);
+    void print() const;
 
 private:
     void multm(double matrix[4][4]);

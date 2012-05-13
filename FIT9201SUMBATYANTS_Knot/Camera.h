@@ -11,6 +11,7 @@ public:
     void translate(double coef);
     Vector2D project(const Vector& v) const;
     void scale(const double*);
+    void reset();
 
 private:
     Vector* center;

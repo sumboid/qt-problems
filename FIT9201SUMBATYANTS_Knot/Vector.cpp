@@ -1,7 +1,9 @@
 #include "Vector.h"
 #include <cmath>
 #include <cstdlib>
+#include <iostream>
 
+Vector::Vector() {}
 Vector::Vector(const Vector& vector)
 {
     const double* c = vector.getCoordinates();
@@ -14,12 +16,22 @@ Vector::Vector(const Vector& vector)
 Vector::Vector(const double x0,
                const double x1,
                const double x2,
-               const double x3 = 1)
+               const double x3)
 {
     x[0] = x0;
     x[1] = x1;
     x[2] = x2;
     x[3] = x3;
+}
+
+Vector::Vector(const double x0,
+               const double x1,
+               const double x2)
+{
+    x[0] = x0;
+    x[1] = x1;
+    x[2] = x2;
+    x[3] = 1;
 }
 
 double Vector::magnitude()
@@ -57,7 +69,7 @@ void Vector::scale(const double* coef)
     double matrix[4][4] = {{coef[0], 0, 0, 0},
                            {0, coef[1], 0, 0},
                            {0, 0, coef[2], 0},
-                           {0, 0, 0, coef[3]}};
+                           {0, 0, 0, 1}};
     multm(matrix);
 }
 
@@ -66,21 +78,22 @@ Vector2D Vector::project(const double& coef) const
     double matrix[4][4] = {{1, 0, 0 ,0},
                            {0, 1, 0, 0},
                            {0, 0, 1, 0},
-                           {0, 0, 1 / coef, 1}};
-    Vector tmp = *this;
+                           {0, 0, -1 / coef, 1}};
+    Vector tmp(*this);
     tmp.multm(matrix);
     const double* coord = tmp.getCoordinates();
     Vector2D result;
     result.x[0] = coord[0] / coord[3];
     result.x[1] = coord[1] / coord[3];
+    result.z = coord[2];
     return result;
 }
 void Vector::translate(const Vector& vector)
 {
     const double* coord = vector.getCoordinates();
-    double matrix[4][4] = {{1, 0, 0, coord[0]},
-                           {0, 1, 0, coord[1]},
-                           {0, 0, 1, coord[2]},
+    double matrix[4][4] = {{1, 0, 0, coord[0]/coord[3]},
+                           {0, 1, 0, coord[1]/coord[3]},
+                           {0, 0, 1, coord[2]/coord[3]},
                            {0, 0, 0, 1}};
     multm(matrix);
 }
@@ -98,7 +111,7 @@ void Vector::multm(double matrix[4][4])
         newCoordinates[i] = 0;
         for(int k = 0; k < 4; k++)
         {
-            newCoordinates[i] += matrix[i][k] * x[i];
+            newCoordinates[i] += matrix[i][k] * x[k];
         }
     }
     for(int i = 0; i < 4; i++)
@@ -109,13 +122,9 @@ void Vector::multm(double matrix[4][4])
 
 void Vector::rotate(const double* angle)
 {
-    const double epsilon = 1e-10;
     for(int i = 2; i >= 0; i--)
     {
-        if(abs(angle[i]) > epsilon)
-        {
-            rotateHelper(i, angle[i]);
-        }
+        rotateHelper(i, angle[i]);
     }
 }
 
@@ -145,3 +154,9 @@ void Vector::rotateHelper(const int number, const double angle)
                              };
     multm(matrix[number]);
 };
+
+void Vector::print() const
+{
+    std::cout << x[0] << " " << x[1] << " " << x[2] << " " << x[3] << std::endl;
+}
+
