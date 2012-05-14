@@ -63,7 +63,6 @@ void Image::setScale(const double hscale, const double vscale)
                 rgba[2] += qBlue(p[j]) * d[j];
                 rgba[3] += qAlpha(p[j]) * d[j];
             }
-            //rgba[3] = qAlpha(p[0]);
             unsigned int color = qRgba(rgba[0], rgba[1], rgba[2], rgba[3]);
 
             bilinear.setPixel(x, y, color);

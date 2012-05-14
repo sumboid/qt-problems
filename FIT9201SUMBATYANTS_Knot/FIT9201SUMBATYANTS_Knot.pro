@@ -12,7 +12,8 @@ SOURCES += main.cpp\
            Vector.cpp \
            Camera.cpp \
            Line.cpp \
-           Bezier.cpp
+           Bezier.cpp \
+           Knot.cpp
 
 HEADERS  += View.h \
             PainterWidget.h \
@@ -23,6 +24,7 @@ HEADERS  += View.h \
             Vector.h \
             Camera.h \
             Line.h \
-            Bezier.h
+            Bezier.h \
+            Knot.h
 
 FORMS    += MainWindow.ui

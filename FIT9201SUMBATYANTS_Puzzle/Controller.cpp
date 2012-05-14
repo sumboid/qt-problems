@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+//SCALE
 namespace
 {
     const int MSEC_INTERVAL = 10;

@@ -88,13 +88,9 @@ void Line::drawLine(View* view, int x0, int y0, int x1, int y1, unsigned int col
         view->setPixel(x0, y0, color);
         if(fabs(alpha) > 1e-3)
         {
-            std::cout << alpha * length / (alpha + 1) << " " << 
-            sqrt((start[0] - x0) * (start[0] - x0) + (start[1] - y0) * (start[1] - y0)) <<
-                    std::endl;
             if(alpha * length / (alpha + 1) < sqrt((start[0] - x0) * (start[0] - x0) + 
                                           (start[1] - y0) * (start[1] - y0)))
             {
-                std::cout << "return" << std::endl;
                 return;
             }
         }
