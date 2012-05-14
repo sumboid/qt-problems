@@ -9,6 +9,7 @@ PainterWidget::PainterWidget(Controller* _controller):
     controller(_controller), track(false), lastx(-1), lasty(-1)
 {
     setFocusPolicy(Qt::StrongFocus);
+    setFocus();
 }
 
 
