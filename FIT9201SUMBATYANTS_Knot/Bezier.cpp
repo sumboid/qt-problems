@@ -36,7 +36,7 @@ Vector Bezier::gradient(double t)
 {
     double coeff[4] = {-3 * t * t + 6 * t -3,
                         9 * t * t - 12 * t + 3,
-                        -3 * t * t + 2 * t,
+                       -3 * t * t + 2 * t,
                         3 * t * t};
     return shift(coeff);
 }
@@ -52,4 +52,3 @@ void Bezier::draw(View* view, const Camera* camera, unsigned int color)
         p0 = p1;
     }
 }
-
