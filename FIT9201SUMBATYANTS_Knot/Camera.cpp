@@ -2,7 +2,7 @@
 #include <cstdlib>
 
 Camera::Camera():
-center(new Vector(0, 0, )), speed(1), z(-1000)
+center(new Vector(0, 0, 0)), speed(1), z(-1000)
 {
     for(int i = 0; i < 3; i++)
     {
@@ -39,7 +39,7 @@ void Camera::translate(double coef)
 {
     Vector v(0, 0, -z);
     v.normalize();
-    double o[3] = {-orientation[0], -orientation[1], -orientation[2]};
+    //double o[3] = {-orientation[0], -orientation[1], -orientation[2]};
     //v.rotate(o);
     v.multiply(coef * speed);
     center->translate(v);

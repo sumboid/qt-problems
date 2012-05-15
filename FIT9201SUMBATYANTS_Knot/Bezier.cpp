@@ -34,15 +34,6 @@ Vector Bezier::point(double t)
     return shift(coeff);
 }
 
-Vector Bezier::gradient(double t)
-{
-    double coeff[4] = {-3 * t * t + 6 * t - 3,
-                        9 * t * t - 12 * t + 3,
-                       -3 * t * t + 2 * t,
-                        3 * t * t};
-    return shift(coeff);
-}
-
 void Bezier::draw(View* view, const Camera* camera, unsigned int color)
 {
     int width = view->getWidth() / 2;
@@ -51,6 +42,21 @@ void Bezier::draw(View* view, const Camera* camera, unsigned int color)
     double right = 1;
     double left = 0;
     bool end;
+
+    Vector firstPoint3D = point(0);
+    Vector2D firstPoint = camera->project(firstPoint3D);
+    if(firstPoint.z > 0)
+    {
+        //init
+        bounds[0] = firstPoint3D.getX();
+        bounds[1] = firstPoint3D.getY();
+        bounds[2] = firstPoint3D.getZ();
+        bounds[3] = firstPoint3D.getX();
+        bounds[4] = firstPoint3D.getY();
+        bounds[5] = firstPoint3D.getZ();
+        view->setPixel(firstPoint.x[0] + width, firstPoint.x[1] + height, color);
+    }
+
     while(true)
     {
         Vector2D tmpVector = camera->project(point(right));
@@ -74,16 +80,46 @@ void Bezier::draw(View* view, const Camera* camera, unsigned int color)
         end = true;
         left = eps;
         right = 1;
-        if(point.z > 0 && rv.getX() <= 1 && rv.getX() >= -1 &&
-                          rv.getY() <= 1 && rv.getY() >= -1 &&
-                          rv.getZ() <= 1 && rv.getZ() >= -1)
+        if(point.z > 0)
         {
+            double lx = firstPoint3D.getX();
+            double ly = firstPoint3D.getY();
+            double lz = firstPoint3D.getZ();
+            if(lx > bounds[3]) bounds[3] = lx;
+            if(lx < bounds[0]) bounds[0] = lx;
+            if(ly > bounds[4]) bounds[4] = ly;
+            if(ly < bounds[1]) bounds[1] = ly;
+            if(lz > bounds[5]) bounds[5] = lz;
+            if(lz < bounds[2]) bounds[2] = lz;
+
             view->setPixel(point.x[0] + width, point.x[1] + height, color);
         }
     }
-    Vector2D lastPoint = camera->project(point(1));
+    Vector lastPoint3D = point(1);
+    Vector2D lastPoint = camera->project(lastPoint3D);
     if(lastPoint.z > 0)
     {
+        double lx = lastPoint3D.getX();
+        double ly = lastPoint3D.getY();
+        double lz = lastPoint3D.getZ();
+        if(lx > bounds[3]) bounds[3] = lx;
+        if(lx < bounds[0]) bounds[0] = lx;
+        if(ly > bounds[4]) bounds[4] = ly;
+        if(ly < bounds[1]) bounds[1] = ly;
+        if(lz > bounds[5]) bounds[5] = lz;
+        if(lz < bounds[2]) bounds[2] = lz;
+
         view->setPixel(lastPoint.x[0] + width, lastPoint.x[1] + height, color);
     }
+}
+
+double* Bezier::getBounds() const
+{
+    double* result = new double[6];
+    for(int i = 0; i < 6; i++)
+    {
+        result[i] = bounds[i];
+    }
+
+    return result;
 }

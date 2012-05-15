@@ -5,15 +5,25 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 AR	Makefile	/^AR            = ar cqs$/;"	m
+Axis	Bezier.h	/^enum Axis {X, Y, Z};$/;"	g
 Bezier	Bezier.cpp	/^Bezier::Bezier(const Vector* _points)$/;"	f	class:Bezier	signature:(const Vector* _points)
 Bezier	Bezier.h	/^    Bezier (const Vector*);$/;"	p	class:Bezier	access:public	signature:(const Vector*)
 Bezier	Bezier.h	/^class Bezier : public Drawable {$/;"	c	inherits:Drawable
 Bezier::Bezier	Bezier.cpp	/^Bezier::Bezier(const Vector* _points)$/;"	f	class:Bezier	signature:(const Vector* _points)
 Bezier::Bezier	Bezier.h	/^    Bezier (const Vector*);$/;"	p	class:Bezier	access:public	signature:(const Vector*)
+Bezier::Mx	Bezier.h	/^    double Mx, My, Mz; \/\/max$/;"	m	class:Bezier	access:private
+Bezier::My	Bezier.h	/^    double Mx, My, Mz; \/\/max$/;"	m	class:Bezier	access:private
+Bezier::Mz	Bezier.h	/^    double Mx, My, Mz; \/\/max$/;"	m	class:Bezier	access:private
 Bezier::draw	Bezier.cpp	/^void Bezier::draw(View* view, const Camera* camera, unsigned int color)$/;"	f	class:Bezier	signature:(View* view, const Camera* camera, unsigned int color)
 Bezier::draw	Bezier.h	/^    virtual void draw(View* view, const Camera* camera, unsigned int color);$/;"	p	class:Bezier	access:public	signature:(View* view, const Camera* camera, unsigned int color)
 Bezier::gradient	Bezier.cpp	/^Vector Bezier::gradient(double t)$/;"	f	class:Bezier	signature:(double t)
-Bezier::gradient	Bezier.h	/^    Vector gradient(double);$/;"	p	class:Bezier	access:public	signature:(double)
+Bezier::max	Bezier.cpp	/^double Bezier::max(Axis a) const$/;"	f	class:Bezier	signature:(Axis a) const
+Bezier::max	Bezier.h	/^    double max(Axis) const;$/;"	p	class:Bezier	access:public	signature:(Axis) const
+Bezier::min	Bezier.cpp	/^double Bezier::min(Axis a) const$/;"	f	class:Bezier	signature:(Axis a) const
+Bezier::min	Bezier.h	/^    double min(Axis) const;$/;"	p	class:Bezier	access:public	signature:(Axis) const
+Bezier::mx	Bezier.h	/^    double mx, my, mz; \/\/min$/;"	m	class:Bezier	access:private
+Bezier::my	Bezier.h	/^    double mx, my, mz; \/\/min$/;"	m	class:Bezier	access:private
+Bezier::mz	Bezier.h	/^    double mx, my, mz; \/\/min$/;"	m	class:Bezier	access:private
 Bezier::point	Bezier.cpp	/^Vector Bezier::point(double t)$/;"	f	class:Bezier	signature:(double t)
 Bezier::point	Bezier.h	/^    Vector point(double);$/;"	p	class:Bezier	access:public	signature:(double)
 Bezier::points	Bezier.h	/^    Vector points[4];$/;"	m	class:Bezier	access:private
@@ -146,6 +156,9 @@ Model::resize	Model.h	/^    void resize();$/;"	p	class:Model	access:public	signa
 Model::view	Model.h	/^    View* view;$/;"	m	class:Model	access:private
 Model::~Model	Model.cpp	/^Model::~Model()$/;"	f	class:Model	signature:()
 Model::~Model	Model.h	/^    ~Model();$/;"	p	class:Model	access:public	signature:()
+Mx	Bezier.h	/^    double Mx, My, Mz; \/\/max$/;"	m	class:Bezier	access:private
+My	Bezier.h	/^    double Mx, My, Mz; \/\/max$/;"	m	class:Bezier	access:private
+Mz	Bezier.h	/^    double Mx, My, Mz; \/\/max$/;"	m	class:Bezier	access:private
 OBJECTS	Makefile	/^OBJECTS       = main.o \\$/;"	m
 OBJECTS_DIR	Makefile	/^OBJECTS_DIR   = .\/$/;"	m
 PainterWidget	PainterWidget.cpp	/^PainterWidget::PainterWidget(Controller* _controller):$/;"	f	class:PainterWidget	signature:(Controller* _controller)
@@ -192,7 +205,6 @@ QMAKE	Makefile	/^QMAKE         = \/usr\/bin\/qmake$/;"	m
 QMAKE_TARGET	Makefile	/^QMAKE_TARGET  = FIT9201SUMBATYANTS_Knot$/;"	m
 RANLIB	Makefile	/^RANLIB        = $/;"	m
 RIGHT	Controller.h	/^enum Direction {LEFT, RIGHT, UP, DOWN};$/;"	e	enum:Direction
-SCALE	Knot.cpp	/^    const double SCALE = 0.1;$/;"	m	namespace:__anon1	file:
 SED	Makefile	/^SED           = sed$/;"	m
 SOURCES	Makefile	/^SOURCES       = main.cpp \\$/;"	m
 STRIP	Makefile	/^STRIP         = strip$/;"	m
@@ -238,6 +250,12 @@ Vector::add	Vector.cpp	/^void Vector::add(const Vector& vector)$/;"	f	class:Vect
 Vector::add	Vector.h	/^    void add(const Vector&);$/;"	p	class:Vector	access:public	signature:(const Vector&)
 Vector::getCoordinates	Vector.cpp	/^const double* Vector::getCoordinates() const$/;"	f	class:Vector	signature:() const
 Vector::getCoordinates	Vector.h	/^    const double* getCoordinates() const;$/;"	p	class:Vector	access:private	signature:() const
+Vector::getX	Vector.cpp	/^double Vector::getX() const$/;"	f	class:Vector	signature:() const
+Vector::getX	Vector.h	/^    double getX() const;$/;"	p	class:Vector	access:public	signature:() const
+Vector::getY	Vector.cpp	/^double Vector::getY() const$/;"	f	class:Vector	signature:() const
+Vector::getY	Vector.h	/^    double getY() const;$/;"	p	class:Vector	access:public	signature:() const
+Vector::getZ	Vector.cpp	/^double Vector::getZ() const$/;"	f	class:Vector	signature:() const
+Vector::getZ	Vector.h	/^    double getZ() const;$/;"	p	class:Vector	access:public	signature:() const
 Vector::magnitude	Vector.cpp	/^double Vector::magnitude()$/;"	f	class:Vector	signature:()
 Vector::magnitude	Vector.h	/^    double magnitude();$/;"	p	class:Vector	access:public	signature:()
 Vector::multiply	Vector.cpp	/^void Vector::multiply(const double& coef)$/;"	f	class:Vector	signature:(const double& coef)
@@ -292,7 +310,9 @@ ViewKnot::setPixel	ViewKnot.h	/^    virtual void setPixel(int x, int y, unsigned
 ViewKnot::ui	ViewKnot.h	/^    Ui::MainWindow ui;$/;"	m	class:ViewKnot	access:private
 ViewKnot::~ViewKnot	ViewKnot.cpp	/^ViewKnot::~ViewKnot()$/;"	f	class:ViewKnot	signature:()
 ViewKnot::~ViewKnot	ViewKnot.h	/^    virtual ~ViewKnot();$/;"	p	class:ViewKnot	access:public	signature:()
-__anon1::SCALE	Knot.cpp	/^    const double SCALE = 0.1;$/;"	m	namespace:__anon1	file:
+X	Bezier.h	/^enum Axis {X, Y, Z};$/;"	e	enum:Axis
+Y	Bezier.h	/^enum Axis {X, Y, Z};$/;"	e	enum:Axis
+Z	Bezier.h	/^enum Axis {X, Y, Z};$/;"	e	enum:Axis
 add	Vector.cpp	/^void Vector::add(const Vector& vector)$/;"	f	class:Vector	signature:(const Vector& vector)
 add	Vector.h	/^    void add(const Vector&);$/;"	p	class:Vector	access:public	signature:(const Vector&)
 alpha	Line.h	/^    double alpha;$/;"	m	class:Line	access:private
@@ -344,8 +364,13 @@ getWidth	PainterWidget.h	/^    int getWidth();$/;"	p	class:PainterWidget	access:
 getWidth	View.h	/^    virtual int getWidth() = 0;$/;"	p	class:View	access:public	signature:()
 getWidth	ViewKnot.cpp	/^int ViewKnot::getWidth()$/;"	f	class:ViewKnot	signature:()
 getWidth	ViewKnot.h	/^    virtual int getWidth();$/;"	p	class:ViewKnot	access:public	signature:()
+getX	Vector.cpp	/^double Vector::getX() const$/;"	f	class:Vector	signature:() const
+getX	Vector.h	/^    double getX() const;$/;"	p	class:Vector	access:public	signature:() const
+getY	Vector.cpp	/^double Vector::getY() const$/;"	f	class:Vector	signature:() const
+getY	Vector.h	/^    double getY() const;$/;"	p	class:Vector	access:public	signature:() const
+getZ	Vector.cpp	/^double Vector::getZ() const$/;"	f	class:Vector	signature:() const
+getZ	Vector.h	/^    double getZ() const;$/;"	p	class:Vector	access:public	signature:() const
 gradient	Bezier.cpp	/^Vector Bezier::gradient(double t)$/;"	f	class:Bezier	signature:(double t)
-gradient	Bezier.h	/^    Vector gradient(double);$/;"	p	class:Bezier	access:public	signature:(double)
 horizontalLayout	ui_MainWindow.h	/^    QHBoxLayout *horizontalLayout;$/;"	m	class:Ui_MainWindow	access:public
 image	PainterWidget.h	/^    QImage image;$/;"	m	class:PainterWidget	access:private
 initPoints	Knot.h	/^    std::vector<Vector> initPoints;$/;"	m	class:Knot	access:private
@@ -358,8 +383,12 @@ magnitude	Vector.cpp	/^double Vector::magnitude()$/;"	f	class:Vector	signature:(
 magnitude	Vector.h	/^    double magnitude();$/;"	p	class:Vector	access:public	signature:()
 main	main.cpp	/^int main(int argc, char *argv[])$/;"	f	signature:(int argc, char *argv[])
 mainWindow	ViewKnot.h	/^    QMainWindow mainWindow;$/;"	m	class:ViewKnot	access:private
+max	Bezier.cpp	/^double Bezier::max(Axis a) const$/;"	f	class:Bezier	signature:(Axis a) const
+max	Bezier.h	/^    double max(Axis) const;$/;"	p	class:Bezier	access:public	signature:(Axis) const
 metaObject	moc_Controller.cpp	/^const QMetaObject *Controller::metaObject() const$/;"	f	class:Controller	signature:() const
 metaObject	moc_PainterWidget.cpp	/^const QMetaObject *PainterWidget::metaObject() const$/;"	f	class:PainterWidget	signature:() const
+min	Bezier.cpp	/^double Bezier::min(Axis a) const$/;"	f	class:Bezier	signature:(Axis a) const
+min	Bezier.h	/^    double min(Axis) const;$/;"	p	class:Bezier	access:public	signature:(Axis) const
 model	Controller.h	/^    Model* model;$/;"	m	class:Controller	access:private
 mouseMoveEvent	PainterWidget.cpp	/^void PainterWidget::mouseMoveEvent(QMouseEvent *event)$/;"	f	class:PainterWidget	signature:(QMouseEvent *event)
 mouseMoveEvent	PainterWidget.h	/^    virtual void mouseMoveEvent(QMouseEvent *event);$/;"	p	class:PainterWidget	access:protected	signature:(QMouseEvent *event)
@@ -367,6 +396,9 @@ multiply	Vector.cpp	/^void Vector::multiply(const double& coef)$/;"	f	class:Vect
 multiply	Vector.h	/^    void multiply(const double&);$/;"	p	class:Vector	access:public	signature:(const double&)
 multm	Vector.cpp	/^void Vector::multm(double matrix[4][4])$/;"	f	class:Vector	signature:(double matrix[4][4])
 multm	Vector.h	/^    void multm(double matrix[4][4]);$/;"	p	class:Vector	access:private	signature:(double matrix[4][4])
+mx	Bezier.h	/^    double mx, my, mz; \/\/min$/;"	m	class:Bezier	access:private
+my	Bezier.h	/^    double mx, my, mz; \/\/min$/;"	m	class:Bezier	access:private
+mz	Bezier.h	/^    double mx, my, mz; \/\/min$/;"	m	class:Bezier	access:private
 normalize	Vector.cpp	/^void Vector::normalize()$/;"	f	class:Vector	signature:()
 normalize	Vector.h	/^    void normalize();$/;"	p	class:Vector	access:public	signature:()
 orientation	Camera.h	/^    double orientation[3];$/;"	m	class:Camera	access:private

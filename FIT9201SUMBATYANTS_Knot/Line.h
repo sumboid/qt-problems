@@ -15,4 +15,6 @@ private:
     Vector v[2];
     double alpha;
     double length;
+
+    double bounds[6];
 };

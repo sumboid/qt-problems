@@ -1,10 +1,5 @@
 #include "Knot.h"
 
-namespace
-{
-    const double SCALE = 0.1;
-}
-
 Knot::Knot(double points[6][3], int n)
 {
     for(int i = 0; i < n; i++)
