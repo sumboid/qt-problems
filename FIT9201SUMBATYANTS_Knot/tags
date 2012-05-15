@@ -5,6 +5,20 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 AR	Makefile	/^AR            = ar cqs$/;"	m
+Bezier	Bezier.cpp	/^Bezier::Bezier(const Vector* _points)$/;"	f	class:Bezier	signature:(const Vector* _points)
+Bezier	Bezier.h	/^    Bezier (const Vector*);$/;"	p	class:Bezier	access:public	signature:(const Vector*)
+Bezier	Bezier.h	/^class Bezier : public Drawable {$/;"	c	inherits:Drawable
+Bezier::Bezier	Bezier.cpp	/^Bezier::Bezier(const Vector* _points)$/;"	f	class:Bezier	signature:(const Vector* _points)
+Bezier::Bezier	Bezier.h	/^    Bezier (const Vector*);$/;"	p	class:Bezier	access:public	signature:(const Vector*)
+Bezier::draw	Bezier.cpp	/^void Bezier::draw(View* view, const Camera* camera, unsigned int color)$/;"	f	class:Bezier	signature:(View* view, const Camera* camera, unsigned int color)
+Bezier::draw	Bezier.h	/^    virtual void draw(View* view, const Camera* camera, unsigned int color);$/;"	p	class:Bezier	access:public	signature:(View* view, const Camera* camera, unsigned int color)
+Bezier::gradient	Bezier.cpp	/^Vector Bezier::gradient(double t)$/;"	f	class:Bezier	signature:(double t)
+Bezier::gradient	Bezier.h	/^    Vector gradient(double);$/;"	p	class:Bezier	access:public	signature:(double)
+Bezier::point	Bezier.cpp	/^Vector Bezier::point(double t)$/;"	f	class:Bezier	signature:(double t)
+Bezier::point	Bezier.h	/^    Vector point(double);$/;"	p	class:Bezier	access:public	signature:(double)
+Bezier::points	Bezier.h	/^    Vector points[4];$/;"	m	class:Bezier	access:private
+Bezier::shift	Bezier.cpp	/^Vector Bezier::shift(double* coeff)$/;"	f	class:Bezier	signature:(double* coeff)
+Bezier::shift	Bezier.h	/^    Vector shift(double*);$/;"	p	class:Bezier	access:public	signature:(double*)
 CC	Makefile	/^CC            = gcc$/;"	m
 CFLAGS	Makefile	/^CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT $(DEFINES)$/;"	m
 CHK_DIR_EXISTS	Makefile	/^CHK_DIR_EXISTS= test -d$/;"	m
@@ -14,21 +28,58 @@ COPY_DIR	Makefile	/^COPY_DIR      = $(COPY) -r$/;"	m
 COPY_FILE	Makefile	/^COPY_FILE     = $(COPY)$/;"	m
 CXX	Makefile	/^CXX           = g++$/;"	m
 CXXFLAGS	Makefile	/^CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT $(DEFINES)$/;"	m
-Controller	Controller.cpp	/^Controller::Controller(View* view): model(new Model(view))$/;"	f	class:Controller	signature:(View* view)
+Camera	Camera.cpp	/^Camera::Camera (const Vector& _center, const double* _orientation):$/;"	f	class:Camera	signature:(const Vector& _center, const double* _orientation)
+Camera	Camera.cpp	/^Camera::Camera():$/;"	f	class:Camera	signature:()
+Camera	Camera.h	/^    Camera ();$/;"	p	class:Camera	access:public	signature:()
+Camera	Camera.h	/^    Camera (const Vector& center, const double* orientation);$/;"	p	class:Camera	access:public	signature:(const Vector& center, const double* orientation)
+Camera	Camera.h	/^class Camera$/;"	c
+Camera::Camera	Camera.cpp	/^Camera::Camera (const Vector& _center, const double* _orientation):$/;"	f	class:Camera	signature:(const Vector& _center, const double* _orientation)
+Camera::Camera	Camera.cpp	/^Camera::Camera():$/;"	f	class:Camera	signature:()
+Camera::Camera	Camera.h	/^    Camera ();$/;"	p	class:Camera	access:public	signature:()
+Camera::Camera	Camera.h	/^    Camera (const Vector& center, const double* orientation);$/;"	p	class:Camera	access:public	signature:(const Vector& center, const double* orientation)
+Camera::center	Camera.h	/^    Vector* center;$/;"	m	class:Camera	access:private
+Camera::getScale	Camera.cpp	/^double Camera::getScale() const$/;"	f	class:Camera	signature:() const
+Camera::getScale	Camera.h	/^    double getScale() const;$/;"	p	class:Camera	access:public	signature:() const
+Camera::orientation	Camera.h	/^    double orientation[3];$/;"	m	class:Camera	access:private
+Camera::project	Camera.cpp	/^Vector2D Camera::project(const Vector& _v) const$/;"	f	class:Camera	signature:(const Vector& _v) const
+Camera::project	Camera.h	/^    Vector2D project(const Vector& v) const;$/;"	p	class:Camera	access:public	signature:(const Vector& v) const
+Camera::reset	Camera.cpp	/^void Camera::reset()$/;"	f	class:Camera	signature:()
+Camera::reset	Camera.h	/^    void reset();$/;"	p	class:Camera	access:public	signature:()
+Camera::rotate	Camera.cpp	/^void Camera::rotate(const double* rotateCoef)$/;"	f	class:Camera	signature:(const double* rotateCoef)
+Camera::rotate	Camera.h	/^    void rotate(const double*);$/;"	p	class:Camera	access:public	signature:(const double*)
+Camera::scale	Camera.cpp	/^void Camera::scale(const double* _scaleCoef)$/;"	f	class:Camera	signature:(const double* _scaleCoef)
+Camera::scale	Camera.h	/^    void scale(const double*);$/;"	p	class:Camera	access:public	signature:(const double*)
+Camera::scaleCoef	Camera.h	/^    double scaleCoef[3];$/;"	m	class:Camera	access:private
+Camera::speed	Camera.h	/^    const double speed;$/;"	m	class:Camera	access:private
+Camera::translate	Camera.cpp	/^void Camera::translate(double coef)$/;"	f	class:Camera	signature:(double coef)
+Camera::translate	Camera.h	/^    void translate(double coef);$/;"	p	class:Camera	access:public	signature:(double coef)
+Camera::z	Camera.h	/^    const int z;$/;"	m	class:Camera	access:private
+Camera::~Camera	Camera.cpp	/^Camera::~Camera()$/;"	f	class:Camera	signature:()
+Camera::~Camera	Camera.h	/^    ~Camera ();$/;"	p	class:Camera	access:public	signature:()
+Controller	Controller.cpp	/^Controller::Controller(View* view)$/;"	f	class:Controller	signature:(View* view)
 Controller	Controller.h	/^    Controller(View* view);$/;"	p	class:Controller	access:public	signature:(View* view)
 Controller	Controller.h	/^class Controller : public QObject$/;"	c	inherits:QObject
-Controller::Controller	Controller.cpp	/^Controller::Controller(View* view): model(new Model(view))$/;"	f	class:Controller	signature:(View* view)
+Controller::Controller	Controller.cpp	/^Controller::Controller(View* view)$/;"	f	class:Controller	signature:(View* view)
 Controller::Controller	Controller.h	/^    Controller(View* view);$/;"	p	class:Controller	access:public	signature:(View* view)
+Controller::camera	Controller.h	/^    Camera* camera;$/;"	m	class:Controller	access:private
 Controller::getStaticMetaObject	moc_Controller.cpp	/^const QMetaObject &Controller::getStaticMetaObject() { return staticMetaObject; }$/;"	f	class:Controller	signature:()
 Controller::metaObject	moc_Controller.cpp	/^const QMetaObject *Controller::metaObject() const$/;"	f	class:Controller	signature:() const
 Controller::model	Controller.h	/^    Model* model;$/;"	m	class:Controller	access:private
 Controller::qt_metacall	moc_Controller.cpp	/^int Controller::qt_metacall(QMetaObject::Call _c, int _id, void **_a)$/;"	f	class:Controller	signature:(QMetaObject::Call _c, int _id, void **_a)
 Controller::qt_metacast	moc_Controller.cpp	/^void *Controller::qt_metacast(const char *_clname)$/;"	f	class:Controller	signature:(const char *_clname)
 Controller::qt_static_metacall	moc_Controller.cpp	/^void Controller::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)$/;"	f	class:Controller	signature:(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+Controller::reset	Controller.cpp	/^void Controller::reset()$/;"	f	class:Controller	signature:()
+Controller::reset	Controller.h	/^    void reset();$/;"	p	class:Controller	access:public	signature:()
 Controller::resize	Controller.cpp	/^void Controller::resize()$/;"	f	class:Controller	signature:()
 Controller::resize	Controller.h	/^    void resize();$/;"	p	class:Controller	access:public	signature:()
+Controller::rotate	Controller.cpp	/^void Controller::rotate(Direction direction)$/;"	f	class:Controller	signature:(Direction direction)
+Controller::rotate	Controller.h	/^    void rotate(Direction);$/;"	p	class:Controller	access:public	signature:(Direction)
+Controller::scale	Controller.cpp	/^void Controller::scale(bool b)$/;"	f	class:Controller	signature:(bool b)
+Controller::scale	Controller.h	/^    void scale(bool);$/;"	p	class:Controller	access:public	signature:(bool)
 Controller::staticMetaObject	moc_Controller.cpp	/^const QMetaObject Controller::staticMetaObject = {$/;"	m	class:Controller	file:
 Controller::staticMetaObjectExtraData	moc_Controller.cpp	/^const QMetaObjectExtraData Controller::staticMetaObjectExtraData = {$/;"	m	class:Controller	file:
+Controller::translate	Controller.cpp	/^void Controller::translate(Direction direction)$/;"	f	class:Controller	signature:(Direction direction)
+Controller::translate	Controller.h	/^    void translate(Direction);$/;"	p	class:Controller	access:public	signature:(Direction)
 Controller::update	Controller.cpp	/^void Controller::update()$/;"	f	class:Controller	signature:()
 Controller::update	Controller.h	/^    void update();$/;"	p	class:Controller	access:public	signature:()
 Controller::~Controller	Controller.cpp	/^Controller::~Controller()$/;"	f	class:Controller	signature:()
@@ -38,30 +89,56 @@ DEL_DIR	Makefile	/^DEL_DIR       = rmdir$/;"	m
 DEL_FILE	Makefile	/^DEL_FILE      = rm -f$/;"	m
 DESTDIR	Makefile	/^DESTDIR       = $/;"	m
 DIST	Makefile	/^DIST          = \/usr\/share\/qt4\/mkspecs\/common\/unix.conf \\$/;"	m
+DOWN	Controller.h	/^enum Direction {LEFT, RIGHT, UP, DOWN};$/;"	e	enum:Direction
+Direction	Controller.h	/^enum Direction {LEFT, RIGHT, UP, DOWN};$/;"	g
 Drawable	Drawable.h	/^class Drawable$/;"	c
-Drawable::draw	Drawable.h	/^    virtual void draw(const View* view, const Camera* camera, unsigned int color) = 0;$/;"	p	class:Drawable	access:private	signature:(const View* view, const Camera* camera, unsigned int color)
+Drawable::draw	Drawable.h	/^    virtual void draw(View* view, const Camera* camera, unsigned int color) = 0;$/;"	p	class:Drawable	access:private	signature:(View* view, const Camera* camera, unsigned int color)
 INCPATH	Makefile	/^INCPATH       = -I\/usr\/share\/qt4\/mkspecs\/linux-g++ -I. -I\/usr\/include\/qt4\/QtCore -I\/usr\/include\/qt4\/QtGui -I\/usr\/include\/qt4 -I. -I.$/;"	m
 INSTALL_DIR	Makefile	/^INSTALL_DIR   = $(COPY_DIR)$/;"	m
 INSTALL_FILE	Makefile	/^INSTALL_FILE  = install -m 644 -p$/;"	m
 INSTALL_PROGRAM	Makefile	/^INSTALL_PROGRAM = install -m 755 -p$/;"	m
+Knot	Knot.cpp	/^Knot::Knot(double points[6][3], int n)$/;"	f	class:Knot	signature:(double points[6][3], int n)
+Knot	Knot.h	/^    Knot (double points[6][3], int n);$/;"	p	class:Knot	access:public	signature:(double points[6][3], int n)
+Knot	Knot.h	/^class Knot : public Drawable$/;"	c	inherits:Drawable
+Knot::Knot	Knot.cpp	/^Knot::Knot(double points[6][3], int n)$/;"	f	class:Knot	signature:(double points[6][3], int n)
+Knot::Knot	Knot.h	/^    Knot (double points[6][3], int n);$/;"	p	class:Knot	access:public	signature:(double points[6][3], int n)
+Knot::draw	Knot.cpp	/^void Knot::draw(View* view, const Camera* camera, unsigned int color)$/;"	f	class:Knot	signature:(View* view, const Camera* camera, unsigned int color)
+Knot::draw	Knot.h	/^    virtual void draw(View* view, const Camera* camera, unsigned int color);$/;"	p	class:Knot	access:public	signature:(View* view, const Camera* camera, unsigned int color)
+Knot::generatePoints	Knot.cpp	/^void Knot::generatePoints()$/;"	f	class:Knot	signature:()
+Knot::generatePoints	Knot.h	/^    void generatePoints();$/;"	p	class:Knot	access:private	signature:()
+Knot::initPoints	Knot.h	/^    std::vector<Vector> initPoints;$/;"	m	class:Knot	access:private
+Knot::workPoints	Knot.h	/^    std::vector<Vector> workPoints;$/;"	m	class:Knot	access:private
+LEFT	Controller.h	/^enum Direction {LEFT, RIGHT, UP, DOWN};$/;"	e	enum:Direction
 LFLAGS	Makefile	/^LFLAGS        = -Wl,-O1$/;"	m
 LIBS	Makefile	/^LIBS          = $(SUBLIBS)  -L\/usr\/lib64\/qt4 -lQtGui -L\/usr\/lib64 -L\/usr\/lib64\/qt4 -L\/usr\/X11R6\/lib -lQtCore -lgthread-2.0 -lrt -lglib-2.0 -lpthread $/;"	m
 LINK	Makefile	/^LINK          = g++$/;"	m
+Line	Line.cpp	/^Line::Line(const Vector& v1, const Vector& v2)$/;"	f	class:Line	signature:(const Vector& v1, const Vector& v2)
+Line	Line.cpp	/^Line::Line(int x1, int x2, int x3, int x4, int x5, int x6):$/;"	f	class:Line	signature:(int x1, int x2, int x3, int x4, int x5, int x6)
 Line	Line.h	/^    Line (const Vector& v1, const Vector& v2);$/;"	p	class:Line	access:public	signature:(const Vector& v1, const Vector& v2)
+Line	Line.h	/^    Line (int, int, int, int, int, int);$/;"	p	class:Line	access:public	signature:(int, int, int, int, int, int)
 Line	Line.h	/^class Line : public Drawable$/;"	c	inherits:Drawable
+Line::Line	Line.cpp	/^Line::Line(const Vector& v1, const Vector& v2)$/;"	f	class:Line	signature:(const Vector& v1, const Vector& v2)
+Line::Line	Line.cpp	/^Line::Line(int x1, int x2, int x3, int x4, int x5, int x6):$/;"	f	class:Line	signature:(int x1, int x2, int x3, int x4, int x5, int x6)
 Line::Line	Line.h	/^    Line (const Vector& v1, const Vector& v2);$/;"	p	class:Line	access:public	signature:(const Vector& v1, const Vector& v2)
-Line::draw	Line.h	/^    virtual void draw(const View* view, const Camera* camera, unsigned int color);$/;"	p	class:Line	access:public	signature:(const View* view, const Camera* camera, unsigned int color)
-Line::drawLine	Line.h	/^    void drawLine(const int x0, const int y0, const int x1, const int y1, unsigned int color, bool flip);$/;"	p	class:Line	access:private	signature:(const int x0, const int y0, const int x1, const int y1, unsigned int color, bool flip)
+Line::Line	Line.h	/^    Line (int, int, int, int, int, int);$/;"	p	class:Line	access:public	signature:(int, int, int, int, int, int)
+Line::alpha	Line.h	/^    double alpha;$/;"	m	class:Line	access:private
+Line::draw	Line.cpp	/^void Line::draw(View* view, const Camera* camera, unsigned int color)$/;"	f	class:Line	signature:(View* view, const Camera* camera, unsigned int color)
+Line::draw	Line.h	/^    virtual void draw(View* view, const Camera* camera, unsigned int color);$/;"	p	class:Line	access:public	signature:(View* view, const Camera* camera, unsigned int color)
+Line::drawLine	Line.cpp	/^void Line::drawLine(View* view, int x0, int y0, int x1, int y1, unsigned int color)$/;"	f	class:Line	signature:(View* view, int x0, int y0, int x1, int y1, unsigned int color)
+Line::drawLine	Line.h	/^    void drawLine(View* view, int x0, int y0, int x1, int y1, unsigned int color);$/;"	p	class:Line	access:private	signature:(View* view, int x0, int y0, int x1, int y1, unsigned int color)
+Line::length	Line.h	/^    double length;$/;"	m	class:Line	access:private
 Line::v	Line.h	/^    Vector v[2];$/;"	m	class:Line	access:private
+Line::~Line	Line.cpp	/^Line::~Line()$/;"	f	class:Line	signature:()
 Line::~Line	Line.h	/^    virtual ~Line ();$/;"	p	class:Line	access:public	signature:()
 MKDIR	Makefile	/^MKDIR         = mkdir -p$/;"	m
 MOVE	Makefile	/^MOVE          = mv -f$/;"	m
 MainWindow	ui_MainWindow.h	/^    class MainWindow: public Ui_MainWindow {};$/;"	c	namespace:Ui	inherits:Ui_MainWindow
-Model	Model.cpp	/^Model::Model(View* _view):$/;"	f	class:Model	signature:(View* _view)
-Model	Model.h	/^    Model(View* view);$/;"	p	class:Model	access:public	signature:(View* view)
+Model	Model.cpp	/^Model::Model(View* _view, Camera* _camera):$/;"	f	class:Model	signature:(View* _view, Camera* _camera)
+Model	Model.h	/^    Model(View* view, Camera* camera);$/;"	p	class:Model	access:public	signature:(View* view, Camera* camera)
 Model	Model.h	/^class Model$/;"	c
-Model::Model	Model.cpp	/^Model::Model(View* _view):$/;"	f	class:Model	signature:(View* _view)
-Model::Model	Model.h	/^    Model(View* view);$/;"	p	class:Model	access:public	signature:(View* view)
+Model::Model	Model.cpp	/^Model::Model(View* _view, Camera* _camera):$/;"	f	class:Model	signature:(View* _view, Camera* _camera)
+Model::Model	Model.h	/^    Model(View* view, Camera* camera);$/;"	p	class:Model	access:public	signature:(View* view, Camera* camera)
+Model::camera	Model.h	/^    Camera* camera;$/;"	m	class:Model	access:private
 Model::draw	Model.cpp	/^void Model::draw()$/;"	f	class:Model	signature:()
 Model::draw	Model.h	/^    void draw();$/;"	p	class:Model	access:public	signature:()
 Model::resize	Model.cpp	/^void Model::resize()$/;"	f	class:Model	signature:()
@@ -87,7 +164,13 @@ PainterWidget::getStaticMetaObject	moc_PainterWidget.cpp	/^const QMetaObject &Pa
 PainterWidget::getWidth	PainterWidget.cpp	/^int PainterWidget::getWidth()$/;"	f	class:PainterWidget	signature:()
 PainterWidget::getWidth	PainterWidget.h	/^    int getWidth();$/;"	p	class:PainterWidget	access:public	signature:()
 PainterWidget::image	PainterWidget.h	/^    QImage image;$/;"	m	class:PainterWidget	access:private
+PainterWidget::keyPressEvent	PainterWidget.cpp	/^void PainterWidget::keyPressEvent(QKeyEvent *event)$/;"	f	class:PainterWidget	signature:(QKeyEvent *event)
+PainterWidget::keyPressEvent	PainterWidget.h	/^    virtual void keyPressEvent(QKeyEvent *event);$/;"	p	class:PainterWidget	access:protected	signature:(QKeyEvent *event)
+PainterWidget::lastx	PainterWidget.h	/^    int lastx;$/;"	m	class:PainterWidget	access:private
+PainterWidget::lasty	PainterWidget.h	/^    int lasty;$/;"	m	class:PainterWidget	access:private
 PainterWidget::metaObject	moc_PainterWidget.cpp	/^const QMetaObject *PainterWidget::metaObject() const$/;"	f	class:PainterWidget	signature:() const
+PainterWidget::mouseMoveEvent	PainterWidget.cpp	/^void PainterWidget::mouseMoveEvent(QMouseEvent *event)$/;"	f	class:PainterWidget	signature:(QMouseEvent *event)
+PainterWidget::mouseMoveEvent	PainterWidget.h	/^    virtual void mouseMoveEvent(QMouseEvent *event);$/;"	p	class:PainterWidget	access:protected	signature:(QMouseEvent *event)
 PainterWidget::paint	PainterWidget.cpp	/^void PainterWidget::paint()$/;"	f	class:PainterWidget	signature:()
 PainterWidget::paint	PainterWidget.h	/^    void paint();$/;"	p	class:PainterWidget	access:public	signature:()
 PainterWidget::paintEvent	PainterWidget.cpp	/^void PainterWidget::paintEvent(QPaintEvent*)$/;"	f	class:PainterWidget	signature:(QPaintEvent*)
@@ -101,12 +184,15 @@ PainterWidget::setPixel	PainterWidget.cpp	/^void PainterWidget::setPixel(int x, 
 PainterWidget::setPixel	PainterWidget.h	/^    void setPixel(int x, int y, unsigned int color);$/;"	p	class:PainterWidget	access:public	signature:(int x, int y, unsigned int color)
 PainterWidget::staticMetaObject	moc_PainterWidget.cpp	/^const QMetaObject PainterWidget::staticMetaObject = {$/;"	m	class:PainterWidget	file:
 PainterWidget::staticMetaObjectExtraData	moc_PainterWidget.cpp	/^const QMetaObjectExtraData PainterWidget::staticMetaObjectExtraData = {$/;"	m	class:PainterWidget	file:
+PainterWidget::track	PainterWidget.h	/^    bool track;$/;"	m	class:PainterWidget	access:private
 PainterWidget::~PainterWidget	PainterWidget.cpp	/^PainterWidget::~PainterWidget()$/;"	f	class:PainterWidget	signature:()
 PainterWidget::~PainterWidget	PainterWidget.h	/^    ~PainterWidget();$/;"	p	class:PainterWidget	access:public	signature:()
 Point	Point.h	/^typedef std::pair<int, int> Point;$/;"	t
 QMAKE	Makefile	/^QMAKE         = \/usr\/bin\/qmake$/;"	m
 QMAKE_TARGET	Makefile	/^QMAKE_TARGET  = FIT9201SUMBATYANTS_Knot$/;"	m
 RANLIB	Makefile	/^RANLIB        = $/;"	m
+RIGHT	Controller.h	/^enum Direction {LEFT, RIGHT, UP, DOWN};$/;"	e	enum:Direction
+SCALE	Knot.cpp	/^    const double SCALE = 0.1;$/;"	m	namespace:__anon1	file:
 SED	Makefile	/^SED           = sed$/;"	m
 SOURCES	Makefile	/^SOURCES       = main.cpp \\$/;"	m
 STRIP	Makefile	/^STRIP         = strip$/;"	m
@@ -114,6 +200,7 @@ SYMLINK	Makefile	/^SYMLINK       = ln -f -s$/;"	m
 TAR	Makefile	/^TAR           = tar -cf$/;"	m
 TARGET	Makefile	/^TARGET        = FIT9201SUMBATYANTS_Knot$/;"	m
 UI_MAINWINDOW_H	ui_MainWindow.h	11;"	d
+UP	Controller.h	/^enum Direction {LEFT, RIGHT, UP, DOWN};$/;"	e	enum:Direction
 Ui	ViewKnot.h	/^namespace Ui$/;"	n
 Ui	ui_MainWindow.h	/^namespace Ui {$/;"	n
 Ui::MainWindow	ui_MainWindow.h	/^    class MainWindow: public Ui_MainWindow {};$/;"	c	namespace:Ui	inherits:Ui_MainWindow
@@ -127,13 +214,26 @@ Ui_MainWindow::retranslateUi	ui_MainWindow.h	/^    void retranslateUi(QMainWindo
 Ui_MainWindow::setupUi	ui_MainWindow.h	/^    void setupUi(QMainWindow *MainWindow)$/;"	f	class:Ui_MainWindow	access:public	signature:(QMainWindow *MainWindow)
 Ui_MainWindow::verticalLayout	ui_MainWindow.h	/^    QVBoxLayout *verticalLayout;$/;"	m	class:Ui_MainWindow	access:public
 VIEW_H	View.h	2;"	d
-Vector	Vector.cpp	/^Vector::Vector(const double x0,$/;"	f	class:Vector	signature:(const double x0, const double x1, const double x2, const double x3 = 1)
+Vector	Vector.cpp	/^Vector::Vector() {}$/;"	f	class:Vector	signature:()
+Vector	Vector.cpp	/^Vector::Vector(const Vector& vector)$/;"	f	class:Vector	signature:(const Vector& vector)
+Vector	Vector.cpp	/^Vector::Vector(const double x0,$/;"	f	class:Vector	signature:(const double x0, const double x1, const double x2)
+Vector	Vector.cpp	/^Vector::Vector(const double x0,$/;"	f	class:Vector	signature:(const double x0, const double x1, const double x2, const double x3)
+Vector	Vector.h	/^    Vector (const double x0,$/;"	p	class:Vector	access:public	signature:(const double x0, const double x1, const double x2)
 Vector	Vector.h	/^    Vector (const double x0,$/;"	p	class:Vector	access:public	signature:(const double x0, const double x1, const double x2, const double x3)
-Vector	Vector.h	/^class Vector {$/;"	c
+Vector	Vector.h	/^    Vector();$/;"	p	class:Vector	access:public	signature:()
+Vector	Vector.h	/^    Vector(const Vector& vector);$/;"	p	class:Vector	access:public	signature:(const Vector& vector)
+Vector	Vector.h	/^class Vector$/;"	c
 Vector2D	Vector.h	/^struct Vector2D$/;"	s
 Vector2D::x	Vector.h	/^    int x[2];$/;"	m	struct:Vector2D	access:public
-Vector::Vector	Vector.cpp	/^Vector::Vector(const double x0,$/;"	f	class:Vector	signature:(const double x0, const double x1, const double x2, const double x3 = 1)
+Vector2D::z	Vector.h	/^    double z;$/;"	m	struct:Vector2D	access:public
+Vector::Vector	Vector.cpp	/^Vector::Vector() {}$/;"	f	class:Vector	signature:()
+Vector::Vector	Vector.cpp	/^Vector::Vector(const Vector& vector)$/;"	f	class:Vector	signature:(const Vector& vector)
+Vector::Vector	Vector.cpp	/^Vector::Vector(const double x0,$/;"	f	class:Vector	signature:(const double x0, const double x1, const double x2)
+Vector::Vector	Vector.cpp	/^Vector::Vector(const double x0,$/;"	f	class:Vector	signature:(const double x0, const double x1, const double x2, const double x3)
+Vector::Vector	Vector.h	/^    Vector (const double x0,$/;"	p	class:Vector	access:public	signature:(const double x0, const double x1, const double x2)
 Vector::Vector	Vector.h	/^    Vector (const double x0,$/;"	p	class:Vector	access:public	signature:(const double x0, const double x1, const double x2, const double x3)
+Vector::Vector	Vector.h	/^    Vector();$/;"	p	class:Vector	access:public	signature:()
+Vector::Vector	Vector.h	/^    Vector(const Vector& vector);$/;"	p	class:Vector	access:public	signature:(const Vector& vector)
 Vector::add	Vector.cpp	/^void Vector::add(const Vector& vector)$/;"	f	class:Vector	signature:(const Vector& vector)
 Vector::add	Vector.h	/^    void add(const Vector&);$/;"	p	class:Vector	access:public	signature:(const Vector&)
 Vector::getCoordinates	Vector.cpp	/^const double* Vector::getCoordinates() const$/;"	f	class:Vector	signature:() const
@@ -146,6 +246,8 @@ Vector::multm	Vector.cpp	/^void Vector::multm(double matrix[4][4])$/;"	f	class:V
 Vector::multm	Vector.h	/^    void multm(double matrix[4][4]);$/;"	p	class:Vector	access:private	signature:(double matrix[4][4])
 Vector::normalize	Vector.cpp	/^void Vector::normalize()$/;"	f	class:Vector	signature:()
 Vector::normalize	Vector.h	/^    void normalize();$/;"	p	class:Vector	access:public	signature:()
+Vector::print	Vector.cpp	/^void Vector::print() const$/;"	f	class:Vector	signature:() const
+Vector::print	Vector.h	/^    void print() const;$/;"	p	class:Vector	access:public	signature:() const
 Vector::project	Vector.cpp	/^Vector2D Vector::project(const double& coef) const$/;"	f	class:Vector	signature:(const double& coef) const
 Vector::project	Vector.h	/^    Vector2D project(const double&) const;$/;"	p	class:Vector	access:public	signature:(const double&) const
 Vector::rotate	Vector.cpp	/^void Vector::rotate(const double* angle)$/;"	f	class:Vector	signature:(const double* angle)
@@ -159,8 +261,6 @@ Vector::subtract	Vector.h	/^    void subtract(const Vector&);$/;"	p	class:Vector
 Vector::translate	Vector.cpp	/^void Vector::translate(const Vector& vector)$/;"	f	class:Vector	signature:(const Vector& vector)
 Vector::translate	Vector.h	/^    void translate(const Vector&);$/;"	p	class:Vector	access:public	signature:(const Vector&)
 Vector::x	Vector.h	/^    double x[4];$/;"	m	class:Vector	access:private
-Vector::~Vector	Vector.cpp	/^Vector::~Vector() {}$/;"	f	class:Vector	signature:()
-Vector::~Vector	Vector.h	/^    virtual ~Vector ();$/;"	p	class:Vector	access:public	signature:()
 View	View.h	/^class View$/;"	c
 View::clear	View.h	/^    virtual void clear() = 0;$/;"	p	class:View	access:public	signature:()
 View::getColor	View.h	/^    virtual unsigned int getColor(int x, int y) = 0;$/;"	p	class:View	access:public	signature:(int x, int y)
@@ -192,8 +292,13 @@ ViewKnot::setPixel	ViewKnot.h	/^    virtual void setPixel(int x, int y, unsigned
 ViewKnot::ui	ViewKnot.h	/^    Ui::MainWindow ui;$/;"	m	class:ViewKnot	access:private
 ViewKnot::~ViewKnot	ViewKnot.cpp	/^ViewKnot::~ViewKnot()$/;"	f	class:ViewKnot	signature:()
 ViewKnot::~ViewKnot	ViewKnot.h	/^    virtual ~ViewKnot();$/;"	p	class:ViewKnot	access:public	signature:()
+__anon1::SCALE	Knot.cpp	/^    const double SCALE = 0.1;$/;"	m	namespace:__anon1	file:
 add	Vector.cpp	/^void Vector::add(const Vector& vector)$/;"	f	class:Vector	signature:(const Vector& vector)
 add	Vector.h	/^    void add(const Vector&);$/;"	p	class:Vector	access:public	signature:(const Vector&)
+alpha	Line.h	/^    double alpha;$/;"	m	class:Line	access:private
+camera	Controller.h	/^    Camera* camera;$/;"	m	class:Controller	access:private
+camera	Model.h	/^    Camera* camera;$/;"	m	class:Model	access:private
+center	Camera.h	/^    Vector* center;$/;"	m	class:Camera	access:private
 centralwidget	ui_MainWindow.h	/^    QWidget *centralwidget;$/;"	m	class:Ui_MainWindow	access:public
 clear	PainterWidget.cpp	/^void PainterWidget::clear()$/;"	f	class:PainterWidget	signature:()
 clear	PainterWidget.h	/^    void clear();$/;"	p	class:PainterWidget	access:public	signature:()
@@ -205,11 +310,19 @@ controller	PainterWidget.h	/^    Controller* controller;$/;"	m	class:PainterWidg
 controller	ViewKnot.h	/^    Controller* controller;$/;"	m	class:ViewKnot	access:private
 customButton	ui_MainWindow.h	/^    QRadioButton *customButton;$/;"	m	class:Ui_MainWindow	access:public
 defaultButton	ui_MainWindow.h	/^    QRadioButton *defaultButton;$/;"	m	class:Ui_MainWindow	access:public
-draw	Drawable.h	/^    virtual void draw(const View* view, const Camera* camera, unsigned int color) = 0;$/;"	p	class:Drawable	access:private	signature:(const View* view, const Camera* camera, unsigned int color)
-draw	Line.h	/^    virtual void draw(const View* view, const Camera* camera, unsigned int color);$/;"	p	class:Line	access:public	signature:(const View* view, const Camera* camera, unsigned int color)
+draw	Bezier.cpp	/^void Bezier::draw(View* view, const Camera* camera, unsigned int color)$/;"	f	class:Bezier	signature:(View* view, const Camera* camera, unsigned int color)
+draw	Bezier.h	/^    virtual void draw(View* view, const Camera* camera, unsigned int color);$/;"	p	class:Bezier	access:public	signature:(View* view, const Camera* camera, unsigned int color)
+draw	Drawable.h	/^    virtual void draw(View* view, const Camera* camera, unsigned int color) = 0;$/;"	p	class:Drawable	access:private	signature:(View* view, const Camera* camera, unsigned int color)
+draw	Knot.cpp	/^void Knot::draw(View* view, const Camera* camera, unsigned int color)$/;"	f	class:Knot	signature:(View* view, const Camera* camera, unsigned int color)
+draw	Knot.h	/^    virtual void draw(View* view, const Camera* camera, unsigned int color);$/;"	p	class:Knot	access:public	signature:(View* view, const Camera* camera, unsigned int color)
+draw	Line.cpp	/^void Line::draw(View* view, const Camera* camera, unsigned int color)$/;"	f	class:Line	signature:(View* view, const Camera* camera, unsigned int color)
+draw	Line.h	/^    virtual void draw(View* view, const Camera* camera, unsigned int color);$/;"	p	class:Line	access:public	signature:(View* view, const Camera* camera, unsigned int color)
 draw	Model.cpp	/^void Model::draw()$/;"	f	class:Model	signature:()
 draw	Model.h	/^    void draw();$/;"	p	class:Model	access:public	signature:()
-drawLine	Line.h	/^    void drawLine(const int x0, const int y0, const int x1, const int y1, unsigned int color, bool flip);$/;"	p	class:Line	access:private	signature:(const int x0, const int y0, const int x1, const int y1, unsigned int color, bool flip)
+drawLine	Line.cpp	/^void Line::drawLine(View* view, int x0, int y0, int x1, int y1, unsigned int color)$/;"	f	class:Line	signature:(View* view, int x0, int y0, int x1, int y1, unsigned int color)
+drawLine	Line.h	/^    void drawLine(View* view, int x0, int y0, int x1, int y1, unsigned int color);$/;"	p	class:Line	access:private	signature:(View* view, int x0, int y0, int x1, int y1, unsigned int color)
+generatePoints	Knot.cpp	/^void Knot::generatePoints()$/;"	f	class:Knot	signature:()
+generatePoints	Knot.h	/^    void generatePoints();$/;"	p	class:Knot	access:private	signature:()
 getColor	PainterWidget.cpp	/^unsigned int PainterWidget::getColor(int x, int y)$/;"	f	class:PainterWidget	signature:(int x, int y)
 getColor	PainterWidget.h	/^    unsigned int getColor(int x, int y);$/;"	p	class:PainterWidget	access:public	signature:(int x, int y)
 getColor	View.h	/^    virtual unsigned int getColor(int x, int y) = 0;$/;"	p	class:View	access:public	signature:(int x, int y)
@@ -222,6 +335,8 @@ getHeight	PainterWidget.h	/^    int getHeight();$/;"	p	class:PainterWidget	acces
 getHeight	View.h	/^    virtual int getHeight() = 0;$/;"	p	class:View	access:public	signature:()
 getHeight	ViewKnot.cpp	/^int ViewKnot::getHeight()$/;"	f	class:ViewKnot	signature:()
 getHeight	ViewKnot.h	/^    virtual int getHeight();$/;"	p	class:ViewKnot	access:public	signature:()
+getScale	Camera.cpp	/^double Camera::getScale() const$/;"	f	class:Camera	signature:() const
+getScale	Camera.h	/^    double getScale() const;$/;"	p	class:Camera	access:public	signature:() const
 getStaticMetaObject	moc_Controller.cpp	/^const QMetaObject &Controller::getStaticMetaObject() { return staticMetaObject; }$/;"	f	class:Controller	signature:()
 getStaticMetaObject	moc_PainterWidget.cpp	/^const QMetaObject &PainterWidget::getStaticMetaObject() { return staticMetaObject; }$/;"	f	class:PainterWidget	signature:()
 getWidth	PainterWidget.cpp	/^int PainterWidget::getWidth()$/;"	f	class:PainterWidget	signature:()
@@ -229,8 +344,16 @@ getWidth	PainterWidget.h	/^    int getWidth();$/;"	p	class:PainterWidget	access:
 getWidth	View.h	/^    virtual int getWidth() = 0;$/;"	p	class:View	access:public	signature:()
 getWidth	ViewKnot.cpp	/^int ViewKnot::getWidth()$/;"	f	class:ViewKnot	signature:()
 getWidth	ViewKnot.h	/^    virtual int getWidth();$/;"	p	class:ViewKnot	access:public	signature:()
+gradient	Bezier.cpp	/^Vector Bezier::gradient(double t)$/;"	f	class:Bezier	signature:(double t)
+gradient	Bezier.h	/^    Vector gradient(double);$/;"	p	class:Bezier	access:public	signature:(double)
 horizontalLayout	ui_MainWindow.h	/^    QHBoxLayout *horizontalLayout;$/;"	m	class:Ui_MainWindow	access:public
 image	PainterWidget.h	/^    QImage image;$/;"	m	class:PainterWidget	access:private
+initPoints	Knot.h	/^    std::vector<Vector> initPoints;$/;"	m	class:Knot	access:private
+keyPressEvent	PainterWidget.cpp	/^void PainterWidget::keyPressEvent(QKeyEvent *event)$/;"	f	class:PainterWidget	signature:(QKeyEvent *event)
+keyPressEvent	PainterWidget.h	/^    virtual void keyPressEvent(QKeyEvent *event);$/;"	p	class:PainterWidget	access:protected	signature:(QKeyEvent *event)
+lastx	PainterWidget.h	/^    int lastx;$/;"	m	class:PainterWidget	access:private
+lasty	PainterWidget.h	/^    int lasty;$/;"	m	class:PainterWidget	access:private
+length	Line.h	/^    double length;$/;"	m	class:Line	access:private
 magnitude	Vector.cpp	/^double Vector::magnitude()$/;"	f	class:Vector	signature:()
 magnitude	Vector.h	/^    double magnitude();$/;"	p	class:Vector	access:public	signature:()
 main	main.cpp	/^int main(int argc, char *argv[])$/;"	f	signature:(int argc, char *argv[])
@@ -238,12 +361,15 @@ mainWindow	ViewKnot.h	/^    QMainWindow mainWindow;$/;"	m	class:ViewKnot	access:
 metaObject	moc_Controller.cpp	/^const QMetaObject *Controller::metaObject() const$/;"	f	class:Controller	signature:() const
 metaObject	moc_PainterWidget.cpp	/^const QMetaObject *PainterWidget::metaObject() const$/;"	f	class:PainterWidget	signature:() const
 model	Controller.h	/^    Model* model;$/;"	m	class:Controller	access:private
+mouseMoveEvent	PainterWidget.cpp	/^void PainterWidget::mouseMoveEvent(QMouseEvent *event)$/;"	f	class:PainterWidget	signature:(QMouseEvent *event)
+mouseMoveEvent	PainterWidget.h	/^    virtual void mouseMoveEvent(QMouseEvent *event);$/;"	p	class:PainterWidget	access:protected	signature:(QMouseEvent *event)
 multiply	Vector.cpp	/^void Vector::multiply(const double& coef)$/;"	f	class:Vector	signature:(const double& coef)
 multiply	Vector.h	/^    void multiply(const double&);$/;"	p	class:Vector	access:public	signature:(const double&)
 multm	Vector.cpp	/^void Vector::multm(double matrix[4][4])$/;"	f	class:Vector	signature:(double matrix[4][4])
 multm	Vector.h	/^    void multm(double matrix[4][4]);$/;"	p	class:Vector	access:private	signature:(double matrix[4][4])
 normalize	Vector.cpp	/^void Vector::normalize()$/;"	f	class:Vector	signature:()
 normalize	Vector.h	/^    void normalize();$/;"	p	class:Vector	access:public	signature:()
+orientation	Camera.h	/^    double orientation[3];$/;"	m	class:Camera	access:private
 paint	PainterWidget.cpp	/^void PainterWidget::paint()$/;"	f	class:PainterWidget	signature:()
 paint	PainterWidget.h	/^    void paint();$/;"	p	class:PainterWidget	access:public	signature:()
 paint	View.h	/^    virtual void paint() = 0;$/;"	p	class:View	access:public	signature:()
@@ -252,6 +378,13 @@ paint	ViewKnot.h	/^    virtual void paint();$/;"	p	class:ViewKnot	access:public	
 paintEvent	PainterWidget.cpp	/^void PainterWidget::paintEvent(QPaintEvent*)$/;"	f	class:PainterWidget	signature:(QPaintEvent*)
 paintEvent	PainterWidget.h	/^    virtual void paintEvent(QPaintEvent*);$/;"	p	class:PainterWidget	access:protected	signature:(QPaintEvent*)
 painterWidget	ViewKnot.h	/^    PainterWidget* painterWidget;$/;"	m	class:ViewKnot	access:private
+point	Bezier.cpp	/^Vector Bezier::point(double t)$/;"	f	class:Bezier	signature:(double t)
+point	Bezier.h	/^    Vector point(double);$/;"	p	class:Bezier	access:public	signature:(double)
+points	Bezier.h	/^    Vector points[4];$/;"	m	class:Bezier	access:private
+print	Vector.cpp	/^void Vector::print() const$/;"	f	class:Vector	signature:() const
+print	Vector.h	/^    void print() const;$/;"	p	class:Vector	access:public	signature:() const
+project	Camera.cpp	/^Vector2D Camera::project(const Vector& _v) const$/;"	f	class:Camera	signature:(const Vector& _v) const
+project	Camera.h	/^    Vector2D project(const Vector& v) const;$/;"	p	class:Camera	access:public	signature:(const Vector& v) const
 project	Vector.cpp	/^Vector2D Vector::project(const double& coef) const$/;"	f	class:Vector	signature:(const double& coef) const
 project	Vector.h	/^    Vector2D project(const double&) const;$/;"	p	class:Vector	access:public	signature:(const double&) const
 qt_meta_data_Controller	moc_Controller.cpp	/^static const uint qt_meta_data_Controller[] = {$/;"	v	file:
@@ -264,6 +397,10 @@ qt_metacast	moc_Controller.cpp	/^void *Controller::qt_metacast(const char *_clna
 qt_metacast	moc_PainterWidget.cpp	/^void *PainterWidget::qt_metacast(const char *_clname)$/;"	f	class:PainterWidget	signature:(const char *_clname)
 qt_static_metacall	moc_Controller.cpp	/^void Controller::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)$/;"	f	class:Controller	signature:(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 qt_static_metacall	moc_PainterWidget.cpp	/^void PainterWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)$/;"	f	class:PainterWidget	signature:(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+reset	Camera.cpp	/^void Camera::reset()$/;"	f	class:Camera	signature:()
+reset	Camera.h	/^    void reset();$/;"	p	class:Camera	access:public	signature:()
+reset	Controller.cpp	/^void Controller::reset()$/;"	f	class:Controller	signature:()
+reset	Controller.h	/^    void reset();$/;"	p	class:Controller	access:public	signature:()
 resize	Controller.cpp	/^void Controller::resize()$/;"	f	class:Controller	signature:()
 resize	Controller.h	/^    void resize();$/;"	p	class:Controller	access:public	signature:()
 resize	Model.cpp	/^void Model::resize()$/;"	f	class:Model	signature:()
@@ -271,24 +408,41 @@ resize	Model.h	/^    void resize();$/;"	p	class:Model	access:public	signature:()
 resizeEvent	PainterWidget.cpp	/^void PainterWidget::resizeEvent(QResizeEvent*)$/;"	f	class:PainterWidget	signature:(QResizeEvent*)
 resizeEvent	PainterWidget.h	/^    virtual void resizeEvent(QResizeEvent*);$/;"	p	class:PainterWidget	access:protected	signature:(QResizeEvent*)
 retranslateUi	ui_MainWindow.h	/^    void retranslateUi(QMainWindow *MainWindow)$/;"	f	class:Ui_MainWindow	access:public	signature:(QMainWindow *MainWindow)
+rotate	Camera.cpp	/^void Camera::rotate(const double* rotateCoef)$/;"	f	class:Camera	signature:(const double* rotateCoef)
+rotate	Camera.h	/^    void rotate(const double*);$/;"	p	class:Camera	access:public	signature:(const double*)
+rotate	Controller.cpp	/^void Controller::rotate(Direction direction)$/;"	f	class:Controller	signature:(Direction direction)
+rotate	Controller.h	/^    void rotate(Direction);$/;"	p	class:Controller	access:public	signature:(Direction)
 rotate	Vector.cpp	/^void Vector::rotate(const double* angle)$/;"	f	class:Vector	signature:(const double* angle)
 rotate	Vector.h	/^    void rotate(const double*);$/;"	p	class:Vector	access:public	signature:(const double*)
 rotateHelper	Vector.cpp	/^void Vector::rotateHelper(const int number, const double angle)$/;"	f	class:Vector	signature:(const int number, const double angle)
 rotateHelper	Vector.h	/^    void rotateHelper(const int number, const double angle);$/;"	p	class:Vector	access:private	signature:(const int number, const double angle)
+scale	Camera.cpp	/^void Camera::scale(const double* _scaleCoef)$/;"	f	class:Camera	signature:(const double* _scaleCoef)
+scale	Camera.h	/^    void scale(const double*);$/;"	p	class:Camera	access:public	signature:(const double*)
+scale	Controller.cpp	/^void Controller::scale(bool b)$/;"	f	class:Controller	signature:(bool b)
+scale	Controller.h	/^    void scale(bool);$/;"	p	class:Controller	access:public	signature:(bool)
 scale	Vector.cpp	/^void Vector::scale(const double* coef)$/;"	f	class:Vector	signature:(const double* coef)
 scale	Vector.h	/^    void scale(const double*);$/;"	p	class:Vector	access:public	signature:(const double*)
+scaleCoef	Camera.h	/^    double scaleCoef[3];$/;"	m	class:Camera	access:private
 setPixel	PainterWidget.cpp	/^void PainterWidget::setPixel(int x, int y, QRgb color)$/;"	f	class:PainterWidget	signature:(int x, int y, QRgb color)
 setPixel	PainterWidget.h	/^    void setPixel(int x, int y, unsigned int color);$/;"	p	class:PainterWidget	access:public	signature:(int x, int y, unsigned int color)
 setPixel	View.h	/^    virtual void setPixel(int x, int y, unsigned int color) = 0;$/;"	p	class:View	access:public	signature:(int x, int y, unsigned int color)
 setPixel	ViewKnot.cpp	/^void ViewKnot::setPixel(int x, int y, unsigned int color)$/;"	f	class:ViewKnot	signature:(int x, int y, unsigned int color)
 setPixel	ViewKnot.h	/^    virtual void setPixel(int x, int y, unsigned int color);$/;"	p	class:ViewKnot	access:public	signature:(int x, int y, unsigned int color)
 setupUi	ui_MainWindow.h	/^    void setupUi(QMainWindow *MainWindow)$/;"	f	class:Ui_MainWindow	access:public	signature:(QMainWindow *MainWindow)
+shift	Bezier.cpp	/^Vector Bezier::shift(double* coeff)$/;"	f	class:Bezier	signature:(double* coeff)
+shift	Bezier.h	/^    Vector shift(double*);$/;"	p	class:Bezier	access:public	signature:(double*)
+speed	Camera.h	/^    const double speed;$/;"	m	class:Camera	access:private
 staticMetaObject	moc_Controller.cpp	/^const QMetaObject Controller::staticMetaObject = {$/;"	m	class:Controller	file:
 staticMetaObject	moc_PainterWidget.cpp	/^const QMetaObject PainterWidget::staticMetaObject = {$/;"	m	class:PainterWidget	file:
 staticMetaObjectExtraData	moc_Controller.cpp	/^const QMetaObjectExtraData Controller::staticMetaObjectExtraData = {$/;"	m	class:Controller	file:
 staticMetaObjectExtraData	moc_PainterWidget.cpp	/^const QMetaObjectExtraData PainterWidget::staticMetaObjectExtraData = {$/;"	m	class:PainterWidget	file:
 subtract	Vector.cpp	/^void Vector::subtract(const Vector& vector)$/;"	f	class:Vector	signature:(const Vector& vector)
 subtract	Vector.h	/^    void subtract(const Vector&);$/;"	p	class:Vector	access:public	signature:(const Vector&)
+track	PainterWidget.h	/^    bool track;$/;"	m	class:PainterWidget	access:private
+translate	Camera.cpp	/^void Camera::translate(double coef)$/;"	f	class:Camera	signature:(double coef)
+translate	Camera.h	/^    void translate(double coef);$/;"	p	class:Camera	access:public	signature:(double coef)
+translate	Controller.cpp	/^void Controller::translate(Direction direction)$/;"	f	class:Controller	signature:(Direction direction)
+translate	Controller.h	/^    void translate(Direction);$/;"	p	class:Controller	access:public	signature:(Direction)
 translate	Vector.cpp	/^void Vector::translate(const Vector& vector)$/;"	f	class:Vector	signature:(const Vector& vector)
 translate	Vector.h	/^    void translate(const Vector&);$/;"	p	class:Vector	access:public	signature:(const Vector&)
 ui	ViewKnot.h	/^    Ui::MainWindow ui;$/;"	m	class:ViewKnot	access:private
@@ -297,17 +451,21 @@ update	Controller.h	/^    void update();$/;"	p	class:Controller	access:public	si
 v	Line.h	/^    Vector v[2];$/;"	m	class:Line	access:private
 verticalLayout	ui_MainWindow.h	/^    QVBoxLayout *verticalLayout;$/;"	m	class:Ui_MainWindow	access:public
 view	Model.h	/^    View* view;$/;"	m	class:Model	access:private
+workPoints	Knot.h	/^    std::vector<Vector> workPoints;$/;"	m	class:Knot	access:private
 x	Vector.h	/^    double x[4];$/;"	m	class:Vector	access:private
 x	Vector.h	/^    int x[2];$/;"	m	struct:Vector2D	access:public
+z	Camera.h	/^    const int z;$/;"	m	class:Camera	access:private
+z	Vector.h	/^    double z;$/;"	m	struct:Vector2D	access:public
+~Camera	Camera.cpp	/^Camera::~Camera()$/;"	f	class:Camera	signature:()
+~Camera	Camera.h	/^    ~Camera ();$/;"	p	class:Camera	access:public	signature:()
 ~Controller	Controller.cpp	/^Controller::~Controller()$/;"	f	class:Controller	signature:()
 ~Controller	Controller.h	/^    ~Controller();$/;"	p	class:Controller	access:public	signature:()
+~Line	Line.cpp	/^Line::~Line()$/;"	f	class:Line	signature:()
 ~Line	Line.h	/^    virtual ~Line ();$/;"	p	class:Line	access:public	signature:()
 ~Model	Model.cpp	/^Model::~Model()$/;"	f	class:Model	signature:()
 ~Model	Model.h	/^    ~Model();$/;"	p	class:Model	access:public	signature:()
 ~PainterWidget	PainterWidget.cpp	/^PainterWidget::~PainterWidget()$/;"	f	class:PainterWidget	signature:()
 ~PainterWidget	PainterWidget.h	/^    ~PainterWidget();$/;"	p	class:PainterWidget	access:public	signature:()
-~Vector	Vector.cpp	/^Vector::~Vector() {}$/;"	f	class:Vector	signature:()
-~Vector	Vector.h	/^    virtual ~Vector ();$/;"	p	class:Vector	access:public	signature:()
 ~View	View.h	/^    virtual ~View() {}$/;"	f	class:View	access:public	signature:()
 ~ViewKnot	ViewKnot.cpp	/^ViewKnot::~ViewKnot()$/;"	f	class:ViewKnot	signature:()
 ~ViewKnot	ViewKnot.h	/^    virtual ~ViewKnot();$/;"	p	class:ViewKnot	access:public	signature:()

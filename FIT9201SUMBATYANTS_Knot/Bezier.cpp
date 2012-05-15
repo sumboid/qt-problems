@@ -50,31 +50,38 @@ void Bezier::draw(View* view, const Camera* camera, unsigned int color)
     double eps = 1;
     double right = 1;
     double left = 0;
+    bool end;
     while(true)
     {
         Vector2D tmpVector = camera->project(point(right));
         Vector rv(point(left));
         Vector2D point = camera->project(rv);
 
-        if(abs(tmpVector.x[0] - point.x[0]) - 1 > 0.000001 &&
-           abs(tmpVector.x[1] - point.x[1]) - 1 > 0.000001 )
+        if(abs(tmpVector.x[0] - point.x[0]) > 1 ||
+           abs(tmpVector.x[1] - point.x[1]) > 1 )
         {
-            eps = left + (right - left) / 2;
-        std::cout << eps << std::endl;
-            right = eps;
-            if(1 - right < 0.01)
+            if(right - left < 0.001)
             {
                 break;
             }
+            eps = left + (right - left) / 2;
+            right = eps;
+            end = false;
             continue;
         }
 
+        if(end) break;
+        end = true;
         left = eps;
         right = 1;
         if(point.z > 0)
         {
             view->setPixel(point.x[0] + width, point.x[1] + height, color);
         }
-        std::cout << eps << std::endl;
+    }
+    Vector2D lastPoint = camera->project(point(1));
+    if(lastPoint.z > 0)
+    {
+        view->setPixel(lastPoint.x[0] + width, lastPoint.x[1] + height, color);
     }
 }
