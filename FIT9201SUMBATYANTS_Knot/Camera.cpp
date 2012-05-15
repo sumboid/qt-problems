@@ -7,7 +7,7 @@ center(new Vector(0, 0, 0)), speed(1), z(-1000)
     for(int i = 0; i < 3; i++)
     {
         orientation[i] = 0;
-        scaleCoef[i] = 60.;
+        scaleCoef[i] = 100.;
     }
 }
 

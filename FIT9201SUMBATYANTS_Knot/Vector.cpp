@@ -160,3 +160,17 @@ void Vector::print() const
     std::cout << x[0] << " " << x[1] << " " << x[2] << " " << x[3] << std::endl;
 }
 
+double Vector::getX() const
+{
+    return x[0];
+}
+
+double Vector::getY() const
+{
+    return x[1];
+}
+
+double Vector::getZ() const
+{
+    return x[2];
+}

@@ -60,7 +60,7 @@ void Bezier::draw(View* view, const Camera* camera, unsigned int color)
         if(abs(tmpVector.x[0] - point.x[0]) > 1 ||
            abs(tmpVector.x[1] - point.x[1]) > 1 )
         {
-            if(right - left < 0.001)
+            if(right - left < 0.00001)
             {
                 break;
             }
@@ -74,7 +74,9 @@ void Bezier::draw(View* view, const Camera* camera, unsigned int color)
         end = true;
         left = eps;
         right = 1;
-        if(point.z > 0)
+        if(point.z > 0 && rv.getX() <= 1 && rv.getX() >= -1 &&
+                          rv.getY() <= 1 && rv.getY() >= -1 &&
+                          rv.getZ() <= 1 && rv.getZ() >= -1)
         {
             view->setPixel(point.x[0] + width, point.x[1] + height, color);
         }

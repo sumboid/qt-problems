@@ -28,6 +28,9 @@ public:
     void translate(const Vector&);
     void rotate(const double*);
     void print() const;
+    double getX() const;
+    double getY() const;
+    double getZ() const;
 
 private:
     void multm(double matrix[4][4]);
