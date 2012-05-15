@@ -84,7 +84,6 @@ void Triangle::setScale(const double& _vscale, const double& _hscale)
 
 unsigned int Triangle::getColor(const Point& d)
 {
-    allPixels++;
     double cd = LENGTH(points[0], d);
     double cb = LENGTH(points[0], points[2]);
     double ca = LENGTH(points[0], points[1]);

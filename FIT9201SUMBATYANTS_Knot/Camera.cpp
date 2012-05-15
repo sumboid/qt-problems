@@ -7,7 +7,7 @@ center(new Vector(0, 0, 0)), speed(1), z(-1000)
     for(int i = 0; i < 3; i++)
     {
         orientation[i] = 0;
-        scaleCoef[i] = 100.;
+        scaleCoef[i] = 120.;
     }
 }
 
@@ -40,7 +40,7 @@ void Camera::translate(double coef)
     Vector v(0, 0, -z);
     v.normalize();
     double o[3] = {-orientation[0], -orientation[1], -orientation[2]};
-    v.rotate(o);
+    //v.rotate(o);
     v.multiply(coef * speed);
     center->translate(v);
 }
@@ -48,8 +48,8 @@ void Camera::translate(double coef)
 Vector2D Camera::project(const Vector& _v) const
 {
     Vector v(_v);
-    v.subtract(*center);
     v.rotate(orientation);
+    v.subtract(*center);
     v.scale(scaleCoef);
     return v.project(z);
 }
