@@ -72,3 +72,8 @@ void Camera::reset()
     delete center;
     center = new Vector(0, 0, 0);
 }
+
+double Camera::getScale() const
+{
+    return scaleCoef[0];
+}

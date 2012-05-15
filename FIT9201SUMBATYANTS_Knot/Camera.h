@@ -12,6 +12,7 @@ public:
     Vector2D project(const Vector& v) const;
     void scale(const double*);
     void reset();
+    double getScale() const;
 
 private:
     Vector* center;
