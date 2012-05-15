@@ -22,7 +22,7 @@ void Model::draw()
     Line(0, 0, 0, 2, 0, 0).draw(view, camera, 0xff0000);
     Line(0, 0, 0, 0, 2, 0).draw(view, camera, 0x00ff00);
     Line(0, 0, 0, 0, 0, 2).draw(view, camera, 0x0000ff);
-    Line( 1,  1,  1, -1,  1,  1).draw(view, camera, 0x0);
+    /*Line( 1,  1,  1, -1,  1,  1).draw(view, camera, 0x0);
     Line(-1,  1,  1, -1, -1,  1).draw(view, camera, 0x0);
     Line(-1, -1,  1,  1, -1,  1).draw(view, camera, 0x0);
     Line( 1, -1,  1,  1,  1,  1).draw(view, camera, 0x0);
@@ -34,6 +34,7 @@ void Model::draw()
     Line(-1,  1, -1, -1,  1,  1).draw(view, camera, 0x0);
     Line(-1, -1, -1, -1, -1,  1).draw(view, camera, 0x0);
     Line( 1, -1, -1,  1, -1,  1).draw(view, camera, 0x0);
+    */
     double ps[6][3] =
         { {-1.0, -1.0, -1.0}
         , {-1.0, 1.0, 0.0}
@@ -43,7 +44,22 @@ void Model::draw()
         , {1.0, 1.0, -1.0}
         };
 
-    Knot(ps, 6).draw(view, camera, 0x0);
+    Knot knot(ps, 6);
+    knot.draw(view, camera, 0x0);
+    double* bounds = knot.getBounds();
+    Line(bounds[0], bounds[1], bounds[2], bounds[3], bounds[1], bounds[2]).draw(view, camera, 0x0);
+    Line(bounds[0], bounds[1], bounds[2], bounds[0], bounds[4], bounds[2]).draw(view, camera, 0x0);
+    Line(bounds[0], bounds[1], bounds[2], bounds[0], bounds[1], bounds[5]).draw(view, camera, 0x0);
+    Line(bounds[3], bounds[4], bounds[5], bounds[0], bounds[4], bounds[5]).draw(view, camera, 0x0);
+    Line(bounds[3], bounds[4], bounds[5], bounds[3], bounds[1], bounds[5]).draw(view, camera, 0x0);
+    Line(bounds[3], bounds[4], bounds[5], bounds[3], bounds[4], bounds[2]).draw(view, camera, 0x0);
+    Line(bounds[0], bounds[1], bounds[5], bounds[3], bounds[1], bounds[5]).draw(view, camera, 0x0);
+    Line(bounds[0], bounds[1], bounds[5], bounds[0], bounds[4], bounds[5]).draw(view, camera, 0x0);
+    Line(bounds[3], bounds[1], bounds[2], bounds[3], bounds[4], bounds[2]).draw(view, camera, 0x0);
+    Line(bounds[3], bounds[1], bounds[2], bounds[3], bounds[1], bounds[5]).draw(view, camera, 0x0);
+    Line(bounds[0], bounds[4], bounds[2], bounds[3], bounds[4], bounds[2]).draw(view, camera, 0x0);
+    Line(bounds[0], bounds[4], bounds[2], bounds[0], bounds[4], bounds[5]).draw(view, camera, 0x0);
+
     view->paint();
 }
 

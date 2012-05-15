@@ -82,15 +82,15 @@ void Bezier::draw(View* view, const Camera* camera, unsigned int color)
         right = 1;
         if(point.z > 0)
         {
-            double lx = firstPoint3D.getX();
-            double ly = firstPoint3D.getY();
-            double lz = firstPoint3D.getZ();
-            if(lx > bounds[3]) bounds[3] = lx;
+            double lx = rv.getX();
+            double ly = rv.getY();
+            double lz = rv.getZ();
             if(lx < bounds[0]) bounds[0] = lx;
-            if(ly > bounds[4]) bounds[4] = ly;
             if(ly < bounds[1]) bounds[1] = ly;
-            if(lz > bounds[5]) bounds[5] = lz;
             if(lz < bounds[2]) bounds[2] = lz;
+            if(lx > bounds[3]) bounds[3] = lx;
+            if(ly > bounds[4]) bounds[4] = ly;
+            if(lz > bounds[5]) bounds[5] = lz;
 
             view->setPixel(point.x[0] + width, point.x[1] + height, color);
         }
@@ -102,12 +102,12 @@ void Bezier::draw(View* view, const Camera* camera, unsigned int color)
         double lx = lastPoint3D.getX();
         double ly = lastPoint3D.getY();
         double lz = lastPoint3D.getZ();
-        if(lx > bounds[3]) bounds[3] = lx;
         if(lx < bounds[0]) bounds[0] = lx;
-        if(ly > bounds[4]) bounds[4] = ly;
         if(ly < bounds[1]) bounds[1] = ly;
-        if(lz > bounds[5]) bounds[5] = lz;
         if(lz < bounds[2]) bounds[2] = lz;
+        if(lx > bounds[3]) bounds[3] = lx;
+        if(ly > bounds[4]) bounds[4] = ly;
+        if(lz > bounds[5]) bounds[5] = lz;
 
         view->setPixel(lastPoint.x[0] + width, lastPoint.x[1] + height, color);
     }

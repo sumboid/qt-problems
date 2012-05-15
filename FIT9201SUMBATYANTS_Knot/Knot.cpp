@@ -45,6 +45,37 @@ void Knot::draw(View* view, const Camera* camera, unsigned int color)
         {
             bPoints[k] = workPoints[(i + k) % n];
         }
-        Bezier(bPoints).draw(view, camera, color);
+        Bezier bezier(bPoints);
+        bezier.draw(view, camera, color);
+        double* newBounds = bezier.getBounds();
+
+        if(i == 1)
+        {
+            for(int i = 0; i < 6; i++)
+            {
+                bounds[i] = newBounds[i];
+            }
+        }
+        else
+        {
+            for(int i = 0; i < 3; i++)
+            {
+                if(newBounds[i] < bounds[i]) bounds[i] = newBounds[i];
+            }
+            for(int i = 3; i < 6; i++)
+            {
+                if(newBounds[i] > bounds[i]) bounds[i] = newBounds[i];
+            }
+        }
     }
+}
+
+double* Knot::getBounds() const
+{
+    double* result = new double[6];
+    for(int i = 0; i < 6; i++)
+    {
+        result[i] = bounds[i];
+    }
+    return result;
 }
