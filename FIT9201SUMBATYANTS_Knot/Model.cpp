@@ -20,29 +20,29 @@ Model::~Model()
 void Model::draw()
 {
     view->clear();
-    Line(0, 0, 0, 2, 0, 0).draw(view, camera, 0xff0000);
-    Line(0, 0, 0, 0, 2, 0).draw(view, camera, 0x00ff00);
-    Line(0, 0, 0, 0, 0, 2).draw(view, camera, 0x0000ff);
-    /*Line( 1,  1,  1, -1,  1,  1).draw(view, camera, 0x0);
-    Line(-1,  1,  1, -1, -1,  1).draw(view, camera, 0x0);
-    Line(-1, -1,  1,  1, -1,  1).draw(view, camera, 0x0);
-    Line( 1, -1,  1,  1,  1,  1).draw(view, camera, 0x0);
-    Line( 1,  1, -1, -1,  1, -1).draw(view, camera, 0x0);
-    Line(-1,  1, -1, -1, -1, -1).draw(view, camera, 0x0);
-    Line(-1, -1, -1,  1, -1, -1).draw(view, camera, 0x0);
-    Line( 1, -1, -1,  1,  1, -1).draw(view, camera, 0x0);
-    Line( 1,  1, -1,  1,  1,  1).draw(view, camera, 0x0);
-    Line(-1,  1, -1, -1,  1,  1).draw(view, camera, 0x0);
-    Line(-1, -1, -1, -1, -1,  1).draw(view, camera, 0x0);
-    Line( 1, -1, -1,  1, -1,  1).draw(view, camera, 0x0);
-    */
+    Line(0, 0, 0, 200, 0, 0).draw(view, camera, 0xff0000);
+    Line(0, 0, 0, 0, 200, 0).draw(view, camera, 0x00ff00);
+    Line(0, 0, 0, 0, 0, 200).draw(view, camera, 0x0000ff);
+    Line( 100,  100,  100, -100,  100,  100).draw(view, camera, 0x0);
+    Line(-100,  100,  100, -100, -100,  100).draw(view, camera, 0x0);
+    Line(-100, -100,  100,  100, -100,  100).draw(view, camera, 0x0);
+    Line( 100, -100,  100,  100,  100,  100).draw(view, camera, 0x0);
+    Line( 100,  100, -100, -100,  100, -100).draw(view, camera, 0x0);
+    Line(-100,  100, -100, -100, -100, -100).draw(view, camera, 0x0);
+    Line(-100, -100, -100,  100, -100, -100).draw(view, camera, 0x0);
+    Line( 100, -100, -100,  100,  100, -100).draw(view, camera, 0x0);
+    Line( 100,  100, -100,  100,  100,  100).draw(view, camera, 0x0);
+    Line(-100,  100, -100, -100,  100,  100).draw(view, camera, 0x0);
+    Line(-100, -100, -100, -100, -100,  100).draw(view, camera, 0x0);
+    Line( 100, -100, -100,  100, -100,  100).draw(view, camera, 0x0);
+
     double ps[6][3] =
-            { {0.7, 0.0, 0.9}
-            , {1.0, 1.0, 0.0}
-            , {0.0, 1.0, 1.0}
-            , {0.9, 0.0, 0.0}
-            , {0.9, 0.9, 1.0}
-            , {0.0, 1.0, 0.0}};
+            { {70, 0, 90}
+            , {100, 100, 0}
+            , {0, 100, 100}
+            , {90, 0, 0}
+            , {90, 90, 100}
+            , {0, 100, 0}};
 
     double start[3] = {0, 0, 0};
     double end[3] = {1, 1, 2};

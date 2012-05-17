@@ -85,7 +85,7 @@ Vector2D Vector::project(const double& coef) const
     Vector2D result;
     result.x[0] = coord[0] / coord[3];
     result.x[1] = coord[1] / coord[3];
-    result.z = coord[2];
+    result.z = coord[2] / coord[3];
     return result;
 }
 void Vector::translate(const Vector& vector)
@@ -162,15 +162,15 @@ void Vector::print() const
 
 double Vector::getX() const
 {
-    return x[0];
+    return x[0]/x[3];
 }
 
 double Vector::getY() const
 {
-    return x[1];
+    return x[1]/x[3];
 }
 
 double Vector::getZ() const
 {
-    return x[2];
+    return x[2]/x[3];
 }
