@@ -28,5 +28,5 @@ Vector CustomSpline::point(double t) const
 
 void CustomSpline::draw(View* view, const Camera* camera, unsigned int color)
 {
-    CurveRender(this, 1.2).draw(view, camera, color);
+    CurveRender(this, 1).draw(view, camera, color);
 }

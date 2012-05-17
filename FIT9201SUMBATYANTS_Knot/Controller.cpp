@@ -26,10 +26,10 @@ void Controller::resize()
 void Controller::rotate(Direction direction)
 {
     double angle = 3.1415 / 100;
-    double matrix[4][3] = {{0, angle, 0},
-                          {0, -angle, 0},
-                          {-angle, 0, 0},
-                          {angle, 0, 0}};
+    double matrix[4][3] = {{0, -angle, 0},
+                          {0, angle, 0},
+                          {angle, 0, 0},
+                          {-angle, 0, 0}};
     switch(direction)
     {
         case LEFT:

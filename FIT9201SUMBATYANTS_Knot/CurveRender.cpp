@@ -15,10 +15,10 @@ void CurveRender::draw(View* view, const Camera* camera, unsigned int color)
     bool end;
 
     Vector2D firstPoint = camera->project(curve->point(0));
-    //if(firstPoint.z > 0)
-    //{
+    if(firstPoint.z > 0)
+    {
         view->setPixel(firstPoint.x[0] + width, firstPoint.x[1] + height, color);
-    //}
+    }
 
     while(true)
     {
@@ -43,14 +43,14 @@ void CurveRender::draw(View* view, const Camera* camera, unsigned int color)
         end = true;
         left = eps;
         right = bound;
-        //if(point.z > 0)
-     //   {
+        if(point.z > 0)
+        {
             view->setPixel(point.x[0] + width, point.x[1] + height, color);
-    //    }
+        }
     }
-   /* Vector2D lastPoint = camera->project(curve->point(bound));
+    Vector2D lastPoint = camera->project(curve->point(bound));
     if(lastPoint.z > 0)
     {
         view->setPixel(lastPoint.x[0] + width, lastPoint.x[1] + height, color);
-    }*/
+    }
 }

@@ -46,10 +46,10 @@ void Model::draw()
 
     double start[3] = {0, 0, 0};
     double end[3] = {1, 1, 2};
-    CustomSpline(start, end).draw(view, camera, 0x0);
-    /*Knot knot(ps, 6);
+    //CustomSpline(start, end).draw(view, camera, 0x0);
+    Knot knot(ps, 6);
     knot.draw(view, camera, 0x0);
-    double* bounds = knot.getBounds();
+    /*double* bounds = knot.getBounds();
     Line(bounds[0], bounds[1], bounds[2], bounds[3], bounds[1], bounds[2]).draw(view, camera, 0x0);
     Line(bounds[0], bounds[1], bounds[2], bounds[0], bounds[4], bounds[2]).draw(view, camera, 0x0);
     Line(bounds[0], bounds[1], bounds[2], bounds[0], bounds[1], bounds[5]).draw(view, camera, 0x0);
