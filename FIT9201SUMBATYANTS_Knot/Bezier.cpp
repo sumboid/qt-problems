@@ -1,5 +1,6 @@
 #include "Bezier.h"
 #include "Line.h"
+#include "CurveRender.h"
 #include <cstdlib>
 #include <iostream>
 
@@ -9,9 +10,10 @@ Bezier::Bezier(const Vector* _points)
     {
         points[i] = _points[i];
     }
+    checkBounds();
 }
 
-Vector Bezier::shift(double* coeff)
+Vector Bezier::shift(double* coeff) const
 {
     Vector v(0, 0, 0);
     for(int i = 0; i < 4; i++)
@@ -24,7 +26,7 @@ Vector Bezier::shift(double* coeff)
     return v;
 }
 
-Vector Bezier::point(double t)
+Vector Bezier::point(double t) const
 {
     double u = 1 - t;
     double coeff[4] = {u * u * u,
@@ -34,83 +36,34 @@ Vector Bezier::point(double t)
     return shift(coeff);
 }
 
-void Bezier::draw(View* view, const Camera* camera, unsigned int color)
+void Bezier::checkBounds()
 {
-    int width = view->getWidth() / 2;
-    int height = view->getHeight() / 2;
-    double eps = 1;
-    double right = 1;
-    double left = 0;
-    bool end;
-
     Vector firstPoint3D = point(0);
-    Vector2D firstPoint = camera->project(firstPoint3D);
-    if(firstPoint.z > 0)
+    bounds[0] = firstPoint3D.getX();
+    bounds[1] = firstPoint3D.getY();
+    bounds[2] = firstPoint3D.getZ();
+    bounds[3] = firstPoint3D.getX();
+    bounds[4] = firstPoint3D.getY();
+    bounds[5] = firstPoint3D.getZ();
+
+    for(double eps = 0; eps <= 1; eps+=0.001)
     {
-        //init
-        bounds[0] = firstPoint3D.getX();
-        bounds[1] = firstPoint3D.getY();
-        bounds[2] = firstPoint3D.getZ();
-        bounds[3] = firstPoint3D.getX();
-        bounds[4] = firstPoint3D.getY();
-        bounds[5] = firstPoint3D.getZ();
-        view->setPixel(firstPoint.x[0] + width, firstPoint.x[1] + height, color);
-    }
-
-    while(true)
-    {
-        Vector2D tmpVector = camera->project(point(right));
-        Vector rv(point(left));
-        Vector2D point = camera->project(rv);
-
-        if(abs(tmpVector.x[0] - point.x[0]) > 1 ||
-           abs(tmpVector.x[1] - point.x[1]) > 1 )
-        {
-            if(right - left < 0.00001)
-            {
-                break;
-            }
-            eps = left + (right - left) / 2;
-            right = eps;
-            end = false;
-            continue;
-        }
-
-        if(end) break;
-        end = true;
-        left = eps;
-        right = 1;
-        if(point.z > 0)
-        {
-            double lx = rv.getX();
-            double ly = rv.getY();
-            double lz = rv.getZ();
-            if(lx < bounds[0]) bounds[0] = lx;
-            if(ly < bounds[1]) bounds[1] = ly;
-            if(lz < bounds[2]) bounds[2] = lz;
-            if(lx > bounds[3]) bounds[3] = lx;
-            if(ly > bounds[4]) bounds[4] = ly;
-            if(lz > bounds[5]) bounds[5] = lz;
-
-            view->setPixel(point.x[0] + width, point.x[1] + height, color);
-        }
-    }
-    Vector lastPoint3D = point(1);
-    Vector2D lastPoint = camera->project(lastPoint3D);
-    if(lastPoint.z > 0)
-    {
-        double lx = lastPoint3D.getX();
-        double ly = lastPoint3D.getY();
-        double lz = lastPoint3D.getZ();
+        Vector p(point(eps));
+        double lx = p.getX();
+        double ly = p.getY();
+        double lz = p.getZ();
         if(lx < bounds[0]) bounds[0] = lx;
         if(ly < bounds[1]) bounds[1] = ly;
         if(lz < bounds[2]) bounds[2] = lz;
         if(lx > bounds[3]) bounds[3] = lx;
         if(ly > bounds[4]) bounds[4] = ly;
         if(lz > bounds[5]) bounds[5] = lz;
-
-        view->setPixel(lastPoint.x[0] + width, lastPoint.x[1] + height, color);
     }
+}
+
+void Bezier::draw(View* view, const Camera* camera, unsigned int color)
+{
+    CurveRender(this, 1.).draw(view, camera, color);
 }
 
 double* Bezier::getBounds() const

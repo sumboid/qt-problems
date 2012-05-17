@@ -162,12 +162,12 @@ void Vector::print() const
 
 double Vector::getX() const
 {
-    return x[0]/x[3];
+    return x[0];
 }
 
 double Vector::getY() const
 {
-    return x[1]/x[3];
+    return x[1];
 }
 
 double Vector::getZ() const

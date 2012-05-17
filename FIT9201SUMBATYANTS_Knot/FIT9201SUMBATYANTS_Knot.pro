@@ -13,7 +13,9 @@ SOURCES += main.cpp\
            Camera.cpp \
            Line.cpp \
            Bezier.cpp \
-           Knot.cpp
+           Knot.cpp \
+           CustomSpline.cpp \
+           CurveRender.cpp
 
 HEADERS  += View.h \
             PainterWidget.h \
@@ -25,6 +27,9 @@ HEADERS  += View.h \
             Camera.h \
             Line.h \
             Bezier.h \
-            Knot.h
+            Knot.h \
+            CustomSpline.h \
+            Curve.h \
+            CurveRender.h
 
 FORMS    += MainWindow.ui

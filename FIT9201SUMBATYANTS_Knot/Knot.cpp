@@ -1,4 +1,5 @@
 #include "Knot.h"
+#include <iostream>
 
 Knot::Knot(double points[6][3], int n)
 {
@@ -37,7 +38,7 @@ void Knot::generatePoints()
 
 void Knot::draw(View* view, const Camera* camera, unsigned int color)
 {
-    const int n = initPoints.size();
+    const int n = workPoints.size();
     for(int i = 1; i < n; i+=3)
     {
         Vector bPoints[4];
@@ -73,9 +74,27 @@ void Knot::draw(View* view, const Camera* camera, unsigned int color)
 double* Knot::getBounds() const
 {
     double* result = new double[6];
-    for(int i = 0; i < 6; i++)
+/*
+    result[0] = workPoints[0].getX();
+    result[1] = workPoints[0].getY();
+    result[2] = workPoints[0].getZ();
+    result[3] = workPoints[0].getX();
+    result[4] = workPoints[0].getY();
+    result[5] = workPoints[0].getZ();
+*/
+    for(int k = 0; k < 6; k++)
     {
-        result[i] = bounds[i];
+        result[k] = bounds[k];
+        std::cout << result[k] << " ";
+        /*
+        if(workPoints[k].getX() < result[0]) result[0] = workPoints[k].getX();
+        if(workPoints[k].getY() < result[1]) result[1] = workPoints[k].getY();
+        if(workPoints[k].getZ() < result[2]) result[2] = workPoints[k].getZ();
+        if(workPoints[k].getX() > result[3]) result[3] = workPoints[k].getX();
+        if(workPoints[k].getY() > result[4]) result[4] = workPoints[k].getY();
+        if(workPoints[k].getZ() > result[5]) result[5] = workPoints[k].getZ();
+        */
     }
+    std::cout << std::endl << "-------" << std::endl;
     return result;
 }

@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "Bezier.h"
 #include "Knot.h"
+#include "CustomSpline.h"
 #include <iostream>
 
 Model::Model(View* _view, Camera* _camera):
@@ -36,15 +37,17 @@ void Model::draw()
     Line( 1, -1, -1,  1, -1,  1).draw(view, camera, 0x0);
     */
     double ps[6][3] =
-        { {-1.0, -1.0, -1.0}
-        , {-1.0, 1.0, 0.0}
-        , {0.0, 2.0, 1.0}
-        , {0.5, 1.5, 1.1}
-        , {1.0, 1.0,  1.0}
-        , {1.0, 1.0, -1.0}
-        };
+            { {0.7, 0.0, 0.9}
+            , {1.0, 1.0, 0.0}
+            , {0.0, 1.0, 1.0}
+            , {0.9, 0.0, 0.0}
+            , {0.9, 0.9, 1.0}
+            , {0.0, 1.0, 0.0}};
 
-    Knot knot(ps, 6);
+    double start[3] = {0, 0, 0};
+    double end[3] = {1, 1, 2};
+    CustomSpline(start, end).draw(view, camera, 0x0);
+    /*Knot knot(ps, 6);
     knot.draw(view, camera, 0x0);
     double* bounds = knot.getBounds();
     Line(bounds[0], bounds[1], bounds[2], bounds[3], bounds[1], bounds[2]).draw(view, camera, 0x0);
@@ -59,7 +62,12 @@ void Model::draw()
     Line(bounds[3], bounds[1], bounds[2], bounds[3], bounds[1], bounds[5]).draw(view, camera, 0x0);
     Line(bounds[0], bounds[4], bounds[2], bounds[3], bounds[4], bounds[2]).draw(view, camera, 0x0);
     Line(bounds[0], bounds[4], bounds[2], bounds[0], bounds[4], bounds[5]).draw(view, camera, 0x0);
-
+    for(int i = 0; i < 6; i++)
+    {
+        std::cout << bounds[i] << " ";
+    }
+    std::cout << std::endl;
+*/
     view->paint();
 }
 
