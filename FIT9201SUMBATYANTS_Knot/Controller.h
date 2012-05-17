@@ -18,7 +18,6 @@ public slots:
 public:
     void rotate(Direction);
     void translate(Direction);
-    void scale(bool);
     void reset();
 
 private:

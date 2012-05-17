@@ -71,19 +71,8 @@ void PainterWidget::keyPressEvent(QKeyEvent *event)
         case Qt::Key_L:
             controller->translate(RIGHT);
             break;
-        case Qt::Key_PageUp:
-            controller->scale(true);
-            break;
-        case Qt::Key_PageDown:
-            controller->scale(false);
-            break;
         case Qt::Key_Escape:
             controller->reset();
-            break;
-        case Qt::Key_Space:
-            track = track ? false : true;
-            lastx = -1; lasty = -1;
-            setMouseTracking(track);
             break;
         default:
             return;

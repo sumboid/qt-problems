@@ -1,6 +1,7 @@
 #pragma once
 #include "View.h"
 #include "Camera.h"
+#include "Knot.h"
 
 class Model
 {
@@ -13,4 +14,6 @@ public:
 private:
     View* view;
     Camera* camera;
+    Knot* knot;
+    double* bounds;
 };

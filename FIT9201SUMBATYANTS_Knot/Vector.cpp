@@ -64,15 +64,6 @@ void Vector::add(const Vector& vector)
     translate(vector);
 }
 
-void Vector::scale(const double* coef)
-{
-    double matrix[4][4] = {{coef[0], 0, 0, 0},
-                           {0, coef[1], 0, 0},
-                           {0, 0, coef[2], 0},
-                           {0, 0, 0, 1}};
-    multm(matrix);
-}
-
 Vector2D Vector::project(const double& coef) const
 {
     double matrix[4][4] = {{1, 0, 0 ,0},

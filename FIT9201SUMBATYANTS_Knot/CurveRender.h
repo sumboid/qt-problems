@@ -2,11 +2,11 @@
 #include "Drawable.h"
 #include "Curve.h"
 
-class CurveRender : public Drawable 
+class CurveRender
 {
 public:
     CurveRender(const Curve* curve, double);
-    virtual void draw(View*, const Camera*, unsigned int color);
+    void draw(View*, const Camera*, unsigned int color);
 private:
     const Curve* curve;
     double bound;

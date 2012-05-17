@@ -1,9 +1,13 @@
 #include "CurveRender.h"
 #include "Vector.h"
 #include <cstdlib>
+#include <ctime>
 
 CurveRender::CurveRender(const Curve* _curve, double _bound):
-    curve(_curve), bound(_bound) {}
+    curve(_curve), bound(_bound) 
+{
+    srand(time(0));
+}
 
 void CurveRender::draw(View* view, const Camera* camera, unsigned int color)
 {
@@ -17,7 +21,7 @@ void CurveRender::draw(View* view, const Camera* camera, unsigned int color)
     Vector2D firstPoint = camera->project(curve->point(0));
     if(firstPoint.z > 0)
     {
-        view->setPixel(firstPoint.x[0] + width, firstPoint.x[1] + height, color);
+        view->setPixel(firstPoint.x[0] + width, firstPoint.x[1] + height, firstPoint.z);
     }
 
     while(true)
@@ -31,6 +35,10 @@ void CurveRender::draw(View* view, const Camera* camera, unsigned int color)
         {
             if(right - left < 0.00001)
             {
+                if(point.z > 0)
+                {
+                    view->setPixel(point.x[0] + width, point.x[1] + height, point.z);
+                }
                 break;
             }
             eps = left + (right - left) / 2;
@@ -45,12 +53,12 @@ void CurveRender::draw(View* view, const Camera* camera, unsigned int color)
         right = bound;
         if(point.z > 0)
         {
-            view->setPixel(point.x[0] + width, point.x[1] + height, color);
+            view->setPixel(point.x[0] + width, point.x[1] + height, point.z);
         }
     }
     Vector2D lastPoint = camera->project(curve->point(bound));
     if(lastPoint.z > 0)
     {
-        view->setPixel(lastPoint.x[0] + width, lastPoint.x[1] + height, color);
+        view->setPixel(lastPoint.x[0] + width, lastPoint.x[1] + height, lastPoint.z);
     }
 }

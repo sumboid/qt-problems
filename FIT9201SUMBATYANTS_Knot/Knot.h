@@ -11,7 +11,7 @@ public:
     Knot (double points[6][3], int n);
 
     virtual void draw(View* view, const Camera* camera, unsigned int color);
-    double* getBounds() const;
+    double* getBounds();
 private:
     void generatePoints();
     std::vector<Vector> workPoints;

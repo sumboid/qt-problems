@@ -63,7 +63,7 @@ void Bezier::checkBounds()
 
 void Bezier::draw(View* view, const Camera* camera, unsigned int color)
 {
-    CurveRender(this, 1.).draw(view, camera, color);
+    CurveRender(this, 1+0.001).draw(view, camera, color);
 }
 
 double* Bezier::getBounds() const
