@@ -2,12 +2,20 @@
 *.o
 *.pro.user
 <<<<<<< HEAD
+<<<<<<< HEAD
 moc_*
-ui_*
-Makefile
-qrc_resources.cpp
 =======
+>>>>>>> 1e8997d1cbd2b3df50785d59a26d7241d900761a
 ui_*
 moc_*
 Makefile
+=======
+moc_*
+ui_*
+Makefile
+<<<<<<< HEAD
 >>>>>>> 6e8a6c47168fd9e439677086b2c1b75bc58ebdaf
+=======
+qrc_resources.cpp
+>>>>>>> cd32dabc7243ec6f6077c213a9565538500dee52
+>>>>>>> 1e8997d1cbd2b3df50785d59a26d7241d900761a

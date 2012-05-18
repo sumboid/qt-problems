@@ -23,7 +23,6 @@ public:
     void multiply(const double&);
     void subtract(const Vector&);
     void add(const Vector&);
-    void scale(const double*);
     Vector2D project(const double&) const;
     void translate(const Vector&);
     void rotate(const double*);
