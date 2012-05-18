@@ -31,6 +31,7 @@ view(_view), camera(_camera)
 Model::~Model()
 {
     delete knot;
+    delete bounds;
 }
 
 

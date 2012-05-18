@@ -68,7 +68,7 @@ Vector2D Vector::project(const double& coef) const
 {
     double matrix[4][4] = {{1, 0, 0 ,0},
                            {0, 1, 0, 0},
-                           {0, 0, 1, 0},
+                           {0, 0, 0, 0},
                            {0, 0, -1 / coef, 1}};
     Vector tmp(*this);
     tmp.multm(matrix);
@@ -76,7 +76,7 @@ Vector2D Vector::project(const double& coef) const
     Vector2D result;
     result.x[0] = coord[0] / coord[3];
     result.x[1] = coord[1] / coord[3];
-    result.z = coord[2] / coord[3];
+    result.z = x[2];
     return result;
 }
 void Vector::translate(const Vector& vector)

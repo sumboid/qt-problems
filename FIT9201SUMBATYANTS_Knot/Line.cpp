@@ -24,7 +24,6 @@ void Line::draw(View* view, const Camera* camera, unsigned int color)
 {
     Vector2D first = camera->project(v[0]);
     Vector2D second = camera->project(v[1]);
-    
     if(first.z < 0 && second.z < 0)
     {
         return;
