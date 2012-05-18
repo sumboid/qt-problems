@@ -26,10 +26,10 @@ void Controller::resize()
 void Controller::rotate(Direction direction)
 {
     double angle = 3.1415 / 60;
-    double matrix[4][3] = {{0, -angle, 0},
-                          {0, angle, 0},
-                          {angle, 0, 0},
-                          {-angle, 0, 0}};
+    double matrix[4][3] = {{0, angle, 0},
+                          {0, -angle, 0},
+                          {-angle, 0, 0},
+                          {angle, 0, 0}};
     switch(direction)
     {
         case LEFT:
@@ -54,10 +54,10 @@ void Controller::translate(Direction direction)
     switch(direction)
     {
         case UP:
-            camera->translate(5);
+            camera->translate(100);
             break;
         case DOWN:
-            camera->translate(-5);
+            camera->translate(-100);
             break;
         default:
             return;

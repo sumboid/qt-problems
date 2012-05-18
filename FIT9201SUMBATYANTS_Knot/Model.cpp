@@ -50,6 +50,9 @@ void Model::draw()
     Line(bounds[3], bounds[1], bounds[2], bounds[3], bounds[1], bounds[5]).draw(view, camera, 0x0);
     Line(bounds[0], bounds[4], bounds[2], bounds[3], bounds[4], bounds[2]).draw(view, camera, 0x0);
     Line(bounds[0], bounds[4], bounds[2], bounds[0], bounds[4], bounds[5]).draw(view, camera, 0x0);
+    Line(0, 0, 0, 100, 0, 0).draw(view, camera, 0xff0000);
+    Line(0, 0, 0, 0, 100, 0).draw(view, camera, 0x00ff00);
+    Line(0, 0, 0, 0, 0, 100).draw(view, camera, 0x0000ff);
     view->paint();
 }
 

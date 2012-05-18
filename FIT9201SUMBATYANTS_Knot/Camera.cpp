@@ -23,7 +23,12 @@ void Camera::translate(double coef)
     Vector v(0, 0, -z);
     v.normalize();
     v.multiply(coef * speed);
-    center.translate(v);
+    Vector newCenter(center);
+    newCenter.translate(v);
+    if(newCenter.getZ() <= 100)
+    {
+        center = newCenter;
+    }
 }
 
 Vector2D Camera::project(const Vector& _v) const
@@ -31,6 +36,7 @@ Vector2D Camera::project(const Vector& _v) const
     Vector v(_v);
     v.subtract(pseudoCenter);
     v.rotate(orientation);
+    v.add(pseudoCenter);
     v.subtract(center);
     return v.project(z);
 }

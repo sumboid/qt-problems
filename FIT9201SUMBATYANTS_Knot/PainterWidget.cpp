@@ -89,8 +89,8 @@ void PainterWidget::mouseMoveEvent(QMouseEvent *event)
     }
     else
     {
-        lastx > event->x() ? controller->rotate(RIGHT) : controller->rotate(LEFT);
-        lasty > event->y() ? controller->rotate(DOWN) : controller->rotate(UP);
+        lastx > event->x() ? controller->rotate(LEFT) : controller->rotate(RIGHT);
+        lasty > event->y() ? controller->rotate(UP) : controller->rotate(DOWN);
         lastx = event->x();
         lasty = event->y();
         controller->update();
