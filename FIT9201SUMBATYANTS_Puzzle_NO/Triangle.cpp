@@ -104,7 +104,7 @@ unsigned int Triangle::getColor(const Point& d)
     double u = cd * _cos / cb;
     double v = cd * _sin / ca;
 
-    float x, y;
+    double x, y;
 
     if(imagePoints[0].first > imagePoints[2].first)
     {
@@ -134,12 +134,12 @@ unsigned int Triangle::getColor(const Point& d)
     }
     else if(filter == BILINEAR)
     {
-        int ix = (int) x;
+        int ix = x;
         if (ix > image->width() - 2)
         {
             ix = image->width() - 2;
         }
-        int iy = (int) y;
+        int iy = y;
         if (iy > image->height() - 2)
         {
             iy = image->height() - 2;
@@ -147,11 +147,18 @@ unsigned int Triangle::getColor(const Point& d)
         double dx = x - ix;
         double dy = y - iy;
 
-        double d[] = { (1 - dy) * (1 - dx), dy * (1 - dx), dy * dx, (1 - dy) * dx };
-        int p[] = { image->pixel(ix, iy), image->pixel(ix, iy + 1), image->pixel(ix + 1, iy + 1), image->pixel(ix + 1, iy) };
+        std::cout << x << " " << ix << " " << y << " " << iy << std::endl;
+        double d[] = {(1 - dy) * (1 - dx),
+                      dy * (1 - dx),
+                      dy * dx,
+                      (1 - dy) * dx };
+        int p[] = {image->pixel(ix, iy),
+                   image->pixel(ix, iy + 1),
+                   image->pixel(ix + 1, iy + 1),
+                   image->pixel(ix + 1, iy)};
 
         double rgba[] = {0, 0, 0, 0};
-        for (int j = 0; j < 4; j++) 
+        for(int j = 0; j < 4; j++)
         {
             rgba[0] += qRed(p[j]) * d[j];
             rgba[1] += qGreen(p[j]) * d[j];
@@ -186,7 +193,11 @@ void Triangle::draw(const Point& x, const double _angle)
      *
      *  [[c, 0], [a, 1], [b, 2]]
      */
-
+    if(false && filter == BILINEAR)
+    {
+        int yoba;
+        std::cin >> yoba;
+    }
     allPixels = 0;
     transparentPixels = 0;
     borderPixels = 0;
