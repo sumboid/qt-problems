@@ -147,7 +147,7 @@ unsigned int Triangle::getColor(const Point& d)
         double dx = x - ix;
         double dy = y - iy;
 
-        std::cout << x << " " << ix << " " << y << " " << iy << std::endl;
+        //std::cout << x << " " << ix << " " << y << " " << iy << std::endl;
         double d[] = {(1 - dy) * (1 - dx),
                       dy * (1 - dx),
                       dy * dx,
