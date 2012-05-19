@@ -108,24 +108,24 @@ unsigned int Triangle::getColor(const Point& d)
 
     if(imagePoints[0].first > imagePoints[2].first)
     {
-        x = (imagePoints[0].first - LENGTH(imagePoints[0], imagePoints[2]) * u + 0.5);
+        x = (imagePoints[0].first - LENGTH(imagePoints[0], imagePoints[2]) * u);
     }
     else
     {
-        x = (imagePoints[0].first + LENGTH(imagePoints[0], imagePoints[2]) * u + 0.5);
+        x = (imagePoints[0].first + LENGTH(imagePoints[0], imagePoints[2]) * u);
     }
 
     if(imagePoints[0].second > imagePoints[1].second)
     {
-        y = (imagePoints[0].second - LENGTH(imagePoints[0], imagePoints[1]) * v + 0.5);
+        y = (imagePoints[0].second - LENGTH(imagePoints[0], imagePoints[1]) * v);
     }
     else
     {
-        y = (imagePoints[0].second + LENGTH(imagePoints[0], imagePoints[1]) * v + 0.5);
+        y = (imagePoints[0].second + LENGTH(imagePoints[0], imagePoints[1]) * v);
     }
 
     if(static_cast<int>(x + 0.5) >= image->width() || static_cast<int>(y + 0.5) >= image->height()) return 0x0; //Check bugs
-    if(x < 0 || y < 0) return 0x0; 
+    if(x < 0 || y < 0) return 0x0;
     unsigned int rgb = 0;
 
     if(filter == NEAREST)
