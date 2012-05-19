@@ -3,10 +3,11 @@
 #include <cstdlib>
 #include <ctime>
 #include "Model.h"
+#include <iostream>
 
 
 Model::Model(View* _view):
-view(_view), image(QImage(":/puzzle.png")), step(0), resized(false)
+view(_view), image(QImage(":/puzzle_4.png")), step(0), resized(false)
 {
     init();
     srand(time(0));
@@ -85,7 +86,6 @@ void Model::setTrianglePoints(Triangle& triangle, const int number)
     b.second = a.second + qh;
     c.first = even ? b.first : a.first;
     c.second = even ? a.second : b.second;
-
     Point pointsOdd[3] = {c, a, b};
     Point pointsEven[3] = {c, b, a};
     triangle.setImageCoordinates(even ? pointsEven : pointsOdd);

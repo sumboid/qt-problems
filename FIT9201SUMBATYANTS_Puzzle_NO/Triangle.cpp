@@ -4,6 +4,7 @@
 #include "Triangle.h"
 #include "Line.h"
 #include <QRgb>
+#include <iostream>
 
 // Comparators
 bool ycomp(const Point& x, const Point& y)
@@ -107,20 +108,20 @@ unsigned int Triangle::getColor(const Point& d)
 
     if(imagePoints[0].first > imagePoints[2].first)
     {
-        x = (imagePoints[0].first - LENGTH(imagePoints[0], imagePoints[2]) * u);
+        x = (imagePoints[0].first - LENGTH(imagePoints[0], imagePoints[2]) * u + 0.5);
     }
     else
     {
-        x = (imagePoints[0].first + LENGTH(imagePoints[0], imagePoints[2]) * u);
+        x = (imagePoints[0].first + LENGTH(imagePoints[0], imagePoints[2]) * u + 0.5);
     }
 
     if(imagePoints[0].second > imagePoints[1].second)
     {
-        y = (imagePoints[0].second - LENGTH(imagePoints[0], imagePoints[1]) * v);
+        y = (imagePoints[0].second - LENGTH(imagePoints[0], imagePoints[1]) * v + 0.5);
     }
     else
     {
-        y = (imagePoints[0].second + LENGTH(imagePoints[0], imagePoints[1]) * v);
+        y = (imagePoints[0].second + LENGTH(imagePoints[0], imagePoints[1]) * v + 0.5);
     }
 
     if(static_cast<int>(x + 0.5) >= image->width() || static_cast<int>(y + 0.5) >= image->height()) return 0x0; //Check bugs
@@ -133,12 +134,12 @@ unsigned int Triangle::getColor(const Point& d)
     }
     else if(filter == BILINEAR)
     {
-        int ix = (int) x + 0.5;
+        int ix = (int) x;
         if (ix > image->width() - 2)
         {
             ix = image->width() - 2;
         }
-        int iy = (int) y + 0.5;
+        int iy = (int) y;
         if (iy > image->height() - 2)
         {
             iy = image->height() - 2;
@@ -245,7 +246,6 @@ void Triangle::draw(const Point& x, const double _angle)
     Line leftLine(sortPoints[TOP], sortPoints[left]);
     Line rightLine(sortPoints[TOP], sortPoints[right]);
     Line bottomLine(sortPoints[MIDDLE], sortPoints[BOTTOM]);
-
 
     while(!EQUAL(sortPoints[BOTTOM], leftBorder))
     {
