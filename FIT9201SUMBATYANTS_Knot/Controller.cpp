@@ -23,6 +23,12 @@ void Controller::resize()
     model->resize();
 }
 
+void Controller::setBounds(int val)
+{
+    model->setBoundBox(val != 0);
+    model->draw();
+}
+
 void Controller::rotate(Direction direction)
 {
     double angle = 3.1415 / 60;

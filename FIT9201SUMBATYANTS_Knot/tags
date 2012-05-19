@@ -17,6 +17,8 @@ Bezier::draw	Bezier.cpp	/^void Bezier::draw(View* view, const Camera* camera, un
 Bezier::draw	Bezier.h	/^    virtual void draw(View* view, const Camera* camera, unsigned int color);$/;"	p	class:Bezier	access:public	signature:(View* view, const Camera* camera, unsigned int color)
 Bezier::getBounds	Bezier.cpp	/^double* Bezier::getBounds() const$/;"	f	class:Bezier	signature:() const
 Bezier::getBounds	Bezier.h	/^    double* getBounds() const;$/;"	p	class:Bezier	access:public	signature:() const
+Bezier::grad	Bezier.cpp	/^Vector Bezier::grad(double t) const$/;"	f	class:Bezier	signature:(double t) const
+Bezier::grad	Bezier.h	/^    virtual Vector grad(double) const;$/;"	p	class:Bezier	access:public	signature:(double) const
 Bezier::point	Bezier.cpp	/^Vector Bezier::point(double t) const$/;"	f	class:Bezier	signature:(double t) const
 Bezier::point	Bezier.h	/^    virtual Vector point(double) const;$/;"	p	class:Bezier	access:public	signature:(double) const
 Bezier::points	Bezier.h	/^    Vector points[4];$/;"	m	class:Bezier	access:private
@@ -31,34 +33,28 @@ COPY_DIR	Makefile	/^COPY_DIR      = $(COPY) -r$/;"	m
 COPY_FILE	Makefile	/^COPY_FILE     = $(COPY)$/;"	m
 CXX	Makefile	/^CXX           = g++$/;"	m
 CXXFLAGS	Makefile	/^CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT $(DEFINES)$/;"	m
-Camera	Camera.cpp	/^Camera::Camera (const Vector& _center, const double* _orientation):$/;"	f	class:Camera	signature:(const Vector& _center, const double* _orientation)
 Camera	Camera.cpp	/^Camera::Camera():$/;"	f	class:Camera	signature:()
 Camera	Camera.h	/^    Camera ();$/;"	p	class:Camera	access:public	signature:()
 Camera	Camera.h	/^    Camera (const Vector& center, const double* orientation);$/;"	p	class:Camera	access:public	signature:(const Vector& center, const double* orientation)
 Camera	Camera.h	/^class Camera$/;"	c
-Camera::Camera	Camera.cpp	/^Camera::Camera (const Vector& _center, const double* _orientation):$/;"	f	class:Camera	signature:(const Vector& _center, const double* _orientation)
 Camera::Camera	Camera.cpp	/^Camera::Camera():$/;"	f	class:Camera	signature:()
 Camera::Camera	Camera.h	/^    Camera ();$/;"	p	class:Camera	access:public	signature:()
 Camera::Camera	Camera.h	/^    Camera (const Vector& center, const double* orientation);$/;"	p	class:Camera	access:public	signature:(const Vector& center, const double* orientation)
-Camera::center	Camera.h	/^    Vector* center;$/;"	m	class:Camera	access:private
-Camera::getScale	Camera.cpp	/^double Camera::getScale() const$/;"	f	class:Camera	signature:() const
-Camera::getScale	Camera.h	/^    double getScale() const;$/;"	p	class:Camera	access:public	signature:() const
+Camera::center	Camera.h	/^    Vector center;$/;"	m	class:Camera	access:private
 Camera::orientation	Camera.h	/^    double orientation[3];$/;"	m	class:Camera	access:private
 Camera::project	Camera.cpp	/^Vector2D Camera::project(const Vector& _v) const$/;"	f	class:Camera	signature:(const Vector& _v) const
 Camera::project	Camera.h	/^    Vector2D project(const Vector& v) const;$/;"	p	class:Camera	access:public	signature:(const Vector& v) const
+Camera::pseudoCenter	Camera.h	/^    Vector pseudoCenter;$/;"	m	class:Camera	access:private
 Camera::reset	Camera.cpp	/^void Camera::reset()$/;"	f	class:Camera	signature:()
 Camera::reset	Camera.h	/^    void reset();$/;"	p	class:Camera	access:public	signature:()
 Camera::rotate	Camera.cpp	/^void Camera::rotate(const double* rotateCoef)$/;"	f	class:Camera	signature:(const double* rotateCoef)
 Camera::rotate	Camera.h	/^    void rotate(const double*);$/;"	p	class:Camera	access:public	signature:(const double*)
-Camera::scale	Camera.cpp	/^void Camera::scale(const double* _scaleCoef)$/;"	f	class:Camera	signature:(const double* _scaleCoef)
-Camera::scale	Camera.h	/^    void scale(const double*);$/;"	p	class:Camera	access:public	signature:(const double*)
-Camera::scaleCoef	Camera.h	/^    double scaleCoef[3];$/;"	m	class:Camera	access:private
+Camera::setCenter	Camera.cpp	/^void Camera::setCenter(const Vector& v)$/;"	f	class:Camera	signature:(const Vector& v)
+Camera::setCenter	Camera.h	/^    void setCenter(const Vector&);$/;"	p	class:Camera	access:public	signature:(const Vector&)
 Camera::speed	Camera.h	/^    const double speed;$/;"	m	class:Camera	access:private
 Camera::translate	Camera.cpp	/^void Camera::translate(double coef)$/;"	f	class:Camera	signature:(double coef)
 Camera::translate	Camera.h	/^    void translate(double coef);$/;"	p	class:Camera	access:public	signature:(double coef)
 Camera::z	Camera.h	/^    const int z;$/;"	m	class:Camera	access:private
-Camera::~Camera	Camera.cpp	/^Camera::~Camera()$/;"	f	class:Camera	signature:()
-Camera::~Camera	Camera.h	/^    ~Camera ();$/;"	p	class:Camera	access:public	signature:()
 Controller	Controller.cpp	/^Controller::Controller(View* view)$/;"	f	class:Controller	signature:(View* view)
 Controller	Controller.h	/^    Controller(View* view);$/;"	p	class:Controller	access:public	signature:(View* view)
 Controller	Controller.h	/^class Controller : public QObject$/;"	c	inherits:QObject
@@ -77,8 +73,7 @@ Controller::resize	Controller.cpp	/^void Controller::resize()$/;"	f	class:Contro
 Controller::resize	Controller.h	/^    void resize();$/;"	p	class:Controller	access:public	signature:()
 Controller::rotate	Controller.cpp	/^void Controller::rotate(Direction direction)$/;"	f	class:Controller	signature:(Direction direction)
 Controller::rotate	Controller.h	/^    void rotate(Direction);$/;"	p	class:Controller	access:public	signature:(Direction)
-Controller::scale	Controller.cpp	/^void Controller::scale(bool b)$/;"	f	class:Controller	signature:(bool b)
-Controller::scale	Controller.h	/^    void scale(bool);$/;"	p	class:Controller	access:public	signature:(bool)
+Controller::setBounds	Controller.h	/^    void setBounds(int);$/;"	p	class:Controller	access:public	signature:(int)
 Controller::staticMetaObject	moc_Controller.cpp	/^const QMetaObject Controller::staticMetaObject = {$/;"	m	class:Controller	file:
 Controller::staticMetaObjectExtraData	moc_Controller.cpp	/^const QMetaObjectExtraData Controller::staticMetaObjectExtraData = {$/;"	m	class:Controller	file:
 Controller::translate	Controller.cpp	/^void Controller::translate(Direction direction)$/;"	f	class:Controller	signature:(Direction direction)
@@ -88,16 +83,18 @@ Controller::update	Controller.h	/^    void update();$/;"	p	class:Controller	acce
 Controller::~Controller	Controller.cpp	/^Controller::~Controller()$/;"	f	class:Controller	signature:()
 Controller::~Controller	Controller.h	/^    ~Controller();$/;"	p	class:Controller	access:public	signature:()
 Curve	Curve.h	/^class Curve$/;"	c
+Curve::grad	Curve.h	/^    virtual Vector grad(double) const = 0;$/;"	p	class:Curve	access:public	signature:(double) const
 Curve::point	Curve.h	/^    virtual Vector point(double) const = 0;$/;"	p	class:Curve	access:public	signature:(double) const
 Curve::~Curve	Curve.h	/^    virtual ~Curve() {};$/;"	f	class:Curve	access:public	signature:()
-CurveRender	CurveRender.cpp	/^CurveRender::CurveRender(const Curve* _curve): curve(_curve) {}$/;"	f	class:CurveRender	signature:(const Curve* _curve)
-CurveRender	CurveRender.h	/^    CurveRender(const Curve* curve);$/;"	p	class:CurveRender	access:public	signature:(const Curve* curve)
-CurveRender	CurveRender.h	/^class CurveRender : public Drawable $/;"	c	inherits:Drawable
-CurveRender::CurveRender	CurveRender.cpp	/^CurveRender::CurveRender(const Curve* _curve): curve(_curve) {}$/;"	f	class:CurveRender	signature:(const Curve* _curve)
-CurveRender::CurveRender	CurveRender.h	/^    CurveRender(const Curve* curve);$/;"	p	class:CurveRender	access:public	signature:(const Curve* curve)
+CurveRender	CurveRender.cpp	/^CurveRender::CurveRender(const Curve* _curve, double _bound):$/;"	f	class:CurveRender	signature:(const Curve* _curve, double _bound)
+CurveRender	CurveRender.h	/^    CurveRender(const Curve* curve, double);$/;"	p	class:CurveRender	access:public	signature:(const Curve* curve, double)
+CurveRender	CurveRender.h	/^class CurveRender$/;"	c
+CurveRender::CurveRender	CurveRender.cpp	/^CurveRender::CurveRender(const Curve* _curve, double _bound):$/;"	f	class:CurveRender	signature:(const Curve* _curve, double _bound)
+CurveRender::CurveRender	CurveRender.h	/^    CurveRender(const Curve* curve, double);$/;"	p	class:CurveRender	access:public	signature:(const Curve* curve, double)
+CurveRender::bound	CurveRender.h	/^    double bound;$/;"	m	class:CurveRender	access:private
 CurveRender::curve	CurveRender.h	/^    const Curve* curve;$/;"	m	class:CurveRender	access:private
 CurveRender::draw	CurveRender.cpp	/^void CurveRender::draw(View* view, const Camera* camera, unsigned int color)$/;"	f	class:CurveRender	signature:(View* view, const Camera* camera, unsigned int color)
-CurveRender::draw	CurveRender.h	/^    virtual void draw(View*, const Camera*, unsigned int color);$/;"	p	class:CurveRender	access:public	signature:(View*, const Camera*, unsigned int color)
+CurveRender::draw	CurveRender.h	/^    void draw(View*, const Camera*, unsigned int color);$/;"	p	class:CurveRender	access:public	signature:(View*, const Camera*, unsigned int color)
 CustomSpline	CustomSpline.cpp	/^CustomSpline::CustomSpline(double* start, double* end)$/;"	f	class:CustomSpline	signature:(double* start, double* end)
 CustomSpline	CustomSpline.h	/^    CustomSpline (double* start, double* end);$/;"	p	class:CustomSpline	access:public	signature:(double* start, double* end)
 CustomSpline	CustomSpline.h	/^class CustomSpline : public Drawable, public Curve $/;"	c	inherits:Drawable,Curve
@@ -136,8 +133,8 @@ Knot::draw	Knot.cpp	/^void Knot::draw(View* view, const Camera* camera, unsigned
 Knot::draw	Knot.h	/^    virtual void draw(View* view, const Camera* camera, unsigned int color);$/;"	p	class:Knot	access:public	signature:(View* view, const Camera* camera, unsigned int color)
 Knot::generatePoints	Knot.cpp	/^void Knot::generatePoints()$/;"	f	class:Knot	signature:()
 Knot::generatePoints	Knot.h	/^    void generatePoints();$/;"	p	class:Knot	access:private	signature:()
-Knot::getBounds	Knot.cpp	/^double* Knot::getBounds() const$/;"	f	class:Knot	signature:() const
-Knot::getBounds	Knot.h	/^    double* getBounds() const;$/;"	p	class:Knot	access:public	signature:() const
+Knot::getBounds	Knot.cpp	/^double* Knot::getBounds()$/;"	f	class:Knot	signature:()
+Knot::getBounds	Knot.h	/^    double* getBounds();$/;"	p	class:Knot	access:public	signature:()
 Knot::initPoints	Knot.h	/^    std::vector<Vector> initPoints;$/;"	m	class:Knot	access:private
 Knot::workPoints	Knot.h	/^    std::vector<Vector> workPoints;$/;"	m	class:Knot	access:private
 LEFT	Controller.h	/^enum Direction {LEFT, RIGHT, UP, DOWN};$/;"	e	enum:Direction
@@ -171,11 +168,20 @@ Model	Model.h	/^    Model(View* view, Camera* camera);$/;"	p	class:Model	access:
 Model	Model.h	/^class Model$/;"	c
 Model::Model	Model.cpp	/^Model::Model(View* _view, Camera* _camera):$/;"	f	class:Model	signature:(View* _view, Camera* _camera)
 Model::Model	Model.h	/^    Model(View* view, Camera* camera);$/;"	p	class:Model	access:public	signature:(View* view, Camera* camera)
+Model::boundBox	Model.h	/^    bool boundBox;$/;"	m	class:Model	access:private
+Model::bounds	Model.h	/^    double* bounds;$/;"	m	class:Model	access:private
 Model::camera	Model.h	/^    Camera* camera;$/;"	m	class:Model	access:private
 Model::draw	Model.cpp	/^void Model::draw()$/;"	f	class:Model	signature:()
 Model::draw	Model.h	/^    void draw();$/;"	p	class:Model	access:public	signature:()
+Model::drawAxis	Model.cpp	/^void Model::drawAxis()$/;"	f	class:Model	signature:()
+Model::drawAxis	Model.h	/^    void drawAxis();$/;"	p	class:Model	access:private	signature:()
+Model::drawBounds	Model.cpp	/^void Model::drawBounds()$/;"	f	class:Model	signature:()
+Model::drawBounds	Model.h	/^    void drawBounds();$/;"	p	class:Model	access:private	signature:()
+Model::knot	Model.h	/^    Knot* knot;$/;"	m	class:Model	access:private
 Model::resize	Model.cpp	/^void Model::resize()$/;"	f	class:Model	signature:()
 Model::resize	Model.h	/^    void resize();$/;"	p	class:Model	access:public	signature:()
+Model::setBoundBox	Model.cpp	/^void Model::setBoundBox(bool flag)$/;"	f	class:Model	signature:(bool flag)
+Model::setBoundBox	Model.h	/^    void setBoundBox(bool);$/;"	p	class:Model	access:public	signature:(bool)
 Model::view	Model.h	/^    View* view;$/;"	m	class:Model	access:private
 Model::~Model	Model.cpp	/^Model::~Model()$/;"	f	class:Model	signature:()
 Model::~Model	Model.h	/^    ~Model();$/;"	p	class:Model	access:public	signature:()
@@ -227,6 +233,7 @@ QMAKE	Makefile	/^QMAKE         = \/usr\/bin\/qmake$/;"	m
 QMAKE_TARGET	Makefile	/^QMAKE_TARGET  = FIT9201SUMBATYANTS_Knot$/;"	m
 RANLIB	Makefile	/^RANLIB        = $/;"	m
 RIGHT	Controller.h	/^enum Direction {LEFT, RIGHT, UP, DOWN};$/;"	e	enum:Direction
+SCALE	Knot.cpp	/^    const int SCALE = 50;$/;"	m	namespace:__anon1	file:
 SED	Makefile	/^SED           = sed$/;"	m
 SOURCES	Makefile	/^SOURCES       = main.cpp \\$/;"	m
 STRIP	Makefile	/^STRIP         = strip$/;"	m
@@ -294,8 +301,6 @@ Vector::rotate	Vector.cpp	/^void Vector::rotate(const double* angle)$/;"	f	class
 Vector::rotate	Vector.h	/^    void rotate(const double*);$/;"	p	class:Vector	access:public	signature:(const double*)
 Vector::rotateHelper	Vector.cpp	/^void Vector::rotateHelper(const int number, const double angle)$/;"	f	class:Vector	signature:(const int number, const double angle)
 Vector::rotateHelper	Vector.h	/^    void rotateHelper(const int number, const double angle);$/;"	p	class:Vector	access:private	signature:(const int number, const double angle)
-Vector::scale	Vector.cpp	/^void Vector::scale(const double* coef)$/;"	f	class:Vector	signature:(const double* coef)
-Vector::scale	Vector.h	/^    void scale(const double*);$/;"	p	class:Vector	access:public	signature:(const double*)
 Vector::subtract	Vector.cpp	/^void Vector::subtract(const Vector& vector)$/;"	f	class:Vector	signature:(const Vector& vector)
 Vector::subtract	Vector.h	/^    void subtract(const Vector&);$/;"	p	class:Vector	access:public	signature:(const Vector&)
 Vector::translate	Vector.cpp	/^void Vector::translate(const Vector& vector)$/;"	f	class:Vector	signature:(const Vector& vector)
@@ -332,15 +337,19 @@ ViewKnot::setPixel	ViewKnot.h	/^    virtual void setPixel(int x, int y, unsigned
 ViewKnot::ui	ViewKnot.h	/^    Ui::MainWindow ui;$/;"	m	class:ViewKnot	access:private
 ViewKnot::~ViewKnot	ViewKnot.cpp	/^ViewKnot::~ViewKnot()$/;"	f	class:ViewKnot	signature:()
 ViewKnot::~ViewKnot	ViewKnot.h	/^    virtual ~ViewKnot();$/;"	p	class:ViewKnot	access:public	signature:()
+__anon1::SCALE	Knot.cpp	/^    const int SCALE = 50;$/;"	m	namespace:__anon1	file:
 add	Vector.cpp	/^void Vector::add(const Vector& vector)$/;"	f	class:Vector	signature:(const Vector& vector)
 add	Vector.h	/^    void add(const Vector&);$/;"	p	class:Vector	access:public	signature:(const Vector&)
 alpha	Line.h	/^    double alpha;$/;"	m	class:Line	access:private
+bound	CurveRender.h	/^    double bound;$/;"	m	class:CurveRender	access:private
+boundBox	Model.h	/^    bool boundBox;$/;"	m	class:Model	access:private
 bounds	Bezier.h	/^    double bounds[6];$/;"	m	class:Bezier	access:private
 bounds	Knot.h	/^    double bounds[6]; \/\/minx miny minz maxx maxy maxz$/;"	m	class:Knot	access:private
 bounds	Line.h	/^    double bounds[6];$/;"	m	class:Line	access:private
+bounds	Model.h	/^    double* bounds;$/;"	m	class:Model	access:private
 camera	Controller.h	/^    Camera* camera;$/;"	m	class:Controller	access:private
 camera	Model.h	/^    Camera* camera;$/;"	m	class:Model	access:private
-center	Camera.h	/^    Vector* center;$/;"	m	class:Camera	access:private
+center	Camera.h	/^    Vector center;$/;"	m	class:Camera	access:private
 centralwidget	ui_MainWindow.h	/^    QWidget *centralwidget;$/;"	m	class:Ui_MainWindow	access:public
 checkBounds	Bezier.cpp	/^void Bezier::checkBounds()$/;"	f	class:Bezier	signature:()
 checkBounds	Bezier.h	/^    void checkBounds();$/;"	p	class:Bezier	access:private	signature:()
@@ -358,7 +367,7 @@ defaultButton	ui_MainWindow.h	/^    QRadioButton *defaultButton;$/;"	m	class:Ui_
 draw	Bezier.cpp	/^void Bezier::draw(View* view, const Camera* camera, unsigned int color)$/;"	f	class:Bezier	signature:(View* view, const Camera* camera, unsigned int color)
 draw	Bezier.h	/^    virtual void draw(View* view, const Camera* camera, unsigned int color);$/;"	p	class:Bezier	access:public	signature:(View* view, const Camera* camera, unsigned int color)
 draw	CurveRender.cpp	/^void CurveRender::draw(View* view, const Camera* camera, unsigned int color)$/;"	f	class:CurveRender	signature:(View* view, const Camera* camera, unsigned int color)
-draw	CurveRender.h	/^    virtual void draw(View*, const Camera*, unsigned int color);$/;"	p	class:CurveRender	access:public	signature:(View*, const Camera*, unsigned int color)
+draw	CurveRender.h	/^    void draw(View*, const Camera*, unsigned int color);$/;"	p	class:CurveRender	access:public	signature:(View*, const Camera*, unsigned int color)
 draw	CustomSpline.cpp	/^void CustomSpline::draw(View* view, const Camera* camera, unsigned int color)$/;"	f	class:CustomSpline	signature:(View* view, const Camera* camera, unsigned int color)
 draw	CustomSpline.h	/^    virtual void draw(View*, const Camera*, unsigned int color);$/;"	p	class:CustomSpline	access:public	signature:(View*, const Camera*, unsigned int color)
 draw	Drawable.h	/^    virtual void draw(View* view, const Camera* camera, unsigned int color) = 0;$/;"	p	class:Drawable	access:private	signature:(View* view, const Camera* camera, unsigned int color)
@@ -368,14 +377,18 @@ draw	Line.cpp	/^void Line::draw(View* view, const Camera* camera, unsigned int c
 draw	Line.h	/^    virtual void draw(View* view, const Camera* camera, unsigned int color);$/;"	p	class:Line	access:public	signature:(View* view, const Camera* camera, unsigned int color)
 draw	Model.cpp	/^void Model::draw()$/;"	f	class:Model	signature:()
 draw	Model.h	/^    void draw();$/;"	p	class:Model	access:public	signature:()
+drawAxis	Model.cpp	/^void Model::drawAxis()$/;"	f	class:Model	signature:()
+drawAxis	Model.h	/^    void drawAxis();$/;"	p	class:Model	access:private	signature:()
+drawBounds	Model.cpp	/^void Model::drawBounds()$/;"	f	class:Model	signature:()
+drawBounds	Model.h	/^    void drawBounds();$/;"	p	class:Model	access:private	signature:()
 drawLine	Line.cpp	/^void Line::drawLine(View* view, int x0, int y0, int x1, int y1, unsigned int color)$/;"	f	class:Line	signature:(View* view, int x0, int y0, int x1, int y1, unsigned int color)
 drawLine	Line.h	/^    void drawLine(View* view, int x0, int y0, int x1, int y1, unsigned int color);$/;"	p	class:Line	access:private	signature:(View* view, int x0, int y0, int x1, int y1, unsigned int color)
 generatePoints	Knot.cpp	/^void Knot::generatePoints()$/;"	f	class:Knot	signature:()
 generatePoints	Knot.h	/^    void generatePoints();$/;"	p	class:Knot	access:private	signature:()
 getBounds	Bezier.cpp	/^double* Bezier::getBounds() const$/;"	f	class:Bezier	signature:() const
 getBounds	Bezier.h	/^    double* getBounds() const;$/;"	p	class:Bezier	access:public	signature:() const
-getBounds	Knot.cpp	/^double* Knot::getBounds() const$/;"	f	class:Knot	signature:() const
-getBounds	Knot.h	/^    double* getBounds() const;$/;"	p	class:Knot	access:public	signature:() const
+getBounds	Knot.cpp	/^double* Knot::getBounds()$/;"	f	class:Knot	signature:()
+getBounds	Knot.h	/^    double* getBounds();$/;"	p	class:Knot	access:public	signature:()
 getColor	PainterWidget.cpp	/^unsigned int PainterWidget::getColor(int x, int y)$/;"	f	class:PainterWidget	signature:(int x, int y)
 getColor	PainterWidget.h	/^    unsigned int getColor(int x, int y);$/;"	p	class:PainterWidget	access:public	signature:(int x, int y)
 getColor	View.h	/^    virtual unsigned int getColor(int x, int y) = 0;$/;"	p	class:View	access:public	signature:(int x, int y)
@@ -388,8 +401,6 @@ getHeight	PainterWidget.h	/^    int getHeight();$/;"	p	class:PainterWidget	acces
 getHeight	View.h	/^    virtual int getHeight() = 0;$/;"	p	class:View	access:public	signature:()
 getHeight	ViewKnot.cpp	/^int ViewKnot::getHeight()$/;"	f	class:ViewKnot	signature:()
 getHeight	ViewKnot.h	/^    virtual int getHeight();$/;"	p	class:ViewKnot	access:public	signature:()
-getScale	Camera.cpp	/^double Camera::getScale() const$/;"	f	class:Camera	signature:() const
-getScale	Camera.h	/^    double getScale() const;$/;"	p	class:Camera	access:public	signature:() const
 getStaticMetaObject	moc_Controller.cpp	/^const QMetaObject &Controller::getStaticMetaObject() { return staticMetaObject; }$/;"	f	class:Controller	signature:()
 getStaticMetaObject	moc_PainterWidget.cpp	/^const QMetaObject &PainterWidget::getStaticMetaObject() { return staticMetaObject; }$/;"	f	class:PainterWidget	signature:()
 getWidth	PainterWidget.cpp	/^int PainterWidget::getWidth()$/;"	f	class:PainterWidget	signature:()
@@ -403,11 +414,15 @@ getY	Vector.cpp	/^double Vector::getY() const$/;"	f	class:Vector	signature:() co
 getY	Vector.h	/^    double getY() const;$/;"	p	class:Vector	access:public	signature:() const
 getZ	Vector.cpp	/^double Vector::getZ() const$/;"	f	class:Vector	signature:() const
 getZ	Vector.h	/^    double getZ() const;$/;"	p	class:Vector	access:public	signature:() const
+grad	Bezier.cpp	/^Vector Bezier::grad(double t) const$/;"	f	class:Bezier	signature:(double t) const
+grad	Bezier.h	/^    virtual Vector grad(double) const;$/;"	p	class:Bezier	access:public	signature:(double) const
+grad	Curve.h	/^    virtual Vector grad(double) const = 0;$/;"	p	class:Curve	access:public	signature:(double) const
 horizontalLayout	ui_MainWindow.h	/^    QHBoxLayout *horizontalLayout;$/;"	m	class:Ui_MainWindow	access:public
 image	PainterWidget.h	/^    QImage image;$/;"	m	class:PainterWidget	access:private
 initPoints	Knot.h	/^    std::vector<Vector> initPoints;$/;"	m	class:Knot	access:private
 keyPressEvent	PainterWidget.cpp	/^void PainterWidget::keyPressEvent(QKeyEvent *event)$/;"	f	class:PainterWidget	signature:(QKeyEvent *event)
 keyPressEvent	PainterWidget.h	/^    virtual void keyPressEvent(QKeyEvent *event);$/;"	p	class:PainterWidget	access:protected	signature:(QKeyEvent *event)
+knot	Model.h	/^    Knot* knot;$/;"	m	class:Model	access:private
 lastx	PainterWidget.h	/^    int lastx;$/;"	m	class:PainterWidget	access:private
 lasty	PainterWidget.h	/^    int lasty;$/;"	m	class:PainterWidget	access:private
 length	Line.h	/^    double length;$/;"	m	class:Line	access:private
@@ -449,6 +464,7 @@ project	Camera.cpp	/^Vector2D Camera::project(const Vector& _v) const$/;"	f	clas
 project	Camera.h	/^    Vector2D project(const Vector& v) const;$/;"	p	class:Camera	access:public	signature:(const Vector& v) const
 project	Vector.cpp	/^Vector2D Vector::project(const double& coef) const$/;"	f	class:Vector	signature:(const double& coef) const
 project	Vector.h	/^    Vector2D project(const double&) const;$/;"	p	class:Vector	access:public	signature:(const double&) const
+pseudoCenter	Camera.h	/^    Vector pseudoCenter;$/;"	m	class:Camera	access:private
 qt_meta_data_Controller	moc_Controller.cpp	/^static const uint qt_meta_data_Controller[] = {$/;"	v	file:
 qt_meta_data_PainterWidget	moc_PainterWidget.cpp	/^static const uint qt_meta_data_PainterWidget[] = {$/;"	v	file:
 qt_meta_stringdata_Controller	moc_Controller.cpp	/^static const char qt_meta_stringdata_Controller[] = {$/;"	v	file:
@@ -478,14 +494,12 @@ rotate	Vector.cpp	/^void Vector::rotate(const double* angle)$/;"	f	class:Vector	
 rotate	Vector.h	/^    void rotate(const double*);$/;"	p	class:Vector	access:public	signature:(const double*)
 rotateHelper	Vector.cpp	/^void Vector::rotateHelper(const int number, const double angle)$/;"	f	class:Vector	signature:(const int number, const double angle)
 rotateHelper	Vector.h	/^    void rotateHelper(const int number, const double angle);$/;"	p	class:Vector	access:private	signature:(const int number, const double angle)
-scale	Camera.cpp	/^void Camera::scale(const double* _scaleCoef)$/;"	f	class:Camera	signature:(const double* _scaleCoef)
-scale	Camera.h	/^    void scale(const double*);$/;"	p	class:Camera	access:public	signature:(const double*)
-scale	Controller.cpp	/^void Controller::scale(bool b)$/;"	f	class:Controller	signature:(bool b)
-scale	Controller.h	/^    void scale(bool);$/;"	p	class:Controller	access:public	signature:(bool)
 scale	CustomSpline.h	/^    double scale[3];$/;"	m	class:CustomSpline	access:private
-scale	Vector.cpp	/^void Vector::scale(const double* coef)$/;"	f	class:Vector	signature:(const double* coef)
-scale	Vector.h	/^    void scale(const double*);$/;"	p	class:Vector	access:public	signature:(const double*)
-scaleCoef	Camera.h	/^    double scaleCoef[3];$/;"	m	class:Camera	access:private
+setBoundBox	Model.cpp	/^void Model::setBoundBox(bool flag)$/;"	f	class:Model	signature:(bool flag)
+setBoundBox	Model.h	/^    void setBoundBox(bool);$/;"	p	class:Model	access:public	signature:(bool)
+setBounds	Controller.h	/^    void setBounds(int);$/;"	p	class:Controller	access:public	signature:(int)
+setCenter	Camera.cpp	/^void Camera::setCenter(const Vector& v)$/;"	f	class:Camera	signature:(const Vector& v)
+setCenter	Camera.h	/^    void setCenter(const Vector&);$/;"	p	class:Camera	access:public	signature:(const Vector&)
 setPixel	PainterWidget.cpp	/^void PainterWidget::setPixel(int x, int y, QRgb color)$/;"	f	class:PainterWidget	signature:(int x, int y, QRgb color)
 setPixel	PainterWidget.h	/^    void setPixel(int x, int y, unsigned int color);$/;"	p	class:PainterWidget	access:public	signature:(int x, int y, unsigned int color)
 setPixel	View.h	/^    virtual void setPixel(int x, int y, unsigned int color) = 0;$/;"	p	class:View	access:public	signature:(int x, int y, unsigned int color)
@@ -520,8 +534,6 @@ x	Vector.h	/^    double x[4];$/;"	m	class:Vector	access:private
 x	Vector.h	/^    int x[2];$/;"	m	struct:Vector2D	access:public
 z	Camera.h	/^    const int z;$/;"	m	class:Camera	access:private
 z	Vector.h	/^    double z;$/;"	m	struct:Vector2D	access:public
-~Camera	Camera.cpp	/^Camera::~Camera()$/;"	f	class:Camera	signature:()
-~Camera	Camera.h	/^    ~Camera ();$/;"	p	class:Camera	access:public	signature:()
 ~Controller	Controller.cpp	/^Controller::~Controller()$/;"	f	class:Controller	signature:()
 ~Controller	Controller.h	/^    ~Controller();$/;"	p	class:Controller	access:public	signature:()
 ~Curve	Curve.h	/^    virtual ~Curve() {};$/;"	f	class:Curve	access:public	signature:()

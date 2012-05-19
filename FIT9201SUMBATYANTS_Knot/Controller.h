@@ -15,6 +15,7 @@ public:
 public slots:
     void update();
     void resize();
+    void setBounds(int);
 public:
     void rotate(Direction);
     void translate(Direction);

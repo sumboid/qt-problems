@@ -11,9 +11,13 @@ public:
 
     void draw();
     void resize();
+    void setBoundBox(bool);
 private:
+    void drawBounds();
+    void drawAxis();
     View* view;
     Camera* camera;
     Knot* knot;
     double* bounds;
+    bool boundBox;
 };

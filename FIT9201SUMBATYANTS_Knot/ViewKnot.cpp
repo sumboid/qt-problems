@@ -9,6 +9,7 @@ ViewKnot::ViewKnot()
     mainWindow.setMinimumSize(500, 400);
     ui.setupUi(&mainWindow);
     ui.verticalLayout->insertWidget(0, painterWidget, 1);
+    connect(ui.boundButton, SIGNAL(stateChanged(int)), controller, SLOT(setBounds(int)));
 
 
     mainWindow.show();
