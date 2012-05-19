@@ -124,13 +124,13 @@ unsigned int Triangle::getColor(const Point& d)
         y = (imagePoints[0].second + LENGTH(imagePoints[0], imagePoints[1]) * v);
     }
 
-    if(static_cast<int>(x + 0.5) >= image->width() || static_cast<int>(y + 0.5) >= image->height()) return 0x0; //Check bugs
+    if(static_cast<int>(x + 1) >= image->width() || static_cast<int>(y + 1) >= image->height()) return 0x0; //Check bugs
     if(x < 0 || y < 0) return 0x0;
     unsigned int rgb = 0;
 
     if(filter == NEAREST)
     {
-        rgb = image->pixel(x + 0.5, y + 0.5);
+        rgb = image->pixel(x + 1, y + 1);
     }
     else if(filter == BILINEAR)
     {
