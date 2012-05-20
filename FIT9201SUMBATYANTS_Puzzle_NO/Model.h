@@ -22,6 +22,8 @@ public:
     void init();
     void getInfo(const int x, const int y);
     void resize(int);
+    void calc();
+    void update();
 private:
     void setTrianglePoints(Triangle& triangle, const int number);
     double getVScale() const;
@@ -38,4 +40,5 @@ private:
     int step;
     int interval;
     bool resized;
+    //bool calc;
 };

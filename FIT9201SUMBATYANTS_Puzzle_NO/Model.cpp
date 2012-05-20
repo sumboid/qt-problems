@@ -14,12 +14,12 @@ namespace
 Model::Model(View* _view):
 view(_view), image(QImage(":/puzzle.png")), step(0), resized(false)
 {
-    init();
     srand(time(0));
     for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
     {
         triangles[i] = new Triangle(view, &image);
     }
+    init();
 }
 
 Model::~Model()
@@ -30,20 +30,27 @@ Model::~Model()
     }
 }
 
+void Model::update()
+{
+    view->paint();
+}
 
 void Model::draw()
+{
+    calc();
+    for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
+    {
+        triangles[i]->draw(getTrianglePosition(i), getTriangleAngle(i));
+    }
+}
+
+void Model::calc()
 {
     for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
     {
         setTrianglePoints(*triangles[i], i);
         triangles[i]->setScale(getVScale(), getHScale());
     }
-    view->clear();
-    for(int i = 0; i < NUMBER_OF_TRIANGLES; i++)
-    {
-        triangles[i]->draw(getTrianglePosition(i), getTriangleAngle(i));
-    }
-    view->paint();
 }
 
 double Model::getHScale() const

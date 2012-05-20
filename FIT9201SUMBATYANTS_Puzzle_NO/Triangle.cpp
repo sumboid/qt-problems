@@ -19,9 +19,11 @@ bool xcomp(const Point& x, const Point& y)
 #define EQUAL(x, y) (x.first == y.first && x.second == y.second)
 
 Triangle::Triangle(View* _view, const QImage* _image):
-vScale(1), hScale(1), filter(NEAREST), view(_view), image(_image), blend(false),
+vScale(1), hScale(1), filter(NEAREST), blend(false),
 allPixels(0), transparentPixels(0), borderPixels(0)
 {
+    view = _view;
+    image = _image;
     for(int i = 0; i < 3; ++i)
     {
         imagePoints[i] = Point(0, 0);

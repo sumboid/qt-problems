@@ -18,9 +18,14 @@ Controller::Controller(View* view): step(0)
     timer.setInterval(MSEC_INTERVAL);
 }
 
-void Controller::update()
+void Controller::draw()
 {
     model->draw();
+}
+
+void Controller::update()
+{
+    model->update();
 }
 
 void Controller::start()
@@ -62,7 +67,7 @@ void Controller::setStep(int _step)
 {
     step = _step;
     model->setStep(_step);
-    model->draw();
+    update();
 }
 
 void Controller::nextStep()
@@ -70,7 +75,6 @@ void Controller::nextStep()
     int delta = lastTime.elapsed();
     int steps = delta / MSEC_INTERVAL;
     step = (step + steps) % 360;
-    //step == 360 ? step = 1 : step++;
     lastTime.restart();
     setStep(step);
 }
@@ -83,5 +87,5 @@ void Controller::getInfo(int x, int y)
 void Controller::resize(int flag)
 {
     model->resize(flag);
-    model->draw();
+    update();
 }

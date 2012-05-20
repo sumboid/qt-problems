@@ -3,10 +3,6 @@
 #include "Controller.h"
 
 #include <iostream>
-namespace
-{
-    const int START_SPEED = 5000;
-}
 
 ViewPuzzle::ViewPuzzle()
 {
@@ -57,7 +53,7 @@ void ViewPuzzle::clear()
 
 void ViewPuzzle::paint()
 {
-    painterWidget->paint();
+    painterWidget->update();
 }
 
 void ViewPuzzle::invertButton(bool state)

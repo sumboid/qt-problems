@@ -1,5 +1,6 @@
 #include "PainterWidget.h"
 #include <QRgb>
+#include <iostream>
 
 PainterWidget::PainterWidget(Controller* _controller):
     controller(_controller)
@@ -21,11 +22,12 @@ void PainterWidget::setPixel(int x, int y, QRgb color)
 void PainterWidget::clear()
 {
     image.fill(Qt::white);
-    update();
 }
 
 void PainterWidget::paintEvent(QPaintEvent*)
 {
+    clear();
+    controller->draw();
     QPainter painter(this);
     painter.drawImage(0, 0, image);
 }
@@ -33,8 +35,7 @@ void PainterWidget::paintEvent(QPaintEvent*)
 void PainterWidget::resizeEvent(QResizeEvent*)
 {
     image = QImage(this->size(), QImage::Format_RGB888);
-    clear();
-    controller->update();
+    update();
 }
 
 void PainterWidget::mouseMoveEvent(QMouseEvent *event)

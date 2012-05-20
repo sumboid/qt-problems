@@ -23,6 +23,7 @@ public slots:
     void nextStep();
     void getInfo(int, int);
     void resize(int);
+    void draw();
 
 private:
     Model* model;
