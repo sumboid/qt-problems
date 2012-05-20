@@ -5,9 +5,14 @@
 #include "Model.h"
 #include <iostream>
 
+namespace
+{
+    const int SCALE = 1.;
+}
+
 
 Model::Model(View* _view):
-view(_view), image(QImage(":/puzzle_4.png")), step(0), resized(false)
+view(_view), image(QImage(":/puzzle.png")), step(0), resized(false)
 {
     init();
     srand(time(0));
@@ -49,7 +54,7 @@ double Model::getHScale() const
     }
     else
     {
-        return 1;
+        return SCALE;
     }
 }
 double Model::getVScale() const
@@ -60,7 +65,7 @@ double Model::getVScale() const
     }
     else
     {
-        return 1;
+        return SCALE;
     }
 }
 
