@@ -61,17 +61,6 @@ void Bezier::checkBounds()
     }
 }
 
-Vector Bezier::grad(double t) const
-{
-    double coeff[4] =
-        { -3 * t * t +  6 * t - 3
-        ,  9 * t * t - 12 * t + 3
-        , -3 * t * t +  2 * t
-        ,  3 * t * t
-        };
-    return shift(coeff);
-}
-
 void Bezier::draw(View* view, const Camera* camera, unsigned int color)
 {
     CurveRender(this, 1).draw(view, camera, color);

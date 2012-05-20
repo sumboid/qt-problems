@@ -2,8 +2,10 @@
 #include <cstdlib>
 
 Camera::Camera():
-center(Vector(0, 0, -5)), pseudoCenter(Vector(0, 0, 0)), speed(1), z(-500)
+speed(1), z(-500)
 {
+    center = Vector(0, 0, -5);
+    pseudoCenter = Vector(0, 0, 0);
     for(int i = 0; i < 3; i++)
     {
         orientation[i] = 0;
